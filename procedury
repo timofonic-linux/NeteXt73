@@ -419,6 +419,14 @@ sudo sed -i '/exit 0/d' /etc/rc.local
 echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
 echo 'exit 0' | sudo tee -a /etc/rc.local
 rm -Rf /tmp/apm-ext73
+#zmiana vsync
+if [ "$vsyncoff" = "TRUE" ]; then
+	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
+else
+	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
+fi
+
 }
 
 apm_zmiana(){
@@ -511,6 +519,13 @@ if [ "$apmik" = "nowy" ]; then
 	sudo udevadm control --reload-rules
 	sudo /etc/apm-ext73/./$(cat /etc/udev/rules.d/50-udev-apm-ext73.rules | sed 's/.*\///g' | grep adv | head -n 1 | awk '{print $1}')
 fi
+#zmiana vsync
+if [ "$vsyncoff" = "TRUE" ]; then
+	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
+else
+	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
+fi
 }
 
 apm_zmiana_config(){
@@ -597,6 +612,13 @@ fi
 if [ "$apmik" = "nowy" ]; then
 	sudo udevadm control --reload-rules
 	sudo /etc/apm-ext73/./$(cat /etc/udev/rules.d/50-udev-apm-ext73.rules | sed 's/.*\///g' | grep adv | head -n 1 | awk '{print $1}')
+fi
+#zmiana vsync
+if [ "$(grep vsync ~/.netext73/apm_status | cut -d ' ' -f 2)" = "TRUE" ];then
+	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
+else
+	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
 fi
 }
 
@@ -714,6 +736,13 @@ stan_apm_config(){
 	else
 		hibernacja_menu="FALSE"
 	fi
+	#sprawdzenie vsync
+	if [ -e /home/$(cat /tmp/netext73/userek)/.drirc ]; then
+		export vsyncoff="TRUE"
+	else
+		export vsyncoff="FALSE"
+	fi
+	
 	export wifin_przed=$wifin
 	export wififix_przed=$wififix
 	export wifionoff_przed=$wifionoff
@@ -724,6 +753,7 @@ stan_apm_config(){
 	export turbooff_przed=$turbooff
 	export turboacoff_przed=$turboacoff
 	export hibernacja_menu_przed=$hibernacja_menu
+	export vsyncoffprzed=$vsyncoff
 
 	#wysłanie danych do configu
 	if [ "$1" = "czeki" ]; then
@@ -742,6 +772,7 @@ stan_apm_config(){
 		echo "turbooff $turbooff" >> ~/.netext73/apm_status
 		echo "turboacoff $turboacoff" >> ~/.netext73/apm_status
 		echo "hibernacja $hibernacja_menu" >> ~/.netext73/apm_status
+		echo "vsync $vsyncoff" >> ~/.netext73/apm_status
 	fi
 }
 

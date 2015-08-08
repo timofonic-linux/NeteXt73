@@ -144,7 +144,7 @@ while [ $petla_duza = "tak" ]; do
 		--field='':LBL "" \
 		--field="$TEXT_FIX6:CHK" "$turbooff" \
 		--field="$TEXT_FIX7:CHK" "$turboacoff" \
-		--field='':LBL "" \
+		--field="$TEXT_FIX8:CHK" "$vsyncoff" \
 		--field="$TEXT_HIBERNACJA:CHK" "$hibernacja_menu" \
 		--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" )
 
@@ -167,6 +167,7 @@ while [ $petla_duza = "tak" ]; do
 			export turbooff=$(echo $aa | cut -d "|" -f 17)
 			export turboacoff=$(echo $aa | cut -d "|" -f 18)
 			
+			export vsyncoff=$(echo $aa | cut -d "|" -f 19)
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
 			
 			
@@ -191,13 +192,13 @@ while [ $petla_duza = "tak" ]; do
 			
 			#uruchomienie aktualizacji gdy zaszła jakaś zmiana
 			if [ "$bfqfix" = "blk-mq" ] || [ "$ssdfix" = "blk-mq" ]; then
-				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]; then
+				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsyncoffprzed" = "$vsyncoff" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM
 				fi
 			else
-				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$bfqfix_przed" = "$bfqfix" ] && [ "$ssdfix_przed" = "$ssdfix" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]; then
+				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$bfqfix_przed" = "$bfqfix" ] && [ "$ssdfix_przed" = "$ssdfix" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]  && [ "$vsyncoffprzed" = "$vsyncoff" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM
