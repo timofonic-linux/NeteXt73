@@ -265,10 +265,6 @@ baza=(
 	"Kadu for Ubuntu"
 	"kadu"
 	
-	"UnofficialWhatsApp_linux64"
-	"WhatsApp-Desktop"
-	"WhatsApp-Desktop"
-	"whatsappfordesktop"
 	)
 
 cd /tmp/netext73
@@ -369,29 +365,19 @@ else
 			sed -i '/^#/d' repo.txt; sed -i '/^[ \t]*$/ d' repo.txt
 			#zaznaczanie co mieliśmy przed instalacją
 			for (( i=0; i<=$ilosc_repo; i++ )); do
-				if [ "$(echo ${repo[$i]})" = "UnofficialWhatsApp_linux64" ]; then
-					if [ "$(dpkg -l | grep whatsappfordesktop)" != "" ] ; then
-						r[$i]="TRUE"
-					else
-						r[$i]="FALSE"
-					fi
-					echo ${repo_opis[$i]} >> 0.txt
-					echo ${r[$i]} >> 1.txt
+				echo ${repo[$i]} | sed 's/ppa://'  > dane.txt
+				if [ "$(cat repo.txt | grep -f dane.txt)" != "" ] ; then
+					r[$i]="TRUE"
 				else
-					echo ${repo[$i]} | sed 's/ppa://'  > dane.txt
-					if [ "$(cat repo.txt | grep -f dane.txt)" != "" ] ; then
-						r[$i]="TRUE"
-					else
-						r[$i]="FALSE"
-					fi
-					echo ${repo_opis[$i]} >> 0.txt
-					echo ${r[$i]} >> 1.txt
+					r[$i]="FALSE"
 				fi
+				echo ${repo_opis[$i]} >> 0.txt
+				echo ${r[$i]} >> 1.txt
 			done
 			paste -d "@" 1.txt 0.txt | tr "\n" "@" > lista_repo.txt
 			grep TRUE lista_repo.txt | sed 's/TRUE@//g' > lista_przed.txt
 			IFS=@
-			instalka=$(yad --center --height=$((640*$skala)) --width=$((940*$skala)) --separator="@"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="$a9:2" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Repo - automat</b></span>\n$TEXT_MENU_USLUGI2" \
+			instalka=$(yad --center --height=$((640*$skala)) --width=$((940*$skala)) --separator="@"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="$a9:2" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Repo - automat</b></span>\n$a6" \
 			--column="$TEXT_ZAZNACZ"  --column="opis"  --checklist --list $(cat lista_repo.txt))
 			klawisz="$?"
 			if [ "$klawisz" = "0" ]; then
@@ -416,8 +402,6 @@ else
 						if [ "${repo[$i]}" = "ppa:i-nex-development-team/daily" ]; then
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
 						      echo "sudo ppa-purge -y ppa:nemh/gambas3" >> instaluj.sh
-						elif [ "${repo[$i]}" = "UnofficialWhatsApp_linux64" ]; then
-						      echo "sudo apt-get purge whatsappfordesktop" >> instaluj.sh
 						elif [ "${repo[$i]}" = "deb http://repository.spotify.com stable non-free" ]; then
 						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list"  >> instaluj.sh
 						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list.d/*"  >> instaluj.sh
@@ -444,10 +428,6 @@ else
 						      echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
 						      echo "sudo add-apt-repository -y ppa:nemh/gambas3" >> instaluj.sh
 						      echo "sudo apt-get install -y  ${paczka[$i]}" >> instaluj.txt
-						elif [ "${repo[$i]}" = "UnofficialWhatsApp_linux64" ]; then
-						      echo "wget https://github.com/Aluxian/WhatsApp-Desktop/releases/download/v1.1.0/UnofficialWhatsApp_linux64.deb" >> instaluj.sh
-						      echo "sudo dpkg -i UnofficialWhatsApp_linux64.deb" >> instaluj.sh
-						      echo "rm -f UnofficialWhatsApp_linux64.deb" >> instaluj.sh
 						elif [ "${repo[$i]}" = "deb http://repository.spotify.com stable non-free" ]; then
 						      echo "sudo add-apt-repository -y 'deb http://repository.spotify.com stable non-free'" >> instaluj.sh
 						      echo "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59"  >> instaluj.sh
@@ -459,8 +439,8 @@ else
 						      echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ownCloud" ]; then
 						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/xUbuntu_$(lsb_release -rs)/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
-						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$(lsb_release -rs)/Release.key" >> instaluj.txt
-						      echo "sudo apt-key add - < Release.key" >> instaluj.txt
+						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$(lsb_release -rs)/Release.key" >> instaluj.sh
+						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
 						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
@@ -597,7 +577,7 @@ else
 				paste -d " " 1.txt 2.txt > lista_softu.txt
 				grep TRUE lista_softu.txt | awk '{print $2}' > lista_przed.txt
 
-				instalka=$(yad --center --height=$((540*$skala)) --width=$((640*$skala)) --image="/opt/NeteXt73/ikony/backuprepo.png" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$a8:2" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Soft - automat</b></span>\n$TEXT_MENU_USLUGI2" \
+				instalka=$(yad --center --height=$((540*$skala)) --width=$((640*$skala)) --image="/opt/NeteXt73/ikony/backuprepo.png" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$a8:2" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Soft - automat</b></span>" \
 				--column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --checklist --list $(cat lista_softu.txt))
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then		 
