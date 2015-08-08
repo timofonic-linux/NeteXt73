@@ -421,7 +421,7 @@ echo 'exit 0' | sudo tee -a /etc/rc.local
 rm -Rf /tmp/apm-ext73
 #zmiana vsync
 if [ "$vsyncoff" = "TRUE" ]; then
-	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo cp /opt/NeteXt73/APM/drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
 	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
@@ -521,7 +521,7 @@ if [ "$apmik" = "nowy" ]; then
 fi
 #zmiana vsync
 if [ "$vsyncoff" = "TRUE" ]; then
-	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo cp /opt/NeteXt73/APM/drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
 	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
@@ -615,7 +615,7 @@ if [ "$apmik" = "nowy" ]; then
 fi
 #zmiana vsync
 if [ "$(grep vsync ~/.netext73/apm_status | cut -d ' ' -f 2)" = "TRUE" ];then
-	sudo cp /opt/NeteXt73/APM/.drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
+	sudo cp /opt/NeteXt73/APM/drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
 	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
