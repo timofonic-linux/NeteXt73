@@ -824,6 +824,7 @@ xterm -T instalator -e bash -c "tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr
 
 #instalacja bez pytań
 instalacja2(){
+#x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
 xterm -T instalator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
 }
 #instalacja wciśnij enter

@@ -1,3 +1,9 @@
+netext73 (0.9.13) stable; urgency=medium
+
+  * automatyczne zamknięcie xterm przy backupie gruba
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 09 Aug 2015 13:27:57 +0200
+
 netext73 (0.9.12) stable; urgency=medium
 
   * dodanie do APM opcji vsync

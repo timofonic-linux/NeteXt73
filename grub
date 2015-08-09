@@ -64,7 +64,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 	#backup pliku grub
 	if [ "$grub" = "$TEXT_GRUB4A" ]; then
 		echo "nie" > /tmp/netext73/ok.txt
-		xterm -T Grub -e bash -c "echo \"$TEXT_GRUB8 /etc/default/grub\";sudo cp $sciezka/grub $sciezka/grub.backup -f; echo -e \"$TEXT_INSTALACJA2\"; read ent; echo 'tak' > /tmp/netext73/ok.txt"
+		xterm -T Grub -e bash -c "echo \"$TEXT_GRUB8 /etc/default/grub\";sudo cp $sciezka/grub $sciezka/grub.backup -f; echo 'tak' > /tmp/netext73/ok.txt"
 		if [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 			dymek  -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB9"
 		fi
@@ -72,7 +72,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 	elif [ "$grub" = "$TEXT_GRUB5A" ]; then
 		if [ -e $sciezka/grub.backup ]; then
 			echo "nie" > /tmp/netext73/ok.txt
-			xterm -T Grub -e bash -c "echo \"$TEXT_GRUB10\"; sudo cp $sciezka/grub.backup $sciezka/grub -f; sudo update-grub; echo -e \"$TEXT_INSTALACJA2\"; read ent; echo 'tak' > /tmp/netext73/ok.txt"
+			xterm -T Grub -e bash -c "echo \"$TEXT_GRUB10\"; sudo cp $sciezka/grub.backup $sciezka/grub -f; sudo update-grub; echo 'tak' > /tmp/netext73/ok.txt"
 			if [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 				dymek  -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB11"
 			fi
@@ -86,7 +86,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 		else
 			dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB13 $sciezka"
 			#kasowanie starych wpisów w grub
-			xterm -e bash -c "sudo cp $sciezka/grub $sciezka/grub.backup -f; echo -e \"$TEXT_INSTALACJA2\"; read ent;  echo 'tak' > /tmp/netext73/ok.txt"
+			xterm -e bash -c "sudo cp $sciezka/grub $sciezka/grub.backup -f; echo 'tak' > /tmp/netext73/ok.txt"
 		fi
 		if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
 			wpis_grub=$(grep GRUB_CMDLINE_LINUX=\" /etc/default/grub | sed 's/GRUB_CMDLINE_LINUX=//' | cut -d '"' -f 2)

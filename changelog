@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.13
+-	automatyczne zamknięcie xterm przy backupie gruba
 v0.9.12
 -	dodanie do APM opcji vsync
 -	poprawki w instalatorze repo
