@@ -198,7 +198,7 @@ fi
 
 
 echo -e "##############################################################################################" >> apmsystem$losowa.log
-cat ~/.netext73/apm_status >> apmsystem$losowa.log
+cat ~/.netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log
 echo -e "\n\nscheduler  " >> apmsystem$losowa.log
 echo -e "##############################################################################################" >> apmsystem$losowa.log
 if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then

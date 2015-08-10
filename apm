@@ -54,7 +54,7 @@ rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
 #zapamiętanie configu jeżeli był niepełen config
-if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "11" ]; then
+if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "12" ]; then
 	#sprawdzanie czy jest włączony jakiś APM
 	if [ "$apmik" = "stary" ]; then
 		if [ "$(ls /etc/pm/power.d/)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
@@ -130,44 +130,44 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_AKTUALNY_PROFIL_APM:RO" "$aktualny_apm" \
 		--field="$TEXT_ZMIEN_PROFIL_APM:CB" "$menu"\
 		--field='':LBL "" \
-		--field="$TEXT_PLANISTA:CB" "$bfqfix_menu" \
-		--field="$(echo $TEXT_PLANISTA | sed 's/HDD/SSD\/FLASH/'):CB" "$ssdfix_menu" \
+		--field="$TEXT_PLANISTA:CB" "$hdd_scheduler_menu" \
+		--field="$(echo $TEXT_PLANISTA | sed 's/HDD/SSD\/FLASH/'):CB" "$ssd_scheduler_menu" \
 		--field='':LBL "" \
                 --field="$TEXT_STEROWANIE_JASNOSCIA:CB" "$jasnosc_dziala" \
 		--field="$TEXT_JASNOSC_NA_BATT:SCL" "$wartosc_batt" \
                 --field="$TEXT_JASNOSC_NA_AC:SCL" "$wartosc_ac" \
-		--field="$TEXT_FIX1:CHK" "$wififix" \
-		--field="$TEXT_FIX2:CHK" "$wifionoff" \
-		--field="$TEXT_FIX3:CHK" "$btfix" \
-		--field="$TEXT_FIX4:CHK" "$rts5139fix" \
-		--field="$TEXT_FIX5:CHK" "$wifin" \
+		--field="$TEXT_FIX1:CHK" "$wifi_batt_fix" \
+		--field="$TEXT_FIX2:CHK" "$wifi_batt_on" \
+		--field="$TEXT_FIX3:CHK" "$bt_batt_on" \
+		--field="$TEXT_FIX4:CHK" "$rts5139_on" \
+		--field="$TEXT_FIX5:CHK" "$wifi_n_on" \
 		--field='':LBL "" \
-		--field="$TEXT_FIX6:CHK" "$turbooff" \
-		--field="$TEXT_FIX7:CHK" "$turboacoff" \
-		--field="$TEXT_FIX8:CHK" "$vsyncoff" \
+		--field="$TEXT_FIX6:CHK" "$turbo_batt_on" \
+		--field="$TEXT_FIX7:CHK" "$turbo_ac_on" \
+		--field="$TEXT_FIX8:CHK" "$vsync_on" \
 		--field="$TEXT_HIBERNACJA:CHK" "$hibernacja_menu" \
 		--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" )
 
 		klawisz=$?
 		if [ $klawisz = 0 ]; then
 			a=$(echo $aa | cut -d "|" -f 3)
-			export bfqfix=$(echo $aa | cut -d "|" -f 5)
-			export ssdfix=$(echo $aa | cut -d "|" -f 6)
+			export hdd_scheduler=$(echo $aa | cut -d "|" -f 5)
+			export ssd_scheduler=$(echo $aa | cut -d "|" -f 6)
 			
 			export jasnosc_dziala=$(echo $aa | cut -d "|" -f 8)
 			export wart_batt1=$(echo $aa | cut -d "|" -f 9)
 			export wart_ac1=$(echo $aa | cut -d "|" -f 10)
 			
-			export wififix=$(echo $aa | cut -d "|" -f 11)
-			export wifionoff=$(echo $aa | cut -d "|" -f 12)
-			export btfix=$(echo $aa | cut -d "|" -f 13)
-			export rts5139fix=$(echo $aa | cut -d "|" -f 14)
-			export wifin=$(echo $aa | cut -d "|" -f 15)
+			export wifi_batt_fix=$(echo $aa | cut -d "|" -f 11)
+			export wifi_batt_on=$(echo $aa | cut -d "|" -f 12)
+			export bt_batt_on=$(echo $aa | cut -d "|" -f 13)
+			export rts5139_on=$(echo $aa | cut -d "|" -f 14)
+			export wifi_n_on=$(echo $aa | cut -d "|" -f 15)
 			
-			export turbooff=$(echo $aa | cut -d "|" -f 17)
-			export turboacoff=$(echo $aa | cut -d "|" -f 18)
+			export turbo_batt_on=$(echo $aa | cut -d "|" -f 17)
+			export turbo_ac_on=$(echo $aa | cut -d "|" -f 18)
 			
-			export vsyncoff=$(echo $aa | cut -d "|" -f 19)
+			export vsync_on=$(echo $aa | cut -d "|" -f 19)
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
 			
 			
@@ -191,14 +191,14 @@ while [ $petla_duza = "tak" ]; do
 			
 			
 			#uruchomienie aktualizacji gdy zaszła jakaś zmiana
-			if [ "$bfqfix" = "blk-mq" ] || [ "$ssdfix" = "blk-mq" ]; then
-				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsyncoffprzed" = "$vsyncoff" ]; then
+			if [ "$hdd_scheduler" = "blk-mq" ] || [ "$ssd_scheduler" = "blk-mq" ]; then
+				if [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsync_on_przed" = "$vsync_on" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM
 				fi
 			else
-				if [ "$a" = "$aktualny_apm" ] && [ "$wififix_przed" = "$wififix" ] && [ "$wifionoff_przed" = "$wifionoff" ] && [ "$btfix_przed" = "$btfix" ] && [ "$rts5139fix_przed" = "$rts5139fix" ] && [ "$wifin_przed" = "$wifin" ] && [ "$bfqfix_przed" = "$bfqfix" ] && [ "$ssdfix_przed" = "$ssdfix" ] && [ "$turbooff_przed" = "$turbooff" ] && [ "$turboacoff_przed" = "$turboacoff" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]  && [ "$vsyncoffprzed" = "$vsyncoff" ]; then
+				if [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$hdd_scheduler_przed" = "$hdd_scheduler" ] && [ "$ssd_scheduler_przed" = "$ssd_scheduler" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]  && [ "$vsync_on_przed" = "$vsync_on" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM

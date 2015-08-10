@@ -4,6 +4,7 @@
 v0.9.13
 -	automatyczne zamknięcie xterm przy backupie gruba
 -	odwrócenie oznaczeń vsync
+-	poprawka zmiennych
 v0.9.12
 -	dodanie do APM opcji vsync
 -	poprawki w instalatorze repo
