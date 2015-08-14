@@ -35,7 +35,12 @@ source /opt/NeteXt73/procedury
 instaluj_NV(){
 	echo "nie" > /tmp/netext73/ok.txt
 	naglowek > instaluj.sh
-	nvidia >> instaluj.sh
+	#sprawdzanie czy jest nvidia_optimus
+	if [ "$(lspci | grep 3D)" = "" ]; then
+		nvidia >> instaluj.sh
+	else
+		nvidia_optimus >> instaluj.sh
+	fi
 	instalacja
 }
 

@@ -97,6 +97,7 @@ export wersje_ubu="wily!vivid!utopic!trusty!precise!unstable"
 #adres serwera
 export adres_glowny="ftp://37.59.165.105"
 export adres_sterownikow="$adres_glowny/sterowniki2/"
+export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 
 #premium
 if [ -e ~/.netext73/kernel_premium ]; then
@@ -1044,6 +1045,34 @@ echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
 }
      
+nvidia_optimus(){
+echo "echo \"$TEXT_PROCEDURA_15\""
+echo "dpkg -l | grep nvidia | awk '{print \$2}' > nv.txt"
+echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
+echo "rm -f nv.txt"
+echo "sudo apt-get install bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 -y"
+echo "wget \$adres_sterownikow_optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1"
+echo "sudo cp libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
+echo "rm libGL.so.1 -f"
+echo "wget \$adres_sterownikow_optimus/usr/lib/i386-linux-gnu/primus/libGL.so.1"
+echo "sudo cp libGL.so.1 /usr/lib/i386-linux-gnu/primus/libGL.so.1 -f"
+echo "rm libGL.so.1 -f"
+echo "/usr/bin/yes | sudo dpkg -i *.deb"
+echo "wget \$adres_sterownikow_optimus/nvidia_optimus/etc/bumblebee/bumblebee.conf"
+echo "wget \$adres_sterownikow_optimus/nvidia_optimus/etc/bumblebee/xorg.conf.nvidia"
+echo "sudo cp bumblebee.conf /etc/bumblebee/bumblebee.conf -f"
+echo "sudo cp xorg.conf.nvidia /etc/bumblebee/xorg.conf.nvidia -f"
+echo "rm bumblebee.conf xorg.conf.nvidia"
+echo "wget \$adres_sterownikow_optimus/nvidia_optimus/etc/modprobe.d/bumblebee.conf"
+echo "sudo cp bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
+echo "rm bumblebee.conf"
+echo "wersja_sterownika=\"\$(ls | grep nvidia | cut -d '_' -f 1 | cut -d '-' -f 3)\""
+echo "sudo sed -i \"s/nvidia-updates-.../nvidia-updates-\$wersja_sterownika/g\" /etc/bumblebee/bumblebee.conf"
+echo "sudo echo "# \$wersja_sterownika" >> /etc/modprobe.d/bumblebee.conf"
+echo "sudo echo "blacklist nvidia-updates-\$wersja_sterownika" >> /etc/modprobe.d/bumblebee.conf"
+}
+
+
 restart(){
 yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
       if [ $? = 0 ]; then
