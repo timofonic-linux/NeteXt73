@@ -64,10 +64,15 @@ rm nvidia-settings -f
 usun
 if [ "$1" = "nvidia" ]; then
 	wget $adres_sterownikow  2>&1 | pobieranie 
+	if [ "$(lspci | grep 3D)" = "" ]; then
+		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1""
+	else
+		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="Primusrun:2""
+	fi
 	if [ -e index.html ]; then
 		cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'nvidia-' | sed 's/.deb//' | grep -v -E "nvidia-settings.*|libnvidia-"  | sort -r > 2a.txt
 		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
-		ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 			if  [ "$(echo $ster | cut -d '_' -f 2 | cut -d "." -f1 )" -ge "340" ]; then
@@ -83,7 +88,38 @@ if [ "$1" = "nvidia" ]; then
 			else
 				yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
 			fi
-	fi
+		elif [ "$klawisz" = "2" ]; then
+			petla="tak"
+			while [ $petla = "tak" ]; do
+				rm primusrun.txt -f
+				for i in $(ls /usr/share/applications/ | grep desktop); do
+					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
+						echo "FALSE $i - off" >> primusrun.txt 
+					else
+						echo "FALSE $i on -" >> primusrun.txt 
+					fi
+				done
+					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat primusrun.txt))
+					if [ $? = "0" ]; then
+						if [ "$primus" != "" ]; then
+							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
+							naglowek > instaluj.sh
+							for i in $(cat zaznaczone.txt); do
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" /usr/share/applications/$i" >> instaluj.sh
+								else
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" /usr/share/applications/$i" >> instaluj.sh
+								fi
+							done
+							instalacja2
+						fi
+					fi
+					rm *.txt -f
+					if [ -z "$primus" ]; then
+						opusc__mala_petle
+					fi
+			done
+		fi
 	fi
 elif [ "$1" = "radeon" ]; then
 	if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
