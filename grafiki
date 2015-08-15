@@ -94,21 +94,22 @@ if [ "$1" = "nvidia" ]; then
 				rm primusrun.txt -f
 				for i in $(ls /usr/share/applications/ | grep desktop); do
 					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
-						echo "FALSE $i - off" >> primusrun.txt 
+						nazwa=$(echo $i | sed 's/.desktop//')
+						echo "FALSE $nazwa - off" >> primusrun.txt 
 					else
-						echo "FALSE $i on -" >> primusrun.txt 
+						echo "FALSE $nazwa on -" >> primusrun.txt 
 					fi
 				done
-					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat primusrun.txt))
+					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI39"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat primusrun.txt))
 					if [ $? = "0" ]; then
 						if [ "$primus" != "" ]; then
 							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
 							naglowek > instaluj.sh
 							for i in $(cat zaznaczone.txt); do
 								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
-									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" /usr/share/applications/$i" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" /usr/share/applications/$i.desktop" >> instaluj.sh
 								else
-									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" /usr/share/applications/$i" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" /usr/share/applications/$i.desktop" >> instaluj.sh
 								fi
 							done
 							instalacja2
@@ -129,7 +130,7 @@ elif [ "$1" = "radeon" ]; then
 		if [ -e index.html ]; then
 		    cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'fglrx_' | grep $bit2 | sed 's/.deb//' | sort -r >> 2a.txt
 		    lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
-		    ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		    ster=$(yad --center --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 			klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 			if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 				ster1=$(echo $ster.deb | sed "s/fglrx/fglrx-amdcccle/")
