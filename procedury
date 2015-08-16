@@ -1010,9 +1010,8 @@ nvidia_nagłowek(){
 echo "echo \"$TEXT_PROCEDURA_15\""
 echo "dpkg -l | grep nvidia | awk '{print \$2}' > nv.txt"
 echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
-echo "rm -f nv.txt"
 }
-
+#nvidia-prime
 nvidia(){
 echo "sudo apt-get install libpango-1.0-0 -y"
 echo "sudo apt-get install libvdpau1 -y"
@@ -1050,7 +1049,7 @@ echo "rm bumblebee.conf xorg.conf.nvidia"
 echo "wget \$adres_sterownikow_optimus/etc/modprobe.d/bumblebee.conf"
 echo "sudo cp bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
 echo "rm bumblebee.conf"
-echo "wersja_sterownika=\"\$(ls | grep nvidia | cut -d '_' -f 1 | cut -d '-' -f 3)\""
+echo "wersja_sterownika=\"\$(ls | grep nvidia | cut -d '_' -f 1 | cut -d '-' -f 3 | head -n 1)\""
 echo "sudo sed -i \"s/nvidia-updates-.../nvidia-updates-\$wersja_sterownika/g\" /etc/bumblebee/bumblebee.conf"
 echo "sudo echo \"# \$wersja_sterownika\" >> /etc/modprobe.d/bumblebee.conf"
 echo "sudo echo \"blacklist nvidia-updates-\$wersja_sterownika\" >> /etc/modprobe.d/bumblebee.conf"
@@ -1058,6 +1057,7 @@ echo "sudo echo \"blacklist nvidia-updates-\$wersja_sterownika\" >> /etc/modprob
 
 nvidia_stopka(){
 echo "rm *.deb -f"
+echo "rm -f nv.txt"
 echo "if [ \"\$(grep '#GRUB_GFXMODE' /etc/default/grub)\" != \"\" ]; then"
 echo "sudo sed -i 's/#GRUB_GFXMODE.*/GRUB_GFXMODE=1024x768/' /etc/default/grub"
 echo "fi"
