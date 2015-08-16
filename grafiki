@@ -108,7 +108,7 @@ if [ "$1" = "nvidia" ]; then
 							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
 							naglowek > instaluj.sh
 							for i in $(cat zaznaczone.txt); do
-								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i.desktop)" = "" ]; then
 									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" /usr/share/applications/$i.desktop" >> instaluj.sh
 								else
 									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" /usr/share/applications/$i.desktop" >> instaluj.sh
