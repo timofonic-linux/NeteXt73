@@ -95,8 +95,8 @@ if [ "$1" = "nvidia" ]; then
 			while [ $petla = "tak" ]; do
 				rm primusrun.txt -f
 				for i in $(ls /usr/share/applications/ | grep desktop); do
+					nazwa=$(echo $i | sed 's/.desktop//')
 					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
-						nazwa=$(echo $i | sed 's/.desktop//')
 						echo "FALSE $nazwa - off" >> primusrun.txt 
 					else
 						echo "FALSE $nazwa on -" >> primusrun.txt 
