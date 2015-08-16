@@ -45,9 +45,9 @@ if [ "$1" = "testy" ]; then
 #inne skrypty
 else
 	if [ "$(cat /etc/sysctl.conf | grep 'net.ipv6.conf.all.disable_ipv6 = 1')" = "" ]; then
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14"
+		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17"
 	else
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14"
+		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17"
 	fi
 	ikonka="/opt/NeteXt73/ikony/skrypty.png"
 fi
@@ -119,7 +119,10 @@ if [ $klawisz = 0 ]; then
 		naglowek > instaluj.sh
 		echo "sudo mv /lib/udev/rules.d/40-usb_modeswitch.rules /lib/udev/rules.d/61-usb_modeswitch.rules" >> instaluj.sh
 		instalacja3
-	    
+	#OPTIMUS FIX
+	elif [ "$skrypt" = "$MENU17" ]; then
+		cat /opt/NeteXt73/APM/nvidia-optimus-intel-drm-fix.sh > instaluj.sh
+		instalacja
 	#burntest
 	elif [ "$skrypt" = "BurnTest" ]; then
 		burntest
