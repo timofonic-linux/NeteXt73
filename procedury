@@ -1023,13 +1023,6 @@ echo "/usr/bin/yes | sudo dpkg -i *.deb"
 echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
-echo "if [ -e nvidia-settings.tar.xz ]; then"
-echo "sudo apt-get install nvidia-settings -y"
-echo "tar xf nvidia-settings.tar.xz"
-echo "sudo cp nvidia-settings /usr/bin/ -f"
-echo "sudo cp libnvidia* /usr/lib/ -f"
-echo "sudo rm nvidia-settings* libnvidia* -f"
-echo "fi"
 }
      
 nvidia_optimus(){
@@ -1055,6 +1048,9 @@ echo "if [ \"\$(grep \"blacklist nvidia-updates-\$wersja_sterownika\" /etc/modpr
 echo "echo \"# \$wersja_sterownika\" | sudo tee - a /etc/modprobe.d/bumblebee.conf"
 echo "echo \"blacklist nvidia-updates-\$wersja_sterownika\" | sudo tee -a /etc/modprobe.d/bumblebee.conf"
 echo "fi"
+}
+
+nvidia_stopka(){
 echo "if [ -e nvidia-settings.tar.xz ]; then"
 echo "sudo apt-get install nvidia-settings -y"
 echo "tar xf nvidia-settings.tar.xz"
@@ -1062,10 +1058,6 @@ echo "sudo cp nvidia-settings /usr/bin/ -f"
 echo "sudo cp libnvidia* /usr/lib/ -f"
 echo "sudo rm nvidia-settings* libnvidia* -f"
 echo "fi"
-echo "sudo sed -i \"s/Exec=.*/Exec=optirun -b none nvidia-settings -c :8/g\" /usr/share/applications/nvidia-settings.desktop"
-}
-
-nvidia_stopka(){
 echo "rm *.deb -f"
 echo "rm -f nv.txt"
 echo "if [ \"\$(grep '#GRUB_GFXMODE' /etc/default/grub)\" != \"\" ]; then"
@@ -1077,6 +1069,9 @@ echo "fi"
 echo "sudo update-initramfs -u -k all"
 echo "sudo update-grub"
 echo "sudo rm -f /usr/share/applications/nvidia-settings.desktop"
+echo "if [ -e /usr/share/nvidia-updates-\$wersja_sterownika/ubuntu-nvidia-settings.desktop ];then"
+echo "echo \"sudo sed -i 's/Exec=.*/Exec=optirun -b none nvidia-settings -c :8/g' /usr/share/nvidia-updates-\$wersja_sterownika/ubuntu-nvidia-settings.desktop\""
+echo "fi"
 echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
