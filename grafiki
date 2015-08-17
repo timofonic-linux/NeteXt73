@@ -43,14 +43,14 @@ instaluj_NV(){
 		nvidia_optimus >> instaluj.sh
 	fi
 	nvidia_stopka >> instaluj.sh
-	instalacja
+	instalacja2
 }
 
 instaluj_RADEON(){
 	echo "nie" > /tmp/netext73/ok.txt
 	naglowek > instaluj.sh
 	radeon >> instaluj.sh
-	instalacja
+	instalacja2
 }
 
 #########################################################################################################################################################################
