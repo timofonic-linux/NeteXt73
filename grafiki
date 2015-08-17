@@ -68,6 +68,7 @@ if [ "$1" = "nvidia" ]; then
 	wget $adres_sterownikow  2>&1 | pobieranie
 	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
 	
+	#sprawdzanie Optimusa
 	if [ "$(lspci | grep 3D)" = "" ]; then
 		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1""
 	else
@@ -101,39 +102,45 @@ if [ "$1" = "nvidia" ]; then
 		elif [ "$klawisz" = "2" ] || [ "$klawisz" = "3" ]; then
 			petla="tak"
 			while [ $petla = "tak" ]; do
-				rm primusrun.txt -f
+				rm primusrun*.txt -f
 				if [ "$klawisz" = "2" ]; then
 				      katalog="/usr/share/applications"
 				elif [ "$klawisz" = "3" ]; then
 				      katalog="$katalog_pulpit"
 				fi
+				IFS=$'\n'
 				for i in $(ls $katalog/ | grep desktop); do
-					nazwa=$(echo $i | sed 's/.desktop//')
+					nazwa=$(echo "$i" | sed 's/.desktop//')
 					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i)" = "" ]; then
-						echo "FALSE $nazwa - off" >> primusrun.txt 
+						echo "FALSE@"$nazwa"@-@off" >> primusrun1.txt 
 					else
-						echo "FALSE $nazwa on -" >> primusrun.txt 
+						echo "FALSE@"$nazwa"@on@-" >> primusrun1.txt 
 					fi
 				done
-					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI39"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat primusrun.txt))
+					cat primusrun1.txt | tr '\n' '@' > primusrun.txt
+					IFS='@'
+					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI39"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5" --item-separator='@' --checklist --list $(cat primusrun.txt))
 					if [ $? = "0" ]; then
 						if [ "$primus" != "" ]; then
 							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
 							naglowek > instaluj.sh
+							IFS=$'\n'
 							for i in $(cat zaznaczone.txt); do
-								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i.desktop)" = "" ]; then
-									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" $katalog/$i.desktop" >> instaluj.sh
+							echo $i
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' "$katalog/$i.desktop")" = "" ]; then
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" \"$katalog/$i.desktop\"" >> instaluj.sh
 									if [ "$klawisz" = "3" ] && [ $USER = "root" ]; then
-										echo "sudo chown $userek:$userek  $katalog/$i.desktop" >> instaluj.sh
+										echo "sudo chown $userek:$userek  \"$katalog/$i.desktop\"" >> instaluj.sh
 									fi
 								else
-									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" $katalog/$i.desktop" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" \"$katalog/$i.desktop\"" >> instaluj.sh
 									if [ "$klawisz" = "3" ] && [ $USER = "root" ]; then
-										echo "sudo chown $userek:$userek  $katalog/$i.desktop" >> instaluj.sh
+										echo "sudo chown $userek:$userek  \"$katalog/$i.desktop\"" >> instaluj.sh
 									fi
 								fi
 							done
 							instalacja2
+							IFS=$' \t\n'
 						fi
 					fi
 					rm *.txt -f

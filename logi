@@ -219,7 +219,7 @@ lsusb >> lsusbsystem$losowa.log
 echo -e "qlxinfo" >> glxinfo$losowa.log
 echo -e "##############################################################################################" >> glxinfo$losowa.log
 glxinfo >> glxinfo$losowa.log
-if [ "$(lspci | grep 3D)" = "" ]; then
+if [ "$(lspci | grep 3D)" != "" ]; then
 	echo -e "##############################################################################################" >> glxinfo$losowa.log
 	primusrun glxinfo | grep OpenGL  >> glxinfo$losowa.log
 fi
