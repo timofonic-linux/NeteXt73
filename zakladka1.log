@@ -1,0 +1,31 @@
+<span color="#0000ff"><b>Aktualna wersja kernela:</b></span>
+Linux version 4.1.5-ext73-41.5-haswell (root@ext73-kernel) (gcc version 5.2.1 20150804 (eXt73-build_v6.1) ) #34 SMP PREEMPT Wed Aug 12 20:04:53 CEST 2015
+<span color="#0000ff"><b>Informacje o sprzęcie:</b></span>
+Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz
+Intel Corporation Wireless 7260 (rev 6b)
+scheduler I/O :
+[noop] deadline cfq 
+<span color="#0000ff"><b>SYSTEM:</b></span> Ubuntu 14.04 trusty 64bit
+<span color="#0000ff"><b>Zainstalowane skrypty optymalizacyjne:</b></span>
+microcode Intel - <b>ON</b>
+microcode AMD - <b>OFF</b>
+Skrypt APM - <b>ON</b>
+Prawa pliku GRUB: <b>root</b>
+<span color="#0000ff"><b>Dodatkowy wpis w sekcji GRUB:</b></span>
+GRUB_CMDLINE_LINUX="acpi_osi=Linux pcie_aspm=force acpi_enforce_resources=lax zswap.enabled=1 zswap.compressor=lz4"
+<span color="#0000ff"><b>Wersje plików:</b></span>
+GCC - gcc (Ubuntu 5.1.0-0ubuntu11~14.04.1) 5.1.0
+Powertop - 2.6.1-0~23~ubuntu14.04.1
+<span color="#0000ff"><b>OpenGL</b></span>
+OpenGL vendor string: Intel Open Source Technology Center
+OpenGL renderer string: Mesa DRI Intel(R) Haswell Mobile 
+OpenGL core profile version string: 3.3 (Core Profile) Mesa 10.3.2
+OpenGL core profile shading language version string: 3.30
+OpenGL core profile context flags: (none)
+OpenGL core profile profile mask: core profile
+OpenGL version string: 3.0 Mesa 10.3.2
+OpenGL shading language version string: 1.30
+OpenGL context flags: (none)
+OpenGL ES profile version string: OpenGL ES 3.0 Mesa 10.3.2
+OpenGL ES profile shading language version string: OpenGL ES GLSL ES 3.0
+OpenGL ES profile extensions:

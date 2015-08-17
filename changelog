@@ -3,8 +3,10 @@
 
 v0.9.14
 -	instalator optimusa
--	dodanie opcji primusrun
+-	dodanie opcji primusrun dla aplikacji w menu
+-	dodanie opcji primusrun dla aplikacji na pulpicie
 -	Optimus Steam Fix
+-	Logi primus opengl
 v0.9.13
 -	automatyczne zamknięcie xterm przy backupie gruba
 -	odwrócenie oznaczeń vsync

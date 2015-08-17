@@ -1006,13 +1006,13 @@ echo "rm *.deb -f"
 }
 
 
-nvidia_nagłowek(){
+nvidia_naglowek(){
 echo "echo \"$TEXT_PROCEDURA_15\""
 echo "dpkg -l | grep nvidia | awk '{print \$2}' > nv.txt"
-echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
 }
 #nvidia-prime
 nvidia(){
+echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
 echo "sudo apt-get install libpango-1.0-0 -y"
 echo "sudo apt-get install libvdpau1 -y"
 echo "if [ \"\$(dpkg -l | grep bumblebee)\" = \"\" ];then"
@@ -1024,7 +1024,7 @@ echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ -e nvidia-settings.tar.xz ]; then"
-echo "sudo apt-get install nvidia-settings-updates nvidia-common -y"
+echo "sudo apt-get install nvidia-settings -y"
 echo "tar xf nvidia-settings.tar.xz"
 echo "sudo cp nvidia-settings /usr/bin/ -f"
 echo "sudo cp libnvidia* /usr/lib/ -f"
@@ -1033,6 +1033,7 @@ echo "fi"
 }
      
 nvidia_optimus(){
+echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
 echo "sudo apt-get install bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 -y"
 echo "wget \$adres_sterownikow_optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1"
 echo "sudo cp libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
@@ -1051,9 +1052,17 @@ echo "rm bumblebee.conf -f"
 echo "export wersja_sterownika=\"\$(ls | grep nvidia-updates | cut -d '_' -f 1 | cut -d '-' -f 3 | head -n 1)\""
 echo "sudo sed -i \"s/nvidia-updates-.../nvidia-updates-\$wersja_sterownika/g\" /etc/bumblebee/bumblebee.conf"
 echo "if [ \"\$(grep \"blacklist nvidia-updates-\$wersja_sterownika\" /etc/modprobe.d/bumblebee.conf)\" = \"\" ];then"
-echo "sudo echo \"# \$wersja_sterownika\" >> /etc/modprobe.d/bumblebee.conf"
-echo "sudo echo \"blacklist nvidia-updates-\$wersja_sterownika\" >> /etc/modprobe.d/bumblebee.conf"
+echo "echo \"# \$wersja_sterownika\" | sudo tee - a /etc/modprobe.d/bumblebee.conf"
+echo "echo \"blacklist nvidia-updates-\$wersja_sterownika\" | sudo tee -a /etc/modprobe.d/bumblebee.conf"
 echo "fi"
+echo "if [ -e nvidia-settings.tar.xz ]; then"
+echo "sudo apt-get install nvidia-settings -y"
+echo "tar xf nvidia-settings.tar.xz"
+echo "sudo cp nvidia-settings /usr/bin/ -f"
+echo "sudo cp libnvidia* /usr/lib/ -f"
+echo "sudo rm nvidia-settings* libnvidia* -f"
+echo "fi"
+echo "sudo sed -i \"s/Exec=.*/Exec=optirun -b none nvidia-settings -c :8/g\" /usr/share/applications/nvidia-settings.desktop"
 }
 
 nvidia_stopka(){

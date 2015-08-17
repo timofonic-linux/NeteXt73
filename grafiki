@@ -65,12 +65,20 @@ rm nvidia-settings -f
 
 usun
 if [ "$1" = "nvidia" ]; then
-	wget $adres_sterownikow  2>&1 | pobieranie 
+	wget $adres_sterownikow  2>&1 | pobieranie
+	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
+	
 	if [ "$(lspci | grep 3D)" = "" ]; then
 		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1""
 	else
-		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="Primusrun:2""
+		if [ "$(ls $katalog_pulpit/ | grep \.desktop)" = "" ]; then
+			menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="primus-menu-start:2""
+		else
+			menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="primus-menu-start:2" --button="primus-desktop-start:3""
+		fi
+		
 	fi
+	
 	if [ -e index.html ]; then
 		cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'nvidia-' | sed 's/.deb//' | grep -v -E "nvidia-settings.*|libnvidia-"  | sort -r > 2a.txt
 		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
@@ -90,13 +98,18 @@ if [ "$1" = "nvidia" ]; then
 			else
 				yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
 			fi
-		elif [ "$klawisz" = "2" ]; then
+		elif [ "$klawisz" = "2" ] || [ "$klawisz" = "3" ]; then
 			petla="tak"
 			while [ $petla = "tak" ]; do
 				rm primusrun.txt -f
-				for i in $(ls /usr/share/applications/ | grep desktop); do
+				if [ "$klawisz" = "2" ]; then
+				      katalog="/usr/share/applications"
+				elif [ "$klawisz" = "3" ]; then
+				      katalog="$katalog_pulpit"
+				fi
+				for i in $(ls $katalog/ | grep desktop); do
 					nazwa=$(echo $i | sed 's/.desktop//')
-					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i)" = "" ]; then
+					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i)" = "" ]; then
 						echo "FALSE $nazwa - off" >> primusrun.txt 
 					else
 						echo "FALSE $nazwa on -" >> primusrun.txt 
@@ -108,10 +121,10 @@ if [ "$1" = "nvidia" ]; then
 							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
 							naglowek > instaluj.sh
 							for i in $(cat zaznaczone.txt); do
-								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' /usr/share/applications/$i.desktop)" = "" ]; then
-									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" /usr/share/applications/$i.desktop" >> instaluj.sh
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i.desktop)" = "" ]; then
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" $katalog/$i.desktop" >> instaluj.sh
 								else
-									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" /usr/share/applications/$i.desktop" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" $katalog/$i.desktop" >> instaluj.sh
 								fi
 							done
 							instalacja2
