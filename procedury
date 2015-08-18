@@ -1010,7 +1010,7 @@ nvidia_naglowek(){
 echo "echo \"$TEXT_PROCEDURA_15\""
 echo "dpkg -l | grep nvidia | awk '{print \$2}' > nv.txt"
 }
-#nvidia-prime
+
 nvidia(){
 echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
 echo "sudo apt-get install libpango-1.0-0 -y"
@@ -1020,9 +1020,6 @@ echo "sudo apt-get install nvidia-prime"
 echo "fi"
 echo "sudo apt-get -f install pkg-config screen-resolution-extra -y"
 echo "/usr/bin/yes | sudo dpkg -i *.deb"
-echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
-echo "sudo cp *.deb /var/cache/apt/archives/ -f"
-echo "fi"
 }
      
 nvidia_optimus(){
@@ -1051,6 +1048,9 @@ echo "fi"
 }
 
 nvidia_stopka(){
+echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
+echo "sudo cp *.deb /var/cache/apt/archives/ -f"
+echo "fi"
 echo "if [ -e nvidia-settings.tar.xz ]; then"
 echo "sudo apt-get install nvidia-settings -y"
 echo "tar xf nvidia-settings.tar.xz"

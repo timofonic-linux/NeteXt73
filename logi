@@ -90,6 +90,16 @@ fi
 	else
 		echo -e "$TEXT_SKRYPT APM - <b>$TEXT_LOGI7</b>" >> system$losowa.log
 	fi
+
+#Optimus 
+if [ "$(lspci | grep 3D)" != "" ]; then 
+	if [ "$(cat /proc/acpi/bbswitch 0000:03:00.0 | grep -i on)" != "" ]; then 
+		echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log 
+	else 
+		echo -e "Nvidia Optimus - <b>OFF</b>" >> system$losowa.log 
+	fi
+fi
+
 if [ -e $wersja_apm ]; then
 	echo "$TEXT_LOGI8 APM: <b>$(ls -al /etc/default/grub | cut -d " " -f 3)</b>" >> system$losowa.log
 fi
