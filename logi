@@ -85,14 +85,14 @@ else
 	echo "microcode AMD - <b>OFF</b>" >> system$losowa.log
 fi
 #apm status
-	if [ "$stan_apm" != "-" ]; then
-		echo -e "$TEXT_SKRYPT APM - <b>ON</b>" >> system$losowa.log
-	else
-		echo -e "$TEXT_SKRYPT APM - <b>$TEXT_LOGI7</b>" >> system$losowa.log
-	fi
+if [ "$stan_apm" != "-" ]; then
+	echo -e "$TEXT_SKRYPT APM - <b>ON</b>" >> system$losowa.log
+else
+	echo -e "$TEXT_SKRYPT APM - <b>$TEXT_LOGI7</b>" >> system$losowa.log
+fi
 
-#Optimus 
-if [ "$(lspci | grep 3D)" != "" ]; then 
+#sprawdzanie czy jest nvidia_optimus
+if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
 	if [ "$(cat /proc/acpi/bbswitch 0000:03:00.0 | grep -i on)" != "" ]; then 
 		echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log 
 	else 

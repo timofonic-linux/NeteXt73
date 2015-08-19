@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.15
+-	zmiana sposobu sprawdzania czy jest optimus
 v0.9.14
 -	instalator optimusa
 -	dodanie opcji primusrun dla aplikacji w menu

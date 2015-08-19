@@ -1,3 +1,9 @@
+netext73 (0.9.15) stable; urgency=medium
+
+  * zmiana sposobu sprawdzania czy jest optimus
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 19 Aug 2015 19:59:13 +0200
+
 netext73 (0.9.14) stable; urgency=medium
 
   * instalator nvidia optimus
