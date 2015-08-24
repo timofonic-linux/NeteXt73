@@ -81,20 +81,16 @@ if [ "$1" = "nvidia" ]; then
 	fi
 	
 	if [ -e index.html ]; then
-		cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'nvidia-' | sed 's/.deb//' | grep -v -E "nvidia-settings.*|libnvidia-"  | sort -r > 2a.txt
+		cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'nvidia-' | sed 's/.tar.xz//' | grep -v -E "nvidia-settings.*|libnvidia-"  | sort -r > 2a.txt
 		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
 		ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-			if  [ "$(echo $ster | cut -d '_' -f 2 | cut -d "." -f1 )" -ge "340" ]; then
-				nv_set="nvidia-settings.tar.xz"
-				yad_wget $adres_sterownikow/$nv_set $adres_sterownikow/$ster.deb
-			else
-				yad_wget $adres_sterownikow/$ster.deb
-			fi  
-			if [ -e $ster.deb ] && [ -e $nv_set ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $nv_set) $sumy_kontrolne)" != "" ]; then
-				instaluj_NV
-			elif [ -e $ster.deb ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ]; then
+			yad_wget $adres_sterownikow/$ster.tar.xz
+			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ]; then
+				tar -Jxf $ster.tar.xz
+				cd $ster
+				export wersja_nvidia=$(echo $ster | sed 's/nvidia-//')
 				instaluj_NV
 			else
 				yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
