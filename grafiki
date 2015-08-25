@@ -88,6 +88,7 @@ if [ "$1" = "nvidia" ]; then
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 			yad_wget $adres_sterownikow/$ster.tar.xz
 			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ]; then
+				rm -f index.html 2a.txt
 				tar -Jxf $ster.tar.xz
 				cd $ster
 				export wersja_nvidia=$(echo $ster"_amd64" | sed 's/nvidia-//')
@@ -118,6 +119,7 @@ if [ "$1" = "nvidia" ]; then
 					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI39"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5" --item-separator='@' --checklist --list $(cat primusrun.txt))
 					if [ $? = "0" ]; then
 						if [ "$primus" != "" ]; then
+							rm -f index.html 2a.txt
 							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
 							naglowek > instaluj.sh
 							IFS=$'\n'
