@@ -4,6 +4,7 @@
 v0.9.17
 -	dodanie aktualnego klucza GPG do instalatora spotify
 -	usunięcie repo bumblebee
+-	usunięcie autoremove
 v0.9.16
 -	zmiana sposobu instalacji sterowników NV
 v0.9.15

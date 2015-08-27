@@ -306,7 +306,7 @@ echo "echo \"$TEXT_PROCEDURA_3\""
 echo "/usr/bin/yes | sudo dpkg -r linux-firmware-nonfree"
 echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then sudo apt-get purge intel-microcode -y; fi"
 echo "sudo rm /lib/firmware/amd-ucode -r"
-echo "sudo apt-get autoremove -y"
+#echo "sudo apt-get autoremove -y"
 }
 
 apm_inst(){

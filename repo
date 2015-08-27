@@ -477,13 +477,6 @@ else
 							      echo "wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/qt_pl.qm && wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/VirtualBox_pl.qm && sudo mv qt_pl.qm /usr/share/virtualbox/nls/ && sudo mv VirtualBox_pl.qm /usr/share/virtualbox/nls/" >> instaluj.txt
 							  ;;
 							  esac
-						elif [ "${repo[$i]}" = "ppa:bumblebee/stable" ]; then
-							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-							if [ "$(lsb_release -r | grep 12.04)" != "" ] || [ "$(lsb_release -r | grep 13.04)" != "" ];then
-							      echo "sudo apt-get install bumblebee bumblebee-nvidia virtualgl" >> instaluj.txt
-							elif [ "$(lsb_release -r | grep 13.10)" != "" ] || [ "$(lsb_release -r | grep 14.04)" != "" ]; then
-							      echo "sudo apt-get install bumblebee bumblebee-nvidia primus" >> instaluj.txt
-							fi
 						elif [ "${repo[$i]}" = "ppa:kubuntu-ppa/backports" ]; then
 							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
 						else
@@ -497,7 +490,7 @@ else
 				if [ "$(grep 'sudo' instaluj.sh)" != "" ]; then
 					echo "sudo apt-get update" >> instaluj.sh
 					cat instaluj.txt >> instaluj.sh
-					echo "sudo apt-get install -f && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y" >> instaluj.sh
+					echo "sudo apt-get install -f && sudo apt-get dist-upgrade -y" >> instaluj.sh
 				fi
 				instalacja
 			elif [ "$klawisz" = "2" ]; then
@@ -594,7 +587,7 @@ else
 						fi
 					done
 					if [ "$(grep 'sudo' instaluj.sh)" != "" ]; then
-						echo "sudo apt-get install -f && sudo apt-get autoremove -y" >> instaluj.sh
+						echo "sudo apt-get install -f" >> instaluj.sh
 					fi
 					instalacja
 				elif [ "$klawisz" = "2" ]; then
