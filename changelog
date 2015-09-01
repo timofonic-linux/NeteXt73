@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.19
+-	zmiana zależności dla nowych sterowników nvidia
 v0.9.18
 -	automatyzacja deinstalacji kerneli
 v0.9.17

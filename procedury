@@ -1014,7 +1014,7 @@ echo "dpkg -l | grep libcuda1| awk '{print \$2}' >> nv.txt"
 
 nvidia(){
 echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
-echo "sudo apt-get install lib32gcc1 libvdpau1 libpango-1.0-0 -y"
+echo "sudo apt-get install lib32gcc1 libvdpau1 libpango-1.0-0 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4  libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1 -y"
 echo "if [ \"\$(dpkg -l | grep bumblebee)\" = \"\" ];then"
 echo "sudo apt-get install nvidia-prime"
 echo "fi"
@@ -1028,7 +1028,7 @@ echo "/usr/bin/ | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.deb"
      
 nvidia_optimus(){
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
-echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 -y"
+echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y" libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1
 echo "wget \$adres_sterownikow_optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1"
 echo "sudo cp libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
 echo "rm libGL.so.1 -f"
