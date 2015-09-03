@@ -37,49 +37,19 @@ source /opt/NeteXt73/procedury
 
 cd /tmp/netext73
 
-#menu1="i7 - Intel Sandy Bridge, Ivy Bridge"
-#menu1a="i7-PRO Haswell"
-#menu2="Brazos - AMD Athlon II, Phenom II, Brazos, Bulldozer"
-#menu2a="Brazos-PRO Piledriver, Steamroller"
-#menu3=$TEXT_K8
-#menu4="Atom - Intel Atom 64bit"
-#menu5="Sandy Bridge"
-#menu6="Ivy Bridge"
-#menu7="Haswell"
-#menu8="Broadwell"
-#menu9="Brazos"
-#menu10="Bulldozer"
-#menu11="Piledriver"
-
 if [ -e ~/.netext73/kernel_automat ] && [ -e ~/.netext73/instalator_kerneli ] && [ "$(cat ~/.netext73/kernel_automat)" = "TRUE" ]; then
 	kern="$(cat ~/.netext73/instalator_kerneli)"
-	if [ "$(echo $kern | grep -E "sandybridge|ivybridge|haswell|broadwell|brazos|bulldozer|piledriver")" != "" ]; then
-		export katalog2="2"
+	if [ "$(echo $kern | grep -E "sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver")" != "" ]; then
 		export premium="tak"
 	else
-		export katalog2=""
 		export premium="nie"
 	fi
 else
 	if [ "$1" = "K8" ] || [ "$1" = "atom" ]; then
 		kern="$1"
-		export katalog2=""
 		export premium="nie"
-	elif [ "$(echo $1 | grep -E "sandybridge|ivybridge|haswell|broadwell|brazos|bulldozer|piledriver")" != "" ]; then
+	elif [ "$(echo $1 | grep -E "sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver")" != "" ]; then
 		kern="$1"
-		export katalog2="2"
-		export premium="tak"
-	elif [ "$1" = "amd" ]; then
-		kern="Brazos - AMD Athlon II, Phenom II, Brazos, Bulldozer"
-		export katalog2=""
-		export premium="tak"
-	elif [ "$1" = "amd_pro" ]; then
-		kern="Brazos-PRO Piledriver, Steamroller"
-		export katalog2=""
-		export premium="tak"
-	elif [ "$1" = "i7" ] || [ "$1" = "i7-pro" ]; then
-		kern="$1"
-		export katalog2=""
 		export premium="tak"
 	elif [ "$1" = "naglowki" ]; then
 		kern="$TEXT_MENU_INSTALATOR4"
@@ -88,9 +58,6 @@ else
 	fi
 	if [ "$1" = "premium" ]; then
 		pliki="/opt/NeteXt73/kernel-premium"
-		ikona="linux-premium.png"
-	elif [ "$1" = "old" ]; then
-		pliki="/opt/NeteXt73/kernel-premium_old"
 		ikona="linux-premium.png"
 	else
 		pliki="/opt/NeteXt73/kernel"
@@ -106,7 +73,6 @@ else
 		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$((860*$skala))" --height="$wysokosc" \
 		--title="$nazwa_skryptu " --button="$TEXT_MENU_INSTALATOR5:4"  --button="$TEXT_ZAMKNIJ:1" --single-click
 		klawisz=$?   
-		# --image="/opt/NeteXt73/ikony/netext73.png"
 	fi
 fi
 
