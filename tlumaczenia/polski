@@ -218,6 +218,7 @@ export TEXT_WYGENERUJ="wygeneruj logi"
 export TEXT_PASTE="Wciśnij CTRL+V, żeby wkleić wygenerowane logi"
 export TEXT_PASTEBIN="wklej na serwer"
 export TEXT_CLIPBOARD="kopiuj do schowka"
+export TEXT_LISTAPAKIETOW="Pakiety"
 
 #########################################################################################################################################################################
 #tlumaczenia_microcode

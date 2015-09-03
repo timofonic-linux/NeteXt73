@@ -244,6 +244,39 @@ mv system$losowa.log netext.log
 sudo ufw status verbose > firewall.log
 for i in $(seq 1 42); do sudo dmidecode --type $i >> dmidecode.log; done
 sudo tac /var/log/kern.log | sed -n 1,1000p > kern.log
+
+#przygotowanie informacji o zainstalowanych plikach
+rm /tmp/netext73/sumy/pliki.txt -f
+dpkg -l | grep -wE "linux-headers|nvidia|fglrx" | grep ii > /tmp/netext73/sumy/pakiety.txt
+cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
+cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	  	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
+cat /tmp/netext73/sumy/pakiety.txt | awk '{print $2"_"$3}' 	| sed 's/.://g' | grep fglrx_ >> /tmp/netext73/sumy/lista.txt
+cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' > /tmp/netext73/sumy/pakiety.txt
+
+for i in $(cat /tmp/netext73/sumy/pakiety.txt); do 
+	if [ "$(echo $i | grep fglrx )" = "" ];then
+		if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $i)" = "" ]; then
+			echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
+		else
+			echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
+		fi
+	else
+		if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $(echo $i | sed 's/.*_fglrx/fglrx/g'))" = "" ]; then
+			echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
+		else
+			echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
+		fi
+	fi
+done
+rm -f /tmp/netext73/sumy/pakiety.txt 
+#sed -i 's/_amd64.deb//g' /tmp/netext73/sumy/pliki.txt
+#sed -i 's/.tar.xz//g' /tmp/netext73/sumy/pliki.txt
+sed -i 's/-headers//g' /tmp/netext73/sumy/pliki.txt
+cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
+rm -f /tmp/netext73/sumy/pliki.txt
+
+
+
 #system logi
 please_wait kill
 
@@ -298,9 +331,45 @@ yad --plug=$KEY --tabnum=12 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNAC
 yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " \
 --tab="main" --tab="netext" --tab="dmesg" --tab="kern" --tab="firewall" --tab="dmidecode" \
 --tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
---window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((600*$skala)) --height=$((600*$skala)) --on-top --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
+--window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((600*$skala)) --height=$((600*$skala)) --on-top --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_LISTAPAKIETOW:2"
 klawisz=$?
-if [ "$klawisz" = "0" ]; then
+
+if [ "$klawisz" = "2" ]; then
+	KEY="$(echo $RANDOM)"
+	res4=$(mktemp --tmpdir=/tmp/netext73 netext73_4.XXXXXXXX)
+	res5=$(mktemp --tmpdir=/tmp/netext73 netext73_5.XXXXXXXX)
+	res6=$(mktemp --tmpdir=/tmp/netext73 netext73_6.XXXXXXXX)
+	res7=$(mktemp --tmpdir=/tmp/netext73 netext73_7.XXXXXXXX)
+	res8=$(mktemp --tmpdir=/tmp/netext73 netext73_8.XXXXXXXX)
+	res9=$(mktemp --tmpdir=/tmp/netext73 netext73_9.XXXXXXXX)
+	res10=$(mktemp --tmpdir=/tmp/netext73 netext73_10.XXXXXXXX)
+	res11=$(mktemp --tmpdir=/tmp/netext73 netext73_11.XXXXXXXX)
+	res12=$(mktemp --tmpdir=/tmp/netext73 netext73_12.XXXXXXXX)
+	res13=$(mktemp --tmpdir=/tmp/netext73 netext73_13.XXXXXXXX)
+	res14=$(mktemp --tmpdir=/tmp/netext73 netext73_14.XXXXXXXX)
+	res15=$(mktemp --tmpdir=/tmp/netext73 netext73_15.XXXXXXXX)
+	
+	yad --plug=$KEY --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" &> $res4 &
+	yad --plug=$KEY --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" &> $res5 &
+	yad --plug=$KEY --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" &> $res6 &
+	yad --plug=$KEY --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" &> $res7 &
+	yad --plug=$KEY --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" &> $res8 &
+	yad --plug=$KEY --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" &> $res9 &
+	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" &> $res10 &
+	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" &> $res11 &
+	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" &> $res12 &
+	yad --plug=$KEY --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" &> $res13 &
+	yad --plug=$KEY --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" &> $res14 &
+	yad --plug=$KEY --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" &> $res15 &
+
+	yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " \
+      --tab="catalyst" --tab="nvidia" --tab="k8" --tab="atom" \
+      --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="skylake" \
+      --tab="brazos" --tab="buldozer" --tab="piledriver" \
+      --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
+
+      rm /tmp/netext73/sumy/pliki.txt $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11 $res12 $res13 $res14 $res15 -f
+elif [ "$klawisz" = "0" ]; then
 	cat $res11 | cut -d "|" -f 1 > ~/.netext73/wysylkalogow
 	cat $res11 | cut -d "|" -f 2 >> ~/.netext73/wysylkalogow
 	cat $res11 | cut -d "|" -f 3 >> ~/.netext73/wysylkalogow

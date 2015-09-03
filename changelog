@@ -6,6 +6,7 @@ v0.9.20
 -	dodanie instalatora kerneli skylake
 -	dostosowanie modułu sprawdzania zainstalowanych kerneli do nowych wersji
 -	dostosowanie pliku makefile
+-	przeniesienie listy pakietów z o Netext do logów
 v0.9.19
 -	zmiana zależności dla nowych sterowników nvidia
 v0.9.18
