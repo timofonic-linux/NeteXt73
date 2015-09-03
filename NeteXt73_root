@@ -57,6 +57,7 @@ if [ "$1" = "kontakty" ]; then
 	done
 	rm -f /tmp/netext73/sumy/pakiety.txt 
 	sed -i 's/_amd64.deb//g' /tmp/netext73/sumy/pliki.txt
+	sed -i 's/.tar.xz//g' /tmp/netext73/sumy/pliki.txt
 	sed -i 's/-headers//g' /tmp/netext73/sumy/pliki.txt
 	cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
 	rm -f /tmp/netext73/sumy/pliki.txt
