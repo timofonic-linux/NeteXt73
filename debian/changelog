@@ -1,3 +1,9 @@
+netext73 (0.9.20) stable; urgency=medium
+
+  * skylake
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 03 Sep 2015 18:04:35 +0200
+
 netext73 (0.9.19) stable; urgency=medium
 
   * zmiana zależności dla nowych sterowników nvidia

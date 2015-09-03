@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.20
+-	usunięcie instalatora starych wersji kerneli premium
+-	dodanie instalatora kerneli skylake
 v0.9.19
 -	zmiana zależności dla nowych sterowników nvidia
 v0.9.18
