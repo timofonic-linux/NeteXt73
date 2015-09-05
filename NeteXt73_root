@@ -36,17 +36,19 @@ if [ "$1" = "kontakty" ]; then
 	KEY="$(echo $RANDOM)"
 
 	#zmienne losowe
+	res0=$(mktemp --tmpdir=/tmp/netext73 netext73_0.XXXXXXXX)
 	res1=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
 	res2=$(mktemp --tmpdir=/tmp/netext73 netext73_2.XXXXXXXX)
 	res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
 
-	yad --plug=$KEY --tabnum=1 --icons --image-on-top --single-click --item-width=$((390*$skala)) --read-dir=/opt/NeteXt73/kontakty &> $res1 &
-	yad --plug=$KEY --tabnum=2 --text-info --filename=/opt/NeteXt73/changelog &> $res2 &
-	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/LICENSE &> $res3 &
-	yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" \
-	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_BUG:2"
+	yad --plug=$KEY --tabnum=1 --text="$TEXT_O_PROGRAMIE" &> $res0 &
+	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty &> $res1 &
+	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog &> $res2 &
+	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE &> $res3 &
+	yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" \
+	--window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((340*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_BUG:2"
 	klawisz=$?
-	rm $res1 $res2 $res3 -f
+	rm $res0 $res1 $res2 $res3 -f
 	if [ "$klawisz" = "2" ]; then
 		xdg-open "http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html"
 	fi

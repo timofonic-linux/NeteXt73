@@ -400,3 +400,5 @@ export TEXT_PPAPURGE="Usuń wskazane repozytorium i przywróć oficjalne pakiety
 
 export TEXT_WARRING_DEP1="Do prawidłowego działania zarządzania energią [Skryptu APM] usuń następujące pakiety:"
 export TEXT_BOOT_START="Domyślnie bootowany system:"
+export TEXT_O_PROGRAMIE="<span color=\"$kolor_textu\"><b>NeteXt'73</b></span> to zbiór przydatnych skryptów, których użycie jest teraz jeszcze łatwiejsze dzięki graficznemu interfejsowi <span color=\"$kolor_textu\"><b>YAD</b></span>.\nJego główną funkcją jest ułatwienie instalacji kerneli <span color=\"$kolor_textu\"><b>e X t 7 3</b></span>, oraz wszelkich optymalizacji przygotowanych przez <span color=\"$kolor_textu\"><b>e X t 7 3</b></span>.\nProgram do wdrożenia powyższych napisał <span color=\"$kolor_textu\"><b>NetBit73</b></span>, on też rozbudował go o kolejne skrypty zarządzające między innymi:\n\n - repozytoriami,\n - kluczami GPG,\n - usługami SysV,\n - Upstart oraz Systemd.\n\nDzięki <span color=\"$kolor_textu\"><b>NeteXt'73</b></span> użytkownik ma także możliwość sprawdzenia wydajności jak i stabilności swojego systemu."
+export TEXT_O="O programie"
