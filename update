@@ -42,31 +42,26 @@ rm -f /tmp/netext73/*.txt
 }
 
 aktualizuj_calosc(){
-konfiguracja=$(yad --center --window-icon="/opt/NeteXt73/ikony/monitor.png" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --column="$TEXT_ZAZNACZ" --column="program" --width="$((355*$skala))" --height="$((230*$skala))" --checklist --list \
-		"$a1" "microcode" \
-		"$a2" "grub" \
-		"$a3" "apm" \
-		"$a4" "kernel" \
-		--button="gtk-ok:0" --button="$TEXT_POWROT:1" )
-		klawisz=$?
-		if [ "$klawisz" = "0" ]; then
-			if [ "$(echo $konfiguracja | grep microcode)" != "" ]; then
-				/opt/NeteXt73/./microcode
-			fi
-			if [ "$(echo $konfiguracja | grep grub)" != "" ]; then
-				/opt/NeteXt73/./grub
-			fi
-			if [ "$(echo $konfiguracja | grep apm)" != "" ]; then
-				/opt/NeteXt73/./NeteXt73_root ./apm
-			fi
-			if [ "$(echo $konfiguracja | grep kernel)" != "" ]; then
-				if [ "$kernel_premium" = "tak" ]; then
-				      /opt/NeteXt73/./kernele premium
-				else
-				      /opt/NeteXt73/./kernele
-				fi
+konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=2 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" $a1 $a2 $a3 $a4 --width="$((555*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+	klawisz=$?
+	if [ "$klawisz" = "0" ]; then
+		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
+			/opt/NeteXt73/./microcode
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
+			/opt/NeteXt73/./grub
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
+			/opt/NeteXt73/./NeteXt73_root ./apm
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
+			if [ "$kernel_premium" = "tak" ]; then
+			      /opt/NeteXt73/./kernele premium
+			else
+			      /opt/NeteXt73/./kernele
 			fi
 		fi
+	fi
 }
 usun
 
