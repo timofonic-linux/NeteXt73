@@ -61,13 +61,13 @@ yad_wget $adres_sum_kontrolnych2 $adres_sum_kontrolnych
 mv sumy.txt $sumy_kontrolne
 mv test_serwera.txt $test_serwera
 if [ "$(cat $sumy_kontrolne)" = "" ] || [ "$(grep 'OK' $test_serwera)" = "" ]; then
-		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
-		exit 1
+	yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+	exit 1
 fi
 
 #naprawa Gtk-WARNING **: Theme file for default has no directories
 if [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
-        sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0
+	sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0
 fi
 
 }
@@ -85,7 +85,6 @@ if [ "$plik" != "" ]; then
 	if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
 		naglowek > instaluj.sh
 		echo "sudo apt-get purge $plik" >> instaluj.sh
-		#echo "sudo apt-get autoremove" >> instaluj.sh
 		instalacja
 	fi
 fi

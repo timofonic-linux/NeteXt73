@@ -84,45 +84,51 @@ else
 fi
 
 if [ -e /sys/class/power_supply/BAT*/uevent ];then
-	konfiguracja=$(yad --center --window-icon="/opt/NeteXt73/ikony/monitor.png" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --column="$TEXT_ZAZNACZ" --column="program" --width="$((355*$skala))" --height="$((280*$skala))" --checklist --list \
-	"$a1" "system monitor" \
-	"$a2" "powertop" \
-	"$a3" "HTOP" \
-	"$a4" "saidar" \
-	"$a5" "battery" \
-	"$a6" "CPU/Memory" \
-	--button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+	konfiguracja=$(yad --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --center --form --columns=3 --field="system monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="battery:CHK" --field="CPU/Memory:CHK" $a1 $a2 $a3 $a4 $a5 $a6 --width="$((455*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 	klawisz=$?
 else
-	konfiguracja=$(yad --center --window-icon="/opt/NeteXt73/ikony/monitor.png" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --column="$TEXT_ZAZNACZ" --column="program" --width="$((355*$skala))" --height="$((250*$skala))" --checklist --list \
-	"$a1" "system monitor" \
-	"$a2" "powertop" \
-	"$a3" "HTOP" \
-	"$a4" "saidar" \
-	"$a6" "CPU/Memory" \
-	--button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+	konfiguracja=$(konfiguracja=$(yad --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --center --form --columns=3 --field="system monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="CPU/Memory:CHK" $a1 $a2 $a3 $a4 $a6 --width="$((455*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+	 )
 	klawisz=$?
 fi
 if [ "$klawisz" = "0" ]; then
 	if [ "$klawisz" = "0" ]; then
-		echo $konfiguracja > ~/.netext73/monitor
+		rm ~/.netext73/monitor -f
+		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
+			echo "system" >> ~/.netext73/monitor
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
+			echo "powertop" >> ~/.netext73/monitor
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
+			echo "HTOP" >> ~/.netext73/monitor
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
+			echo "saidar" >> ~/.netext73/monitor
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
+			echo "battery" >> ~/.netext73/monitor
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ]; then
+			echo "CPU" >> ~/.netext73/monitor
+		fi
 	fi
-	if [ "$(echo $konfiguracja | grep system)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 1 )" = "TRUE" ]; then
 		xterm -T "System monitor" -e bash -c "watch -t 'uptime; echo  -n \"\nScaling governor : \"; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;echo -n \"CPU driver       : \";cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver | head -n 1; echo -n \"\nCpu Core Frequency\n\";cat /proc/cpuinfo | grep MHz;echo -n \"\nMemory :\n\";free -m;echo -n \"\nSensors:\n\";sensors'" &
 	fi
-	if [ "$(echo $konfiguracja | grep powertop)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 2 )" = "TRUE" ]; then
 		xterm -T "PowerTop" -e bash -c "sudo powertop" &
 	fi
-	if [ "$(echo $konfiguracja | grep HTOP)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 3 )" = "TRUE"  ]; then
 		xterm -T "HTop" -e bash -c "htop" &
 	fi
-	if [ "$(echo $konfiguracja | grep saidar)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 4 )" = "TRUE" ]; then
 		xterm -T "Saidar" -e bash -c "saidar -c" &
 	fi
-	if [ "$(echo $konfiguracja | grep battery)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 5 )" = "TRUE" ]; then
 		stan_baterii &
 	fi
-	if [ "$(echo $konfiguracja | grep CPU)" != "" ]; then
+	if [ "$(echo $konfiguracja | cut -d "|" -f 6 )" = "TRUE" ]; then
 		procesor_monitor &
 	fi
 fi

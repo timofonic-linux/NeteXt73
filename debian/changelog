@@ -1,3 +1,9 @@
+netext73 (0.9.22) stable; urgency=medium
+
+  * zmiana wyglądu okna monitor
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 05 Sep 2015 21:04:46 +0200
+
 netext73 (0.9.21) stable; urgency=medium
 
   * zmiana wielkości okna z hasłem
