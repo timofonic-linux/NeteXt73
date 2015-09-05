@@ -8,6 +8,7 @@ v0.9.21
 -	zmiana klawisza z ok na zamknij w module baterii
 -	zmiana szerokości okna monitora CPU
 -	zmiana okna o programie
+-	usunięcie klawisza PPA z kerneli premium
 v0.9.20
 -	usunięcie instalatora starych wersji kerneli premium
 -	dodanie instalatora kerneli skylake

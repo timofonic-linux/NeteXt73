@@ -59,9 +59,11 @@ else
 	if [ "$1" = "premium" ]; then
 		pliki="/opt/NeteXt73/kernel-premium"
 		ikona="linux-premium.png"
+		menu_dodatkowe=""
 	else
 		pliki="/opt/NeteXt73/kernel"
 		ikona="linux.png"
+		menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
 	fi
 	if [ "$kern" = "" ]; then
 		if [ "$skala" = "2" ];then
@@ -71,7 +73,7 @@ else
 		fi
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
 		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$((860*$skala))" --height="$wysokosc" \
-		--title="$nazwa_skryptu " --button="$TEXT_MENU_INSTALATOR5:4"  --button="$TEXT_ZAMKNIJ:1" --single-click
+		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click
 		klawisz=$?   
 	fi
 fi
