@@ -237,7 +237,7 @@ export TEXT_BUG="Zgłoś błąd"
 export TEXT_CHANGELOG="Lista zmian"
 export TEXT_PASSWD="Złe hasło, czy chcesz przerwać uruchamianie programu NeteXt73 w trybie root?"
 export TEXT_PASSWD1="Proszę wprowadzić hasło"
-export TEXT_REBOOT="Restart komputera"
+export TEXT_REBOOT="Restart"
 
 #########################################################################################################################################################################
 #tlumaczenia_nvidia

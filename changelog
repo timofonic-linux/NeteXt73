@@ -9,6 +9,7 @@ v0.9.21
 -	zmiana szerokości okna monitora CPU
 -	zmiana okna o programie
 -	usunięcie klawisza PPA z kerneli premium
+-	naprawa klawisza restart
 v0.9.20
 -	usunięcie instalatora starych wersji kerneli premium
 -	dodanie instalatora kerneli skylake

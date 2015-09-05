@@ -1078,16 +1078,13 @@ echo "fi"
 
 }
 restart(){
+echo "tete"
 yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
-      if [ $? = 0 ]; then
-      while ! yad --center --on-top --title="$nazwa_skryptu1" --entry --hide-text --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --text="NeteXt'73\n\nRoot-mode\n\n$TEXT_PASSWD1" --button="gtk-ok:0" | sudo -S reboot; do
-	  if $(yad --center --question --title="$nazwa_skryptu1" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
-	      exit 0
-	  fi
-      done
-fi
-
+	if [ $? = 0 ]; then
+		cd /opt/NeteXt73 && ./NeteXt73_root reboot
+	fi
 }
+
 
 sprawdz_klucze(){
 xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';sudo apt-key list > klucze1.txt ; echo -e \"$TEXT_INSTALACJA2\""

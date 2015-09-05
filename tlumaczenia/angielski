@@ -241,7 +241,7 @@ export TEXT_BUG="Bug report"
 export TEXT_CHANGELOG="Changelog"
 export TEXT_PASSWD="Wrong password, would you like to cancel the NeteXt73?"
 export TEXT_PASSWD1="Please enter a password"
-export TEXT_REBOOT="Reboot system"
+export TEXT_REBOOT="Reboot"
 
 #########################################################################################################################################################################
 #tlumaczenia_nvidia
