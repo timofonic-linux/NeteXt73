@@ -55,8 +55,8 @@ else
 		sudo -S $1
 	else
 		echo "root" > /tmp/netext73/stan_netext
-		while ! yad --center --on-top --title="$nazwa_skryptu1" --entry --hide-text --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --text="NeteXt'73\n\nRoot-mode\n\n$TEXT_PASSWD1" --button="gtk-ok:0" | sudo -S $1; do
-			if $(yad --center --question --title="$nazwa_skryptu1" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
+		while ! yad --center --on-top --title="$nazwa_skryptu1 -  Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
+			if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
 				exit 0
 			fi
 		done
