@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.23
+-	dodanie instalatora nv i radeon do okna pierwszej instalacji
+-	czyszczenie zmiennych logach po zamknięciu okna
 v0.9.22
 -	zmiana wyglądu okna monior
 -	zmiana wyglądu okna pierwsza instalacja

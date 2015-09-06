@@ -333,7 +333,7 @@ yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " \
 --tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
 --window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((600*$skala)) --height=$((600*$skala)) --on-top --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_LISTAPAKIETOW:2"
 klawisz=$?
-
+rm /tmp/netext73/sumy/pliki.txt $res0 $res1 $res2 $res3 $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11 -f
 if [ "$klawisz" = "2" ]; then
 	KEY="$(echo $RANDOM)"
 	res4=$(mktemp --tmpdir=/tmp/netext73 netext73_4.XXXXXXXX)

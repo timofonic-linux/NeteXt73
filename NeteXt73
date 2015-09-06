@@ -60,7 +60,7 @@ cd /tmp
 yad_wget $adres_sum_kontrolnych2 $adres_sum_kontrolnych
 mv sumy.txt $sumy_kontrolne
 mv test_serwera.txt $test_serwera
-if [ "$(cat $sumy_kontrolne)" = "" ] || [ "$(grep 'OK' $test_serwera)" = "" ]; then
+if [ "$(cat $sumy_kontrolne)" = "" ] || [ "$(grep 'OK' $test_serwera -x)" = "" ]; then
 	yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
 fi

@@ -1,3 +1,9 @@
+netext73 (0.9.23) stable; urgency=medium
+
+  * dodanie instalatora nv i radeon do okna pierwszej instalacji
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 06 Sep 2015 12:55:33 +0200
+
 netext73 (0.9.22) stable; urgency=medium
 
   * zmiana wyglądu okna monitor
