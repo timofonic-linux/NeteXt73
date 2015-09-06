@@ -248,12 +248,12 @@ sudo tac /var/log/kern.log | sed -n 1,1000p > kern.log
 #przygotowanie informacji o zainstalowanych plikach
 rm /tmp/netext73/sumy/pliki.txt -f
 dpkg -l | grep -wE "linux-headers|nvidia|fglrx" | grep ii > /tmp/netext73/sumy/pakiety.txt
-cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
+cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| sed 's/-headers//g' | awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
 cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	  	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
 cat /tmp/netext73/sumy/pakiety.txt | awk '{print $2"_"$3}' 	| sed 's/.://g' | grep fglrx_ >> /tmp/netext73/sumy/lista.txt
-cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' > /tmp/netext73/sumy/pakiety.txt
+cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' | sed 's/-headers//g' > /tmp/netext73/sumy/wydane.txt
 
-for i in $(cat /tmp/netext73/sumy/pakiety.txt); do 
+for i in $(cat /tmp/netext73/sumy/wydane.txt); do 
 	if [ "$(echo $i | grep fglrx )" = "" ];then
 		if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $i)" = "" ]; then
 			echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
@@ -268,12 +268,8 @@ for i in $(cat /tmp/netext73/sumy/pakiety.txt); do
 		fi
 	fi
 done
-rm -f /tmp/netext73/sumy/pakiety.txt 
-#sed -i 's/_amd64.deb//g' /tmp/netext73/sumy/pliki.txt
-#sed -i 's/.tar.xz//g' /tmp/netext73/sumy/pliki.txt
-sed -i 's/-headers//g' /tmp/netext73/sumy/pliki.txt
 cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
-rm -f /tmp/netext73/sumy/pliki.txt
+rm -f /tmp/netext73/sumy/pliki.txt /tmp/netext73/sumy/wydane.txt /tmp/netext73/sumy/lista.txt
 
 
 
@@ -411,6 +407,6 @@ elif [ "$klawisz" = "0" ]; then
 	fi
 EOF
 	fi
-	rm -f $res0 $res1 $res2 $res3 $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11
+	rm -f $res0 $res1 $res2 $res3 $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11 /tmp/netext73/sumy/pakiety.txt
 	
 rm *.log losowa -f
