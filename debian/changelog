@@ -1,3 +1,9 @@
+netext73 (0.9.24) stable; urgency=medium
+
+  * wyłączenie skylake
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 08 Sep 2015 18:22:52 +0200
+
 netext73 (0.9.23) stable; urgency=medium
 
   * dodanie instalatora nv i radeon do okna pierwszej instalacji

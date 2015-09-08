@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.24
+-	wyłączenie skylake do czasu wydania nowego gcc
 v0.9.23
 -	dodanie instalatora nv i radeon do okna pierwszej instalacji
 -	czyszczenie zmiennych logach po zamknięciu okna
