@@ -170,7 +170,7 @@ yad --center --width=$((560*$skala)) --title="$nazwa_skryptu" --text="$TEXT_POBI
 
 #pobieranie plików do instalacji kerneli
 pobieranie_kerneli(){
-if [ "$kern" = "ppa mainline" ];then
+if [ "$kern" = "$TEXT_MENU_INSTALATOR5" ];then
 	wget $strona/$a #2>&1  | pobieranie
 	if [ "$(grep extra $a)" != "" ]; then
 		yad_wget $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep "all" | grep "linux-headers" | grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-headers"| grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image-[0-9]"| grep -v -E "latency")  $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image-extra" | grep "linux-image"| grep -v -E "latency")
