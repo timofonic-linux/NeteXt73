@@ -1,3 +1,9 @@
+netext73 (0.9.25) stable; urgency=medium
+
+  * poprawka listowania kluczy GPG w module ich usuwania
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 18 Sep 2015 21:50:56 +0200
+
 netext73 (0.9.24) stable; urgency=medium
 
   * wyłączenie skylake

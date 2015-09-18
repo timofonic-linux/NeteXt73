@@ -292,7 +292,7 @@ if [ "$1" = "GPG" ]; then
 				done
 				for i in $(cat linie.txt); do
 					a=$(($i + 1))
-					head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_' >> nazwa.txt
+					head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
 				done
 				paste -d "]" klucz.txt nazwa.txt  > lista.txt
 				sed -i 's/_/ /g' lista.txt
