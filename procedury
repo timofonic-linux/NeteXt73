@@ -961,19 +961,19 @@ fi
 }
 
 klucze(){
-echo "sudo apt-get update 2> /tmp/netext73/keymissing"
-echo "for key in \$(grep 'NO_PUBKEY' /tmp/netext73/keymissing |sed \"s/.*NO_PUBKEY //\"); do"
-echo "gpg --recv-keys \"\$key\""
-echo "gpg --armor --export \"\$key\" | sudo apt-key add -"
-echo "done"
-echo "sudo apt-get update 2> /tmp/netext73/keymissing"
-echo "cat /tmp/netext73/keymissing |sed \"s/.*publicznego://\" > 1.txt"
-echo "sed -e \"/^$/d\" 1.txt > /tmp/netext73/keymissing"
-echo "for key in \$(cat /tmp/netext73/keymissing); do"
-echo "gpg --keyserver keyserver.ubuntu.com --recv-keys \$key"
-echo "gpg --export -a \$key | sudo apt-key add -"
-echo "done"
-echo "rm -f /tmp/netext73/keymissing 1.txt"
+echo "sudo apt-get update 2> /tmp/netext73/updateresults"
+echo "MISSINGKEYS=\$(cat /tmp/updateresults)"
+echo "if [[ \$MISSINGKEYS ]]; then"
+echo "echo 'Trying to import all the missing keys'"
+echo "IFS=\$'\\n'"
+echo "n=1"
+echo "while read curline; do"
+echo "	GPGKEYTOGET=\$(echo \$curline | grep NO_PUBKEY | sed -e 's/.*: \|NO_PUBKEY //g')"
+echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys \$GPGKEYTOGET"
+echo "	let n=n+1"
+echo "done < /tmp/netext73/updateresults"
+echo "fi"
+echo "sudo apt-get update"
 }
 
 radeon(){
@@ -1087,10 +1087,11 @@ yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ik
 
 
 sprawdz_klucze(){
-xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';sudo apt-key list > klucze1.txt"
+#xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';
+sudo apt-key list > klucze1.txt
 }
 usun_klucze(){
-xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done; echo 'sudo apt-key list';sudo apt-key list > klucze1.txt"
+xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
 }
 
 stan_baterii(){

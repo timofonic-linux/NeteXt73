@@ -1,0 +1,98 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    _   _      _      __  ___   _ _____ _____
+#		   | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#		   |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   | |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   |_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#	            __ _ _ __ __ _ / _(_) ___ _____ __  _   _
+#	           / _` | '__/ _` | |_| |/ __|_  / '_ \| | | |
+#	          | (_| | | | (_| |  _| | (__ / /| | | | |_| |
+#	           \__, |_|  \__,_|_| |_|\___/___|_| |_|\__, |
+#	           |___/                                |___/
+#     _           _        _       _                   _                        _ _
+#    (_)_ __  ___| |_ __ _| | __ _| |_ ___  _ __      | | _____ _ __ _ __   ___| (_)
+#    | | '_ \/ __| __/ _` | |/ _` | __/ _ \| '__|     | |/ / _ \ '__| '_ \ / _ \ | |
+#    | | | | \__ \ |_ (_| | | (_| | |_ (_) | |        |   <  __/ |  | | | |  __/ | |
+#    |_|_| |_|___/\__\__,_|_|\__,_|\__\___/|_|        |_|\_\___|_|  |_| |_|\___|_|_|
+#        __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#   ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#  / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+# |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#  \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#procedury
+
+source /opt/NeteXt73/procedury
+
+#Przywróć repozytorium z kopii zapasowej
+cd /tmp/netext73
+petla_duza="tak"
+while [ "$petla_duza" = "tak" ]; do
+
+	menu="$a3!$a4!$a5"
+	gpg=$(yad --center --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; gpg=$(echo $gpg | cut -d "|" -f 1)
+	if [ "$klawisz" = "0" ]; then
+		
+		#Pobieranie brakujących kluczy GPG
+		if [ "$gpg" = "$a3" ]; then
+			rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
+			naglowek > instaluj.sh
+			klucze >> instaluj.sh
+			instalacja	
+		elif [ "$gpg" = "$a4" ]; then
+			xterm -e bash -c "echo -e \"$a4\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update; echo -e \"$TEXT_INSTALACJA\"; read ent"			
+		#Moduł usuwania zbędnych kluczy
+		elif [ "$gpg" = "$a5" ]; then
+			rm *.txt -f
+			sprawdz_klucze
+			petla="tak"
+			while [ $petla = "tak" ]; do
+				IFS=$' \t\n'
+				if [ "$(cat klucze1.txt)" != "" ]; then
+					grep 'pub' klucze1.txt | cut -d '/' -f 2 | cut -d ' ' -f 1 > klucz.txt
+					for i in $(cat klucz.txt); do
+						cat klucze1.txt | grep $i -n | cut -d ':' -f 1 | head -n 1 >> linie.txt
+					done
+					for i in $(cat linie.txt); do
+						a=$(($i + 1))
+						head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
+					done
+					paste -d "]" klucz.txt nazwa.txt  > lista.txt
+					sed -i 's/_/ /g' lista.txt
+					echo $(sed -e '/^[^#]/s:^:FALSE]:' lista.txt) > lista.txt
+					sed -i 's/FALSE/]FALSE/g' lista.txt
+					sed -i 's/]//' lista.txt
+					IFS=]
+					wybor=$(yad --center --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --height=$((420*$skala)) --width=$((690*$skala))  --column="" --column="$TEXT_KLUCZ" --column="$TEXT_DOSTAWCA_KLUCZA" --text="<span color=\"$kolor_textu\">$TEXT_ZAZNACZ_KLUCZE</span>" --list --checklist $(cat lista.txt)  --separator="]" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+					klawisz=$?
+					if [ "$klawisz" = "0" ]; then 
+						if [ "$(echo $wybor)" != "" ]; then
+							echo $wybor | sed -e 's/TRUE|/\n/g' | cut -d '|' -f 1 | sed -e '/^\ *$/d' | awk '{print $2}' > usun.txt
+							usun_klucze
+						else
+							yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIC_NIE_ZAZNACZYLES"
+						fi
+					elif [ "$klawisz" = "1" ]; then 
+						petla="nie"
+						rm *.txt -f
+					fi
+				else
+					yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIE_POBRALES_KLUCZY"
+					petla="nie"
+				fi
+				ls *.txt | grep -Evx "klucze1.txt" | xargs rm -f
+			done
+		fi
+	else
+		petla_duza="nie"
+	fi
+done

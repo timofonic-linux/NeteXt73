@@ -3,6 +3,7 @@
 
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
+-	zmiany w obrębie modułu kluczy GPG
 v0.9.24
 -	wyłączenie skylake do czasu wydania nowego gcc
 -	naprawa klawisza ppa

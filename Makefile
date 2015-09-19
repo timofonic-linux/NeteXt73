@@ -43,6 +43,7 @@ install: install_desktopfiles \
 	 install_file_changelog \
 	 install_file_config \
 	 install_file_deinstalator \
+	 install_file_gpg \
 	 install_file_grub \
 	 install_file_help \
 	 install_file_kernele \
@@ -115,6 +116,8 @@ install_file_deinstalator:
 	$(INSTALL) 0755 deinstalator $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_grub:	
 	$(INSTALL) 0755 grub $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
+install_file_gpg:	
+	$(INSTALL) 0755 gpg $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_help:	
 	$(INSTALL) 0755 help $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_kernele:	

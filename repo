@@ -268,8 +268,9 @@ cd /tmp/netext73
 if [ "$1" = "GPG" ]; then
 #Przywróć repozytorium z kopii zapasowej
 
+
 	menu="$a3!$a4!$a5"
-	gpg=$(yad --center --title="$nazwa_skryptu   " --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	gpg=$(yad --center --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; gpg=$(echo $gpg | cut -d "|" -f 1)
 	if [ "$klawisz" = "0" ]; then
 		
