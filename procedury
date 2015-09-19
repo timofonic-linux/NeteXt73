@@ -960,22 +960,6 @@ elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 fi
 }
 
-klucze(){
-echo "sudo apt-get update 2> /tmp/netext73/updateresults"
-echo "MISSINGKEYS=\$(cat /tmp/updateresults)"
-echo "if [[ \$MISSINGKEYS ]]; then"
-echo "echo 'Trying to import all the missing keys'"
-echo "IFS=\$'\\n'"
-echo "n=1"
-echo "while read curline; do"
-echo "	GPGKEYTOGET=\$(echo \$curline | grep NO_PUBKEY | sed -e 's/.*: \|NO_PUBKEY //g')"
-echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys \$GPGKEYTOGET"
-echo "	let n=n+1"
-echo "done < /tmp/netext73/updateresults"
-echo "fi"
-echo "sudo apt-get update"
-}
-
 radeon(){
 echo "echo \"$TEXT_PROCEDURA_14\""
 echo "sudo apt-get install lib32gcc1 libc6-i386"
@@ -1092,6 +1076,22 @@ sudo apt-key list > klucze1.txt
 }
 usun_klucze(){
 xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
+}
+
+klucze(){
+echo "sudo apt-get update 2> /tmp/netext73/updateresults"
+echo "MISSINGKEYS=\$(cat /tmp/updateresults)"
+echo "if [[ \$MISSINGKEYS ]]; then"
+echo "echo 'Trying to import all the missing keys'"
+echo "IFS=\$'\\n'"
+echo "n=1"
+echo "while read curline; do"
+echo "	GPGKEYTOGET=\$(echo \$curline | grep NO_PUBKEY | sed -e 's/.*: \|NO_PUBKEY //g')"
+echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys \$GPGKEYTOGET"
+echo "	let n=n+1"
+echo "done < /tmp/netext73/updateresults"
+echo "fi"
+echo "sudo apt-get update"
 }
 
 stan_baterii(){
