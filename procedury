@@ -1087,10 +1087,10 @@ yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ik
 
 
 sprawdz_klucze(){
-xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';sudo apt-key list > klucze1.txt ; echo -e \"$TEXT_INSTALACJA2\""
+xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';sudo apt-key list > klucze1.txt"
 }
 usun_klucze(){
-xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done; read ent; echo 'tak' > /tmp/netext73/ok.txt"
+xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done; echo 'sudo apt-key list';sudo apt-key list > klucze1.txt"
 }
 
 stan_baterii(){

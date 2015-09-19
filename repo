@@ -285,41 +285,42 @@ if [ "$1" = "GPG" ]; then
 		elif [ "$gpg" = "$a5" ]; then
 			rm *.txt -f
 			sprawdz_klucze
-			if [ "$(cat klucze1.txt)" != "" ]; then
-				grep 'pub' klucze1.txt | cut -d '/' -f 2 | cut -d ' ' -f 1 > klucz.txt
-				for i in $(cat klucz.txt); do
-					cat klucze1.txt | grep $i -n | cut -d ':' -f 1 | head -n 1 >> linie.txt
-				done
-				for i in $(cat linie.txt); do
-					a=$(($i + 1))
-					head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
-				done
-				paste -d "]" klucz.txt nazwa.txt  > lista.txt
-				sed -i 's/_/ /g' lista.txt
-				echo $(sed -e '/^[^#]/s:^:FALSE]:' lista.txt) > lista.txt
-				sed -i 's/FALSE/]FALSE/g' lista.txt
-				sed -i 's/]//' lista.txt
-				petla="tak"
-				while [ $petla = "tak" ]; do
-				IFS=]
-				wybor=$(yad --center --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --height=$((420*$skala)) --width=$((690*$skala))  --column="" --column="$TEXT_KLUCZ" --column="$TEXT_DOSTAWCA_KLUCZA" --text="<span color=\"$kolor_textu\">$TEXT_ZAZNACZ_KLUCZE</span>" --list --checklist $(cat lista.txt)  --separator="]" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
-				klawisz=$?
-				if [ "$klawisz" = "0" ]; then 
-					if [ "$(echo $wybor)" != "" ]; then
+			petla="tak"
+			while [ $petla = "tak" ]; do
+				IFS=$' \t\n'
+				if [ "$(cat klucze1.txt)" != "" ]; then
+					grep 'pub' klucze1.txt | cut -d '/' -f 2 | cut -d ' ' -f 1 > klucz.txt
+					for i in $(cat klucz.txt); do
+						cat klucze1.txt | grep $i -n | cut -d ':' -f 1 | head -n 1 >> linie.txt
+					done
+					for i in $(cat linie.txt); do
+						a=$(($i + 1))
+						head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
+					done
+					paste -d "]" klucz.txt nazwa.txt  > lista.txt
+					sed -i 's/_/ /g' lista.txt
+					echo $(sed -e '/^[^#]/s:^:FALSE]:' lista.txt) > lista.txt
+					sed -i 's/FALSE/]FALSE/g' lista.txt
+					sed -i 's/]//' lista.txt
+					IFS=]
+					wybor=$(yad --center --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --height=$((420*$skala)) --width=$((690*$skala))  --column="" --column="$TEXT_KLUCZ" --column="$TEXT_DOSTAWCA_KLUCZA" --text="<span color=\"$kolor_textu\">$TEXT_ZAZNACZ_KLUCZE</span>" --list --checklist $(cat lista.txt)  --separator="]" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+					klawisz=$?
+					if [ "$klawisz" = "0" ]; then 
+						if [ "$(echo $wybor)" != "" ]; then
+							#petla="nie"
+							echo $wybor | sed -e 's/TRUE|/\n/g' | cut -d '|' -f 1 | sed -e '/^\ *$/d' | awk '{print $2}' > usun.txt
+							usun_klucze
+						else
+							yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIC_NIE_ZAZNACZYLES"
+						fi
+					elif [ "$klawisz" = "1" ]; then 
 						petla="nie"
-						echo $wybor | sed -e 's/TRUE|/\n/g' | cut -d '|' -f 1 | sed -e '/^\ *$/d' | awk '{print $2}' > usun.txt
-						usun_klucze
-					else
-						yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIC_NIE_ZAZNACZYLES"
 					fi
-				elif [ "$klawisz" = "1" ]; then 
-					petla="nie"
+				else
+					yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIE_POBRALES_KLUCZY"
 				fi
-				done | tr '\n' ']'
-			else
-				yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIE_POBRALES_KLUCZY"
-			fi
-			rm *.txt -f
+				ls *.txt | grep -Evx "klucze1.txt" | xargs rm -f
+			done
 		fi
 	fi
 
