@@ -821,7 +821,7 @@ echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
-xterm -T instalator -e bash -c "tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 10; echo 'tak' > /tmp/netext73/ok.txt" 
+xterm -T instalator -e bash -c "tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 }
 
 #instalacja bez pytań
@@ -831,7 +831,7 @@ xterm -T instalator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
 }
 #instalacja wciśnij enter
 instalacja3(){
-xterm -T instalator -e bash -c "sudo bash instaluj.sh && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 10; echo 'tak' > /tmp/netext73/ok.txt"
+xterm -T instalator -e bash -c "sudo bash instaluj.sh && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
 lista_kerneli(){
@@ -1092,6 +1092,10 @@ echo "	let n=n+1"
 echo "done < /tmp/netext73/updateresults"
 echo "fi"
 echo "sudo apt-get update"
+}
+
+napraw_klucze(){
+echo "echo -e \"$a4\\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update"
 }
 
 stan_baterii(){

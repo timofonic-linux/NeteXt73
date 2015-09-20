@@ -48,8 +48,12 @@ while [ "$petla_duza" = "tak" ]; do
 			naglowek > instaluj.sh
 			klucze >> instaluj.sh
 			instalacja	
+		#napraw błędne klucze
 		elif [ "$gpg" = "$a4" ]; then
-			xterm -e bash -c "echo -e \"$a4\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update;tput setaf 2; echo -e \"$TEXT_INSTALACJA\"; read ent"			
+			export $a4
+			naglowek > instaluj.sh
+			napraw_klucze >> instaluj.sh
+			instalacja
 		#Moduł usuwania zbędnych kluczy
 		elif [ "$gpg" = "$a5" ]; then
 			rm *.txt -f
