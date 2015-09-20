@@ -1080,17 +1080,18 @@ xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze';
 
 klucze(){
 echo "sudo apt-get update 2> /tmp/netext73/updateresults"
-echo "MISSINGKEYS=\$(cat /tmp/updateresults)"
+echo "MISSINGKEYS=\$(cat /tmp/netext73/updateresults)"
 echo "if [[ \$MISSINGKEYS ]]; then"
 echo "echo 'Trying to import all the missing keys'"
 echo "IFS=\$'\\n'"
 echo "n=1"
 echo "while read curline; do"
 echo "	GPGKEYTOGET=\$(echo \$curline | grep NO_PUBKEY | sed -e 's/.*: \|NO_PUBKEY //g')"
-echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys \$GPGKEYTOGET"
+echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys \$GPGKEYTOGET"
 echo "	let n=n+1"
 echo "done < /tmp/netext73/updateresults"
 echo "fi"
+echo "rm -f /tmp/netext73/updateresults"
 echo "sudo apt-get update"
 }
 
