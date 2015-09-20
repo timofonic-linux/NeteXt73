@@ -57,12 +57,16 @@ fi
 sumy(){
 #pobranie sum kontrolnych i sprawdzanie połączenia z netem
 cd /tmp
-yad_wget $adres_sum_kontrolnych2 $adres_sum_kontrolnych
-mv sumy.txt $sumy_kontrolne
-mv test_serwera.txt $test_serwera
-if [ "$(cat $sumy_kontrolne)" = "" ] || [ "$(grep 'OK' $test_serwera -x)" = "" ]; then
+if [ "$(curl $adres_sum_kontrolnych2)" != 'OK' ]; then
 	yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
+else
+	wget $adres_sum_kontrolnych  2>&1 | pobieranie
+	mv sumy.txt $sumy_kontrolne
+	if [ "$(cat $sumy_kontrolne)" = "" ]; then
+		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+		exit 1
+	fi
 fi
 
 #naprawa Gtk-WARNING **: Theme file for default has no directories
@@ -106,8 +110,9 @@ if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; 
 	fi
 fi
 export userek=$(cat /tmp/netext73/userek)
-zaleznosci
+
 sumy &
+zaleznosci &
 aktualizacja &
 
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
