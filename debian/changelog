@@ -1,3 +1,9 @@
+netext73 (0.9.26) stable; urgency=medium
+
+  * autozamykanie okna wyboru kerneli po dokonaniu wyboru
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 20 Sep 2015 16:00:18 +0200
+
 netext73 (0.9.25) stable; urgency=medium
 
   * poprawka listowania kluczy GPG w module ich usuwania

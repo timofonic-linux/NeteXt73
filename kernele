@@ -74,7 +74,7 @@ else
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
 		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$((860*$skala))" --height="$wysokosc" \
 		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click
-		klawisz=$?   
+		klawisz=$?
 	fi
 fi
 
@@ -83,9 +83,9 @@ if [ "$klawisz" = "4" ]; then
 fi
 
 rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
-
 	#lokalne
 	if [ "$kern" = "$TEXT_MENU_INSTALATOR3" ]; then
+		kill_yad linux
 		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/headers/headers ext73 /' | sed 's/image/image ext73 /')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((650*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		if [ $? = 0 ]; then
 			if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
@@ -112,6 +112,7 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 		fi
 	#tylko nagłówki
 	elif [ "$kern" = "$TEXT_MENU_INSTALATOR4" ]; then
+		kill_yad linux
 		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/lub linux-image//' | sed 's/headers/headers ext73/')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((650*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		if [ $? = 0 ]; then
 		if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
@@ -160,8 +161,8 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 			fi
 		fi
 	#instalacja kerneli ext73
-	
 	elif [ "$kern" != "" ] && [ "$blad" != "1" ]; then
+		kill_yad linux
 		if [ "$rodzaj" != "" ]; then
 			lista_kerneli
 			if [ "$klawisz" = "0" ] && [ "$blad" != "1" ] ; then

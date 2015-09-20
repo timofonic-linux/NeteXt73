@@ -1087,7 +1087,7 @@ echo "IFS=\$'\\n'"
 echo "n=1"
 echo "while read curline; do"
 echo "	GPGKEYTOGET=\$(echo \$curline | grep NO_PUBKEY | sed -e 's/.*: \|NO_PUBKEY //g')"
-echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys \$GPGKEYTOGET"
+echo "	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys \$GPGKEYTOGET"
 echo "	let n=n+1"
 echo "done < /tmp/netext73/updateresults"
 echo "fi"
@@ -1096,7 +1096,7 @@ echo "sudo apt-get update"
 }
 
 napraw_klucze(){
-echo "echo -e \"$a4\\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update"
+echo "echo -e \"$a4\\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update; sudo rm -rf /tmp/netext73/lists"
 }
 
 stan_baterii(){
@@ -1384,4 +1384,8 @@ opusc_petle(){
 opusc__mala_petle(){
 	petla="nie"
 	rm *.txt -f *.sh
+}
+
+kill_yad(){
+kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
 }
