@@ -1329,7 +1329,7 @@ for URI in $URILIST; do
           DYNAMIC_COUNTER="$[$DYNAMIC_COUNTER+1]"
     fi
     COUNTER="$[$COUNTER+1]"                 # increment counter
-done | yad --center --multi-progress --auto-kill --auto-close $YADBARS --title "$nazwa_skryptu" \
+done | yad --center --multi-progress --auto-kill --auto-close --width=$((600*$skala)) $YADBARS --title "$nazwa_skryptu" \
 --text "<b>$TEXT_POB2</b>" --window-icon="/opt/NeteXt73/ikony/download.png" --image="/opt/NeteXt73/ikony/download.png" --button="$TEXT_ZAMKNIJ:1"
 # ↑ launch yad multi progress-bar window 
 }
