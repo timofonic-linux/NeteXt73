@@ -4,6 +4,8 @@
 v0.9.26
 -	autozamykanie okna wyboru kerneli po dokonaniu wyboru
 -	zmiana szerokości okna pobierania plików
+-	poprawka monitora-sprawdzanie czy jest bateria mimo wpisu w configu - battery
+-	przebudowa modułu monitor
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
 -	zmiany w obrębie modułu kluczy GPG
@@ -16,7 +18,7 @@ v0.9.23
 -	czyszczenie zmiennych logach po zamknięciu okna
 -	poprawki tłumaczeń i kodu
 v0.9.22
--	zmiana wyglądu okna monior
+-	zmiana wyglądu okna monitor
 -	zmiana wyglądu okna pierwsza instalacja
 v0.9.21
 -	zmiana wielkości okna z hasłem

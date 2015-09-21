@@ -64,7 +64,7 @@ else
 	wget $adres_sum_kontrolnych  2>&1 | pobieranie
 	mv sumy.txt $sumy_kontrolne
 	if [ "$(cat $sumy_kontrolne)" = "" ]; then
-		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+		yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 		exit 1
 	fi
 fi

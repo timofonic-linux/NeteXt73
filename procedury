@@ -165,7 +165,7 @@ fi
 
 #pasek postępu pobierania pulsujący gdy coś długo trwa
 pobieranie(){
-yad --center --width=$((560*$skala)) --title="$nazwa_skryptu" --text="$TEXT_POBIERANIE" --progress --pulsate --auto-close --auto-kill --window-icon="/opt/NeteXt73/ikony/download.png" --button="$TEXT_POWROT:1"
+yad --center --width=$((560*$skala)) --title="  $nazwa_skryptu" --text="$TEXT_POBIERANIE" --progress --pulsate --auto-close --auto-kill --window-icon="/opt/NeteXt73/ikony/download.png" --button="$TEXT_POWROT:1"
 }
 
 #pobieranie plików do instalacji kerneli

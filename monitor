@@ -64,16 +64,17 @@ if [ -e ~/.netext73/monitor ]; then
 	else
 		a4=FALSE
 	fi
-	if [ "$(grep battery ~/.netext73/monitor)" != "" ]; then
+	if [ "$(grep CPU ~/.netext73/monitor)" != "" ]; then
 		a5=TRUE
 	else
 		a5=FALSE
 	fi
-	if [ "$(grep CPU ~/.netext73/monitor)" != "" ]; then
+	if [ "$(grep battery ~/.netext73/monitor)" != "" ] && [ -e /sys/class/power_supply/BAT*/uevent ]; then
 		a6=TRUE
 	else
 		a6=FALSE
 	fi
+
 else
 	a1=TRUE
 	a2=FALSE
@@ -83,51 +84,39 @@ else
 	a6=FALSE
 fi
 
-if [ -e /sys/class/power_supply/BAT*/uevent ];then
-	konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --center --form --columns=3 --field="system monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="battery:CHK" --field="CPU/Memory:CHK" $a1 $a2 $a3 $a4 $a5 $a6 --width="$((555*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
-	klawisz=$?
+if [  -e /sys/class/power_supply/BAT*/uevent ]; then
+	menu=$(echo "--field="system_monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="CPU/Memory:CHK" --field="battery:CHK" $a1 $a2 $a3 $a4 $a5 $a6")
 else
-	konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --center --form --columns=3 --field="system monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="CPU/Memory:CHK" $a1 $a2 $a3 $a4 $a6 --width="$((555*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
-	klawisz=$?
+	menu=$(echo "--field="system_monitor:CHK" --field="powertop:CHK" --field="HTOP:CHK" --field="saidar:CHK" --field="CPU/Memory:CHK" $a1 $a2 $a3 $a4 $a5")
 fi
+
+konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --text="<span color=\"$kolor_textu\">$TEXT_MONITOR1</span>" --center --form --columns=3 $(echo $menu) --width="$((555*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+klawisz=$?
+
 if [ "$klawisz" = "0" ]; then
-	if [ "$klawisz" = "0" ]; then
-		rm ~/.netext73/monitor -f
-		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
-			echo "system" >> ~/.netext73/monitor
-		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
-			echo "powertop" >> ~/.netext73/monitor
-		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
-			echo "HTOP" >> ~/.netext73/monitor
-		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
-			echo "saidar" >> ~/.netext73/monitor
-		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
-			echo "battery" >> ~/.netext73/monitor
-		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ]; then
-			echo "CPU" >> ~/.netext73/monitor
-		fi
-	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 1 )" = "TRUE" ]; then
+	rm ~/.netext73/monitor -f
+	if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
+		echo "system" >> ~/.netext73/monitor
 		xterm -T "System monitor" -e bash -c "watch -t 'uptime; echo  -n \"\nScaling governor : \"; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;echo -n \"CPU driver       : \";cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver | head -n 1; echo -n \"\nCpu Core Frequency\n\";cat /proc/cpuinfo | grep MHz;echo -n \"\nMemory :\n\";free -m;echo -n \"\nSensors:\n\";sensors'" &
 	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 2 )" = "TRUE" ]; then
+	if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
+		echo "powertop" >> ~/.netext73/monitor
 		xterm -T "PowerTop" -e bash -c "sudo powertop" &
 	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 3 )" = "TRUE"  ]; then
+	if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
+		echo "HTOP" >> ~/.netext73/monitor
 		xterm -T "HTop" -e bash -c "htop" &
 	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 4 )" = "TRUE" ]; then
+	if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
+		echo "saidar" >> ~/.netext73/monitor
 		xterm -T "Saidar" -e bash -c "saidar -c" &
 	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 5 )" = "TRUE" ]; then
-		stan_baterii &
-	fi
-	if [ "$(echo $konfiguracja | cut -d "|" -f 6 )" = "TRUE" ]; then
+	if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
+		echo "CPU" >> ~/.netext73/monitor
 		procesor_monitor &
+	fi
+	if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ] && [ -e /sys/class/power_supply/BAT*/uevent ]; then
+		echo "battery" >> ~/.netext73/monitor
+		stan_baterii &
 	fi
 fi
