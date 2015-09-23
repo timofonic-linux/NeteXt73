@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.27
+-	poprawki tłumaczeń
+-	wyłączenie jawnego pobierania sum kontrolnych na starcie
 v0.9.26
 -	autozamykanie okna wyboru kerneli po dokonaniu wyboru
 -	zmiana szerokości okna pobierania plików

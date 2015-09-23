@@ -1,3 +1,9 @@
+netext73 (0.9.27) stable; urgency=medium
+
+  * wyłączenie jawnego pobierania sum kontrolnych na starcie
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 23 Sep 2015 17:36:15 +0200
+
 netext73 (0.9.26) stable; urgency=medium
 
   * autozamykanie okna wyboru kerneli po dokonaniu wyboru
