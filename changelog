@@ -6,6 +6,8 @@ v0.9.26
 -	zmiana szerokości okna pobierania plików
 -	poprawka monitora-sprawdzanie czy jest bateria mimo wpisu w configu - battery
 -	przebudowa modułu monitor
+-	zmiana kolejności sprawdzania sum kontrolnych
+-	tłumaczenia
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
 -	zmiany w obrębie modułu kluczy GPG
