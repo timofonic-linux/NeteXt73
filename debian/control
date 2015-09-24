@@ -38,6 +38,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
   gcc, 
   yad, 
   ibus, 
+  curl, 
   lsb-core 
 Replaces: netext73
 Description: NeteXt'73 - optymalizator systemu

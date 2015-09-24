@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.28
+-	naprawa zależności - curl
 v0.9.27
 -	poprawki tłumaczeń
 -	wyłączenie jawnego pobierania sum kontrolnych na starcie

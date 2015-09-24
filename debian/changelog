@@ -1,3 +1,9 @@
+netext73 (0.9.28) stable; urgency=medium
+
+  * naprawa zależności curl
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 24 Sep 2015 06:06:12 +0200
+
 netext73 (0.9.27) stable; urgency=medium
 
   * wyłączenie jawnego pobierania sum kontrolnych na starcie
