@@ -212,7 +212,7 @@ echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
-echo "sudo apt-get install bcmwl-kernel-source"
+echo "sudo apt-get install bcmwl-kernel-source -y"
 echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 }
