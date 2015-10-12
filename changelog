@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.30
+-	dodanie firmware iwlwifi dla kerneli 4.2
 v0.9.29
 -	wsparcie dla bcm
 v0.9.28

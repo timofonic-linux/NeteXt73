@@ -256,19 +256,28 @@ echo "fi"
 
 }
 stan_firmware(){
+wersja_iwlwifi=$(ls /opt/NeteXt73/APM/ | grep iwlwifi | cut -d '-' -f 2 | sed 's/.tar.gz//')
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-      if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
-	    stan_microcode=$TEXT_TAK
-      else
-	    stan_microcode="-"
-      fi
+	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
+		stan_microcode=$TEXT_TAK
+	else
+		stan_microcode="-"
+	fi
 elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
-      if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ]; then
-	    stan_microcode=$TEXT_TAK
-      else
-	    stan_microcode="-"
-      fi
+	if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ]; then
+		stan_microcode=$TEXT_TAK
+	else
+		stan_microcode="-"
+	fi
+fi
+
+if [ "$(ls /opt/NeteXt73/APM/ | grep iwlwifi | cut -d '-' -f 2 | sed 's/.tar.gz//')" != "" ]; then
+	if [ "$(ls /lib/firmware/ | grep $wersja_iwlwifi.ucode)" != "" ]; then
+		stan_microcode=$TEXT_TAK
+	else
+		stan_microcode="-"
+	fi
 fi
 }
 
@@ -289,7 +298,7 @@ instalacja
 
 microcode_inst(){
 echo "echo \"$TEXT_PROCEDURA_2\""
-echo "sudo apt-get install linux-firmware"
+echo "sudo apt-get install linux-firmware --reinstall"
 echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
 echo "sudo apt-get install linux-firmware-nonfree -y"
 echo "fi"
@@ -300,16 +309,16 @@ echo "fi"
 echo "else"
 echo "sudo apt-get install amd64-microcode -y"
 echo "fi"
-#echo "sudo tar -xvzf /opt/NeteXt73/APM/iwlwifi-10.ucode.tar.gz -C /lib/firmware/"
-#echo "sudo chown root:root /lib/firmware/*10.ucode"
-#echo "sudo chmod 644 /lib/firmware/*10.ucode"
+echo "sudo tar -xvzf /opt/NeteXt73/APM/iwlwifi-15.tar.gz -C /lib/firmware/"
+echo "sudo chown root:root /lib/firmware/.*15.ucode"
+echo "sudo chmod 644 /lib/firmware/.*15.ucode"
 }
 
 microcode_usun(){
 echo "echo \"$TEXT_PROCEDURA_3\""
 echo "/usr/bin/yes | sudo dpkg -r linux-firmware-nonfree"
 echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then sudo apt-get purge intel-microcode -y; fi"
-echo "sudo rm /lib/firmware/amd-ucode -r"
+echo "sudo rm /lib/firmware/* -rf"
 #echo "sudo apt-get autoremove -y"
 }
 

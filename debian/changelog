@@ -1,3 +1,9 @@
+netext73 (0.9.30) stable; urgency=medium
+
+  * dodanie firmware iwlwifi dla kerneli 4.2
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 12 Oct 2015 20:36:15 +0200
+
 netext73 (0.9.29) stable; urgency=medium
 
   * wsparcie dla bcm
