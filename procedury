@@ -82,7 +82,7 @@ export ikona_info1="dialog-information"
 export warning1="dialog-warning"
 export adres_opisu="http://www.netext73.pl/search/label/opis_netext73"
 
-if [ "$(lsb_release -a | grep 15.04)" != "" ] || [ "$(lsb_release -a | grep vivd)" != "" ]; then
+if [ "$(lsb_release -a | grep 14.04)" = "" ] || [ "$(lsb_release -a | grep trusty)" = "" ]; then
 	export apmik="nowy"
 	export katalog_apm="/etc/apm-ext73/advanced_power_management_by_ext73_*"
 else
