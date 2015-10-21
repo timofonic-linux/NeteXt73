@@ -1,3 +1,9 @@
+netext73 (0.9.33) stable; urgency=medium
+
+  * zmiana instlatora nvidia optimus
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 21 Oct 2015 19:07:51 +0200
+
 netext73 (0.9.32) stable; urgency=medium
 
   * APM - dostosowanie do 15.10
