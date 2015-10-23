@@ -744,7 +744,7 @@ stan_apm_config(){
 	else
 		export vsync_on="TRUE"
 	fi
-	
+
 	export wifi_n_on_przed=$wifi_n_on
 	export wifi_batt_fix_przed=$wifi_batt_fix
 	export wifi_batt_on_przed=$wifi_batt_on
@@ -933,7 +933,7 @@ echo "else"
 echo "sudo sed -i -e \"s/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/\" /etc/default/grub"
 echo "fi"
 echo "sudo chown root:root /etc/default/grub"
-echo "sudo update-grub"  
+echo "sudo update-grub"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 
 }
@@ -1008,7 +1008,7 @@ echo "/usr/bin/yes | sudo dpkg -i nvidia-opencl-icd-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i \$(ls | grep nvidia-settings)"
 echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.deb"
 }
-     
+ 
 nvidia_optimus(){
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
 echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y" libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1
@@ -1060,8 +1060,8 @@ echo "sudo sed -i \"s/GRUB_GFXMODE.*/GRUB_GFXMODE=1280x1024\nGRUB_GFXPAYLOAD_LIN
 echo "fi"
 echo "sudo update-initramfs -u -k all"
 echo "sudo update-grub"
-echo "if [ -e /usr/share/nvidia-updates-\$wersja_sterownika/ubuntu-nvidia-settings.desktop ];then"
-echo "echo \"sudo sed -i 's/Exec=.*/Exec=optirun -b none nvidia-settings -c :8/g' /usr/share/nvidia-updates-\$wersja_sterownika/ubuntu-nvidia-settings.desktop\""
+echo "if [ -e /usr/share/applications/nvidia-settings.desktop ];then"
+echo "sudo sed -i 's/Exec=.*/Exec=optirun -b none nvidia-settings -c :8/g' /usr/share/applications/nvidia-settings.desktop"
 echo "fi"
 echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
