@@ -105,7 +105,7 @@ if [ -e ~/.netext73/kernel_premium ]; then
 		rm -f ~/.netext73/kernel_premium
 		kernel_premium="brak"
 	else
-		export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1) 
+		export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1)
 		export PASS1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 3)
 		kernel_premium="tak"
 	fi
@@ -115,7 +115,7 @@ fi
 export katalog2="2"
 export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
 export test_serwera='/tmp/netext73/sumy/test_serwera.txt'
-export adres_sum_kontrolnych='http://dl.dropboxusercontent.com/u/2936246/weryfikacja/sumy.txt'
+export adres_sum_kontrolnych='https://dl.dropboxusercontent.com/u/2936246/weryfikacja/sumy.txt'
 export adres_sum_kontrolnych2="$adres_glowny/test_serwera.txt"
 
 #kolor textu

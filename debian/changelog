@@ -1,3 +1,9 @@
+netext73 (0.9.34) stable; urgency=medium
+
+  * zmiana http na https dla sum kontrolnych
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 23 Oct 2015 09:29:49 +0200
+
 netext73 (0.9.33) stable; urgency=medium
 
   * zmiana instlatora nvidia optimus
