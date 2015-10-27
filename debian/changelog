@@ -1,3 +1,9 @@
+netext73 (0.9.35) stable; urgency=medium
+
+  * wpisy do gruba dla intela
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 27 Oct 2015 21:40:58 +0100
+
 netext73 (0.9.34) stable; urgency=medium
 
   * zmiana http na https dla sum kontrolnych
