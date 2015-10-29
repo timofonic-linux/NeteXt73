@@ -1,3 +1,9 @@
+netext73 (0.9.37) stable; urgency=medium
+
+  * performance i powersave dla intela w grub
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 29 Oct 2015 19:43:17 +0100
+
 netext73 (0.9.36) stable; urgency=medium
 
   * naprawa instalatora nv
