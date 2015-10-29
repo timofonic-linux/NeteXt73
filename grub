@@ -96,8 +96,10 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 			else
 				menu1="acpi_osi=Linux@acpi_osi='!Windows 2012' acpi_osi=Linux"
 			fi
-			if [ "$(echo $wpis_grub | grep '915')" != "" ] ; then
+			if [ "$(echo $wpis_grub | grep 'i915.i915_enable_rc6=1')" != "" ] ; then
 				menu2="$TEXT_GRUB_INTEL@$TEXT_GRUB_INTEL_POWERSAVE@$TEXT_GRUB_STD@$TEXT_GRUB_RADEON" #$TEXT_GRUB_INTEL@
+			elif [ "$(echo $wpis_grub | grep 'i915.i915_enable_rc6=7')" != "" ] ; then
+				menu2="$TEXT_GRUB_INTEL_POWERSAVE@$TEXT_GRUB_INTEL@$TEXT_GRUB_STD@$TEXT_GRUB_RADEON" #$TEXT_GRUB_INTEL@
 			elif [ "$(echo $wpis_grub | grep 'radeon')" != "" ] ; then
 				menu2="$TEXT_GRUB_RADEON@$TEXT_GRUB_STD@$TEXT_GRUB_INTEL@$TEXT_GRUB_INTEL_POWERSAVE"
 			else
