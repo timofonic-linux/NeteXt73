@@ -435,7 +435,7 @@ else
 						      echo "sudo pipelight-plugin --update" >> instaluj.txt
 						      echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ownCloud" ]; then
-						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/xUbuntu_$(lsb_release -rs)/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
+						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$(lsb_release -rs)/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
 						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$(lsb_release -rs)/Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
 						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt

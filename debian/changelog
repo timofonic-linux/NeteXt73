@@ -1,3 +1,9 @@
+netext73 (0.9.39) stable; urgency=medium
+
+  * zmiana repo ownCloud
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 13 Nov 2015 17:20:17 +0100
+
 netext73 (0.9.38) stable; urgency=medium
 
   * naprawa instalatora NV normal
