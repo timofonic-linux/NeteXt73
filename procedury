@@ -220,7 +220,6 @@ echo "echo 'tak' > /tmp/netext73/ok.txt"
 
 usun_lpt(){
 #wyłączenie LPT dla premium
-ls /boot | grep vmlinuz | sort -r | head -n 1
 echo "if [ \"\$(ls /boot | grep vmlinuz | sort -r | head -n 1 | grep i7)\" != \"\" ] || [ \"\$(ls /boot | grep vmlinuz | sort -r | head -n 1 | grep brazos)\" != \"\" ];then"
 echo "if [ \"\$(grep '#lp' /etc/modules)\" = \"\" ]; then"
 echo "sudo sed -i 's/lp/#lp/g' /etc/modules"
@@ -819,19 +818,28 @@ echo "sudo update-grub"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
 
+
+#data i godzina
+data_godzina(){
+	export godzina=$(date +\"%Y%m%d_%H%m%S\")
+}
+
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
-xterm -T instalator -e bash -c "tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+data_godzina
+xterm -T instalator -e bash -c "cp -f instaluj.sh /tmp/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f 2>&1 | tee -a /tmp/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 }
 
 #instalacja bez pytań
 instalacja2(){
+data_godzina
 #x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
-xterm -T instalator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
+xterm -T instalator -e bash -c "cp -f instaluj.sh /tmp/instalujsh_$godzina.log && bash instaluj.sh  2>&1 | tee -a /tmp/instalacja_$godzina.log && rm instaluj.sh -f"
 }
 #instalacja wciśnij enter
 instalacja3(){
-xterm -T instalator -e bash -c "sudo bash instaluj.sh && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+data_godzina
+xterm -T instalator -e bash -c "cp -f instaluj.sh /tmp/instalujsh_$godzina.log && sudo bash instaluj.sh && rm instaluj.sh -f 2>&1 | tee -a /tmp/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
 lista_kerneli(){

@@ -1,3 +1,9 @@
+netext73 (0.9.49) stable; urgency=medium
+
+  * logi instalacji w /tmp
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 15 Nov 2015 17:24:04 +0100
+
 netext73 (0.9.39) stable; urgency=medium
 
   * zmiana repo ownCloud
