@@ -832,19 +832,19 @@ data_godzina(){
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
 data_godzina
-xterm -T instalator -e bash -c "cp -f instaluj.sh ~/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f 2>&1 | tee -a ~/.netext73/logi/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh  && rm instaluj.sh -f 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 }
 
 #instalacja bez pytań
 instalacja2(){
 data_godzina
 #x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
-xterm -T instalator -e bash -c "cp -f instaluj.sh ~/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh  2>&1 | tee -a ~/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh  2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
 }
 #instalacja wciśnij enter
 instalacja3(){
 data_godzina
-xterm -T instalator -e bash -c "cp -f instaluj.sh ~/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh && rm instaluj.sh -f 2>&1 | tee -a ~/.netext73/logi/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh && rm instaluj.sh -f 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
 lista_kerneli(){

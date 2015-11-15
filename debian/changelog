@@ -1,3 +1,9 @@
+netext73 (0.9.50) stable; urgency=medium
+
+  * przeglądarka logów instalacyjnych
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 15 Nov 2015 18:49:04 +0100
+
 netext73 (0.9.49) stable; urgency=medium
 
   * logi instalacji w /tmp
