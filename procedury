@@ -1057,7 +1057,7 @@ echo "sudo sed -i \"s/nvidia-.../nvidia-\$wersja_sterownika/g\" /etc/bumblebee/b
 echo "else"
 echo "sudo sed -i \"s/nvidia-updates-.../nvidia-\$wersja_sterownika/g\" /etc/bumblebee/bumblebee.conf"
 echo "fi"
-echo "sudo sed -i \"s/BusID \\"PCI:..:..:.\\"/BusID \\"PCI:\\$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')\\"/g\" /etc/bumblebee/xorg.conf.nvidia"
+echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')/g\" /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
 
 }
