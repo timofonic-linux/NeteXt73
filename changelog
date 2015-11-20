@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.53
+-	zmiana serwera sum kontrolnych
 v0.9.52
 -	naprawa instalatora NV optimus
 v0.9.51
@@ -25,7 +27,7 @@ v0.9.35
 v0.9.34
 -	zmiana http na https dla sum kontrolnych
 v0.9.33
--	zmiana instlatora nvidia optimus
+-	zmiana instalatora nvidia optimus
 v0.9.32
 -       APM - dostosowanie do 15.10
 v0.9.31
@@ -40,7 +42,7 @@ v0.9.27
 -	poprawki tłumaczeń
 -	wyłączenie jawnego pobierania sum kontrolnych na starcie
 v0.9.26
--	autozamykanie okna wyboru kerneli po dokonaniu wyboru
+-	auto-zamykanie okna wyboru kerneli po dokonaniu wyboru
 -	zmiana szerokości okna pobierania plików
 -	poprawka monitora-sprawdzanie czy jest bateria mimo wpisu w configu - battery
 -	przebudowa modułu monitor
@@ -128,7 +130,7 @@ v0.9.03
 v0.9.02
 -	szczegółowe opisy kerneli premium w dymkach
 v0.9.01
--	modyfikacja sekcji GRUB usunięcie spejalnych ustawień dla iCorów
+-	modyfikacja sekcji GRUB usunięcie specjalnych ustawień dla iCorów
 v0.9.00
 -	zatwierdzenie zmian
 v0.8.97

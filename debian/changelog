@@ -1,3 +1,9 @@
+netext73 (0.9.53) stable; urgency=medium
+
+  * zmiana serwera sum kontrolnych
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 20 Nov 2015 17:51:10 +0100
+
 netext73 (0.9.52) stable; urgency=medium
 
   * naprawa instalatora NV optimus
