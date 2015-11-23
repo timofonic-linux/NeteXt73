@@ -1,3 +1,9 @@
+netext73 (0.9.54) stable; urgency=medium
+
+  * zmiany instalatora NV dla 15.10
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 23 Nov 2015 21:28:01 +0100
+
 netext73 (0.9.53) stable; urgency=medium
 
   * zmiana serwera sum kontrolnych

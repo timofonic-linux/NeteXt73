@@ -56,3 +56,9 @@ if [ "$(grep bfq /sys/block/sd*/queue/scheduler)" = "" ]; then
 		sudo sed -i '/#HDD/ s/bfq/cfq/g' /etc/pm/power.d/advanced_power_management_by_ext73_*
 	fi
 fi
+#usunięcie xorg
+if [ "$(lsb_release -a | grep 15.10)" != "" ] || [ "$(lsb_release -a | grep wily)" != "" ]; then
+	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+		sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f
+	fi
+fi
