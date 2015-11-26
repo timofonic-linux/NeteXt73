@@ -1,6 +1,10 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.56
+-	zatwierdzenie zmian instalatora Nvidia dla 15.10
+-	wklejanie logów instalacji na serwer
+-	bmcwl nowa wersja
 v0.9.55
 -	zmiany instalatora NV dla 15.10 - dopisek do gruba
 -	utrzymanie dopisku do gruba przy aktualizacji grub i posiadaniu 15.10 i NV

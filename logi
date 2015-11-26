@@ -351,9 +351,9 @@ if [ "$klawisz" = "2" ]; then
 	yad --plug=$KEY --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" &> $res7 &
 	yad --plug=$KEY --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" &> $res8 &
 	yad --plug=$KEY --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" &> $res9 &
-	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" &> $res10 &
-	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" &> $res11 &
-	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" &> $res12 &
+	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" &> $res10 &
+	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" &> $res11 &
+	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" &> $res12 &
 	yad --plug=$KEY --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" &> $res13 &
 	yad --plug=$KEY --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" &> $res14 &
 	yad --plug=$KEY --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" &> $res15 &
@@ -382,8 +382,12 @@ elif [ "$klawisz" = "3" ]; then
 
 			yad --plug=$KEY --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" &> $res0 &
 			yad --plug=$KEY --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" &> $res1 &
-			yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_ZAMKNIJ:1"
+			yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 			klawisz=$?
+			if [ "$klawisz" = "0" ]; then
+				cat /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik | pastebinit | xclip -selection clipboard
+				dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PASTE"
+			fi
 			rm $res0 $res1 -f
 		elif [ "$klawisz" = "2" ]; then
 			wynik=$(echo $a | cut -d '|' -f 1)
