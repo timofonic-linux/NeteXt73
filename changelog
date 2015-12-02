@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.57
+-	gpu-manager.override - tryb manual dla 15.10
 v0.9.56
 -	zatwierdzenie zmian instalatora Nvidia dla 15.10
 -	wklejanie logów instalacji na serwer

@@ -1,3 +1,9 @@
+netext73 (0.9.57) stable; urgency=medium
+
+  * gpu-manager.override - tryb manual dla 15.10
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 02 Dec 2015 21:59:45 +0100
+
 netext73 (0.9.56) stable; urgency=medium
 
   * bcm + logi

@@ -951,6 +951,7 @@ echo "sudo chown root:root /etc/default/grub"
 #nogpumanager dla 15.10
 echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(lsb_release -a | grep wily)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
+echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 echo "if [ \"\$(grep nogpumanager /etc/default/grub)\" = \"\" ]; then"
 echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ nogpumanager\"/' /etc/default/grub"
 echo "fi"
@@ -1101,10 +1102,11 @@ echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 #nogpumanager
 echo "if [ \"\$(grep nogpumanager /etc/default/grub)\" = \"\" ]; then"
 echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ nogpumanager\"/' /etc/default/grub"
+echo "echo \"manual\" | sudo tee /etc/init/gpu-manager.override"
+echo "fi"
+echo "fi"
+echo "fi"
 echo "sudo update-grub"
-echo "fi"
-echo "fi"
-echo "fi"
 
 }
 restart(){
