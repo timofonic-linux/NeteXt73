@@ -240,13 +240,13 @@ elif [ $klawisz = "2" ]; then
 	aktualizuj_calosc 
 elif [ $klawisz = "3" ]; then  #lista zmian
     if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
-	if [ "$(echo $nr | grep "......")" != "" ];then
+	if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
 		if [ "$USER" = "root" ]; then
 			sudo -u $userek bash << EOF
-			xdg-open "https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-$stable"
+			xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
 EOF
 		else
-			xdg-open "https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-$stable"
+			xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
 		fi
 	else
 		if [ "$USER" = "root" ]; then
