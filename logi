@@ -70,7 +70,7 @@ else
 	echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> system$losowa.log
 fi
 #system
-echo -e "<span color=\"$kolor_textu\"><b>SYSTEM:</b></span> $(lsb_release -i | awk '{print $3}') $(lsb_release -r | awk '{print $2}') $(lsb_release -c | awk '{print $2}') $bit" >> system$losowa.log
+echo -e "<span color=\"$kolor_textu\"><b>SYSTEM:</b></span> $(lsb_release -i | awk '{print $3}') $NR_WERSJA_UBUNTU $WERSJA_UBUNTU $bit" >> system$losowa.log
 echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI6</b></span>" >> system$losowa.log
 #microcode intel
 if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then

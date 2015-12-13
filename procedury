@@ -68,6 +68,7 @@ fi
 
 }
 
+#pobranie tłumaczeń
 source /opt/NeteXt73/tlumaczenia/angielski
 jezyczek; case $jezyk in pol*)
 	source /opt/NeteXt73/tlumaczenia/polski
@@ -76,18 +77,59 @@ esac
 
 export nazwa_skryptu="NeteXt'73 v$LATEST_VERSION - $TEXT_NETEXT2"
 export nazwa_skryptu1="NeteXt'73 v$LATEST_VERSION"
+#wersje APM
 export wersja_apm1="advanced_power_management_by_ext73_conservative-conservative"
 export wersja_apm2="advanced_power_management_by_ext73_ondemand-ondemand"
 export wersja_apm3="advanced_power_management_by_ext73_intel-performance"
 export wersja_apm4="advanced_power_management_by_ext73_intel-powersave"
 export wersja_apm5="advanced_power_management_by_ext73_performance-conservative"
 export wersja_apm6="advanced_power_management_by_ext73_performance-ondemand"
+#nazwy ikon do dymków
 export error1="dialog-error"
 export ikona_info1="dialog-information"
 export warning1="dialog-warning"
+
 export adres_opisu="http://www.netext73.pl/search/label/opis_netext73"
 
-if [ "$(lsb_release -a | grep 14.04)" = "" ] || [ "$(lsb_release -a | grep trusty)" = "" ]; then
+export wersje_ubu="wily!vivid!trusty!unstable"
+
+#wsparcie mint
+export WERSJA_UBUNTU="$(lsb_release -cs)"
+export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
+case `lsb_release -cs` in
+		qiana|rebecca|rafaela|freya|rosa)
+		export WERSJA_UBUNTU="trusty" 
+		export NR_WERSJA_UBUNTU="14.04" ;;
+esac
+
+#adres serwera
+export adres_glowny="ftp://37.59.165.105"
+export adres_sterownikow="$adres_glowny/sterowniki/"
+export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
+
+#sumy sumy kontrolne
+export katalog2="2"
+export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
+export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
+export adres_sum_kontrolnych2="$adres_glowny/test_serwera.txt"
+
+if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
+	export komputerek="INTEL"
+elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
+	export komputerek="AMD"
+fi
+#bity
+if [ "$(uname -m)" = "x86_64" ]; then
+	bit="64bit"
+	bit2="amd64"
+else 
+	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_STEROWNIKI1"
+	exit 1
+fi
+
+
+#if [ "$(lsb_release -a | grep 14.04)" = "" ] || [ "$(lsb_release -a | grep trusty)" = "" ]; then
+if [ "$(echo $WERSJA_UBUNTU | grep -i trusty)" = "" ]; then
 	export apmik="nowy"
 	export katalog_apm="/etc/apm-ext73/advanced_power_management_by_ext73_*"
 else
@@ -96,13 +138,6 @@ else
 
 fi
 export wersja_apm=$(ls /opt/NeteXt73/APM/advanced_power_management_by_ext73_* | cut -d '_' -f 6 | tail -n 1 | sed 's/.tar.gz//')
-
-export wersje_ubu="wily!vivid!utopic!trusty!precise!unstable"
-
-#adres serwera
-export adres_glowny="ftp://37.59.165.105"
-export adres_sterownikow="$adres_glowny/sterowniki/"
-export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 
 #premium
 if [ -e ~/.netext73/kernel_premium ]; then
@@ -116,31 +151,11 @@ if [ -e ~/.netext73/kernel_premium ]; then
 	fi
 fi
 
-#sumy sumy kontrolne
-export katalog2="2"
-export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
-export test_serwera='/tmp/netext73/sumy/test_serwera.txt'
-export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
-export adres_sum_kontrolnych2="$adres_glowny/test_serwera.txt"
-
 #kolor textu
 if [ -e ~/.netext73/kolor_textu ]; then
 	export kolor_textu=$(cat ~/.netext73/kolor_textu)
 else
 	export kolor_textu="blue"
-fi
-if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-	export komputerek="INTEL"
-elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
-	export komputerek="AMD"
-fi
-#bity
-if [ "$(uname -m)" = "x86_64" ]; then
-	bit="64bit"
-	bit2="amd64"
-else 
-	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_STEROWNIKI1"
-	exit 1
 fi
 
 #adres katalogu download
@@ -157,7 +172,7 @@ if [ ! -e $download ]; then
       mkdir -p $download
 fi
 
-
+#HiDPI
 if [ -e ~/.netext73/HiDPI ] && [ "$(cat ~/.netext73/HiDPI)" = "TRUE" ]; then
 	export skala=2
 else
@@ -298,10 +313,8 @@ echo "sudo apt-get install linux-firmware --reinstall"
 echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
 echo "sudo apt-get install linux-firmware-nonfree -y"
 echo "fi"
-echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then sudo apt-get install intel-microcode -y"
-echo "if [ \"\$(lsb_release -c | awk '{print \$2}' | grep 'precise' )\" != \"\" ]; then"
-echo "sudo /usr/sbin/update-intel-microcode && sudo microcode_ctl -u"
-echo "fi"
+echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then"
+echo "sudo apt-get install intel-microcode -y"
 echo "else"
 echo "sudo apt-get install amd64-microcode -y"
 echo "fi"
@@ -949,7 +962,7 @@ echo "sudo sed -i -e \"s/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/\" /etc/default/grub"
 echo "fi"
 echo "sudo chown root:root /etc/default/grub"
 #nogpumanager dla 15.10
-echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(lsb_release -a | grep wily)\" != \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i wily)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 echo "if [ \"\$(grep nogpumanager /etc/default/grub)\" = \"\" ]; then"
@@ -1051,7 +1064,7 @@ echo "wget \$adres_sterownikow_optimus/etc/bumblebee/bumblebee.conf"
 echo "wget \$adres_sterownikow_optimus/etc/bumblebee/xorg.conf.nvidia"
 echo "sudo cp xorg.conf.nvidia bumblebee.conf /etc/bumblebee/ -f"
 echo "rm bumblebee.conf xorg.conf.nvidia -f"
-echo "if [ \"\$(lsb_release -a | grep 15.10)\" = \"\" ] || [ \"\$(lsb_release -a | grep wily)\" = \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep 15.10)\" = \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i wily)\" = \"\" ]; then"
 echo "wget \$adres_sterownikow_optimus/etc/modprobe.d/bumblebee.conf"
 echo "sudo cp bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
 echo "rm bumblebee.conf -f"
@@ -1096,7 +1109,7 @@ echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
 #usunięcie xorg 15.10
-echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(lsb_release -a | grep wily)\" != \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i wily)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 echo "echo \"manual\" | sudo tee /etc/init/gpu-manager.override"

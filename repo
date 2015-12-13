@@ -215,7 +215,7 @@ baza=(
 	"Chrome - closed source web browser Google Chrome"
 	"google-chrome-stable"
 
-	"deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib non-free"
+	"deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free"
 	"VirtualBox program do wirtualizacji systemów operacyjnych"
 	"VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product"
 	"virtualbox-5.0"
@@ -403,7 +403,7 @@ else
 						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list"  >> instaluj.sh
 						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list.d/*"  >> instaluj.sh
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
-						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib non-free" ]; then
+						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free" ]; then
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list"  >> instaluj.sh
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
@@ -435,8 +435,8 @@ else
 						      echo "sudo pipelight-plugin --update" >> instaluj.txt
 						      echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ownCloud" ]; then
-						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$(lsb_release -rs)/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
-						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$(lsb_release -rs)/Release.key" >> instaluj.sh
+						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
+						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$NR_WERSJA_UBUNTU/Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
 						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
@@ -471,8 +471,8 @@ else
 							echo "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list" >> instaluj.sh
 							echo "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -" >> instaluj.sh
 							echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
-						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib non-free" ]; then
-							echo "sudo sh -c 'wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -' && sudo sh -c 'echo \"deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib non-free\" >> /etc/apt/sources.list.d/virtualbox.list' " >> instaluj.sh
+						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free" ]; then
+							echo "sudo sh -c 'wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -' && sudo sh -c 'echo \"deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free\" >> /etc/apt/sources.list.d/virtualbox.list' " >> instaluj.sh
 							echo "sudo apt-get install -y ${paczka[$i]} && sudo usermod -aG vboxusers $(cat /tmp/netext73/userek)" >> instaluj.txt
 							jezyczek;case $jezyk in pol*)
 							      #dodanie języka polskiego
@@ -622,7 +622,7 @@ else
 			yad --center --width=$((400*$skala)) --text="<span color=\"$kolor_textu\"><b>$a1</b></span>" --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="Backup:2" --button="Restore:3" --button="$TEXT_ZAMKNIJ:1"
 			klawisz=$?
 			if [ "$klawisz" = "2" ]; then
-				xterm -e bash -c "echo -e \"$TEXT_BACKUP7\";cd /etc; sudo tar -zcvf $download/source.list.backup_$(date +"%d-%m-%y")_$(lsb_release -irs | tr '\n' '_').tar.gz apt; echo -e \"\n\nBackup:$download/source.list.backup_$(date +'%d-%m-%y')_$(lsb_release -irs | tr '\n' '_').tar.gz\"; echo -e \"$TEXT_INSTALACJA\"; read ent"
+				xterm -e bash -c "echo -e \"$TEXT_BACKUP7\";cd /etc; sudo tar -zcvf $download/source.list.backup_$(date +"%d-%m-%y")_$NR_WERSJA_UBUNTU.tar.gz apt; echo -e \"\n\nBackup:$download/source.list.backup_$(date +'%d-%m-%y')_$NR_WERSJA_UBUNTU.tar.gz\"; echo -e \"$TEXT_INSTALACJA\"; read ent"
 			#Przywróć repozytorium z kopii zapasowej
 			elif [ "$klawisz" = "3" ]; then
 				a=$(yad --center --file-selection --filename="$download/" --title="$TEXT_BACKUP2" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --width=$((550*$skala)) --height=$((450*$skala)))
@@ -648,7 +648,7 @@ else
 				#zmień wszystkie repo
 				przed=$(cat /etc/apt/sources.list.d/* | grep "^deb http://ppa.launchpad.net" | sed -e 's/.*ppa.launchpad.net//g' -e 's/$ main//g' | cut -d ' ' -f2 | sort | uniq | tr '\n' '!' | sed '$s/!$//' |sed 's/^!//')
 				if [ "$przed" = "" ]; then
-					przed=$(lsb_release -cs)
+					przed=$WERSJA_UBUNTU
 				fi
 				zmiana=$(yad --center --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/backuprepo.png"  --image="/opt/NeteXt73/ikony/backuprepo.png" --form --field="$TEXT_ZMIEN_Z:CB" "$przed" --field="$TEXT_ZMIEN_NA:CB" "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
