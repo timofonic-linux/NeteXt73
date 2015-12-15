@@ -103,6 +103,18 @@ if [ "$plik" != "" ]; then
 fi
 }
 
+dostepne_aktualizacje(){
+stan_firmware
+if [ "$stan_microcode" = "-" ]; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
+fi
+stan_apm
+if [ "$stan_apm" = "-" ]; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
+fi
+
+}
+
 #########################################################################################################################################################################
 
 
@@ -123,6 +135,7 @@ export userek=$(cat /tmp/netext73/userek)
 sumy &
 zaleznosci &
 aktualizacja &
+dostepne_aktualizacje &
 
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"

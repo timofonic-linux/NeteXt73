@@ -9,6 +9,8 @@ MKDIR = mkdir
 INSTALL = install -m
 APM_DIR = APM
 APM_FILES = $(wildcard $(APM_DIR)/*)
+DEB_DIR = pakiety
+DEB_FILE = $(wildcard $(DEB_DIR)/*)
 DESKTOPFILES_DIR = desktopfiles
 DESKTOPFILES_FILES=$(wildcard $(DESKTOPFILES_DIR)/*.desktop)
 GRAPHIC_KERNEL_DIR = kernel
@@ -35,6 +37,7 @@ install: install_desktopfiles \
 	 install_menu \
 	 install_translations_files \
 	 install_APM \
+	 install_pakiety \
 	 install_launcher \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
@@ -72,6 +75,10 @@ install_APM:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)/
 	$(INSTALL) 0755 $(APM_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)
 	
+install_pakiety:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR)/
+	$(INSTALL) 0755 $(DEB_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR)
+
 install_desktopfiles_kernel:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_DIR)/
 	$(INSTALL) 0755 $(GRAPHIC_KERNEL_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_DIR)
