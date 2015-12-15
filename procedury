@@ -317,11 +317,10 @@ instalacja
 
 microcode_inst(){
 echo "echo \"$TEXT_PROCEDURA_2\""
-echo "sudo apt-get install linux-firmware --reinstall"
+#echo "sudo apt-get install linux-firmware --reinstall"
 echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
 echo "sudo apt-get install linux-firmware-nonfree -y"
 echo "fi"
-echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep nic-firmware)"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware)"
 echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then"
 echo "sudo apt-get install intel-microcode -y"
