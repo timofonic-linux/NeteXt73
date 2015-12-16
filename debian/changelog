@@ -1,3 +1,9 @@
+netext73 (0.9.62) stable; urgency=medium
+
+  * kubutnu backport for Wily
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 16 Dec 2015 21:47:52 +0100
+
 netext73 (0.9.61) stable; urgency=medium
 
   * dodane nowy firmware i dymki
