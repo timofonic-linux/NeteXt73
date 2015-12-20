@@ -121,7 +121,7 @@ if [ "$klawisz" = 0 ]; then
 	fi
 elif [ "$klawisz" = 2 ]; then 
 	lista_gcc1=$(dpkg -l | grep gcc- | grep -v base | grep -v libgcc | awk '{print $2}' | sed 's/gcc-//g')
-	lista_gcc2=$(ls /opt/ | grep gcc | sed 's/gcc-//g')
+	lista_gcc2=$(ls /opt/ | grep gcc | sed 's/gcc-//g' | grep -v tar.xz | grep -v '_')
 	lista_gcc=$(echo $lista_gcc1 $lista_gcc2 | tr ' ' '!')
 	wersja=$(yad --center --title="  $nazwa_skryptu1 " --on-top --width=$((340*$skala)) --window-icon="/opt/NeteXt73/ikony/config.png" --form --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" "$(gcc --version | head -n 1 | awk '{print $3}'| sed 's/-.*//g')" "$(echo $lista_gcc)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?
