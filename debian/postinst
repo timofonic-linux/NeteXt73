@@ -1,5 +1,3 @@
 #!/bin/bash
 #instalowanie dymków dla KDE
-if [ "$(dpkg -l | grep kubuntu-desktop)" != "" ]; then
-	sudo apt-get install libnotify-bin -y
-fi
+echo "test" > /dev/null
