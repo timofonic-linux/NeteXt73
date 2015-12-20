@@ -41,6 +41,12 @@ rm *.html* -f
 rm -f /tmp/netext73/*.txt 
 }
 
+instalacja_gcc(){
+naglowek > instaluj.sh
+echo "sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld-plugin && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld.bfd /usr/bin/ld.bfd" >> instaluj.sh
+echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
+instalacja
+}
 nv_radeon(){
 if [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
 	a5="TRUE"
@@ -56,7 +62,7 @@ fi
 
 aktualizuj_calosc(){
 nv_radeon
-konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=3 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" --field="NVIDIA:CHK" --field="RADEON:CHK"  $a1 $a2 $a3 $a4 $a5 $a6 --width="$((650*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=3 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" --field="NVIDIA:CHK" --field="RADEON:CHK" --field="gcc:CHK"  $a1 $a2 $a3 $a4 $a5 $a6 $a7 --width="$((650*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then
 		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
@@ -81,6 +87,9 @@ konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/s
 		if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ]; then
 			/opt/NeteXt73/./grafiki radeon
 		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ]; then
+			instalacja_gcc
+		fi
 	fi
 }
 usun
@@ -91,6 +100,7 @@ if [ "$1" = "first" ]; then
 	a2="TRUE"
 	a3="TRUE"
 	a4="TRUE"
+	a7="TRUE"
 	nv_radeon
 	aktualizuj_calosc
 	usun
@@ -108,6 +118,18 @@ else
 	((ilosc_aktualizacji++))
 fi
 
+
+#GCC
+twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
+dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+if [ "$twoj_gcc" = "$dostepny_gcc" ];then
+	gcc_text="$twoj_gcc"
+	a7="FALSE"
+else
+	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
+	a7="TRUE"
+	((ilosc_aktualizacji++))
+fi
 #firmware
 stan_firmware
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
@@ -196,17 +218,19 @@ fi
 if [ "$ilosc_aktualizacji" -gt "1" ]; then
       menu="$TEXT_UPDATE8"
 fi
+menu="$TEXT_UPDATE1 gcc!$TEXT_UPDATE1 Firmware/microcode!$TEXT_UPDATE1 Kernel!$TEXT_UPDATE1 APM!$TEXT_UPDATE2!$TEXT_UPDATE8"
 
 a=$(yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
 --field="Firmware/microcode:RO" "$firm" \
 --field="Kernel $twoj_kernel:RO" "$kern" \
 --field="APM $twoj_apm:RO" "$apm" \
 --field="$TEXT_STABLE:RO" "$stable" \
+--field="GCC -version:RO" "$gcc_text" \
 --field="$TEXT_UPDATE1:CB" "$menu" \
 --button="Changelog $nr:3" \
 --button="$TEXT_UPDATE7:2" \
 --button="gtk-ok:0" --button="$TEXT_POWROT:1")
-klawisz=$?; a=$(echo $a | cut -d "|" -f 5)
+klawisz=$?; a=$(echo $a | cut -d "|" -f 6)
 
 if [ $klawisz = "0" ]; then 
 	if [ "$a" = "$TEXT_UPDATE1 APM" ]; then 
@@ -231,12 +255,15 @@ if [ $klawisz = "0" ]; then
 	
 	elif [ "$a" = "$TEXT_UPDATE8" ]; then
 		aktualizuj_calosc
+	elif [ "$a" = "$TEXT_UPDATE1 gcc" ]; then 
+		instalacja_gcc
 	fi
 elif [ $klawisz = "2" ]; then
 	a1="TRUE"
 	a2="TRUE"
 	a3="TRUE"
 	a4="TRUE"
+	a7="TRUE"
 	aktualizuj_calosc 
 elif [ $klawisz = "3" ]; then  #lista zmian
     if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then

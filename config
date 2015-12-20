@@ -91,7 +91,7 @@ res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
 yad --plug=$KEY --tabnum=1 --form \
 --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="NeteXt'73 -root mode:CHK" --field="HiDPI:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$automatyczna_instalacja" "$archiwum_deb" "$root_mode" "$HiDPI" --button="$TEXT_CONFIG3:2" &> $res1 &
 yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu &> $res2 &
-yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((540*$skala)) --height=$((400*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1"
+yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((540*$skala)) --height=$((400*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="gcc:2"
 klawisz=$?
 if [ "$klawisz" = 0 ]; then 
 	if [ "$(grep "$TEXT_TAK" $res1)" != "" ]; then
@@ -118,6 +118,25 @@ if [ "$klawisz" = 0 ]; then
 			killall yad
 			dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_CONFIG13"
 		fi    
+	fi
+elif [ "$klawisz" = 2 ]; then 
+	lista_gcc1=$(dpkg -l | grep gcc- | grep -v base | grep -v libgcc | awk '{print $2}' | sed 's/gcc-//g')
+	lista_gcc2=$(ls /opt/ | grep gcc | sed 's/gcc-//g')
+	lista_gcc=$(echo $lista_gcc1 $lista_gcc2 | tr ' ' '!')
+	wersja=$(yad --center --title="  $nazwa_skryptu1 " --on-top --width=$((340*$skala)) --window-icon="/opt/NeteXt73/ikony/config.png" --form --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" "$(gcc --version | head -n 1 | awk '{print $3}'| sed 's/-.*//g')" "$(echo $lista_gcc)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?
+	export wersja=$(echo $wersja | cut -d '|' -f 2)
+	echo $wersja
+	if [ "$klawisz" = 0 ]; then
+		naglowek > instaluj.sh
+		if [ "$(ls /opt/ | grep -x gcc-$wersja)" != "" ]; then
+			echo "sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld-plugin && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld.bfd /usr/bin/ld.bfd" >> instaluj.sh
+			echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
+			echo "sudo ldconfig" >> instaluj.sh
+		else
+			echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp" >> instaluj.sh
+		fi
+		instalacja
 	fi
 fi
 rm -f $res1 $res2

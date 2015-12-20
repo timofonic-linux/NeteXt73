@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.63
+ -	GCC - własne kompilacje
+-	dymek o możliwości aktualizacji GCC
+-	instalator gcc
+-	linkowanie GCC
 v0.9.62
 -	kubutnu backport for Wily
 v0.9.61

@@ -112,7 +112,11 @@ stan_apm
 if [ "$stan_apm" = "-" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
 fi
-
+twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}'| sed 's/-.*//g')
+dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+if [ "$twoj_gcc" != "$dostepny_gcc" ];then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
+fi
 }
 
 #########################################################################################################################################################################
