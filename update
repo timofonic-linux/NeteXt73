@@ -43,8 +43,8 @@ rm -f /tmp/netext73/*.txt
 
 instalacja_gcc(){
 naglowek > instaluj.sh
-echo "sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld /usr/bin/ld-plugin && sudo ln -sf /opt/\$(ls /opt/NeteXt73/pakiety | grep binutils)/bin/ld.bfd /usr/bin/ld.bfd" >> instaluj.sh
 echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
+echo "sudo ldconfig" >> instaluj.sh
 instalacja
 }
 nv_radeon(){
