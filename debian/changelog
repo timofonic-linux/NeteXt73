@@ -1,3 +1,9 @@
+netext73 (0.9.64) stable; urgency=medium
+
+  * poprawki w module gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 21 Dec 2015 19:23:23 +0100
+
 netext73 (0.9.63) stable; urgency=medium
 
   * gcc

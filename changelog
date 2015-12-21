@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.64
+-	poprawki w module gcc
 v0.9.63
  -	GCC - własne kompilacje
 -	dymek o możliwości aktualizacji GCC

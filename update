@@ -227,7 +227,7 @@ a=$(yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon=
 --field="Kernel $twoj_kernel:RO" "$kern" \
 --field="APM $twoj_apm:RO" "$apm" \
 --field="$TEXT_STABLE:RO" "$stable" \
---field="GCC -version:RO" "$gcc_text" \
+--field="GCC -version:RO" "$(gcc --version | head -n 1)" \
 --field="$TEXT_UPDATE1:CB" "$menu" \
 --button="Changelog $nr:3" \
 --button="$TEXT_UPDATE7:2" \
