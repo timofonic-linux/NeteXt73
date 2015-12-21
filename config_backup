@@ -83,34 +83,15 @@ else
 	HiDPI="FALSE"
 fi
 
-#gcc
-if [ "$(gcc --version | grep -i ext73)" != "" ];then
-	aktualny_gcc=$(gcc --version | head -n 1 | awk '{print $1"-"$3}' | sed 's/$/\text73/g')
-else
-	aktualny_gcc1=$(dpkg -l| grep gcc- | grep -v base | grep -v libgcc | grep $(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g') | awk '{print $2}')
-	aktualny_gcc2=$(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g')
-	aktualny_gcc=$(echo $aktualny_gcc1"\t\t"$aktualny_gcc2)
-fi
-
-dpkg -l | grep gcc- | grep -v base | grep -v libgcc | awk '{print $2"\t\t"$3}' > lista_gcc1.txt
-ls /opt/ | grep gcc- | grep -v tar.xz | grep -v '_' | sed 's/$/\text73/g' >> lista_gcc1.txt
-cat lista_gcc1.txt | sed "s/$aktualny_gcc//" > lista_gcc2.txt
-echo "$aktualny_gcc" > lista_gcc1.txt
-cat  lista_gcc2.txt >> lista_gcc1.txt
-#usuwanie pustych linii
-sed -i '/^[ \t]*$/ d' lista_gcc1.txt
-cat lista_gcc1.txt | tr '\n' '!' > lista_gcc2.txt
-#usunięcie ostaniego znaku
-sed -i '$s/!$//' lista_gcc2.txt
-
 KEY="$(echo $RANDOM)"
 #zmienne losowe
 res1=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
 res2=$(mktemp --tmpdir=/tmp/netext73 netext73_2.XXXXXXXX)
 res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
-yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="NeteXt'73 -root mode:CHK" --field="HiDPI:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$(gcc --version | head -n 1)" "$(cat lista_gcc2.txt)" "$automatyczna_instalacja" "$archiwum_deb" "$root_mode" "$HiDPI" --button="$TEXT_CONFIG3:2" &> $res1 &
+yad --plug=$KEY --tabnum=1 --form \
+--field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="NeteXt'73 -root mode:CHK" --field="HiDPI:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$automatyczna_instalacja" "$archiwum_deb" "$root_mode" "$HiDPI" --button="$TEXT_CONFIG3:2" &> $res1 &
 yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu &> $res2 &
-yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((540*$skala)) --height=$((400*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1"
+yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((540*$skala)) --height=$((400*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="gcc:2"
 klawisz=$?
 if [ "$klawisz" = 0 ]; then 
 	if [ "$(grep "$TEXT_TAK" $res1)" != "" ]; then
@@ -121,25 +102,11 @@ if [ "$klawisz" = 0 ]; then
 			cat $res1 | grep '@' | cut -d "|" -f 2 > ~/.netext73/kernel_premium
 		fi
 		cat $res1 | cut -d "|" -f 3 > ~/.netext73/jezyk
-		cat $res1 | cut -d "|" -f 8 > ~/.netext73/kernel_automat
-		cat $res1 | cut -d "|" -f 9 > ~/.netext73/archiwum_deb
-		cat $res1 | cut -d "|" -f 10 > ~/.netext73/root_mode
-		cat $res1 | cut -d "|" -f 11 > ~/.netext73/HiDPI
+		cat $res1 | cut -d "|" -f 6 > ~/.netext73/kernel_automat
+		cat $res1 | cut -d "|" -f 7 > ~/.netext73/archiwum_deb
+		cat $res1 | cut -d "|" -f 8 > ~/.netext73/root_mode
+		cat $res1 | cut -d "|" -f 9 > ~/.netext73/HiDPI
 		cat $res2 > ~/.netext73/kolor_textu
-		wersja=$(cat $res1 | cut -d "|" -f 7)
-		if [ "$aktualny_gcc" != "$wersja" ];then
-			naglowek > instaluj.sh
-			if [ "$(echo $wersja | grep ext73)" != "" ]; then
-				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
-				echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
-				echo "sudo ldconfig" >> instaluj.sh
-			else
-				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
-				echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp" >> instaluj.sh
-			fi
-			instalacja2
-			rm -f *.txt
-		fi
 		#kasowanie śmieci w configach
 		for i in $(echo jezyk kernel_automat archiwum_deb root_mode kernel_premium kolor_textu); do
 			sed -i '/.*yad.*/ d' ~/.netext73/$i
@@ -152,5 +119,47 @@ if [ "$klawisz" = 0 ]; then
 			dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_CONFIG13"
 		fi    
 	fi
+elif [ "$klawisz" = 2 ]; then 
+	#GCC przełaczanie
+	petla="tak"
+	while [ $petla = "tak" ]; do
+		IFS=$' \t\n'
+		#lista_gcc1=$(
+		if [ "$(gcc --version | grep -i ext73)" != "" ];then
+			aktualny_gcc=$(gcc --version | head -n 1 | awk '{print $1"-"$3}' | sed 's/$/\text73/g')
+		else
+			aktualny_gcc1=$(dpkg -l| grep gcc- | grep -v base | grep -v libgcc | grep $(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g') | awk '{print $2}')
+			aktualny_gcc2=$(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g')
+			aktualny_gcc=$(echo $aktualny_gcc1"\t\t"$aktualny_gcc2)
+		fi
+		
+		dpkg -l | grep gcc- | grep -v base | grep -v libgcc | awk '{print $2"\t\t"$3}' > lista_gcc1.txt
+		echo "ext73" | ls /opt/ | grep gcc- | grep -v tar.xz | grep -v '_' | sed 's/$/\text73/g' >> lista_gcc1.txt
+		cat lista_gcc1.txt | sed "s/$aktualny_gcc//" > lista_gcc2.txt
+		echo "$aktualny_gcc" > lista_gcc1.txt
+		cat  lista_gcc2.txt >> lista_gcc1.txt
+		#usuwanie pustych linii
+		sed -i '/^[ \t]*$/ d' lista_gcc1.txt
+		IFS='\n'
+		wersja=$(yad --center --title="  $nazwa_skryptu1 " --on-top --width=$((340*$skala)) --window-icon="/opt/NeteXt73/ikony/config.png" --item-separator="\n" --form --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" "$(gcc --version | head -n 1)" "$(cat lista_gcc1.txt)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		klawisz=$?
+		if [ "$klawisz" = 0 ]; then
+			naglowek > instaluj.sh
+			if [ "$(echo $wersja | grep ext73)" != "" ]; then
+				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
+				echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
+				echo "sudo ldconfig" >> instaluj.sh
+			else
+				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
+				echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp" >> instaluj.sh
+			fi
+			instalacja2
+			IFS=$' \t\n'
+			rm -f *.txt
+		fi
+		if [ -z "$wersja" ]; then
+			opusc__mala_petle
+		fi
+	done
 fi
 rm -f $res1 $res2

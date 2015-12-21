@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.65
+-	przeniesienie gcc do konfiguratora
 v0.9.64
 -	poprawki w module gcc
 v0.9.63
