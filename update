@@ -201,17 +201,18 @@ else
 	fi
 fi
 
-if [ "$menu" = "" ]; then
-	menu="$TEXT_UPDATE2"
+if [ "$(echo $a1$a2$a3$a4$a7 | grep 'TRUE')" != "" ];then
+	menu="$TEXT_UPDATE8!$TEXT_UPDATE2"
+else
+	menu="$TEXT_UPDATE2!$TEXT_UPDATE8"
 fi
 
-menu="$TEXT_UPDATE8!$TEXT_UPDATE2"
-a=$(yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
+a=$(yad --center --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
 --field="Firmware/microcode:RO" "$firm" \
 --field="Kernel $twoj_kernel:RO" "$kern" \
 --field="APM $twoj_apm:RO" "$apm" \
 --field="$TEXT_STABLE:RO" "$stable" \
---field="GCC -version:RO" "$(gcc --version | head -n 1)" \
+--field="gcc -version:RO" "$(gcc --version | head -n 1)" \
 --field="$TEXT_UPDATE1:CB" "$menu" \
 --button="Changelog $nr:3" \
 --button="$TEXT_UPDATE7:2" \

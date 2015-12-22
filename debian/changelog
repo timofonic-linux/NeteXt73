@@ -1,3 +1,9 @@
+netext73 (0.9.66) stable; urgency=medium
+
+  * zmiana update i config
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 22 Dec 2015 06:42:45 +0100
+
 netext73 (0.9.65) stable; urgency=medium
 
   * przeniesienie gcc do konfiguratora

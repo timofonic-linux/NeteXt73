@@ -1,6 +1,10 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.66
+-	zmiana wielkości okna config
+-	zmiana wielkości okna update
+-	automatyczny wybór: aktualizuj dostępne/aktualizuj system
 v0.9.65
 -	przeniesienie gcc do konfiguratora
 v0.9.64
