@@ -42,15 +42,15 @@ if [ ! -e ~/.netext73/strona_domowa ]; then
 fi
 #życzenia świąteczne
 DATA=$(date +"%m-%d")
-if [ "$DATA" = "12-24" ] ||  [ "$DATA" = "12-25" ] ||  [ "$DATA" = "12-26" ]; then
-	yad --center --info --title="$nazwa_skryptu   "  --text="Zespół NeteXt'73 życzy\n<span color=\"$kolor_textu\"><b>Wesołych Świąt Bożego Narodzenia!</b></span>\n\n\nNeteXt'73 team\n<span color=\"$kolor_textu\"><b>wishes Merry Christmas!</b></span>" --window-icon="/opt/NeteXt73/ikony/tux_santa.png" --image="/opt/NeteXt73/ikony/tux_santa.png" --button="gtk-ok:0" --on-top
+if [ "$DATA" = "12-24" ] || [ "$DATA" = "12-25" ] || [ "$DATA" = "12-26" ]; then
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n\n\n\n\nZespół NeteXt'73 życzy\n<span color=\"$kolor_textu\"><b>Wesołych Świąt Bożego Narodzenia!</b></span>\n\n\nNeteXt'73 team\n<span color=\"$kolor_textu\"><b>wishes Merry Christmas!</b></span>" --window-icon="/opt/NeteXt73/ikony/tux_santa.png" --image="/opt/NeteXt73/ikony/tux_santa.png" --button="gtk-ok:0" --on-top
 fi
 #życzenia noworoczne
 if [ "$DATA" = "12-31" ]; then
-	dymek  -i /opt/NeteXt73/ikony/happyny.png "Happy New Year" "<b>NeteXt'73 team wishes Happy New Year $(( $(date +"%Y")+1 ))\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku $(( $(date +"%Y")+1 ))</b>"
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n<span color=\"$kolor_textu\"><b>Happy New Year !!</b></span>\n\n\nNeteXt'73 team wishes Happy New Year $(( $(date +"%Y")+1 ))\n\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku $(( $(date +"%Y")+1 ))" --window-icon="/opt/NeteXt73/ikony/happyny.png" --image="/opt/NeteXt73/ikony/happyny.png" --button="gtk-ok:0" --on-top
 fi
 if [ "$DATA" = "01-01" ]; then
-	dymek  -i /opt/NeteXt73/ikony/happyny.png "Happy New Year" "<b>NeteXt'73 team wishes Happy New Year $(date +"%Y")\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku$(date +"%Y")</b>"
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n<span color=\"$kolor_textu\"><b>Happy New Year !!</b></span>\n\n\nNeteXt'73 team wishes Happy New Year $(( $(date +"%Y") ))\n\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku $(( $(date +"%Y") ))" --window-icon="/opt/NeteXt73/ikony/happyny.png" --image="/opt/NeteXt73/ikony/happyny.png" --button="gtk-ok:0" --on-top
 fi
 
 #sprawdzanie wersji systemu
