@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.67
+-	automatyczna instalacja gcc
 v0.9.66
 -	zmiana wielkości okna config
 -	zmiana wielkości okna update
