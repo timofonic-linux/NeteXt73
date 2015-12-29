@@ -3,4 +3,6 @@
 sudo tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/
 sudo tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/
 sudo ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp
+sudo rm /usr/lib/x86_64-linux-gnu/libisl.so.10
+sudo ln /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
 sudo ldconfig
