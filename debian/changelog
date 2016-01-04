@@ -1,3 +1,9 @@
+netext73 (0.9.69) stable; urgency=medium
+
+  * zmiana kolejności linkowania libisl13
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 04 Jan 2016 18:20:44 +0100
+
 netext73 (0.9.68) stable; urgency=medium
 
   * zależności libisl13

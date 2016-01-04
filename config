@@ -133,6 +133,7 @@ if [ "$klawisz" = 0 ]; then
 				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
 				echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp" >> instaluj.sh
 				echo "sudo ldconfig" >> instaluj.sh
+				echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10 && sudo ln -f /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10" >> instaluj.sh
 			else
 				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
 				echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp" >> instaluj.sh
