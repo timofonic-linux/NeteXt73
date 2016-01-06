@@ -263,19 +263,6 @@ echo "sudo sed -i 's/#parport_pc/parport_pc/g' /etc/modules-load.d/cups-filters.
 echo "fi"
 }
 
-sprawdz_gcc(){
-
-echo "if [ \"\$(gcc --version | head -n 1 | grep 5)\" = \"\" ]; then"
-echo "sudo apt-get update"
-echo "sudo apt-get install gcc-5 -y"
-echo "sudo apt-get dist-upgrade -y"
-echo "sudo ln -sf /usr/bin/gcc-5 /usr/bin/gcc"
-echo "sudo ln -sf /usr/bin/gcc-ar-5 /usr/bin/gcc-ar"
-echo "sudo ln -sf /usr/bin/cpp-5 /usr/bin/cpp"
-echo "fi"
-
-
-}
 stan_firmware(){
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
 dostepny_firmware=$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware | cut -d "_" -f 2)
@@ -1461,4 +1448,35 @@ opusc__mala_petle(){
 
 kill_yad(){
 kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
+}
+
+
+#gcc
+sprawdz_gcc(){
+
+echo "if [ \"\$(gcc --version | head -n 1 | grep 5)\" = \"\" ]; then"
+echo "sudo apt-get update"
+echo "sudo apt-get install gcc-5 -y"
+echo "sudo apt-get dist-upgrade -y"
+echo "sudo ln -sf /usr/bin/gcc-5 /usr/bin/gcc"
+echo "sudo ln -sf /usr/bin/gcc-ar-5 /usr/bin/gcc-ar"
+echo "sudo ln -sf /usr/bin/cpp-5 /usr/bin/cpp"
+echo "fi"
+}
+
+instaluj_gcc(){
+if [ "$1" = "instaluj_nowy" ];then
+	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
+	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
+	echo "sudo ldconfig"
+	echo "sudo rm /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
+elif [ "$1" = "zmien" ];then
+	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp"
+	echo "sudo ldconfig"
+	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10 && sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
+elif [ "$1" = "zmien_stary" ];then
+	echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp"
+fi
 }
