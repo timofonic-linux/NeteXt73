@@ -1,3 +1,9 @@
+netext73 (0.9.71) stable; urgency=medium
+
+  * linux-firmware 1.55
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 07 Jan 2016 18:36:27 +0100
+
 netext73 (0.9.70) stable; urgency=medium
 
   * drobne poprawki
