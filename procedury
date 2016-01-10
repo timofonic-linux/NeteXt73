@@ -1475,10 +1475,12 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
 elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp && sudo ln -sf /opt/gcc-\$wersja/bin/g++ /usr/bin/g++ && sudo ln -sf /opt/gcc-\$wersja/bin/c++ /usr/bin/c++"
+	#echo "sudo ln -sf /usr/bin/c++-\$wersja /usr/bin/c++"
 	#echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc && sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar && sudo ln -sf /opt/gcc-\$wersja/bin/cpp /usr/bin/cpp"
 	echo "sudo ldconfig"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10 && sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
 elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc && sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar && sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp"
+	echo "sudo ln -sf /usr/bin/g++-\$wersja /usr/bin/g++"
 fi
 }
