@@ -1,3 +1,9 @@
+netext73 (0.9.72) stable; urgency=medium
+
+  * zmiana linkowania gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 10 Jan 2016 09:34:16 +0100
+
 netext73 (0.9.71) stable; urgency=medium
 
   * linux-firmware 1.155
