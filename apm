@@ -90,7 +90,7 @@ while [ $petla_duza = "tak" ]; do
 	
 	#ustawienie jasności wg aktualnej
         katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
-        if [ "$katalog_jasnosc" = "" ]; then
+        if [ "$katalog_jasnosc" != "" ]; then
 		wartsc_bright=$(cat /sys/class/backlight/$katalog_jasnosc/brightness)
 		wartosc_max=$(cat /sys/class/backlight/$katalog_jasnosc/max_brightness)
 		skala_jasnosci=$wartosc_max
