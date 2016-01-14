@@ -122,7 +122,7 @@ while [ $petla_duza = "tak" ]; do
         #if [ "$(cat /sys/class/power_supply/*/online)" = "" ];then
         #jasnosc_dziala="TRUE"
         #else
-	if [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
+	if [ "$katalog_jasnosc" != "" ] && [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
 		jasnosc_dziala="TRUE"
 	else
 		jasnosc_dziala="FALSE"
@@ -175,7 +175,7 @@ while [ $petla_duza = "tak" ]; do
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
 			
 			
-                        if [ "$jasnosc_dziala" = "TRUE" ]; then
+                        if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
                                 #if [ "$(echo $wart | cut -d "|" -f 1)" = "TRUE" ];then
                                 	wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
 					wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
