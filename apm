@@ -90,30 +90,34 @@ while [ $petla_duza = "tak" ]; do
 	
 	#ustawienie jasności wg aktualnej
         katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
-        wartsc_bright=$(cat /sys/class/backlight/$katalog_jasnosc/brightness)
-        wartosc_max=$(cat /sys/class/backlight/$katalog_jasnosc/max_brightness)
-        skala_jasnosci=$wartosc_max
+        if [ "$katalog_jasnosc" = "" ]; then
+		wartsc_bright=$(cat /sys/class/backlight/$katalog_jasnosc/brightness)
+		wartosc_max=$(cat /sys/class/backlight/$katalog_jasnosc/max_brightness)
+		skala_jasnosci=$wartosc_max
 
-        wartosc_batt=$(cat /etc/apm-ext73/brightness | grep 'echo' | awk '{print $2}' | head -n 1)
-        wartosc_ac=$(tac /etc/apm-ext73/brightness | grep 'echo' | awk '{print $2}' | head -n 1)
+		wartosc_batt=$(cat /etc/apm-ext73/brightness | grep 'echo' | awk '{print $2}' | head -n 1)
+		wartosc_ac=$(tac /etc/apm-ext73/brightness | grep 'echo' | awk '{print $2}' | head -n 1)
 
-        wartosc_min=1
-        wartosc_max=100
-        wartosc_ac=$(awk "BEGIN{print int(($wartosc_max*$wartosc_ac/$skala_jasnosci)+0.5)}")
-        wartosc_batt=$(awk "BEGIN{print int(($wartosc_max*$wartosc_batt/$skala_jasnosci)+0.5)}")
+		wartosc_min=1
+		wartosc_max=100
+		wartosc_ac=$(awk "BEGIN{print int(($wartosc_max*$wartosc_ac/$skala_jasnosci)+0.5)}")
+		wartosc_batt=$(awk "BEGIN{print int(($wartosc_max*$wartosc_batt/$skala_jasnosci)+0.5)}")
 
-        #walidacja
-        if [ $wartosc_batt -lt $wartosc_min ]; then
-                wartosc_batt=$wartosc_min
-        elif [ $wartosc_batt -gt $wartosc_max ]; then
-                wartosc_batt=$wartosc_max
-        fi
-        if [ $wartosc_ac -lt $wartosc_min ]; then
-                wartosc_ac=$wartosc_min
-        elif [ $wartosc_ac -gt $wartosc_max ]; then
-                wartosc_ac=$wartosc_max
-        fi
-
+		#walidacja
+		if [ $wartosc_batt -lt $wartosc_min ]; then
+			wartosc_batt=$wartosc_min
+		elif [ $wartosc_batt -gt $wartosc_max ]; then
+			wartosc_batt=$wartosc_max
+		fi
+		if [ $wartosc_ac -lt $wartosc_min ]; then
+			wartosc_ac=$wartosc_min
+		elif [ $wartosc_ac -gt $wartosc_max ]; then
+			wartosc_ac=$wartosc_max
+		fi
+	else
+		wartosc_batt="2"
+		wartosc_ac="8"
+	fi
         #sprawdzanie czy jest bateria - włącznik sterowania podświetleniem
         if [ "$(cat /sys/class/power_supply/*/online)" = "" ];then
                 jasnosc_dziala="$TEXT_NIE"

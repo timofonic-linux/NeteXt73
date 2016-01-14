@@ -1,3 +1,9 @@
+netext73 (0.9.74) stable; urgency=medium
+
+  * podświetlenie matrycy i zmiany w grub
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 14 Jan 2016 18:03:23 +0100
+
 netext73 (0.9.73) stable; urgency=medium
 
   * gcc 5.3.1

@@ -418,12 +418,16 @@ fi
 sudo chown root:root /usr/lib/pm-utils/power.d/*
 sudo /etc/init.d/ondemand stop
 sudo update-rc.d -f ondemand remove
+
 #ustawienie jasności wg aktualnej
 katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
-wartsc_bright=$(cat /sys/class/backlight/$katalog_jasnosc/brightness)
-sudo sed -i "/#ac/ s/echo.*>/echo $wartsc_bright >/" /etc/apm-ext73/brightness
-sudo sed -i "/#bateria/ s/echo.*>/echo $wartsc_bright >/" /etc/apm-ext73/brightness
-sudo sed -i "s/jasnosc/$katalog_jasnosc/g" /etc/apm-ext73/brightness
+if [ "$katalog_jasnosc" != "" ]; then
+	wartsc_bright=$(cat /sys/class/backlight/$katalog_jasnosc/brightness)
+	sudo sed -i "/#ac/ s/echo.*>/echo $wartsc_bright >/" /etc/apm-ext73/brightness
+	sudo sed -i "/#bateria/ s/echo.*>/echo $wartsc_bright >/" /etc/apm-ext73/brightness
+	sudo sed -i "s/jasnosc/$katalog_jasnosc/g" /etc/apm-ext73/brightness
+fi
+
 #naprawa powerbtn
 if [ "$(cat /etc/acpi/powerbtn.sh | grep '/usr/.../qdbus')" != "" ]; then
 	sudo cp /etc/acpi/powerbtn.sh /etc/acpi/powerbtn.sh.bak -f
@@ -983,7 +987,7 @@ instalacja2
 if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
       dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_GRUB2 $sciezka/grub. $TEXT_WYMAGANY_RESTART"
 else
-      dymek i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB3"
+      dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB3"
 fi
 }
 
