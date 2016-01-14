@@ -104,16 +104,23 @@ fi
 }
 
 dostepne_aktualizacje(){
+#firmware
 stan_firmware
 if [ "$stan_microcode" = "-" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
 fi
+#apm
 stan_apm
-if [ "$stan_apm" = "-" ]; then
+if [ "$stan_apm" = "-" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" != "" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
+fi
+#grub
+if [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "GRUB - $TEXT_UPDATE5a"
 fi
 twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}'| sed 's/-.*//g')
 dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+#gcc
 if [ "$twoj_gcc" != "$dostepny_gcc" ];then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
 fi
