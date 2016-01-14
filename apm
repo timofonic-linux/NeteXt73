@@ -119,15 +119,15 @@ while [ $petla_duza = "tak" ]; do
 		wartosc_ac="8"
 	fi
         #sprawdzanie czy jest bateria - włącznik sterowania podświetleniem
-        if [ "$(cat /sys/class/power_supply/*/online)" = "" ];then
-                jasnosc_dziala="$TEXT_NIE"
-        else
-                if [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
-                        jasnosc_dziala="$TEXT_TAK!$TEXT_NIE"
-                else
-                        jasnosc_dziala="$TEXT_NIE!$TEXT_TAK"
-                fi
+        #if [ "$(cat /sys/class/power_supply/*/online)" = "" ];then
+        #jasnosc_dziala="TRUE"
+        #else
+	if [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
+		jasnosc_dziala="TRUE"
+	else
+		jasnosc_dziala="FALSE"
 	fi
+	#fi
 	if [ "$stan_apm" != "-" ]; then
 		aa=$(yad --center --columns=2 --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/apm.png"  --image="/opt/NeteXt73/ikony/apm.png" --form \
 		--field="$TEXT_WERSJA_APM:RO" "$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)" \
@@ -137,7 +137,7 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_PLANISTA:CB" "$hdd_scheduler_menu" \
 		--field="$(echo $TEXT_PLANISTA | sed 's/HDD/SSD\/FLASH/'):CB" "$ssd_scheduler_menu" \
 		--field='':LBL "" \
-                --field="$TEXT_STEROWANIE_JASNOSCIA:CB" "$jasnosc_dziala" \
+                --field="$TEXT_STEROWANIE_JASNOSCIA:CHK" "$jasnosc_dziala" \
 		--field="$TEXT_JASNOSC_NA_BATT:SCL" "$wartosc_batt" \
                 --field="$TEXT_JASNOSC_NA_AC:SCL" "$wartosc_ac" \
 		--field="$TEXT_FIX1:CHK" "$wifi_batt_fix" \
@@ -175,20 +175,20 @@ while [ $petla_duza = "tak" ]; do
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
 			
 			
-			wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
-                        wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
-                        sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
-                        sudo sed -i "/#bateria/ s/echo.*>/echo $wart_batt >/" /etc/apm-ext73/brightness
-                        if [ "$(cat /sys/class/power_supply/*/online)" = "0" ];then
-                                sudo /etc/apm-ext73/./brightness true
-                        else
-                                sudo /etc/apm-ext73/./brightness false
-                        fi
-                        if [ "$jasnosc_dziala" = "$TEXT_TAK" ]; then
+                        if [ "$jasnosc_dziala" = "TRUE" ]; then
                                 #if [ "$(echo $wart | cut -d "|" -f 1)" = "TRUE" ];then
-                                        sudo sed -i 's/#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
+                                	wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
+					wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
+					sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
+					sudo sed -i "/#bateria/ s/echo.*>/echo $wart_batt >/" /etc/apm-ext73/brightness
+					if [ "$(cat /sys/class/power_supply/*/online)" = "0" ];then
+						sudo /etc/apm-ext73/./brightness true
+					else
+						sudo /etc/apm-ext73/./brightness false
+					fi
+                                        sudo sed -i 's/.*#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
                         else
-                                        sudo sed -i 's/SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
+                                        sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
                                 #fi
                         fi
 			
