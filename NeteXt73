@@ -104,6 +104,7 @@ fi
 }
 
 dostepne_aktualizacje(){
+cd /tmp/netext73
 #firmware
 stan_firmware
 if [ "$stan_microcode" = "-" ]; then
@@ -124,6 +125,12 @@ dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.
 if [ "$twoj_gcc" != "$dostepny_gcc" ];then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
 fi
+##kernel
+sprawdz_kernel
+if [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
+fi
+rm /tmp/netext73/*.txt -f
 }
 
 #########################################################################################################################################################################

@@ -3,6 +3,7 @@
 
 v0.9.75
 -	dymki informujące o możliwych aktualizacjach
+-	dodanie dymku dla kerneli
 v0.9.74
 -	GRUB usunięcie wpisu i915.lvds_downclock=1
 -	walidacja obsługi podświetlenia matrycy

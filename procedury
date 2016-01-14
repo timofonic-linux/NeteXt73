@@ -866,6 +866,7 @@ xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/user
 }
 
 lista_kerneli(){
+cd /tmp/netext73
 if [ "$1" = "update" ]; then
 	if [ "$kernel_premium" = "tak" ] ; then
 		wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
@@ -935,6 +936,31 @@ else
 		a1=$(echo $aa | cut -d "|" -f 3) #czy zainstalowany jeżeli '-' można instalować
 	fi
 fi
+}
+
+sprawdz_kernel(){
+lista_kerneli update
+#sprawdzanie kerneli do wersji v29.x
+if [ "$(uname -r | grep ags)" != "" ];then
+	if [ "$(uname -r | grep ext | grep pro )" != "" ];then
+		twoj_kernel="e X t 7 3 - pro v$(uname -r| cut -d "-" -f 4)-$(uname -r | cut -d '-' -f 1)"
+	elif [ "$(uname -r | grep ext )" != "" ];then
+		twoj_kernel="e X t 7 3 v$(uname -r| cut -d "-" -f 4)-$(uname -r | cut -d '-' -f 1)"
+	else
+		twoj_kernel=$(uname -r)
+	fi
+else
+#sprawdzanie kerneli od wersji v30.x
+	if [ "$(uname -r | grep ext | grep pro )" != "" ];then
+		twoj_kernel="e X t 7 3 - pro v$(uname -r | cut -d "-" -f 3)-$(uname -r | cut -d '-' -f 1)"
+	elif [ "$(uname -r | grep ext )" != "" ];then
+		twoj_kernel="e X t 7 3 v$(uname -r| cut -d "-" -f 3)-$(uname -r | cut -d '-' -f 1)"
+	else
+		twoj_kernel=$(uname -r)
+	fi
+fi
+nowy_kernel=$(grep 'href="ftp' kernel.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 }
 
 grub(){
