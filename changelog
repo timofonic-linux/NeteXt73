@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.76
+-	zmiana sposobu sprawdzania aktualizacji
 v0.9.75
 -	dymki informujące o możliwych aktualizacjach
 -	dodanie dymku dla kerneli

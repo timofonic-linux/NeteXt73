@@ -116,7 +116,7 @@ if [ "$stan_apm" = "-" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
 fi
 #grub
-if [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
+if [ "$(grep 'acpi_osi=' /etc/default/grub)" = "" ] || [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "GRUB - $TEXT_UPDATE5a"
 fi
 twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}'| sed 's/-.*//g')
@@ -127,7 +127,8 @@ if [ "$twoj_gcc" != "$dostepny_gcc" ];then
 fi
 ##kernel
 sprawdz_kernel
-if [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+#if [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" = "" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 fi
 rm /tmp/netext73/*.txt -f

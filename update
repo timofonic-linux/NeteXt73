@@ -107,12 +107,11 @@ if [ "$1" = "first" ]; then
 fi
 
 #GRUB
-if [ "$(grep 'acpi_osi=' /etc/default/grub)" != "" ]; then
-	a2="FALSE"
-else
+if [ "$(grep 'acpi_osi=' /etc/default/grub)" = "" ] || [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
 	a2="TRUE"
+else
+	a2="FALSE"
 fi
-
 
 #GCC
 twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
@@ -166,12 +165,17 @@ if [ "$(cat kernel.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
 else
-	if [ "$kern1" = "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+	#if [ "$kern1" = "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
 		kern="$TEXT_UPDATE4"
 		a4="FALSE"
 	else
 		kern="$TEXT_UPDATE5  v$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 		a4="TRUE"
+	fi
+	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ] && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+		kern="$TEXT_UPDATE9"
+		a4="FALSE"
 	fi
 fi
 
