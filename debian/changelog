@@ -1,5 +1,11 @@
 netext73 (0.9.76) stable; urgency=medium
 
+  * czyszczenie kodu
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 17 Jan 2016 10:24:15 +0100
+
+netext73 (0.9.76) stable; urgency=medium
+
   * zmiana sposobu sprawdzania aktualizacji
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 16 Jan 2016 22:05:16 +0100

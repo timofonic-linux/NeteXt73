@@ -106,23 +106,6 @@ if [ "$1" = "first" ]; then
 	exit 0
 fi
 
-#GRUB
-if [ "$(grep 'acpi_osi=' /etc/default/grub)" = "" ] || [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
-	a2="TRUE"
-else
-	a2="FALSE"
-fi
-
-#GCC
-twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
-dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
-if [ "$twoj_gcc" = "$dostepny_gcc" ];then
-	gcc_text="$twoj_gcc"
-	a7="FALSE"
-else
-	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
-	a7="TRUE"
-fi
 #firmware
 stan_firmware
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
@@ -131,22 +114,33 @@ twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | s
 if [ "$stan_microcode" != "-" ] && [ "$twoj_firmware" = "" ]; then
 	firm=$TEXT_UPDATE5a
 	a1="TRUE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
 elif [ "$stan_microcode" = "-" ]; then
 	firm=$TEXT_UPDATE5a
 	a1="TRUE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
 else
 	firm=v$twoj_firmware
 	a1="FALSE"
 fi
 
+#GRUB
+if [ "$(grep 'acpi_osi=' /etc/default/grub)" = "" ] || [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
+	a2="TRUE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "GRUB - $TEXT_UPDATE5a"
+else
+	a2="FALSE"
+fi
+
 #APM
 twoj_apm=$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)
-if [ "$twoj_apm" = "$wersja_apm" ]  ; then
+if [ "$twoj_apm" = "$wersja_apm" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ] ; then
 	apm="$TEXT_UPDATE4"
 	a3="FALSE"
 else
 	apm="$TEXT_UPDATE5 $wersja_apm"
 	a3="TRUE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
 fi
 
 #kernele stable
@@ -164,6 +158,7 @@ fi
 if [ "$(cat kernel.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 else
 	#if [ "$kern1" = "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
@@ -172,6 +167,7 @@ else
 	else
 		kern="$TEXT_UPDATE5  v$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 		a4="TRUE"
+		dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 	fi
 	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ] && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 		kern="$TEXT_UPDATE9"
@@ -179,57 +175,70 @@ else
 	fi
 fi
 
-if [ "$(echo $a1$a2$a3$a4$a7 | grep 'TRUE')" != "" ];then
-	menu="$TEXT_UPDATE8!$TEXT_UPDATE2"
+#GCC
+twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
+dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+if [ "$twoj_gcc" = "$dostepny_gcc" ];then
+	gcc_text="$twoj_gcc"
+	a7="FALSE"
 else
-	menu="$TEXT_UPDATE2!$TEXT_UPDATE8"
-fi
-
-a=$(yad --center --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
---field="Firmware/microcode:RO" "$firm" \
---field="Kernel $twoj_kernel:RO" "$kern" \
---field="APM $twoj_apm:RO" "$apm" \
---field="$TEXT_STABLE:RO" "$stable" \
---field="gcc -version:RO" "$(gcc --version | head -n 1)" \
---field="$TEXT_UPDATE1:CB" "$menu" \
---button="Changelog $nr:3" \
---button="$TEXT_UPDATE7:2" \
---button="gtk-ok:0" --button="$TEXT_POWROT:1")
-klawisz=$?; a=$(echo $a | cut -d "|" -f 6)
-
-if [ $klawisz = "0" ]; then 
-	if [ "$a" = "$TEXT_UPDATE2" ]; then
-		xterm -T  "dist-upgrade" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade'; sudo apt-get update && sudo apt-get dist-upgrade -y;echo -e \"$TEXT_INSTALACJA2\"; read ent"	
-	elif [ "$a" = "$TEXT_UPDATE8" ]; then
-		aktualizuj_calosc
-	fi
-elif [ $klawisz = "2" ]; then
-	a1="TRUE"
-	a2="TRUE"
-	a3="TRUE"
-	a4="TRUE"
+	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
 	a7="TRUE"
-	aktualizuj_calosc 
-elif [ $klawisz = "3" ]; then  #lista zmian
-    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
-	if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
-		if [ "$USER" = "root" ]; then
-			sudo -u $userek bash << EOF
-			xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
-EOF
-		else
-			xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
-		fi
-	else
-		if [ "$USER" = "root" ]; then
-			sudo -u $userek bash << EOF
-			xdg-open "https://www.kernel.org"
-EOF
-		else
-			xdg-open "https://www.kernel.org"
-		fi
-	fi
-    fi
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
 fi
 
+if [ "$1" != "start" ]; then
+	if [ "$(echo $a1$a2$a3$a4$a7 | grep 'TRUE')" != "" ];then
+		menu="$TEXT_UPDATE8!$TEXT_UPDATE2"
+	else
+		menu="$TEXT_UPDATE2!$TEXT_UPDATE8"
+	fi
+
+	a=$(yad --center --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
+	--field="Firmware/microcode:RO" "$firm" \
+	--field="Kernel $twoj_kernel:RO" "$kern" \
+	--field="APM $twoj_apm:RO" "$apm" \
+	--field="$TEXT_STABLE:RO" "$stable" \
+	--field="gcc -version:RO" "$(gcc --version | head -n 1)" \
+	--field="$TEXT_UPDATE1:CB" "$menu" \
+	--button="Changelog $nr:3" \
+	--button="$TEXT_UPDATE7:2" \
+	--button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; a=$(echo $a | cut -d "|" -f 6)
+
+	if [ $klawisz = "0" ]; then 
+		if [ "$a" = "$TEXT_UPDATE2" ]; then
+			xterm -T  "dist-upgrade" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade'; sudo apt-get update && sudo apt-get dist-upgrade -y;echo -e \"$TEXT_INSTALACJA2\"; read ent"	
+		elif [ "$a" = "$TEXT_UPDATE8" ]; then
+			aktualizuj_calosc
+		fi
+	elif [ $klawisz = "2" ]; then
+		a1="TRUE"
+		a2="TRUE"
+		a3="TRUE"
+		a4="TRUE"
+		a7="TRUE"
+		aktualizuj_calosc 
+	elif [ $klawisz = "3" ]; then  #lista zmian
+	    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
+		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
+			if [ "$USER" = "root" ]; then
+				sudo -u $userek bash << EOF
+				xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
+EOF
+			else
+				xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
+			fi
+		else
+			if [ "$USER" = "root" ]; then
+				sudo -u $userek bash << EOF
+				xdg-open "https://www.kernel.org"
+EOF
+			else
+				xdg-open "https://www.kernel.org"
+			fi
+		fi
+	    fi
+	fi
+fi
 usun

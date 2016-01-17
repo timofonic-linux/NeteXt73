@@ -3,6 +3,7 @@
 
 v0.9.76
 -	zmiana sposobu sprawdzania aktualizacji
+-	czyszczenie kodu
 v0.9.75
 -	dymki informujące o możliwych aktualizacjach
 -	dodanie dymku dla kerneli
@@ -41,7 +42,7 @@ v0.9.63
 v0.9.62
 -	kubutnu backport for Wily
 v0.9.61
--	dodane dymki informujące o możliwości akutalizjacji APM i firmware
+-	dodane dymki informujące o możliwości akutulizjacji APM i firmware
 -	dodane nowe pakiety firmware
 v0.9.60
 -	dociąganie zależności spotify

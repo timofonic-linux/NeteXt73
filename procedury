@@ -1505,3 +1505,70 @@ elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/g++-\$wersja /usr/bin/g++"
 fi
 }
+
+
+sumy(){
+#pobranie sum kontrolnych i sprawdzanie połączenia z netem
+cd /tmp
+
+wget $adres_sum_kontrolnych  -q # 2>&1 | pobieranie
+openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
+rm sumy_kontrolne.txt -f
+if [ "$(cat $sumy_kontrolne)" = "" ]; then
+	yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+	exit 1
+fi
+if [ "$(curl $adres_sum_kontrolnych2 2>&1 | grep OK)" = '' ]; then
+	yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+	exit 1
+fi
+}
+
+#ostrzeżenie o konfliktach
+zaleznosci(){
+cd /tmp/netext73
+plik=""
+for i in $(echo tlp acpi-call laptop-mode-tools ulatelcy ulatencyd cpufrequtils);do
+if [ "$(dpkg -l | awk '{print $2}' | grep $i -x)" != "" ];then
+	export plik="$plik $i"
+fi
+done
+if [ "$plik" != "" ]; then
+	if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
+		naglowek > instaluj.sh
+		echo "sudo apt-get purge $plik" >> instaluj.sh
+		instalacja
+	fi
+fi
+
+#naprawa Gtk-WARNING **: Theme file for default has no directories
+if [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
+	sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0
+fi
+
+#odpalanie strony domowej 
+if [ ! -e ~/.netext73/strona_domowa ]; then
+	xdg-open "http://www.netext73.pl/p/netext73-poczatek.html"
+	echo "TRUE" > ~/.netext73/strona_domowa
+fi
+#życzenia świąteczne
+DATA=$(date +"%m-%d")
+if [ "$DATA" = "12-24" ] || [ "$DATA" = "12-25" ] || [ "$DATA" = "12-26" ]; then
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n\n\n\n\nZespół NeteXt'73 życzy\n<span color=\"$kolor_textu\"><b>Wesołych Świąt Bożego Narodzenia!</b></span>\n\n\nNeteXt'73 team\n<span color=\"$kolor_textu\"><b>wishes Merry Christmas!</b></span>" --window-icon="/opt/NeteXt73/ikony/tux_santa.png" --image="/opt/NeteXt73/ikony/tux_santa.png" --button="gtk-ok:0" --on-top
+fi
+#życzenia noworoczne
+if [ "$DATA" = "12-31" ]; then
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n<span color=\"$kolor_textu\"><b>Happy New Year !!</b></span>\n\n\nNeteXt'73 team wishes Happy New Year $(( $(date +"%Y")+1 ))\n\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku $(( $(date +"%Y")+1 ))" --window-icon="/opt/NeteXt73/ikony/happyny.png" --image="/opt/NeteXt73/ikony/happyny.png" --button="gtk-ok:0" --on-top
+fi
+if [ "$DATA" = "01-01" ]; then
+	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n<span color=\"$kolor_textu\"><b>Happy New Year !!</b></span>\n\n\nNeteXt'73 team wishes Happy New Year $(( $(date +"%Y") ))\n\nZespół NeteXt'73 życzy Szczęśliwego Nowego Roku $(( $(date +"%Y") ))" --window-icon="/opt/NeteXt73/ikony/happyny.png" --image="/opt/NeteXt73/ikony/happyny.png" --button="gtk-ok:0" --on-top
+fi
+
+#sprawdzanie wersji systemu
+if [ "$(echo $WERSJA_UBUNTU | grep -i trusty)" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i wily)" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i vivid)" != "" ] ; then
+      echo 'ok' > /dev/null
+else
+      dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
+fi
+}
+
