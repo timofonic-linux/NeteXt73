@@ -50,7 +50,7 @@ if [ ! -e ~/.netext73/logi ]; then
 fi
 
 #teksty w języku polskim
-if [ -e ~/.netext73/jezyk ] && [ "$(cat ~/.netext73/jezyk)" = "niemiecki" ] || [ "$(cat ~/.netext73/jezyk)" = "francuski" ]; then
+if [ -e ~/.netext73/jezyk ] && [ "$(cat ~/.netext73/jezyk | grep -e "niemiecki" -e "francuski")" != "" ]; then
 	export jezyk="angielski"
 	echo 'angielski' >  ~/.netext73/jezyk
 fi
@@ -91,7 +91,7 @@ export warning1="dialog-warning"
 
 export adres_opisu="http://www.netext73.pl/search/label/opis_netext73"
 
-export wersje_ubu="wily!vivid!trusty!unstable"
+export wersje_ubu="wily!trusty!unstable"
 
 #wsparcie mint
 export WERSJA_UBUNTU="$(lsb_release -cs)"
@@ -127,8 +127,6 @@ else
 	exit 1
 fi
 
-
-#if [ "$(lsb_release -a | grep 14.04)" = "" ] || [ "$(lsb_release -a | grep trusty)" = "" ]; then
 if [ "$(echo $WERSJA_UBUNTU | grep -i trusty)" = "" ]; then
 	export apmik="nowy"
 	export katalog_apm="/etc/apm-ext73/advanced_power_management_by_ext73_*"
@@ -198,7 +196,7 @@ if [ "$kern" = "$TEXT_MENU_INSTALATOR5" ];then
 		yad_wget $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep "all" | grep "linux-headers" | grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-headers"| grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image"| grep -v -E "latency")
 	fi
 else
-#pobieranie kerneli e X t 7 3
+	#pobieranie kerneli e X t 7 3
 	#nazwy paczek dla v30.x
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
 	yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki
@@ -227,18 +225,14 @@ echo "echo \"$TEXT_PROCEDURA_1\""
 echo "sudo sed -i 's+^start on mounted MOUNTPOINT=/proc TYPE=proc+start on mounted MOUNTPOINT=/var+' /etc/init/mounted-proc.conf"
 echo "sudo sed -i 's+^start on starting mountall+start on mounted MOUNTPOINT=/var+' /etc/init/ureadahead.conf"
 echo "/usr/bin/yes | sudo dpkg -i linux-headers* linux-image*"
-#echo "sudo update-initramfs -u -k \$(ls linux-head* | sed 's/linux-headers-//g' | sed 's/_.*//g')"
 echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
-#echo "sudo apt-get install bcmwl-kernel-source -y"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep bcmwl-kernel-source)"
-#echo "sudo dpkg -i /opt/NeteXt73/APM/bcmwl-kernel-source_6.30.223.248+bdcom-netext73-build-v1_amd64.deb"
 echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 }
-
 
 usun_lpt(){
 #wyłączenie LPT dla premium
@@ -284,7 +278,6 @@ if [ "$twoj_firmware" = "$dostepny_firmware" ]; then
 else
 	stan_microcode="-"
 fi
-
 }
 
 microcode_firmware(){
@@ -304,7 +297,6 @@ instalacja
 
 microcode_inst(){
 echo "echo \"$TEXT_PROCEDURA_2\""
-#echo "sudo apt-get install linux-firmware --reinstall"
 echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
 echo "sudo apt-get install linux-firmware-nonfree -y"
 echo "fi"
@@ -313,7 +305,6 @@ echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then"
 echo "sudo apt-get install intel-microcode -y"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"
-
 echo "else"
 echo "sudo apt-get install amd64-microcode -y"
 echo "fi"
@@ -324,11 +315,9 @@ echo "echo \"$TEXT_PROCEDURA_3\""
 echo "/usr/bin/yes | sudo dpkg -r linux-firmware-nonfree"
 echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then sudo apt-get purge intel-microcode -y; fi"
 echo "sudo rm /lib/firmware/* -rf"
-#echo "sudo apt-get autoremove -y"
 }
 
 apm_inst(){
-#echo "echo \"$TEXT_PROCEDURA_6\""
 sudo rm -fr /etc/pm/power.d/* /usr/lib/pm-utils/power.d/readahead
 sudo chmod a-x /usr/lib/pm-utils/power.d/*
 sudo chmod a-x /etc/apm/event.d/20hdparm
@@ -449,7 +438,6 @@ if [ "$vsync_on" = "FALSE" ]; then
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
 fi
-
 }
 
 apm_zmiana(){
@@ -552,14 +540,6 @@ fi
 }
 
 apm_zmiana_config(){
-#if [ "$apmik" = "stary" ]; then
-#	sudo chmod a-x /etc/pm/power.d/*
-#	sudo chmod a+x /etc/pm/power.d/$2
-#	sudo chown root:root /etc/pm/power.d/*
-#elif [ "$apmik" = "nowy" ]; then
-#	sudo sed -i "s/advanced_power_management_by_ext73_* /$1/g" /etc/udev/rules.d/50-udev-apm-ext73.rules
-#	sudo udevadm control --reload-rules
-#fi
 if [ "$(grep wifi_batt_fix ~/.netext73/apm_status | cut -d ' ' -f 2)" = "FALSE" ];then
 	sudo sed -i 's/echo auto > \$ii/echo on > \$ii/g' $katalog_apm
 else
@@ -828,7 +808,6 @@ echo "sudo sed -i '/apm_status_fix/d' /etc/rc.local"
 echo "if [ -e /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then"
 echo "sudo rm -f /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla"
 echo "fi"
-#echo "rm -f ~/.netext73/apm_status"
 }
 
 usun_kernel(){
@@ -836,7 +815,6 @@ echo "echo \"$TEXT_KERNEL1\""
 echo "echo \"$(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' )\""
 echo "sudo apt-get purge -y $(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' | tr '\n' ' ')"
 echo "sudo update-grub"
-#echo "if [ \"$(dpkg -l | grep '^rc' | awk '{print $2}' | head -n1)\" != \"\" ]; then sudo dpkg -l | grep '^rc' | awk '{print \$2}' | xargs sudo dpkg --purge; fi"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
 
@@ -1002,18 +980,18 @@ naglowek > /tmp/netext73/instaluj.sh
 grub >> /tmp/netext73/instaluj.sh
 instalacja2
 if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
-      dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_GRUB2 $sciezka/grub. $TEXT_WYMAGANY_RESTART"
+	dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_GRUB2 $sciezka/grub. $TEXT_WYMAGANY_RESTART"
 else
-      dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB3"
+	dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_GRUB3"
 fi
 }
 
 wywal_pobrane_pliki_kernela(){
 if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
-    yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
-    rm -rf $PWD
+	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
+	rm -rf $PWD
 elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
-    dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_INFO2<br>/tmp/netext73/$a"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_INFO2<br>/tmp/netext73/$a"
 fi
 }
 
@@ -1033,16 +1011,6 @@ echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "sudo apt-get install -f"
 echo "rm *.deb -f"
-#echo "DRIVER=/usr/lib/fglrx/xorg/modules/drivers/fglrx_drv.so"
-#echo "for x in \$(objdump -d \$DRIVER|awk '/call/&&/EnableLogo/{print \"\\\x\"\$2\"\\\x\"\$3\"\\\x\"\$4\"\\\x\"\$5\"\\\x\"\$6}'); do"
-#echo "sudo sed -i \"s/\$x/\\x90\\x90\\x90\\x90\\x90/g\" \$DRIVER"
-#echo "done"
-#echo "if [ -e /usr/X11R6/lib64/modules/dri ]; then"
-#echo "echo 'ok' > /dev/null"
-#echo "else"
-#echo "sudo mkdir -p /usr/X11R6/lib64/modules/"
-#echo "sudo ln -s /usr/lib/dri/ /usr/X11R6/lib64/modules/"
-#echo "fi"
 }
 
 
@@ -1104,7 +1072,6 @@ echo "sudo sed -i \"s/nvidia-updates-.../nvidia-\$wersja_sterownika/g\" /etc/bum
 echo "fi"
 echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')/g\" /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
-
 }
 
 nvidia_stopka(){
@@ -1140,8 +1107,8 @@ echo "fi"
 echo "fi"
 echo "fi"
 echo "sudo update-grub"
-
 }
+
 restart(){
 echo "tete"
 yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
@@ -1181,91 +1148,89 @@ echo "echo -e \"$a4\\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/ne
 }
 
 stan_baterii(){
-
 info_o_baterii=$(cat /sys/class/power_supply/BAT*/uevent )
 Stan_baterii="Battery status"; licznik=1
 
 for a in "POWER_SUPPLY_NAME" "POWER_SUPPLY_STATUS" "POWER_SUPPLY_TECHNOLOGY" "POWER_SUPPLY_MODEL_NAME" "POWER_SUPPLY_MANUFACTURER" "POWER_SUPPLY_SERIAL_NUMBER" "POWER_SUPPLY_VOLTAGE_MIN_DESIGN" "POWER_SUPPLY_VOLTAGE_NOW" "POWER_SUPPLY_CAPACITY"; do
-      if [ "$(grep pol ~/.netext73/jezyk)" = "" ]; then
-	  bar[$licznik]="$(echo $info_o_baterii | tr ' ' '\n' | grep $a | cut -d '=' -f 1)"
-	  bar[10]="POWER_SUPPLY_FULL_CAPACITY"
-      fi
-      stan[$licznik]="$(echo $info_o_baterii | tr ' ' '\n' | grep $a | cut -d '=' -f 2)"
-      ((licznik++))
+	if [ "$(grep pol ~/.netext73/jezyk)" = "" ]; then
+		bar[$licznik]="$(echo $info_o_baterii | tr ' ' '\n' | grep $a | cut -d '=' -f 1)"
+		bar[10]="POWER_SUPPLY_FULL_CAPACITY"
+	fi
+	stan[$licznik]="$(echo $info_o_baterii | tr ' ' '\n' | grep $a | cut -d '=' -f 2)"
+	((licznik++))
 done
 
 #pojemność
 if [ "$(echo $info_o_baterii | grep POWER_SUPPLY_CHARGE_FULL_DESIGN)" != "" ]; then
-    bateria_full="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL= | cut -d '=' -f 2)/1000" | bc -q)"
-    bateria_teraz="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_NOW= | cut -d '=' -f 2)/1000" | bc -q)"
-    jednostka="mAh"
+	bateria_full="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL= | cut -d '=' -f 2)/1000" | bc -q)"
+	bateria_teraz="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_NOW= | cut -d '=' -f 2)/1000" | bc -q)"
+	jednostka="mAh"
 else
-    bateria_full="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL= | cut -d '=' -f 2)/1000000" | bc -q)"
-    bateria_teraz="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_NOW= | cut -d '=' -f 2)/1000000" | bc -q)"
-    jednostka="Wh"
+	bateria_full="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL= | cut -d '=' -f 2)/1000000" | bc -q)"
+	bateria_teraz="$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_NOW= | cut -d '=' -f 2)/1000000" | bc -q)"
+	jednostka="Wh"
 fi
 #zmiana języka
 #jezyczek
 if [ "$(grep pol ~/.netext73/jezyk)" != "" ]; then
-      Stan_baterii="Stan baterii"
-      bar[1]="Nazwa baterii"
-      bar[2]="Tryb pracy baterii"
-      bar[3]="Rodzaj baterii"
-      bar[4]="Model baterii"
-      bar[5]="Producent baterii"
-      bar[6]="Nr seryjny baterii"
-      bar[7]="Konstrukcyjne napięcie baterii"
-      bar[8]="Aktualne napięcie baterii"
-      bar[9]="Aktualna pojemność baterii"
-      bar[10]="Maksymalny poziom naładowania baterii"
-      if [ "$(echo ${stan[2]})" = "Discharging" ];then
-	  stan[2]="Rozładowywanie"
-      elif [ "$(echo ${stan[2]})" = "Charging" ];then
-	  stan[2]="Ładowywanie"
-      elif [ "$(echo ${stan[2]})" = "Full" ];then
-	  stan[2]="Pełna"
-      else
-	  stan[2]="Nieznany"
-      fi
-      if [ "$(echo ${stan[3]})" = "Unknown" ];then
-	  stan[3]="Nieznany"
-      fi
+	Stan_baterii="Stan baterii"
+	bar[1]="Nazwa baterii"
+	bar[2]="Tryb pracy baterii"
+	bar[3]="Rodzaj baterii"
+	bar[4]="Model baterii"
+	bar[5]="Producent baterii"
+	bar[6]="Nr seryjny baterii"
+	bar[7]="Konstrukcyjne napięcie baterii"
+	bar[8]="Aktualne napięcie baterii"
+	bar[9]="Aktualna pojemność baterii"
+	bar[10]="Maksymalny poziom naładowania baterii"
+	if [ "$(echo ${stan[2]})" = "Discharging" ];then
+		stan[2]="Rozładowywanie"
+	elif [ "$(echo ${stan[2]})" = "Charging" ];then
+		stan[2]="Ładowywanie"
+	elif [ "$(echo ${stan[2]})" = "Full" ];then
+		stan[2]="Pełna"
+	else
+		stan[2]="Nieznany"
+	fi
+	if [ "$(echo ${stan[3]})" = "Unknown" ];then
+		stan[3]="Nieznany"
+	fi
 fi
 #przeliczanie napięcia na V
 stan[7]=$(echo "scale=2; ${stan[7]}/1000000" | bc -q)
 stan[8]=$(echo "scale=2; ${stan[8]}/1000000" | bc -q)
 
 if [ "$(echo $info_o_baterii | grep POWER_SUPPLY_ENERGY_FULL_DESIGN)" != "" ]; then
-    poj_produkcyjna=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL_DESIGN= | cut -d '=' -f 2)/10000" | bc -q)
-    poj_teraz=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL= | cut -d '=' -f 2)/10000" | bc -q)
-    if [ "$poj_produkcyjna" != "0" ] || [ "$poj_produkcyjna" != "" ]; then
-	
-	  stan[10]=$(echo "scale=0; 100*$poj_teraz/$poj_produkcyjna" | bc -q)
-	  stan[9]=$(echo "scale=0; 100*$bateria_teraz/$bateria_full" | bc -q)
-    else
-	  stan[10]=0
-	  stan[9]=0
-    fi
+	poj_produkcyjna=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL_DESIGN= | cut -d '=' -f 2)/10000" | bc -q)
+	poj_teraz=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_ENERGY_FULL= | cut -d '=' -f 2)/10000" | bc -q)
+	if [ "$poj_produkcyjna" != "0" ] || [ "$poj_produkcyjna" != "" ]; then
+		stan[10]=$(echo "scale=0; 100*$poj_teraz/$poj_produkcyjna" | bc -q)
+		stan[9]=$(echo "scale=0; 100*$bateria_teraz/$bateria_full" | bc -q)
+	else
+		stan[10]=0
+		stan[9]=0
+	fi
 else
-    poj_produkcyjna=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL_DESIGN= | cut -d '=' -f 2)/10000" | bc -q)
-    poj_teraz=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL= | cut -d '=' -f 2)/10000" | bc -q)
-    if [ "$poj_produkcyjna" != "0" ] || [ "$poj_produkcyjna" != "" ]; then
-	  stan[10]=$(echo "scale=0; 100*$poj_teraz/$poj_produkcyjna" | bc -q)
-	  stan[9]=$(echo "scale=0; 100*$bateria_teraz/$bateria_full" | bc -q)
-    else
-	  stan[10]=0
-	  stan[9]=0
-    fi
+	poj_produkcyjna=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL_DESIGN= | cut -d '=' -f 2)/10000" | bc -q)
+	poj_teraz=$(echo "scale=0; $(echo $info_o_baterii | tr ' ' '\n' | grep POWER_SUPPLY_CHARGE_FULL= | cut -d '=' -f 2)/10000" | bc -q)
+	if [ "$poj_produkcyjna" != "0" ] || [ "$poj_produkcyjna" != "" ]; then
+		stan[10]=$(echo "scale=0; 100*$poj_teraz/$poj_produkcyjna" | bc -q)
+		stan[9]=$(echo "scale=0; 100*$bateria_teraz/$bateria_full" | bc -q)
+	else
+		stan[10]=0
+		stan[9]=0
+	fi
 fi
 for i in $(seq 1 2); do
-for a in $(seq 1 $(($licznik-3))); do
-echo "$a:#${stan[$a]}"
-done
+	for a in $(seq 1 $(($licznik-3))); do
+		echo "$a:#${stan[$a]}"
+	done
 
-echo "7:#${stan[7]} V"; echo "7:${stan[7]}" # V baterii
-echo "8:#${stan[8]} V"; echo "8:${stan[8]}" # V baterii
-echo "9:#${stan[9]} %      $bateria_teraz $jednostka"; echo "9:${stan[9]}" # % baterii
-echo "10:#${stan[10]} %        $bateria_full $jednostka"; echo "10:${stan[10]}" # % baterii
+	echo "7:#${stan[7]} V"; echo "7:${stan[7]}" # V baterii
+	echo "8:#${stan[8]} V"; echo "8:${stan[8]}" # V baterii
+	echo "9:#${stan[9]} %      $bateria_teraz $jednostka"; echo "9:${stan[9]}" # % baterii
+	echo "10:#${stan[10]} %        $bateria_full $jednostka"; echo "10:${stan[10]}" # % baterii
 
 done | yad --center --multi-progress  --title=" $nazwa_skryptu" --bar="$(echo ${bar[1]})" --bar="$(echo ${bar[2]})" --bar="$(echo ${bar[3]})" --bar="$(echo ${bar[4]})" --bar="$(echo ${bar[5]})" --bar="$(echo ${bar[6]})" --bar="$(echo ${bar[7]})" --bar="$(echo ${bar[8]})" --bar="$(echo ${bar[9]})"  --bar="$(echo ${bar[10]})" --auto-kill --window-icon="/opt/NeteXt73/ikony/apm.png" --image="/opt/NeteXt73/ikony/apm.png" --text="$Stan_baterii:\n" --button="$TEXT_ZAMKNIJ:1"
 }
@@ -1352,43 +1317,42 @@ USAGE="$0 <space-delimited URLs>"
 
 # Usage checks
 
-if [[ -z "$URILIST" ]]
-  then
-      echo "Error: No arguments provided"
-      echo "Usage: $USAGE"
-      exit 1
+if [[ -z "$URILIST" ]];then
+	echo "Error: No arguments provided"
+	echo "Usage: $USAGE"
+	exit 1
 fi
 
 download(){
-    if [ "$(echo $1 | grep premium)" != "" ]; then  #jeżeli konto premium to logujemy się na hasło
-	  wget --user=$US1 --password=$PASS1 "$1" 2>&1 | sed -u \
-	  "s/.* \([0-9]\+%\)\ \+\([0-9,.]\+.\) \(.*\)/$2:\1\n$2:#  \2\/s,  \3/"
-	  RET_WGET="${PIPESTATUS[0]}"             # get return code of wget
-	  if [[ "$RET_WGET" = 0 ]]                # check return code for errors
-	    then
+if [ "$(echo $1 | grep premium)" != "" ]; then  #jeżeli konto premium to logujemy się na hasło
+	wget --user=$US1 --password=$PASS1 "$1" 2>&1 | sed -u \
+	"s/.* \([0-9]\+%\)\ \+\([0-9,.]\+.\) \(.*\)/$2:\1\n$2:#  \2\/s,  \3/"
+	RET_WGET="${PIPESTATUS[0]}"             # get return code of wget
+	if [[ "$RET_WGET" = 0 ]]                # check return code for errors
+	then
 		echo "$2:100%"
 		echo "$2:#$TEXT_POBIERANIE_GOTOWE"
-	    else
+	else
 		echo "$2:#$TEXT_BLAD_POBIERANIA"
-	  fi
-    else
-	  wget  "$1" 2>&1 | sed -u \
-	  "s/.* \([0-9]\+%\)\ \+\([0-9,.]\+.\) \(.*\)/$2:\1\n$2:#  \2\/s,  \3/"
-	  RET_WGET="${PIPESTATUS[0]}"             # get return code of wget
-	  if [[ "$RET_WGET" = 0 ]]                # check return code for errors
-	    then
+	fi
+	else
+	wget  "$1" 2>&1 | sed -u \
+	"s/.* \([0-9]\+%\)\ \+\([0-9,.]\+.\) \(.*\)/$2:\1\n$2:#  \2\/s,  \3/"
+	RET_WGET="${PIPESTATUS[0]}"             # get return code of wget
+	if [[ "$RET_WGET" = 0 ]]                # check return code for errors
+	then
 		echo "$2:100%"
 		echo "$2:#$TEXT_POBIERANIE_GOTOWE"
-	    else
+	else
 		echo "$2:#$TEXT_BLAD_POBIERANIA"
-	  fi
-    fi
+	fi
+fi
 }
 
 # compose list of bars for yad
 for URI in $URILIST; do                     # iterate through all URIs
-    FILENAME="${URI##*/}"                   # extract last field of URI as filename
-    YADBARS="$YADBARS --bar=$(echo $FILENAME | sed "s/1.txt/$TEXT_SUMY_KONTROLNE/"):NORM" # add filename to the list of URIs
+	FILENAME="${URI##*/}"                   # extract last field of URI as filename
+	YADBARS="$YADBARS --bar=$(echo $FILENAME | sed "s/1.txt/$TEXT_SUMY_KONTROLNE/"):NORM" # add filename to the list of URIs
 done
 
 IFS=" "
@@ -1401,15 +1365,15 @@ DYNAMIC_COUNTER="1"
 # source: http://pastebin.com/yBL2wjaY
 
 for URI in $URILIST; do
-    if [[ "$DYNAMIC_COUNTER" = "$MAXDLS" ]] # only download n files at a time
-      then
-          download "$URI" "$COUNTER"        # if limit reached wait until wget complete
-          DYNAMIC_COUNTER="1"               # before proceeding (by not sending download() to bg)
-      else
-          download "$URI" "$COUNTER" &      # pass URI and URI number to download()
-          DYNAMIC_COUNTER="$[$DYNAMIC_COUNTER+1]"
-    fi
-    COUNTER="$[$COUNTER+1]"                 # increment counter
+	if [[ "$DYNAMIC_COUNTER" = "$MAXDLS" ]] # only download n files at a time
+	then
+		 download "$URI" "$COUNTER"        # if limit reached wait until wget complete
+		  DYNAMIC_COUNTER="1"               # before proceeding (by not sending download() to bg)
+	else
+		  download "$URI" "$COUNTER" &      # pass URI and URI number to download()
+		  DYNAMIC_COUNTER="$[$DYNAMIC_COUNTER+1]"
+	fi
+	COUNTER="$[$COUNTER+1]"                 # increment counter
 done | yad --center --multi-progress --auto-kill --auto-close --width=$((700*$skala)) $YADBARS --title "$nazwa_skryptu" \
 --text "<b>$TEXT_POB2</b>" --window-icon="/opt/NeteXt73/ikony/download.png" --image="/opt/NeteXt73/ikony/download.png" --button="$TEXT_ZAMKNIJ:1"
 # ↑ launch yad multi progress-bar window 
@@ -1418,42 +1382,42 @@ done | yad --center --multi-progress --auto-kill --auto-close --width=$((700*$sk
 procesor_monitor(){
 barek="--bar=total --bar="used-buffers-cached" --bar="free+buffers+cached" --bar=reserver --bar="total-reserved" --bar=shared --bar=buffers --bar=cached --bar=swap"
 for i in $(seq 1 $(grep 'model name' /proc/cpuinfo | wc -l )); do
-    barek="$barek --bar=$(echo "core"$i"")" 
+	barek="$barek --bar=$(echo "core"$i"")" 
 done
 petla_duza="tak"
 
 while [ "$petla_duza" = "tak" ]; do
-      echo "1:$((100*$(free -m | grep Mem | awk '{print $2}')/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "2:$(($(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "3:$(($(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "4:$(($(free -m | grep Mem | awk '{print $3}')*100/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "5:$(($(free -m | grep Mem | awk '{print $4}')*100/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "6:$((100*$(free -m | grep Mem | awk '{print $5}')/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "7:$((100*$(free -m | grep Mem | awk '{print $6}')/$(free -m | grep Mem | awk '{print $2}')))"
-      echo "8:$((100*$(free -m | grep Mem | awk '{print $7}')/$(free -m | grep Mem | awk '{print $2}')))"
-      if [ "$(free -m | grep Swap | awk '{print $4}')" = "" ] || [ "$(free -m | grep Swap | awk '{print $4}')" = "0" ]; then
-	  echo "9:0"
-	  echo "9:#0 MB"
-      else
-	  echo "9:$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}')))"
-	  echo "9:#$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}'))) MB"
-      fi
-      echo "1:#$(free -m | grep Mem | awk '{print $2}') MB"
-      echo "2:#$(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}'))) MB"
-      echo "3:#$(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}'))) MB"
-      echo "4:#$(free -m | grep Mem | awk '{print $3}') MB"
-      echo "5:#$(free -m | grep Mem | awk '{print $4}') MB"
-      echo "6:#$(free -m | grep Mem | awk '{print $5}') MB"
-      echo "7:#$(free -m | grep Mem | awk '{print $6}') MB"
-      echo "8:#$(free -m | grep Mem | awk '{print $7}') MB"
-      sleep 1
-      for i in $(seq 10 $(($(grep 'model name' /proc/cpuinfo | wc -l )+9))); do
-	  echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/60))" # * 6000MHZ/100 
-	  echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' ) MHz"
-      done 
+	echo "1:$((100*$(free -m | grep Mem | awk '{print $2}')/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "2:$(($(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "3:$(($(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "4:$(($(free -m | grep Mem | awk '{print $3}')*100/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "5:$(($(free -m | grep Mem | awk '{print $4}')*100/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "6:$((100*$(free -m | grep Mem | awk '{print $5}')/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "7:$((100*$(free -m | grep Mem | awk '{print $6}')/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "8:$((100*$(free -m | grep Mem | awk '{print $7}')/$(free -m | grep Mem | awk '{print $2}')))"
+	if [ "$(free -m | grep Swap | awk '{print $4}')" = "" ] || [ "$(free -m | grep Swap | awk '{print $4}')" = "0" ]; then
+		echo "9:0"
+		echo "9:#0 MB"
+	else
+		echo "9:$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}')))"
+		echo "9:#$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}'))) MB"
+	fi
+	echo "1:#$(free -m | grep Mem | awk '{print $2}') MB"
+	echo "2:#$(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}'))) MB"
+	echo "3:#$(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}'))) MB"
+	echo "4:#$(free -m | grep Mem | awk '{print $3}') MB"
+	echo "5:#$(free -m | grep Mem | awk '{print $4}') MB"
+	echo "6:#$(free -m | grep Mem | awk '{print $5}') MB"
+	echo "7:#$(free -m | grep Mem | awk '{print $6}') MB"
+	echo "8:#$(free -m | grep Mem | awk '{print $7}') MB"
+	sleep 1
+	for i in $(seq 10 $(($(grep 'model name' /proc/cpuinfo | wc -l )+9))); do
+		echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/60))" # * 6000MHZ/100 
+		echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' ) MHz"
+	done 
 done | yad --title "$nazwa_skryptu" --center --multi-progress $barek --text="$(cat /proc/cpuinfo | grep 'model name' | head -n 1 | sed 's/.*: //')\nFree Memory, Cpu Core Frequency:\n" --auto-kill --on-top --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --width=$((460*$skala)) --button="$TEXT_ZAMKNIJ:1"
 if [ "$?" != "" ]; then
-    petla_duza="nie"  
+	petla_duza="nie"  
 fi
 }
 
@@ -1468,13 +1432,12 @@ opusc__mala_petle(){
 }
 
 kill_yad(){
-kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
+	kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
 }
 
 
 #gcc
 sprawdz_gcc(){
-
 echo "if [ \"\$(gcc --version | head -n 1 | grep 5)\" = \"\" ]; then"
 echo "sudo apt-get update"
 echo "sudo apt-get install gcc-5 -y"
@@ -1553,7 +1516,7 @@ if [ ! -e ~/.netext73/strona_domowa ]; then
 fi
 #życzenia świąteczne
 DATA=$(date +"%m-%d")
-if [ "$DATA" = "12-24" ] || [ "$DATA" = "12-25" ] || [ "$DATA" = "12-26" ]; then
+if [ "$(echo $DATA | grep -x -e "12-24" -e "12-25" -e "12-26" ]; then
 	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n\n\n\n\nZespół NeteXt'73 życzy\n<span color=\"$kolor_textu\"><b>Wesołych Świąt Bożego Narodzenia!</b></span>\n\n\nNeteXt'73 team\n<span color=\"$kolor_textu\"><b>wishes Merry Christmas!</b></span>" --window-icon="/opt/NeteXt73/ikony/tux_santa.png" --image="/opt/NeteXt73/ikony/tux_santa.png" --button="gtk-ok:0" --on-top
 fi
 #życzenia noworoczne
@@ -1565,7 +1528,7 @@ if [ "$DATA" = "01-01" ]; then
 fi
 
 #sprawdzanie wersji systemu
-if [ "$(echo $WERSJA_UBUNTU | grep -i trusty)" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i wily)" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i vivid)" != "" ] ; then
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e trusty -e vivid -e wily)" != "" ] ; then
       echo 'ok' > /dev/null
 else
       dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
