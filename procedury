@@ -1517,7 +1517,7 @@ if [ ! -e ~/.netext73/strona_domowa ]; then
 fi
 #życzenia świąteczne
 DATA=$(date +"%m-%d")
-if [ "$(echo $DATA | grep -x -e "12-24" -e "12-25" -e "12-26" ]; then
+if [ "$(echo $DATA | grep -x -e "12-24" -e "12-25" -e "12-26")" != "" ]; then
 	yad --center --info --title="$nazwa_skryptu   "  --text="\n\n\n\n\n\n\nZespół NeteXt'73 życzy\n<span color=\"$kolor_textu\"><b>Wesołych Świąt Bożego Narodzenia!</b></span>\n\n\nNeteXt'73 team\n<span color=\"$kolor_textu\"><b>wishes Merry Christmas!</b></span>" --window-icon="/opt/NeteXt73/ikony/tux_santa.png" --image="/opt/NeteXt73/ikony/tux_santa.png" --button="gtk-ok:0" --on-top
 fi
 #życzenia noworoczne
