@@ -1,3 +1,9 @@
+netext73 (0.9.78) stable; urgency=medium
+
+  * instalator nv 16.04
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 19 Jan 2016 20:31:59 +0100
+
 netext73 (0.9.77) stable; urgency=medium
 
   * zmiana zależności
