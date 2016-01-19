@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.77
+-	zmiana zależności usunięcie lsb_release 
 v0.9.76
 -	zmiana sposobu sprawdzania aktualizacji
 -	czyszczenie kodu

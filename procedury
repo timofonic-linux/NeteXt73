@@ -104,6 +104,7 @@ esac
 
 #adres serwera
 export adres_glowny="ftp://37.59.165.105"
+#export adres_glowny="ftp://192.168.0.6"
 export adres_sterownikow="$adres_glowny/sterowniki/"
 export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 
@@ -847,7 +848,7 @@ lista_kerneli(){
 cd /tmp/netext73
 if [ "$1" = "update" ]; then
 	if [ "$kernel_premium" = "tak" ] ; then
-		wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+		wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
 	else
 		wget $adres_glowny/kernele/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
 	fi

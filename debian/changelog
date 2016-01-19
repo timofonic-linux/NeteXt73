@@ -1,3 +1,9 @@
+netext73 (0.9.77) stable; urgency=medium
+
+  * zmiana zależności
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 19 Jan 2016 18:29:58 +0100
+
 netext73 (0.9.76) stable; urgency=medium
 
   * czyszczenie kodu
