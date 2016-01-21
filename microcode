@@ -34,8 +34,9 @@ source /opt/NeteXt73/procedury
 
 instalacja_MICROCODE(){
 	naglowek > instaluj.sh
+	microcode_firmware 	
 	microcode_inst >> instaluj.sh
-	microcode_firmware  
+	instalacja 
 }
 #########################################################################################################################################################################
 #instalator microcode i firmware

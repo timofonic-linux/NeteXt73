@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.79
+-	nowy sterownik broadcom
+-	zmiana w instalatorze firmware/microcode
 v0.9.78
 -	instalator NV dla xenial
 v0.9.77

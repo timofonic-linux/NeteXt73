@@ -1,3 +1,9 @@
+netext73 (0.9.79) stable; urgency=medium
+
+  * poprawka firmware i nowy bmc
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 21 Jan 2016 13:01:02 +0100
+
 netext73 (0.9.78) stable; urgency=medium
 
   * instalator nv 16.04
