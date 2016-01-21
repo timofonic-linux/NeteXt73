@@ -286,7 +286,7 @@ else
 fi
 }
 
-microcode_firmware(){
+microcode_firmware_nonfree(){
 #nonfree
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ]; then
       yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
@@ -300,7 +300,7 @@ else
 fi
 }
 
-microcode_inst(){
+microcode_instalacja(){
 echo "echo \"$TEXT_PROCEDURA_2\""
 echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
 echo "sudo apt-get install linux-firmware-nonfree -y"
@@ -311,10 +311,10 @@ echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then"
 echo "if [ \"\$(dpkg -l intel-microcode | grep \"ii\" | awk '{print \$1}'| head -n1)\" != \"ii\" ]; then"
 echo "sudo apt-get install intel-microcode -y"
 echo "fi"
-echo "if [ \"\$twoj_intel_microcode\" = \"\$dostepny_intel_microcode\" ]; then"
+echo "if [ \"\$twoj_intel_microcode\" != \"\$dostepny_intel_microcode\" ]; then"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"
 echo "fi"
-echo "if [ \"\$twoj_iucode\" = \"\$dostepny_iucode\" ]; then"
+echo "if [ \"\$twoj_iucode\" != \"\$dostepny_iucode\" ]; then"
 echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"
 echo "fi"
 echo "else"
@@ -322,6 +322,13 @@ echo "sudo apt-get install amd64-microcode -y"
 echo "fi"
 echo "fi"
 echo "rm -f /tmp/netext73/ok.txt"
+}
+
+instalacja_firmware(){
+microcode_firmware_nonfree
+naglowek > instaluj.sh
+microcode_instalacja >> instaluj.sh
+instalacja 
 }
 
 microcode_usun(){

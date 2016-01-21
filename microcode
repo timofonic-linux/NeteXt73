@@ -32,12 +32,7 @@
 
 source /opt/NeteXt73/procedury
 
-instalacja_MICROCODE(){
-	naglowek > instaluj.sh
-	microcode_firmware 	
-	microcode_inst >> instaluj.sh
-	instalacja 
-}
+
 #########################################################################################################################################################################
 #instalator microcode i firmware
 
@@ -48,7 +43,7 @@ stan_firmware
 if [ "$stan_microcode" != "-" ] && [ "$twoj_firmware" = "" ]; then
 	yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_MICROCODE2"
 	if [ $? = 0 ]; then
-		instalacja_MICROCODE
+		instalacja_firmware
 	fi
 fi
 
@@ -57,6 +52,6 @@ if [ "$stan_microcode" != "-" ] && [ "$twoj_firmware" != "" ]; then
 elif [ "$stan_microcode" = "-" ]; then
 	yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_MICROCODE2"
 	if [ $? = 0 ]; then
-		instalacja_MICROCODE
+		instalacja_firmware
 	fi
 fi
