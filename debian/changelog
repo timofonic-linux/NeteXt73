@@ -1,3 +1,9 @@
+netext73 (0.9.81) stable; urgency=medium
+
+  * wstępne wsparcie dla xenial
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 23 Jan 2016 11:51:39 +0100
+
 netext73 (0.9.80) stable; urgency=medium
 
   * dodany mint sarah
