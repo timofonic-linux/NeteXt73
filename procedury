@@ -259,14 +259,14 @@ echo "fi"
 }
 
 stan_firmware(){
-twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-dostepny_firmware=$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware | cut -d "_" -f 2)
+export twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
+export dostepny_firmware=$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware | cut -d "_" -f 2)
 
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-	twoj_iucode=$(dpkg -l | grep iucode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-	dostepny_iucode=$(ls /opt/NeteXt73/pakiety/ | grep iucode | cut -d "_" -f 2)
-	twoj_intel_microcode=$(dpkg -l | grep intel-microcode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-	dostepny_intel_microcode=$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode | cut -d "_" -f 2)
+	export twoj_iucode=$(dpkg -l | grep iucode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
+	export dostepny_iucode=$(ls /opt/NeteXt73/pakiety/ | grep iucode | cut -d "_" -f 2)
+	export twoj_intel_microcode=$(dpkg -l | grep intel-microcode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
+	export dostepny_intel_microcode=$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode | cut -d "_" -f 2)
 	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$twoj_iucode" = "$dostepny_iucode" ] && [ "$twoj_intel_microcode" = "$dostepny_intel_microcode" ]; then
 		stan_microcode=$TEXT_TAK
 	else
@@ -279,7 +279,7 @@ elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
 		stan_microcode="-"
 	fi
 fi
-if [ "$twoj_firmware" = "$dostepny_firmware" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ]; then
+if [ "$twoj_firmware" = "$dostepny_firmware" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
 	stan_microcode=$TEXT_TAK
 else
 	stan_microcode="-"
@@ -301,33 +301,30 @@ fi
 }
 
 microcode_instalacja(){
-echo "echo \"$TEXT_PROCEDURA_2\""
-echo "if [ \"\$(cat /tmp/netext73/ok.txt)\" = \"tak\" ]; then"
-echo "sudo apt-get install linux-firmware-nonfree -y"
-echo "fi"
-echo "if [ \"\$twoj_firmware\" != \"\$dostepny_firmware\" ]; then"
-echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware)"
-echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then"
-echo "if [ \"\$(dpkg -l intel-microcode | grep \"ii\" | awk '{print \$1}'| head -n1)\" != \"ii\" ]; then"
-echo "sudo apt-get install intel-microcode -y"
-echo "fi"
-echo "if [ \"\$twoj_intel_microcode\" != \"\$dostepny_intel_microcode\" ]; then"
-echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"
-echo "fi"
-echo "if [ \"\$twoj_iucode\" != \"\$dostepny_iucode\" ]; then"
-echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"
-echo "fi"
-echo "else"
-echo "sudo apt-get install amd64-microcode -y"
-echo "fi"
-echo "fi"
-echo "rm -f /tmp/netext73/ok.txt"
+echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
+if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
+	echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
+fi
+if [ "$twoj_firmware" != "$dostepny_firmware" ]; then
+	echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware)"  >> instaluj.sh
+fi
+if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
+	if [ "$twoj_intel_microcode" != "$dostepny_intel_microcode" ]; then
+		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"  >> instaluj.sh
+	fi
+	if [ "$twoj_iucode" != "$dostepny_iucode" ]; then
+		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"  >> instaluj.sh
+	fi
+else
+	echo "sudo apt-get install amd64-microcode -y"  >> instaluj.sh
+fi
+echo "rm -f /tmp/netext73/ok.txt"  >> instaluj.sh
 }
 
 instalacja_firmware(){
 microcode_firmware_nonfree
 naglowek > instaluj.sh
-microcode_instalacja >> instaluj.sh
+microcode_instalacja
 instalacja 
 }
 

@@ -1,3 +1,9 @@
+netext73 (0.9.82) stable; urgency=medium
+
+  * poprawka instalatora intel-microcode
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 26 Jan 2016 22:33:49 +0100
+
 netext73 (0.9.81) stable; urgency=medium
 
   * wstępne wsparcie dla xenial
