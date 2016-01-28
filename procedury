@@ -1561,3 +1561,6 @@ else
 fi
 }
 
+pastebinit_netext73(){
+curl -d title=$1 -d private=0 -d name=$(cat /tmp/netext73/userek) --data-urlencode text@- http://37.59.165.105/htdocs/api/create
+}

@@ -1,3 +1,9 @@
+netext73 (0.9.84) stable; urgency=medium
+
+  * wysyłka logów na serwer NeteXt73
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 16:20:41 +0100
+
 netext73 (0.9.83) stable; urgency=medium
 
   * zmiana linkowania gcc
