@@ -114,9 +114,14 @@ yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFI
 klawisz=$?
 if [ "$klawisz" = 0 ]; then 
 	if [ "$(grep "$TEXT_TAK" $res1)" != "" ]; then
-		#rm ~/.netext73/* -f
+		rm ~/.netext73/* -f
 		yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_CONFIG8" --timeout=5
 	else
+		#kasowanie śmieci
+		sed -i '/.*yad.*/ d' $res1
+		sed -i '/^[ \t]*$/ d' $res1
+		sed -i '/.*yad.*/ d' $res2
+		sed -i '/^[ \t]*$/ d' $res2
 		if [ "$(cat $res1 | grep '@' | cut -d "|" -f 2)" != "" ];then
 			cat $res1 | grep '@' | cut -d "|" -f 2 > ~/.netext73/kernel_premium
 		fi
@@ -140,9 +145,11 @@ if [ "$klawisz" = 0 ]; then
 			rm -f *.txt
 		fi
 		#kasowanie śmieci w configach
-		for i in $(echo jezyk kernel_automat archiwum_deb root_mode kernel_premium kolor_textu); do
-			sed -i '/.*yad.*/ d' ~/.netext73/$i
-			sed -i '/^[ \t]*$/ d' ~/.netext73/$i
+		for i in $(echo apm_status HiDPI kernel_premium root_mode archiwum_deb instalator_kerneli kolor_textu soft wysylkalogow jezyk strona_domowa kernel_automat monitor); do
+			if [ -e ~/.netext73/$i ]; then
+				sed -i '/.*yad.*/ d' ~/.netext73/$i
+				sed -i '/^[ \t]*$/ d' ~/.netext73/$i
+			fi
 		done
 
 		if [ "$root_mode" != "$(cat ~/.netext73/root_mode)" ]; then
