@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.85
+-	ustawienie ważności czasu logów 7dni
+-	format logów bash
 v0.9.84
 -	wysyłka logów na serwer NeteXt73
 -	usunięcie pastebinit z zależności

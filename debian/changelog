@@ -1,3 +1,9 @@
+netext73 (0.9.85) stable; urgency=medium
+
+  * logi format bash czas 7dni
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 19:55:24 +0100
+
 netext73 (0.9.84) stable; urgency=medium
 
   * wysyłka logów na serwer NeteXt73
