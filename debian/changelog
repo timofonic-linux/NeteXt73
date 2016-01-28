@@ -1,3 +1,9 @@
+netext73 (0.9.83) stable; urgency=medium
+
+  * zmiana linkowania gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 09:21:09 +0100
+
 netext73 (0.9.82) stable; urgency=medium
 
   * poprawka instalatora intel-microcode
