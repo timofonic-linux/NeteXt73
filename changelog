@@ -3,6 +3,7 @@
 
 v0.9.84
 -	wysyłka logów na serwer NeteXt73
+-	usunięcie pastebinit z zależności
 v0.9.83
 -	modyfikacja skryptów przełączania gcc
 -	patch na błędy yad - config
