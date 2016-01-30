@@ -1,14 +1,19 @@
 #!/bin/bash
 #instalacja gcc
-tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/
-tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/
-ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc 
-ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar 
-ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp 
-ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++ 
-ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++
 
-ldconfig
-rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10 
-ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
+twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
+dostepny_gcc=$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+if [ "$twoj_gcc" != "$dostepny_gcc" ];then
+	tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/
+	tar -Jxf /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/
+	ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc 
+	ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar 
+	ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp 
+	ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++ 
+	ln -sf /opt/gcc-$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++
+
+	ldconfig
+	rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10 
+	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
+fi
 exit 0

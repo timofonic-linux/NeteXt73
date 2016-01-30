@@ -1,3 +1,9 @@
+netext73 (0.9.87) stable; urgency=medium
+
+  * zmiana postinst i wielkości dymku yad
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 30 Jan 2016 12:40:00 +0100
+
 netext73 (0.9.86) stable; urgency=medium
 
   * dymek - yad na root

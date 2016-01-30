@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.87
+-	zmiana wielkości dymków yad
+-	brak wymuszania reinstalacji gcc podczas startu netext gdy gcc jest ext73
 v0.9.86
 -	dymek - yad w trybie root
 v0.9.85
