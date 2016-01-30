@@ -1409,14 +1409,14 @@ done
 petla_duza="tak"
 
 while [ "$petla_duza" = "tak" ]; do
-	echo "1:$((100*$(free -m | grep Mem | awk '{print $2}')/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "2:$(($(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "3:$(($(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}')))*100/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "4:$(($(free -m | grep Mem | awk '{print $3}')*100/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "5:$(($(free -m | grep Mem | awk '{print $4}')*100/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "6:$((100*$(free -m | grep Mem | awk '{print $5}')/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "7:$((100*$(free -m | grep Mem | awk '{print $6}')/$(free -m | grep Mem | awk '{print $2}')))"
-	echo "8:$((100*$(free -m | grep Mem | awk '{print $7}')/$(free -m | grep Mem | awk '{print $2}')))"
+	echo "1:$((100*$(free -m | sed -n 2p | awk '{print $2}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "2:$(($(($(free -m | sed -n 2p | awk '{print $3}')-$(free -m | sed -n 2p | awk '{print $6}')-$(free -m | sed -n 2p | awk '{print $7}')))*100/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "3:$(($(($(free -m | sed -n 2p | awk '{print $4}')+$(free -m | sed -n 2p | awk '{print $6}')+$(free -m | sed -n 2p | awk '{print $7}')))*100/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "4:$(($(free -m | sed -n 2p | awk '{print $3}')*100/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "5:$(($(free -m | sed -n 2p | awk '{print $4}')*100/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "6:$((100*$(free -m | sed -n 2p | awk '{print $5}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "7:$((100*$(free -m | sed -n 2p | awk '{print $6}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "8:$((100*$(free -m | sed -n 2p | awk '{print $7}')/$(free -m | sed -n 2p | awk '{print $2}')))"
 	if [ "$(free -m | grep Swap | awk '{print $4}')" = "" ] || [ "$(free -m | grep Swap | awk '{print $4}')" = "0" ]; then
 		echo "9:0"
 		echo "9:#0 MB"
@@ -1424,14 +1424,14 @@ while [ "$petla_duza" = "tak" ]; do
 		echo "9:$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}')))"
 		echo "9:#$((100*$(free -m | grep Swap | awk '{print $3}')/$(free -m | grep Swap | awk '{print $4}'))) MB"
 	fi
-	echo "1:#$(free -m | grep Mem | awk '{print $2}') MB"
-	echo "2:#$(($(free -m | grep Mem | awk '{print $3}')-$(free -m | grep Mem | awk '{print $6}')-$(free -m | grep Mem | awk '{print $7}'))) MB"
-	echo "3:#$(($(free -m | grep Mem | awk '{print $4}')+$(free -m | grep Mem | awk '{print $6}')+$(free -m | grep Mem | awk '{print $7}'))) MB"
-	echo "4:#$(free -m | grep Mem | awk '{print $3}') MB"
-	echo "5:#$(free -m | grep Mem | awk '{print $4}') MB"
-	echo "6:#$(free -m | grep Mem | awk '{print $5}') MB"
-	echo "7:#$(free -m | grep Mem | awk '{print $6}') MB"
-	echo "8:#$(free -m | grep Mem | awk '{print $7}') MB"
+	echo "1:#$(free -m | sed -n 2p | awk '{print $2}') MB"
+	echo "2:#$(($(free -m | sed -n 2p | awk '{print $3}')-$(free -m | sed -n 2p | awk '{print $6}')-$(free -m | sed -n 2p | awk '{print $7}'))) MB"
+	echo "3:#$(($(free -m | sed -n 2p | awk '{print $4}')+$(free -m | sed -n 2p | awk '{print $6}')+$(free -m | sed -n 2p | awk '{print $7}'))) MB"
+	echo "4:#$(free -m | sed -n 2p | awk '{print $3}') MB"
+	echo "5:#$(free -m | sed -n 2p | awk '{print $4}') MB"
+	echo "6:#$(free -m | sed -n 2p | awk '{print $5}') MB"
+	echo "7:#$(free -m | sed -n 2p | awk '{print $6}') MB"
+	echo "8:#$(free -m | sed -n 2p | awk '{print $7}') MB"
 	sleep 1
 	for i in $(seq 10 $(($(grep 'model name' /proc/cpuinfo | wc -l )+9))); do
 		echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/60))" # * 6000MHZ/100 

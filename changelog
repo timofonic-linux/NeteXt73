@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.88
+-	naprawa monitora CPU/memory dla języków innych niż angielski
 v0.9.87
 -	zmiana wielkości dymków yad
 -	brak wymuszania reinstalacji gcc podczas startu netext gdy gcc jest ext73

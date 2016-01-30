@@ -1,3 +1,9 @@
+netext73 (0.9.88) stable; urgency=medium
+
+  * naprawa monitora CPU/memory dla języków innych niż angielski
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 30 Jan 2016 22:07:14 +0100
+
 netext73 (0.9.87) stable; urgency=medium
 
   * zmiana postinst i wielkości dymku yad
