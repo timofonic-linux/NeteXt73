@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.89
+-	dodanie nagłówków do okna monitora CPU/memory
 v0.9.88
 -	naprawa monitora CPU/memory dla języków innych niż angielski
 -	monitor cpu/mem dane na podstawie free -m
