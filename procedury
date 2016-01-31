@@ -1419,8 +1419,8 @@ while [ "$petla_duza" = "tak" ]; do
 		echo "7:0"
 		echo "7:#0 MB"
 	else
-		echo "7:$((100*$(free -m  |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}')))"
-		echo "7:#$((100*$(free -m |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}'))) "/$(free -m | tail -n 1 | awk '{print $4}')" MB"
+		echo "7:$((100*$(free -m  |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $2}')))"
+		echo "7:#$(free -m |  tail -n 1 | awk '{print $3}') /  $(free -m | tail -n 1 | awk '{print $2}') MB"
 	fi
 	echo "1:#$(free -m | sed -n 2p | awk '{print $2}') MB"
 	echo "2:#$(free -m | sed -n 2p | awk '{print $3}') MB"
