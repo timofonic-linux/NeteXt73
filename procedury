@@ -1402,7 +1402,7 @@ done | yad --center --multi-progress --auto-kill --auto-close --width=$((700*$sk
 }
 
 procesor_monitor(){
-barek="--bar=total --bar="used-buffers-cached" --bar="free+buffers+cached" --bar=reserver --bar="total-reserved" --bar=shared --bar=buffers --bar=cached --bar=swap"
+barek="--bar="$(free -m | awk '{print $1}' | head -n 1)" --bar="$(free -m | awk '{print $2}' | head -n 1)" --bar="$(free -m | awk '{print $3}' | head -n 1)" --bar="$(free -m | awk '{print $4}' | head -n 1)" --bar="$(free -m | awk '{print $5}' | head -n 1)" --bar="$(free -m | awk '{print $6}' | head -n 1)" --bar=swap"
 for i in $(seq 1 $(grep 'model name' /proc/cpuinfo | wc -l )); do
 	barek="$barek --bar=$(echo "core"$i"")" 
 done
@@ -1410,32 +1410,28 @@ petla_duza="tak"
 
 while [ "$petla_duza" = "tak" ]; do
 	echo "1:$((100*$(free -m | sed -n 2p | awk '{print $2}')/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "2:$(($(($(free -m | sed -n 2p | awk '{print $3}')-$(free -m | sed -n 2p | awk '{print $6}')-$(free -m | sed -n 2p | awk '{print $7}')))*100/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "3:$(($(($(free -m | sed -n 2p | awk '{print $4}')+$(free -m | sed -n 2p | awk '{print $6}')+$(free -m | sed -n 2p | awk '{print $7}')))*100/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "4:$(($(free -m | sed -n 2p | awk '{print $3}')*100/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "5:$(($(free -m | sed -n 2p | awk '{print $4}')*100/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "6:$((100*$(free -m | sed -n 2p | awk '{print $5}')/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "7:$((100*$(free -m | sed -n 2p | awk '{print $6}')/$(free -m | sed -n 2p | awk '{print $2}')))"
-	echo "8:$((100*$(free -m | sed -n 2p | awk '{print $7}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "2:$((100*$(free -m | sed -n 2p | awk '{print $3}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "3:$((100*$(free -m | sed -n 2p | awk '{print $4}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "4:$((100*$(free -m | sed -n 2p | awk '{print $5}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "5:$((100*$(free -m | sed -n 2p | awk '{print $6}')/$(free -m | sed -n 2p | awk '{print $2}')))"
+	echo "6:$((100*$(free -m | sed -n 2p | awk '{print $7}')/$(free -m | sed -n 2p | awk '{print $2}')))"
 	if [ "$(free -m | tail -n 1 | awk '{print $4}')" = "" ] || [ "$(free -m | tail -n 1 | awk '{print $4}')" = "0" ]; then
-		echo "9:0"
-		echo "9:#0 MB"
+		echo "7:0"
+		echo "7:#0 MB"
 	else
-		echo "9:$((100*$(free -m  |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}')))"
-		echo "9:#$((100*$(free -m |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}'))) MB"
+		echo "7:$((100*$(free -m  |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}')))"
+		echo "7:#$((100*$(free -m |  tail -n 1 | awk '{print $3}')/$(free -m | tail -n 1 | awk '{print $4}'))) "/$(free -m | tail -n 1 | awk '{print $4}')" MB"
 	fi
 	echo "1:#$(free -m | sed -n 2p | awk '{print $2}') MB"
-	echo "2:#$(($(free -m | sed -n 2p | awk '{print $3}')-$(free -m | sed -n 2p | awk '{print $6}')-$(free -m | sed -n 2p | awk '{print $7}'))) MB"
-	echo "3:#$(($(free -m | sed -n 2p | awk '{print $4}')+$(free -m | sed -n 2p | awk '{print $6}')+$(free -m | sed -n 2p | awk '{print $7}'))) MB"
-	echo "4:#$(free -m | sed -n 2p | awk '{print $3}') MB"
-	echo "5:#$(free -m | sed -n 2p | awk '{print $4}') MB"
-	echo "6:#$(free -m | sed -n 2p | awk '{print $5}') MB"
-	echo "7:#$(free -m | sed -n 2p | awk '{print $6}') MB"
-	echo "8:#$(free -m | sed -n 2p | awk '{print $7}') MB"
+	echo "2:#$(free -m | sed -n 2p | awk '{print $3}') MB"
+	echo "3:#$(free -m | sed -n 2p | awk '{print $4}') MB"
+	echo "4:#$(free -m | sed -n 2p | awk '{print $5}') MB"
+	echo "5:#$(free -m | sed -n 2p | awk '{print $6}') MB"
+	echo "6:#$(free -m | sed -n 2p | awk '{print $7}') MB"
 	sleep 1
-	for i in $(seq 10 $(($(grep 'model name' /proc/cpuinfo | wc -l )+9))); do
-		echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/60))" # * 6000MHZ/100 
-		echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' ) MHz"
+	for i in $(seq 8 $(($(grep 'model name' /proc/cpuinfo | wc -l )+7))); do
+		echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-7))'p' | sed 's/\..*//' )/60))" # * 6000MHZ/100 
+		echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-7))'p' | sed 's/\..*//' ) MHz"
 	done 
 done | yad --title "$nazwa_skryptu" --center --multi-progress $barek --text="$(cat /proc/cpuinfo | grep 'model name' | head -n 1 | sed 's/.*: //')\nFree Memory, Cpu Core Frequency:\n" --auto-kill --on-top --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --width=$((460*$skala)) --button="$TEXT_ZAMKNIJ:1"
 if [ "$?" != "" ]; then

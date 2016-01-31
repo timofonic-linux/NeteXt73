@@ -1,5 +1,11 @@
 netext73 (0.9.88) stable; urgency=medium
 
+  * monitor cpu/mem dane na podstawie free -m
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 31 Jan 2016 10:18:38 +0100
+
+netext73 (0.9.88) stable; urgency=medium
+
   * naprawa monitora CPU/memory dla języków innych niż angielski
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 30 Jan 2016 22:07:14 +0100

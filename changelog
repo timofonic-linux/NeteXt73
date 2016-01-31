@@ -3,6 +3,7 @@
 
 v0.9.88
 -	naprawa monitora CPU/memory dla języków innych niż angielski
+-	monitor cpu/mem dane na podstawie free -m
 v0.9.87
 -	zmiana wielkości dymków yad
 -	brak wymuszania reinstalacji gcc podczas startu netext gdy gcc jest ext73
