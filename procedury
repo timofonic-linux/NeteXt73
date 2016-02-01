@@ -104,7 +104,7 @@ esac
 
 #adres serwera
 export adres_glowny="ftp://37.59.165.105"
-#export adres_glowny="ftp://192.168.0.6"
+export adres_logi="http://37.59.165.105/htdocs/api/create"
 export adres_sterownikow="$adres_glowny/sterowniki/"
 export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 
@@ -1564,5 +1564,5 @@ fi
 }
 
 pastebinit_netext73(){
-curl -d title=$1 -d private=0 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- http://37.59.165.105/htdocs/api/create
+curl -d title=$1 -d private=0 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
 }

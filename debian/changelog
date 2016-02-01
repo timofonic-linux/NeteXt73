@@ -1,3 +1,9 @@
+netext73 (0.9.90) stable; urgency=medium
+
+  * wykonanie dodatkowo autoclean i autoremove gdy w katalogu konfiguracyjnym clean=TRUE
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 01 Feb 2016 08:23:29 +0100
+
 netext73 (0.9.89) stable; urgency=medium
 
   * dodanie nagłówków do okna monitora CPU/memory

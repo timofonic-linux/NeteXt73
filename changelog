@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.90
+-	wykonanie dodatkowo autoclean i autoremove gdy w katalogu konfiguracyjnym clean=TRUE
 v0.9.89
 -	dodanie nagłówków do okna monitora CPU/memory
 v0.9.88
