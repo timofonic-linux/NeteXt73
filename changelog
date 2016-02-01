@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.91
+-	binutils 2.26
 v0.9.90
 -	wykonanie dodatkowo autoclean i autoremove gdy w katalogu konfiguracyjnym clean=TRUE
 -	zmiana układu okna logów

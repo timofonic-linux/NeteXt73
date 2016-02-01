@@ -1472,6 +1472,9 @@ instaluj_gcc(){
 if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
 	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd"
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc"
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar"
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
