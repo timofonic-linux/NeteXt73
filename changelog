@@ -4,6 +4,7 @@
 v0.9.90
 -	wykonanie dodatkowo autoclean i autoremove gdy w katalogu konfiguracyjnym clean=TRUE
 -	zmiana układu okna logów
+-	drobne poprawki w oknie logów
 v0.9.89
 -	dodanie nagłówków do okna monitora CPU/memory
 v0.9.88

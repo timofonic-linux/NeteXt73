@@ -115,11 +115,18 @@ grep "GRUB_CMDLINE_LINUX=" /etc/default/grub >> system$losowa.log
 echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI10</b></span>" >> system$losowa.log
 echo "GCC - $(gcc --version | head -n 1)" >> system$losowa.log
 echo "Powertop - $(dpkg -l | grep powertop | awk '{print $3}' | head -n 1)" >> system$losowa.log
+mv system$losowa.log zakladka1.log
+
 #OpenGl
-echo -e ">OpenGL" > opengl$losowa.log
+echo -e "OpenGL" > opengl$losowa.log
 echo -e "##############################################################################################" >> opengl$losowa.log
 glxinfo | grep OpenGL | sed 's/OpenGL ext.*//g' | sed 's/OpenGL core profile extensions://g' | sed '/^[ \t]*$/ d' >> opengl$losowa.log
-mv system$losowa.log zakladka1.log
+if [ "$(lspci | grep 3D)" != "" ]; then
+	echo -e "Optimus OpenGL" >> opengl$losowa.log
+	echo -e "##############################################################################################" >> opengl$losowa.log
+	primusrun glxinfo | grep OpenGL  >> opengl$losowa.log
+fi
+
 #zakładka2
 echo -e "NeteXt73 i kernel" > system$losowa.log  
 echo -e "##############################################################################################" >> system$losowa.log
@@ -172,9 +179,6 @@ cat /etc/init/ureadahead.conf >> system$losowa.log
 echo -e "\n\nreadahead  " >> system$losowa.log
 echo -e "##############################################################################################" >> system$losowa.log
 cat /usr/lib/pm-utils/power.d/readahead >> system$losowa.log
-
-
-
 
 echo -e "microcode  " >> apmsystem$losowa.log
 echo -e "##############################################################################################" >> apmsystem$losowa.log
@@ -240,12 +244,23 @@ sed -i 's/<\/span>//g' system$losowa.log
 sed -i 's/<span.*">//g' system$losowa.log
 sed -i 's/<\/b>//g' system$losowa.log
 sed -i 's/<b>//g' system$losowa.log
-dmesg > dmesg.log
 mv system$losowa.log netext.log
 
-sudo ufw status verbose > firewall.log
+echo -e "dmesg".log > dmesg.log
+echo -e "##############################################################################################" >> dmesg.log
+dmesg >> dmesg.log
+
+echo -e "firewall.log" > firewall.log
+echo -e "##############################################################################################" >> firewall.log
+sudo ufw status verbose >> firewall.log
+
+echo -e "dmidecode.log" > dmidecode.log
+echo -e "##############################################################################################" >> dmidecode.log
 for i in $(seq 1 42); do sudo dmidecode --type $i >> dmidecode.log; done
-sudo tac /var/log/kern.log | sed -n 1,1000p > kern.log
+
+echo -e "kern.log" > kern.log
+echo -e "##############################################################################################" >> kern.log
+sudo tac /var/log/kern.log | sed -n 1,1000p >> kern.log
 
 #przygotowanie informacji o zainstalowanych plikach
 rm /tmp/netext73/sumy/pliki.txt -f
@@ -288,16 +303,18 @@ if [ -e ~/.netext73/wysylkalogow ]; then
 	s7="$(cat ~/.netext73/wysylkalogow | sed -n 7p)"
 	s8="$(cat ~/.netext73/wysylkalogow | sed -n 8p)"
 	s9="$(cat ~/.netext73/wysylkalogow | sed -n 9p)"
+	s10="$(cat ~/.netext73/wysylkalogow | sed -n 10p)"
 else
 	s1="TRUE"
 	s2="TRUE"
 	s3="TRUE"
-	s4="FALSE"
-	s5="TRUE"
-	s6="FALSE"
-	s7="FALSE"
-	s8="FALSE"
-	s9="FALSE"
+	s4="TRUE"
+	s5="FALSE"
+	s6="TRUE"
+	s7="TRUE"
+	s8="TRUE"
+	s9="TRUE"
+	s10="TRUE"
 fi
 
 KEY="$(echo $RANDOM)"
@@ -329,7 +346,7 @@ yad --plug=$KEY --tabnum=9 --text-info --filename="apmsystem$losowa.log"	&> $res
 yad --plug=$KEY --tabnum=10 --text-info --filename="lsmodsystem$losowa.log"	&> $res9 &
 yad --plug=$KEY --tabnum=11 --text-info --filename="lspcisystem$losowa.log"	&> $res10 &
 yad --plug=$KEY --tabnum=12 --text-info --filename="lsusbsystem$losowa.log"	&> $res11 &
-yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" --form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" --field="kern.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" --field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" $s1 $s2 $s3 $s4 $s5 $s6 $s7 $s8 $s9	&> $res12 &
+yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" --form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" --field="kern.log:CHK" --field="firewall.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" --field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" $s1 $s2 $s3 $s4 $s5 $s6 $s7 $s8 $s9	$s10 &> $res12 &
 yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab-pos="left" \
 --tab="main" --tab="netext" --tab="OpenGl" --tab="dmesg" --tab="kern" --tab="firewall" --tab="dmidecode" \
 --tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
@@ -410,38 +427,44 @@ elif [ "$klawisz" = "0" ]; then
 	cat $res12 | cut -d "|" -f 6 >> ~/.netext73/wysylkalogow
 	cat $res12 | cut -d "|" -f 7 >> ~/.netext73/wysylkalogow
 	cat $res12 | cut -d "|" -f 8 >> ~/.netext73/wysylkalogow
-	cat $res12 | cut -d "|" -f 8 >> ~/.netext73/wysylkalogow
+	cat $res12 | cut -d "|" -f 9 >> ~/.netext73/wysylkalogow
+	cat $res12 | cut -d "|" -f 10 >> ~/.netext73/wysylkalogow
 	      
 	export userek=$(cat /tmp/netext73/userek)
 	#sudo -u $userek bash << EOF
 	if [ -e ~/.netext73/wysylkalogow ]; then
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
-			cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
+			cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 2p)" != "FALSE" ]; then
-			cat opengl$losowa.log | pastebinit_netext73 opengl.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI opengl.log"
+			cat opengl$losowa.log | pastebinit_netext73 opengl.log && log2="opengl.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 3p)" != "FALSE" ]; then
-			cat dmesg.log | pastebinit_netext73 dmesg.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI dmesg.log"
+			cat dmesg.log | pastebinit_netext73 dmesg.log && log3="dmesg.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 4p)" != "FALSE" ]; then
-			cat kern.log | pastebinit_netext73 kern.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI kern.log "
+			cat kern.log | pastebinit_netext73 kern.log && log4="kern.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 5p)" != "FALSE" ]; then
-			cat glxinfo$losowa.log | pastebinit_netext73 glxinfo.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI glxinfo.log"
+			cat firewall.log | pastebinit_netext73 firewall.log && log5="firewall.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 6p)" != "FALSE" ]; then
-			cat apmsystem$losowa.log | pastebinit_netext73 apmsystem.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI apmsystem.log"
+			cat glxinfo$losowa.log | pastebinit_netext73 glxinfo.log && log6="glxinfo.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 7p)" != "FALSE" ]; then
-			cat lsmodsystem$losowa.log | pastebinit_netext73 lsmodsystem.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI lsmodsystem.log"
+			cat apmsystem$losowa.log | pastebinit_netext73 apmsystem.log && log7="apmsystem.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 8p)" != "FALSE" ]; then
-			cat lspcisystem$losowa.log | pastebinit_netext73 lspcisystem.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI lspcisystem.log"
+			cat lsmodsystem$losowa.log | pastebinit_netext73 lsmodsystem.log && log8="lsmodsystem.log"
 		fi
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 9p)" != "FALSE" ]; then
-			cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI lsusbsystem.log"
+			cat lspcisystem$losowa.log | pastebinit_netext73 lspcisystem.log && log9="lspcisystem.log"
 		fi
+		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
+			cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && log10="lsusbsystem.log"
+		fi
+		dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI : \n$log1\n$log2\n$log3\n$log4\n$log5\n$log6\n$log7\n$log8\n$log9\n$log10"
+		
 	else
 		cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
 	fi
