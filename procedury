@@ -104,7 +104,7 @@ esac
 
 #adres serwera
 export adres_glowny="ftp://37.59.165.105"
-export adres_logi="http://37.59.165.105/htdocs/api/create"
+export adres_logi="http://37.59.165.105/htdocs/api/create?apikey=dodawanie_wpisow"
 export adres_sterownikow="$adres_glowny/sterowniki/"
 export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 
