@@ -1,3 +1,9 @@
+netext73 (0.9.92) stable; urgency=medium
+
+  * nowe gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 02 Feb 2016 11:09:13 +0100
+
 netext73 (0.9.91) stable; urgency=medium
 
   * binutils-2.26
