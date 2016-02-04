@@ -463,7 +463,8 @@ elif [ "$klawisz" = "0" ]; then
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
 			cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && log10="lsusbsystem.log"
 		fi
-		dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI : \n$log1\n$log2\n$log3\n$log4\n$log5\n$log6\n$log7\n$log8\n$log9\n$log10"
+		wyslane_logi=$(echo $log1 $log2 $log3 $log4 $log5 $log6 $log7 $log8 $log9 $log10 | tr ' ' '\n')
+		dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
 		
 	else
 		cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
