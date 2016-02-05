@@ -1559,7 +1559,7 @@ if [ "$DATA" = "01-01" ]; then
 fi
 
 #sprawdzanie wersji systemu
-if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e trusty -e vivid -e wily -e xenial)" != "" ] ; then
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e trusty -e wily -e xenial)" != "" ] ; then
       echo 'ok' > /dev/null
 else
       dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
