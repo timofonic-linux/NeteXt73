@@ -1,3 +1,9 @@
+netext73 (0.9.95) stable; urgency=medium
+
+  * libxnvctrl0 - nowa zależność dla sterowników nvidia
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 07 Feb 2016 18:12:30 +0100
+
 netext73 (0.9.94) stable; urgency=medium
 
   * koniec wsparcia dla vivid 15.04

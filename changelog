@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.95
+-	libxnvctrl0 - nowa zależność dla sterowników nvidia
 v0.9.94
 -	koniec wsparcia dla vivid 15.04
 v0.9.93
