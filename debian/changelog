@@ -1,3 +1,9 @@
+netext73 (0.9.96) stable; urgency=medium
+
+  * zmiana okna xterm dla HiDPI
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 08 Feb 2016 21:15:39 +0100
+
 netext73 (0.9.95) stable; urgency=medium
 
   * libxnvctrl0 - nowa zależność dla sterowników nvidia

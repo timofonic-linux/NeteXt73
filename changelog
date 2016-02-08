@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.96
+-	zmiana skalowania okna xterm dla HiDPI
 v0.9.95
 -	libxnvctrl0 - nowa zależność dla sterowników nvidia
 v0.9.94
@@ -158,7 +160,7 @@ v0.9.26
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
 -	zmiany w obrębie modułu kluczy GPG
--	automatyczne zamykanie okna xterm po 5sec 
+-	automatyczne zamykanie okna $XTERM po 5sec 
 v0.9.24
 -	wyłączenie skylake do czasu wydania nowego gcc
 -	naprawa klawisza ppa
@@ -203,7 +205,7 @@ v0.9.14
 -	Optimus Steam Fix
 -	Logi primus opengl
 v0.9.13
--	automatyczne zamknięcie xterm przy backupie gruba
+-	automatyczne zamknięcie $XTERM przy backupie gruba
 -	odwrócenie oznaczeń vsync
 -	poprawka zmiennych
 v0.9.12
@@ -396,7 +398,7 @@ v0.8.41
 v0.8.40
 -	sprawdzanie połączenia internetowego na starcie programu
 -	poprawki w zmieniarce wydań repozytoriów
--	podświetlenie składni xterm
+-	podświetlenie składni $XTERM
 v0.8.39
 -	rozdzielenie gpg od repo
 -	dodanie otwarcia strony z opisem programu przy opcji 'pierwsza instalacja'
@@ -611,7 +613,7 @@ v0.7.72
 -	wyłączenie bug.netext73.pl - brak kasy na serwer:(
 v0.7.71
 -	zmiana ikony repo
--	pobieranie kluczy w oknie natywnym zamiast xterm
+-	pobieranie kluczy w oknie natywnym zamiast $XTERM
 -	kosmetyczne zmiany w logach APM
 -	dodanie aktywacji APM w momencie jak żaden tryb nie jest aktywny
 v0.7.70
@@ -733,8 +735,8 @@ v0.7.40
 -	zmiany w instalatorze Nvidia
 - 	zmiany w instalatorze sterowników kart graficznych
 v0.7.39
--	przeniesienie deinstalatorów z xterm do natywnej konsoli
--	przepisanie instalatora sterowników kart graficznych z xterm na natywną konsolę
+-	przeniesienie deinstalatorów z $XTERM do natywnej konsoli
+-	przepisanie instalatora sterowników kart graficznych z $XTERM na natywną konsolę
 v0.7.38
 -	czyszczenie kodu
 -	zmiana kolejności ikon programu - ustawienie tematyczne
@@ -744,7 +746,7 @@ v0.7.37
 -	poprawki w tłumaczeniach
 -	zmniejszenie ilości skryptów - usunięcie zdublowanego kodu
 -	drobne poprawki kodu
--	zmiana xterm na natywny terminal w zarządzaniu czyszczeniem pamięci
+-	zmiana $XTERM na natywny terminal w zarządzaniu czyszczeniem pamięci
 v0.7.36
 -	zmiany w pliku Makefile
 v0.7.35
@@ -757,8 +759,8 @@ v0.7.34
 v0.7.33
 -	kolejne zmiany w zarządzaniu usługami, teraz cały zbiór obsługiwany jest jednym hasłem roota
 v0.7.32
--	zmiana w tasksel i monitorach xterm na natywną konsolę
--	zmiana w upstart, hasło podawane graficznie zamiast z xterma
+-	zmiana w tasksel i monitorach $XTERM na natywną konsolę
+-	zmiana w upstart, hasło podawane graficznie zamiast z $XTERMa
 -	paypal :)
 -	zmiana w chkconfig długości nazw dla usług skanowanych
 -	zmiany w sekcji monitor, monitor baterii nie pokaże się w menu jeżeli nie mamy baterii

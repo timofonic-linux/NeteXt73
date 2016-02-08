@@ -209,9 +209,9 @@ if [ "$1" != "start" ]; then
 	if [ $klawisz = "0" ]; then 
 		if [ "$a" = "$TEXT_UPDATE2" ]; then
 			if [ -e ~/.netext73/clean ] && [ "$(grep TRUE ~/.netext73/clean)" = "" ] || [ ! -e ~/.netext73/clean ]; then
-				xterm -T  "dist-upgrade" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade'; sudo apt-get update && sudo apt-get dist-upgrade -y;echo -e \"$TEXT_INSTALACJA2\"; read ent"
+				$XTERM -T  "dist-upgrade" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade'; sudo apt-get update && sudo apt-get dist-upgrade -y;echo -e \"$TEXT_INSTALACJA2\"; read ent"
 			elif [ -e ~/.netext73/clean ] && [ "$(grep TRUE ~/.netext73/clean)" != "" ]; then
-				xterm -T  "dist-upgrade & clean" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade && sudo apt-get autoclean && sudo apt-get autoremove'; sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoclean && sudo apt-get autoremove ; echo -e \"$TEXT_INSTALACJA2\"; read ent"	
+				$XTERM -T  "dist-upgrade & clean" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade && sudo apt-get autoclean && sudo apt-get autoremove'; sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoclean && sudo apt-get autoremove ; echo -e \"$TEXT_INSTALACJA2\"; read ent"	
 			fi
 		elif [ "$a" = "$TEXT_UPDATE8" ]; then
 			aktualizuj_calosc
