@@ -1,3 +1,9 @@
+netext73 (0.9.97) stable; urgency=medium
+
+  * przyspieszenie otwierania listy dostępnych sterowników
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 09 Feb 2016 20:16:17 +0100
+
 netext73 (0.9.96) stable; urgency=medium
 
   * zmiana okna xterm dla HiDPI

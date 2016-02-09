@@ -65,7 +65,7 @@ rm nvidia-settings -f
 
 usun
 if [ "$1" = "nvidia" ]; then
-	wget $adres_sterownikow  2>&1 | pobieranie
+	#wget $adres_sterownikow  2>&1 | pobieranie
 	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
 	
 	#sprawdzanie Optimusa
@@ -80,8 +80,8 @@ if [ "$1" = "nvidia" ]; then
 		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1""
 	fi
 	
-	if [ -e index.html ]; then
-		cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'nvidia-' | sed 's/.tar.xz//' | grep -v -E "nvidia-settings.*|libnvidia-"  | sort -r > 2a.txt
+	if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+		grep nvidia /tmp/netext73/sumy/sumy_kontrolne.txt  | sed 's/.tar.xz//' | awk '{print $2}' | sort -r > 2a.txt
 		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
 		ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
@@ -152,9 +152,8 @@ elif [ "$1" = "radeon" ]; then
 	if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
-		wget $adres_sterownikow  2>&1 | pobieranie 
-		if [ -e index.html ]; then
-		    cat index.html | grep "href=" ./index.html   | cut -d '"' -f 2 | sed 's/.*\///g' | grep 'fglrx_' | grep $bit2 | sed 's/.deb//' | sort -r >> 2a.txt
+		if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+		    grep fglrx_ /tmp/netext73/sumy/sumy_kontrolne.txt | sed 's/.deb//' | awk '{print $2}' | sort -r > 2a.txt
 		    lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
 		    ster=$(yad --center --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 			klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
