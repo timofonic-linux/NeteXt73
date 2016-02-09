@@ -146,16 +146,16 @@ fi
 #kernele stable
 sprawdz_kernel
 
-if  [ "$(cat stable.txt)" = "" ]; then
+if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
 	stable=$TEXT_BRAK_DANYCH
 	nr=""
 else
-	stable=$(cat stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')
+	stable=$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')
 	nr=$stable
 fi
 
 #kernel zainstalowany
-if [ "$(cat kernel.txt)" = "" ]; then
+if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"

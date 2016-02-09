@@ -867,9 +867,21 @@ lista_kerneli(){
 cd /tmp/netext73
 if [ "$1" = "update" ]; then
 	if [ "$kernel_premium" = "tak" ] ; then
-		wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+		if [ -e /tmp/netext73/sumy/kernel_premium.txt ]; then
+			echo "jest" > /dev/null
+		else
+			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+			cp kernel.txt /tmp/netext73/sumy/kernel_premium.txt
+			cp stable.txt /tmp/netext73/sumy/stable.txt
+		fi
+
 	else
-		wget $adres_glowny/kernele/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+		if [ -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+			echo "jest" > /dev/null
+		else
+			wget $adres_glowny/kernele/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+			cp kernel.txt /tmp/netext73/sumy/kernel_standard.txt
+		fi
 	fi
 else
 	#tu zmienić
@@ -898,12 +910,26 @@ else
 				fi
 			fi
 		fi
-		rm index.html -f; wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ 2>&1 | pobieranie 
+		if [ -e /tmp/netext73/sumy/kernel_premium.txt ]; then
+			echo "jest" > /dev/null
+		else
+			rm index.html -f; wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ 2>&1 | pobieranie
+			cp index.html /tmp/netext73/sumy/kernel_premium.txt
+		fi
 	else
 		strona="$adres_glowny/kernele/"
-		rm index.html -f; wget $strona 2>&1 | pobieranie 
+		if [ -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+			echo "jest" > /dev/null
+		else
+			rm index.html -f; wget $strona 2>&1 | pobieranie 
+			cp index.html /tmp/netext73/sumy/kernel_standard.txt
+		fi
 	fi
-	echo $(grep 'href="ftp' index.html | grep 'v' | grep -v "logi" | cut -d '"' -f 2 | sed -e 's/.*v/v/g' -e 's/\///g') | tr ' ' '\n' > 2.txt
+	if [ "$premium" = "tak" ]; then
+		echo $(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | grep 'v' | grep -v "logi" | cut -d '"' -f 2 | sed -e 's/.*v/v/g' -e 's/\///g') | tr ' ' '\n' > 2.txt
+	else
+		echo $(grep 'href="ftp' /tmp/netext73/sumy/kernel_standard.txt | grep 'v' | grep -v "logi" | cut -d '"' -f 2 | sed -e 's/.*v/v/g' -e 's/\///g') | tr ' ' '\n' > 2.txt
+	fi
 	dpkg -l |grep linux-image | awk '{print $2}' | grep $rodzaj | sed 's/linux-image-//g'  > 3.txt
 
 	for kernel in $(cat 2.txt); do
@@ -946,8 +972,11 @@ elif [ "$(uname -r | grep ext )" != "" ];then
 else
 	twoj_kernel=$(uname -r)
 fi
-
-nowy_kernel=$(grep 'href="ftp' kernel.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+if [ "$premium" = "tak" ]; then
+	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+else
+	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+fi
 kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 kern2="$(echo $nowy_kernel | cut -d "-" -f 1 )-ext73-$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
 }
