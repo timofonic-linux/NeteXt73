@@ -880,8 +880,10 @@ if [ "$1" = "update" ]; then
 
 	else
 		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			wget $adres_glowny/kernele/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+			wget $adres_glowny/kernele/ -O kernel.txt 
+			wget https://www.kernel.org/ -O stable.txt # 2>&1 | pobieranie
 			cp kernel.txt /tmp/netext73/sumy/kernel_standard.txt
+			cp stable.txt /tmp/netext73/sumy/stable.txt
 		fi
 	fi
 else
