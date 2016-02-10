@@ -870,9 +870,9 @@ cd /tmp/netext73
 if [ "$1" = "update" ]; then
 	if [ "$kernel_premium" = "tak" ] ; then
 		if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			wget $adres_glowny/kernele/ -O kernel_std.txt 
-			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt 
-			wget https://www.kernel.org/ -O stable.txt  # 2>&1 | pobieranie
+			wget $adres_glowny/kernele/ -O kernel_std.txt 2> /dev/null
+			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt 2> /dev/null
+			wget https://www.kernel.org/ -O stable.txt 2> /dev/null  
 			cp kernel_std.txt /tmp/netext73/sumy/kernel_standard.txt
 			cp kernel.txt /tmp/netext73/sumy/kernel_premium.txt
 			cp stable.txt /tmp/netext73/sumy/stable.txt
@@ -880,8 +880,8 @@ if [ "$1" = "update" ]; then
 
 	else
 		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			wget $adres_glowny/kernele/ -O kernel.txt 
-			wget https://www.kernel.org/ -O stable.txt # 2>&1 | pobieranie
+			wget $adres_glowny/kernele/ -O kernel.txt 2> /dev/null
+			wget https://www.kernel.org/ -O stable.txt 2> /dev/null
 			cp kernel.txt /tmp/netext73/sumy/kernel_standard.txt
 			cp stable.txt /tmp/netext73/sumy/stable.txt
 		fi
@@ -973,7 +973,7 @@ elif [ "$(uname -r | grep ext )" != "" ];then
 else
 	twoj_kernel=$(uname -r)
 fi
-if [ "$premium" = "tak" ]; then
+if [ "$kernel_premium" = "tak" ]; then
 	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 else
 	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_standard.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')

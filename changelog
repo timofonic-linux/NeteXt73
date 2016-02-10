@@ -7,6 +7,7 @@ v0.9.97
 -	tworzenie listy kerneli standard jednorazowo na starcie programu
 -	tworzenie listy kerneli premium jednorazowo na starcie programu
 -	automatyczne zamykanie okna z kernelami po 10s zamiast zabijanie procesu
+-	modyfikacja warunku sprawdzania zainstalowanych kerneli
 v0.9.96
 -	zmiana skalowania okna xterm dla HiDPI
 v0.9.95
