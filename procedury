@@ -142,11 +142,11 @@ export wersja_apm=$(ls /opt/NeteXt73/APM/advanced_power_management_by_ext73_* | 
 if [ -e ~/.netext73/kernel_premium ]; then
 	if [ "$(grep @.*@ ~/.netext73/kernel_premium)" = "" ]; then
 		rm -f ~/.netext73/kernel_premium
-		kernel_premium="brak"
+		export kernel_premium="brak"
 	else
 		export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1)
 		export PASS1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 3)
-		kernel_premium="tak"
+		export kernel_premium="tak"
 	fi
 fi
 
@@ -202,6 +202,8 @@ else
 	#pobieranie kerneli e X t 7 3
 	#nazwy paczek dla v30.x
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
+	echo $nazwa_paczki
+	echo $a
 	yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki
 fi
 rm ./index.html -f
@@ -867,18 +869,17 @@ lista_kerneli(){
 cd /tmp/netext73
 if [ "$1" = "update" ]; then
 	if [ "$kernel_premium" = "tak" ] ; then
-		if [ -e /tmp/netext73/sumy/kernel_premium.txt ]; then
-			echo "jest" > /dev/null
-		else
-			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
+		if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+			wget $adres_glowny/kernele/ -O kernel_std.txt 
+			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt 
+			wget https://www.kernel.org/ -O stable.txt  # 2>&1 | pobieranie
+			cp kernel_std.txt /tmp/netext73/sumy/kernel_standard.txt
 			cp kernel.txt /tmp/netext73/sumy/kernel_premium.txt
 			cp stable.txt /tmp/netext73/sumy/stable.txt
 		fi
 
 	else
-		if [ -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			echo "jest" > /dev/null
-		else
+		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
 			wget $adres_glowny/kernele/ -O kernel.txt | wget https://www.kernel.org/ -O stable.txt 2>&1 | pobieranie
 			cp kernel.txt /tmp/netext73/sumy/kernel_standard.txt
 		fi
@@ -904,7 +905,7 @@ else
 							strona="$adres_glowny/kernele_premium$katalog2/"
 							export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1) 
 							export PASS1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 3)
-							kernel_premium="tak"
+							export kernel_premium="tak"
 						fi
 					fi
 				fi
@@ -918,9 +919,7 @@ else
 		fi
 	else
 		strona="$adres_glowny/kernele/"
-		if [ -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			echo "jest" > /dev/null
-		else
+		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
 			rm index.html -f; wget $strona 2>&1 | pobieranie 
 			cp index.html /tmp/netext73/sumy/kernel_standard.txt
 		fi
@@ -975,7 +974,7 @@ fi
 if [ "$premium" = "tak" ]; then
 	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 else
-	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_standard.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 fi
 kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 kern2="$(echo $nowy_kernel | cut -d "-" -f 1 )-ext73-$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"

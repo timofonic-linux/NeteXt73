@@ -4,7 +4,8 @@
 v0.9.97
 -	przyspieszenie otwierania listy dostępnych sterowników
 -	tworzenie listy dostępnych sterowników na podstawie pliku sum kontrolnych
--	tworzenie listy kerneli jednorazowo na starcie programu
+-	tworzenie listy kerneli standard jednorazowo na starcie programu
+-	tworzenie listy kerneli premium jednorazowo na starcie programu
 v0.9.96
 -	zmiana skalowania okna xterm dla HiDPI
 v0.9.95
