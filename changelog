@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.98
+-	przyspieszenie startu programu
+-	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
+-	timeout 5s dla okna wyboru rodzaju kernela
+-	test serwera na podstawie listy kerneli
 v0.9.97
 -	przyspieszenie otwierania listy dostępnych sterowników
 -	tworzenie listy dostępnych sterowników na podstawie pliku sum kontrolnych

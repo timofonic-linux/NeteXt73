@@ -1,3 +1,9 @@
+netext73 (0.9.98) stable; urgency=medium
+
+  * przyspieszenie startu
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 10 Feb 2016 20:04:45 +0100
+
 netext73 (0.9.97) stable; urgency=medium
 
   * przyspieszenie otwierania listy dostępnych sterowników

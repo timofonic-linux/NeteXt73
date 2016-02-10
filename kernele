@@ -73,7 +73,7 @@ else
 		fi
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
 		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$((860*$skala))" --height="$wysokosc" \
-		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=10
+		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=5
 		klawisz=$?
 	fi
 fi

@@ -865,27 +865,23 @@ data_godzina
 $XTERM -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
+pobierz_liste_kerneli(){
+wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null
+tar -xzf dostepne_kernele.tar.gz -C /tmp/netext73/sumy/
+rm -f dostepne_kernele.tar.gz
+}
+
 lista_kerneli(){
 cd /tmp/netext73
 if [ "$1" = "update" ]; then
-	if [ "$kernel_premium" = "tak" ] ; then
-		if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			wget $adres_glowny/kernele/ -O kernel_std.txt 2> /dev/null
-			wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ -O kernel.txt 2> /dev/null
-			wget https://www.kernel.org/ -O stable.txt 2> /dev/null  
-			cp kernel_std.txt /tmp/netext73/sumy/kernel_standard.txt
-			cp kernel.txt /tmp/netext73/sumy/kernel_premium.txt
-			cp stable.txt /tmp/netext73/sumy/stable.txt
-		fi
-
-	else
-		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			wget $adres_glowny/kernele/ -O kernel.txt 2> /dev/null
-			wget https://www.kernel.org/ -O stable.txt 2> /dev/null
-			cp kernel.txt /tmp/netext73/sumy/kernel_standard.txt
-			cp stable.txt /tmp/netext73/sumy/stable.txt
-		fi
+	if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+		pobierz_liste_kerneli
 	fi
+	#sprawdzanie połączenia z netem
+	if [ "$(cat /tmp/netext73/sumy/kernel_standard.txt)" = '' ] || [ "$(cat /tmp/netext73/sumy/stable.txt)" = '' ]; then
+		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+	exit 1
+fi
 else
 	#tu zmienić
 	echo $kern > ~/.netext73/instalator_kerneli #zapamiętanie wybranego kernela
@@ -913,27 +909,23 @@ else
 				fi
 			fi
 		fi
-		if [ -e /tmp/netext73/sumy/kernel_premium.txt ]; then
-			echo "jest" > /dev/null
-		else
-			rm index.html -f; wget --user=$US1 --password=$PASS1  $adres_glowny/kernele_premium$katalog2/ 2>&1 | pobieranie
-			cp index.html /tmp/netext73/sumy/kernel_premium.txt
+		if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+			pobierz_liste_kerneli
 		fi
 	else
 		strona="$adres_glowny/kernele/"
-		if [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
-			rm index.html -f; wget $strona 2>&1 | pobieranie 
-			cp index.html /tmp/netext73/sumy/kernel_standard.txt
+		if [ ! -e /tmp/netext73/sumy/kernel_premium.txt ] || [ ! -e /tmp/netext73/sumy/kernel_standard.txt ]; then
+			pobierz_liste_kerneli
 		fi
 	fi
 	if [ "$premium" = "tak" ]; then
-		echo $(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | grep 'v' | grep -v "logi" | cut -d '"' -f 2 | sed -e 's/.*v/v/g' -e 's/\///g') | tr ' ' '\n' > 2.txt
+		lista_kerneli_ftp="/tmp/netext73/sumy/kernel_premium.txt"
 	else
-		echo $(grep 'href="ftp' /tmp/netext73/sumy/kernel_standard.txt | grep 'v' | grep -v "logi" | cut -d '"' -f 2 | sed -e 's/.*v/v/g' -e 's/\///g') | tr ' ' '\n' > 2.txt
+		lista_kerneli_ftp="/tmp/netext73/sumy/kernel_standard.txt"
 	fi
 	dpkg -l |grep linux-image | awk '{print $2}' | grep $rodzaj | sed 's/linux-image-//g'  > 3.txt
 
-	for kernel in $(cat 2.txt); do
+	for kernel in $(cat $lista_kerneli_ftp ); do
 		echo "$kernel" >> 4.txt
 		for kernel1 in $(cat 3.txt); do
 		      if [ "$(echo $kernel | grep $(echo $kernel1 | sed "s/-$rodzaj.*//g"))" != "" ]; then
@@ -946,7 +938,7 @@ else
 		done
 	done
 	cat 4.txt | awk '{print $2}' >5.txt; sed -i 's/^[ \t]*$/-/' 5.txt
-	paste -d " "  2.txt 5.txt > 4.txt
+	paste -d " "  $lista_kerneli_ftp 5.txt > 4.txt
 	sort -r 4.txt > 3.txt;  echo $(sed -e '/^[^#]/s:^:FALSE :' 3.txt) > 1.txt
 	lista=$(sed  's/FALSE/TRUE/' 1.txt ); rm *.txt -f
 	a1="-"
@@ -974,9 +966,9 @@ else
 	twoj_kernel=$(uname -r)
 fi
 if [ "$kernel_premium" = "tak" ]; then
-	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_premium.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+	nowy_kernel=$(cat /tmp/netext73/sumy/kernel_premium.txt | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 else
-	nowy_kernel=$(grep 'href="ftp' /tmp/netext73/sumy/kernel_standard.txt | cut -d '"' -f 2 | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
+	nowy_kernel=$(cat /tmp/netext73/sumy/kernel_standard.txt | sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 fi
 kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
 kern2="$(echo $nowy_kernel | cut -d "-" -f 1 )-ext73-$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
@@ -1540,18 +1532,16 @@ fi
 
 
 sumy(){
-#pobranie sum kontrolnych i sprawdzanie połączenia z netem
+#pobranie sum kontrolnych
 cd /tmp
-
+#wydanie stable
+wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null &
+#Sumy kontrolne
 wget $adres_sum_kontrolnych  -q # 2>&1 | pobieranie
 openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 rm sumy_kontrolne.txt -f
 if [ "$(cat $sumy_kontrolne)" = "" ]; then
 	yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
-	exit 1
-fi
-if [ "$(curl $adres_sum_kontrolnych2 2>&1 | grep OK)" = '' ]; then
-	yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
 fi
 }
