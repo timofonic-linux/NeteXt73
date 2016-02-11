@@ -8,6 +8,7 @@ v0.9.99
 -	zmiana wielkości okien xterm
 -	zmiana orientacji okna "o programie"
 -	nowy dymek yad-splash
+-	config możliwość ręcznego pobrania sum kontrolnych
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
