@@ -286,7 +286,7 @@ if [ "$1" = "GPG" ]; then
 			klucze >> instaluj.sh
 			instalacja	
 		elif [ "$gpg" = "$a4" ]; then
-			$XTERM -e bash -c "echo -e \"$a4\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update; echo -e \"$TEXT_INSTALACJA\"; read ent"			
+			xterm -e bash -c "echo -e \"$a4\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update; echo -e \"$TEXT_INSTALACJA\"; read ent"			
 		#Moduł usuwania zbędnych kluczy
 		elif [ "$gpg" = "$a5" ]; then
 			rm *.txt -f
@@ -617,11 +617,11 @@ else
 	#########################################################################################################################################################################
 		#dodajemy repo partnerów
 		elif [ "$backup" = "$MENU1" ]; then
-			$XTERM -e bash -c "echo -e \"$MENU1\n\"; sudo sed -i '/partner/ s/#//' /etc/apt/sources.list;sudo apt-get update"
+			xterm -e bash -c "echo -e \"$MENU1\n\"; sudo sed -i '/partner/ s/#//' /etc/apt/sources.list;sudo apt-get update"
 	#########################################################################################################################################################################
 		#usuwamy repo partnerów
 		elif [ "$backup" = "$MENU2" ]; then
-			$XTERM -e bash -c "echo -e \"$MENU2\n\"; sudo sed -i '/partner/ s/^/#/' /etc/apt/sources.list;sudo apt-get update"
+			xterm -e bash -c "echo -e \"$MENU2\n\"; sudo sed -i '/partner/ s/^/#/' /etc/apt/sources.list;sudo apt-get update"
 	#########################################################################################################################################################################
 		#backup repo
 		elif [ "$backup" = "$a1" ]; then
@@ -629,13 +629,13 @@ else
 			yad --center --width=$((400*$skala)) --text="<span color=\"$kolor_textu\"><b>$a1</b></span>" --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="Backup:2" --button="Restore:3" --button="$TEXT_ZAMKNIJ:1"
 			klawisz=$?
 			if [ "$klawisz" = "2" ]; then
-				$XTERM -e bash -c "echo -e \"$TEXT_BACKUP7\";cd /etc; sudo tar -zcvf $download/source.list.backup_$(date +"%d-%m-%y")_$NR_WERSJA_UBUNTU.tar.gz apt; echo -e \"\n\nBackup:$download/source.list.backup_$(date +'%d-%m-%y')_$NR_WERSJA_UBUNTU.tar.gz\"; echo -e \"$TEXT_INSTALACJA\"; read ent"
+				xterm -e bash -c "echo -e \"$TEXT_BACKUP7\";cd /etc; sudo tar -zcvf $download/source.list.backup_$(date +"%d-%m-%y")_$NR_WERSJA_UBUNTU.tar.gz apt; echo -e \"\n\nBackup:$download/source.list.backup_$(date +'%d-%m-%y')_$NR_WERSJA_UBUNTU.tar.gz\"; echo -e \"$TEXT_INSTALACJA\"; read ent"
 			#Przywróć repozytorium z kopii zapasowej
 			elif [ "$klawisz" = "3" ]; then
 				a=$(yad --center --file-selection --filename="$download/" --title="$TEXT_BACKUP2" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --width=$((550*$skala)) --height=$((450*$skala)))
 				if [ "$(echo $a | grep source.list.backu | grep tar.gz)" != "" ]; then
 					echo "nie" > /tmp/netext73/ok.txt
-					$XTERM -T backup_repo -e bash -c "echo \"$TEXT_BACKUP3\";sudo mv -f /etc/apt /etc/apt~; sudo tar -xvzf $a -C /etc/; echo "tak" > /tmp/netext73/ok.txt; echo -e \"$TEXT_INSTALACJA\"; read ent"
+					xterm -T backup_repo -e bash -c "echo \"$TEXT_BACKUP3\";sudo mv -f /etc/apt /etc/apt~; sudo tar -xvzf $a -C /etc/; echo "tak" > /tmp/netext73/ok.txt; echo -e \"$TEXT_INSTALACJA\"; read ent"
 					if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
 						dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_BACKUP4"
 					else

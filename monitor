@@ -38,7 +38,7 @@ source /opt/NeteXt73/procedury
 
 #sprawdzenie sensorów jeżeli nie były włączone
 if [ "$(cat /etc/modules | grep sensors-detect)" = "" ]; then
-      $XTERM  -T "sensors" -e bash -c "/usr/bin/yes| sudo sensors-detect; sudo /etc/init.d/lm-sensors stop;sudo update-rc.d -f lm-sensors remove"
+      xterm  -T "sensors" -e bash -c "/usr/bin/yes| sudo sensors-detect; sudo /etc/init.d/lm-sensors stop;sudo update-rc.d -f lm-sensors remove"
 fi
 
 
@@ -97,19 +97,19 @@ if [ "$klawisz" = "0" ]; then
 	rm ~/.netext73/monitor -f
 	if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
 		echo "system" >> ~/.netext73/monitor
-		$XTERM -T "System monitor" -e bash -c "watch -t 'uptime; echo  -n \"\nScaling governor : \"; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;echo -n \"CPU driver       : \";cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver | head -n 1; echo -n \"\nCpu Core Frequency\n\";cat /proc/cpuinfo | grep MHz;echo -n \"\nMemory :\n\";free -m;echo -n \"\nSensors:\n\";sensors'" &
+		xterm -T "System monitor" -e bash -c "watch -t 'uptime; echo  -n \"\nScaling governor : \"; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;echo -n \"CPU driver       : \";cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver | head -n 1; echo -n \"\nCpu Core Frequency\n\";cat /proc/cpuinfo | grep MHz;echo -n \"\nMemory :\n\";free -m;echo -n \"\nSensors:\n\";sensors'" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
 		echo "powertop" >> ~/.netext73/monitor
-		$XTERM -T "PowerTop" -e bash -c "sudo powertop" &
+		xterm -T "PowerTop" -e bash -c "sudo powertop" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
 		echo "HTOP" >> ~/.netext73/monitor
-		$XTERM -T "HTop" -e bash -c "htop" &
+		xterm -T "HTop" -e bash -c "htop" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
 		echo "saidar" >> ~/.netext73/monitor
-		$XTERM -T "Saidar" -e bash -c "saidar -c" &
+		xterm -T "Saidar" -e bash -c "saidar -c" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
 		echo "CPU" >> ~/.netext73/monitor

@@ -117,13 +117,13 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 			cd $(echo $a | sed -e 's/linux.*//g');	b=$(echo $a | sed -e 's/linux-image/linux-headers/g')
 			rm /tmp/netext73/kernel -fr; 	mkdir /tmp/netext73/kernel
 			cd /tmp/netext73/kernel;    	cp $b /tmp/netext73/kernel/
-			$XTERM -T instalator -e bash -c "/usr/bin/yes | sudo dpkg -i linux-headers*"
+			xterm -T instalator -e bash -c "/usr/bin/yes | sudo dpkg -i linux-headers*"
 		        restart
 		elif [ "$(echo $a | grep 'linux-headers' | grep 'ext' | grep '.deb')" != "" ]; then
 			cd $(echo $a | sed -e 's/linux.*//g')
 			rm /tmp/netext73/kernel -fr; 	mkdir /tmp/netext73/kernel
 			cd /tmp/netext73/kernel;		cp $a /tmp/netext73/kernel/
-			$XTERM -T instalator -e bash -c "/usr/bin/yes | sudo dpkg -i linux-headers*"
+			xterm -T instalator -e bash -c "/usr/bin/yes | sudo dpkg -i linux-headers*"
 			restart
 		else
 			yad --center --error --title="$nazwa_skryptu"  --text="$(echo $TEXT_DEB1 | sed -e 's/:/!/' -e 's/lub linux-image//' -e 's/headers/headers ext73 /')" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0"  --timeout=15
@@ -147,7 +147,7 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 				find $PWD -type f | grep -v -E "*.deb" | xargs rm -f
 				if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="Kernel $a $TEXT_INSTALOWAC_KERNEL"; then
 					echo $PWD > /tmp/netext73/katalog.txt
-					$XTERM -T instalator -e bash -c "cd $(cat /tmp/netext73/katalog.txt) && /usr/bin/yes | sudo dpkg -i *.deb && rm katalog.txt -f"
+					xterm -T instalator -e bash -c "cd $(cat /tmp/netext73/katalog.txt) && /usr/bin/yes | sudo dpkg -i *.deb && rm katalog.txt -f"
 					restart
 				else
 					echo -n "cd "$PWD" && /usr/bin/yes | sudo dpkg -i *.deb" | xclip -selection clipboard

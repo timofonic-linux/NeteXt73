@@ -173,10 +173,8 @@ fi
 #HiDPI
 if [ -e ~/.netext73/HiDPI ] && [ "$(cat ~/.netext73/HiDPI)" = "TRUE" ]; then
 	export skala=2
-	XTERM="xterm -fa 'Monospace' -fs 12"
 else
 	export skala=1
-	XTERM="xterm -fa 'Monospace' -fs 10"
 fi
 
 
@@ -848,20 +846,20 @@ data_godzina(){
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
 data_godzina
-$XTERM -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 }
 
 #instalacja bez pytań
 instalacja2(){
 data_godzina
 #x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
-$XTERM -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
 }
 
 #instalacja wciśnij enter
 instalacja3(){
 data_godzina
-$XTERM -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
 pobierz_liste_kerneli(){
@@ -1166,11 +1164,11 @@ yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ik
 
 
 sprawdz_klucze(){
-#$XTERM -T GPG-KEY -e bash -c "echo 'sudo apt-key list';
+#xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';
 sudo apt-key list > klucze1.txt
 }
 usun_klucze(){
-$XTERM -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
+xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
 }
 
 klucze(){
@@ -1321,9 +1319,9 @@ sudo initctl list | grep -v -E "cryptdisks-udev|network-interface|network-interf
 burntest(){
 glxgears &
 for i in $(seq 1 $(grep 'model name' /proc/cpuinfo | wc -l )); do
-$XTERM -T "BurnTest $i" -e bash -c "echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';python -c \"while True: pass\"" &
+xterm -T "BurnTest $i" -e bash -c "echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';echo'';echo'';echo '███╗   ██╗███████╗████████╗███████╗██╗  ██╗████████╗███████╗██████╗ ';echo '████╗  ██║██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝╚════██║╚════██╗';echo '██╔██╗ ██║█████╗     ██║   █████╗   ╚███╔╝    ██║       ██╔╝ █████╔╝';echo '██║╚██╗██║██╔══╝     ██║   ██╔══╝   ██╔██╗    ██║      ██╔╝  ╚═══██╗';echo '██║ ╚████║███████╗   ██║   ███████╗██╔╝ ██╗   ██║      ██║  ██████╔╝';echo '╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝  ╚═════╝ ';python -c \"while True: pass\"" &
 done
-$XTERM -T "htop" -e bash -c "htop"
+xterm -T "htop" -e bash -c "htop"
 }
 
 yad_wget(){
@@ -1563,7 +1561,7 @@ if [ "$plik" != "" ]; then
 fi
 
 #naprawa Gtk-WARNING **: Theme file for default has no directories
-if [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
+if [ -e ~/.gtkrc-2.0 ] && [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
 	sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0
 fi
 
