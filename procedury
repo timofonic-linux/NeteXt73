@@ -112,7 +112,6 @@ export adres_sterownikow_optimus="$adres_glowny/nvidia_optimus/"
 export katalog2="2"
 export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
 export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
-export adres_sum_kontrolnych2="$adres_glowny/test_serwera.txt"
 
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 	export komputerek="INTEL"
@@ -1537,7 +1536,7 @@ cd /tmp
 #wydanie stable
 wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null &
 #Sumy kontrolne
-wget $adres_sum_kontrolnych  -q # 2>&1 | pobieranie
+wget $adres_sum_kontrolnych --no-check-certificate 2> /dev/null
 openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 rm sumy_kontrolne.txt -f
 if [ "$(cat $sumy_kontrolne)" = "" ]; then

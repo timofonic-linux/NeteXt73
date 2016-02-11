@@ -9,6 +9,7 @@ v0.9.99
 -	zmiana orientacji okna "o programie"
 -	nowy dymek yad-splash
 -	config możliwość ręcznego pobrania sum kontrolnych
+-	wget no-check-certificate
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
