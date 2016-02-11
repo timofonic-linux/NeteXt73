@@ -11,6 +11,7 @@ v0.9.99
 -	config możliwość ręcznego pobrania sum kontrolnych
 -	wget no-check-certificate
 -	nie ma takiego pliku ~/.gtkrc-2.0
+-	zmiana kolejności pierwszej instalacji
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku

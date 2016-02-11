@@ -44,7 +44,7 @@ rm -f /tmp/netext73/*.txt
 instalacja_gcc(){
 naglowek > instaluj.sh
 instaluj_gcc instaluj_nowy >> instaluj.sh
-instalacja
+instalacja gcc
 }
 nv_radeon(){
 if [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
@@ -64,6 +64,9 @@ nv_radeon
 konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=3 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" --field="NVIDIA:CHK" --field="RADEON:CHK" --field="gcc:CHK"  $a1 $a2 $a3 $a4 $a5 $a6 $a7 --width="$((650*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then
+		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ]; then
+			instalacja_gcc
+		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
 			/opt/NeteXt73/./microcode
 		fi
@@ -73,21 +76,18 @@ konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/s
 		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
 			/opt/NeteXt73/./NeteXt73_root ./apm
 		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
-			if [ "$kernel_premium" = "tak" ]; then
-				/opt/NeteXt73/./kernele premium
-			else
-				/opt/NeteXt73/./kernele
-			fi
-		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
 			/opt/NeteXt73/./grafiki nvidia
 		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ]; then
 			/opt/NeteXt73/./grafiki radeon
 		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ]; then
-			instalacja_gcc
+		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
+			if [ "$kernel_premium" = "tak" ]; then
+				/opt/NeteXt73/./kernele premium
+			else
+				/opt/NeteXt73/./kernele
+			fi
 		fi
 	fi
 }
