@@ -863,7 +863,7 @@ xterm -T instalator -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/user
 }
 
 pobierz_liste_kerneli(){
-wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_POBIERANIE_GOTOWE\n($TEXT_SUMY_KONTROLNE)"
+wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_POBIERANIE_GOTOWE\n\n($TEXT_SUMY_KONTROLNE)"
 tar -xzf dostepne_kernele.tar.gz -C /tmp/netext73/sumy/
 rm -f dostepne_kernele.tar.gz
 }
@@ -1300,12 +1300,12 @@ echo "sudo sysctl -p"
 
 dymek(){
 if [ "$USER" = "root" ]; then
-	yad --center --info --width=$((360*$skala)) --title="$3"  --window-icon="$2" --image="$2" --text="$4" --button="gtk-ok:0" --timeout=5 --geometry=+0+0 --no-buttons --splash
+	yad --center --info --width=$((360*$skala)) --title="$3"  --window-icon="$2" --image="$2" --text="$4" --button="gtk-ok:0" --timeout=5 --geometry=+0+0 --no-buttons --splash --borders=20 &
 else
 	if [ "$(which notify-send)" != "" ];then
 		notify-send "$1" "$2" "$3" "$4"
 	else
-		yad --center --info --width=$((360*$skala)) --title="$3"  --window-icon="$2" --image="$2" --text="$4" --button="gtk-ok:0" --timeout=5 --geometry=+0+0 --no-buttons --splash
+		yad --center --info --width=$((360*$skala)) --title="$3"  --window-icon="$2" --image="$2" --text="$4" --button="gtk-ok:0" --timeout=5 --geometry=+0+0 --no-buttons --splash --borders=20 &
 	fi
 fi
 }
