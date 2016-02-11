@@ -54,11 +54,9 @@ if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; 
 	fi
 fi
 
-#please_wait
-/opt/NeteXt73/./update start &
-#please_wait kill
 sumy &
 zaleznosci &
+/opt/NeteXt73/./update start &
 
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"

@@ -875,7 +875,7 @@ if [ "$1" = "update" ]; then
 		pobierz_liste_kerneli
 	fi
 	#sprawdzanie połączenia z netem
-	if [ "$(cat /tmp/netext73/sumy/kernel_standard.txt)" = '' ] || [ "$(cat /tmp/netext73/sumy/stable.txt)" = '' ]; then
+	if [ "$(cat /tmp/netext73/sumy/kernel_standard.txt)" = '' ] || [ "$(cat /tmp/netext73/sumy/kernel_premium.txt)" = '' ]; then
 		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
 fi
