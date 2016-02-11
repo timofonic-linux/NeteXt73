@@ -174,10 +174,10 @@ fi
 #HiDPI
 if [ -e ~/.netext73/HiDPI ] && [ "$(cat ~/.netext73/HiDPI)" = "TRUE" ]; then
 	export skala=2
-	XTERM="xterm -fa 'Monospace' -fs 10"
+	XTERM="xterm -fa 'Monospace' -fs 12"
 else
 	export skala=1
-	XTERM="xterm"
+	XTERM="xterm -fa 'Monospace' -fs 10"
 fi
 
 
@@ -1302,7 +1302,8 @@ echo "sudo sysctl -p"
 }
 
 dymek(){
-if [ -e /tmp/netext73/stan_netext ] && [ $(cat /tmp/netext73/stan_netext) = "root" ];then
+if [ "$USER" = "root" ]; then
+#if [ -e /tmp/netext73/stan_netext ] && [ $(cat /tmp/netext73/stan_netext) = "root" ];then
 	yad --center --info --width=$((360*$skala)) --title="$3"  --window-icon="$2" --image="$2" --text="$4" --button="gtk-ok:0" --timeout=5
 else
 	if [ "$(which notify-send)" != "" ];then

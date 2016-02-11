@@ -1,3 +1,9 @@
+netext73 (0.9.99) stable; urgency=medium
+
+  * nowy rootmode
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 11 Feb 2016 09:07:42 +0100
+
 netext73 (0.9.98) stable; urgency=medium
 
   * przyspieszenie startu

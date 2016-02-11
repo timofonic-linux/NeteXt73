@@ -45,7 +45,8 @@ fi
 export userek=$(cat /tmp/netext73/userek)
 
 if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; then
-	if [ -e /tmp/netext73/stan_netext ] && [ $(cat /tmp/netext73/stan_netext) = "root" ]; then
+	if [ "$USER" = "root" ]; then
+	#[ -e /tmp/netext73/stan_netext ] && [ $(cat /tmp/netext73/stan_netext) = "root" ]; then
 	      sudo -K
 	else
 	      cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
@@ -53,11 +54,11 @@ if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; 
 	fi
 fi
 
-sumy &
-zaleznosci &
 #please_wait
 /opt/NeteXt73/./update start &
 #please_wait kill
+sumy &
+zaleznosci &
 
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"

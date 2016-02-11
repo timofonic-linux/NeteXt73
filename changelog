@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v0.9.99
+-	poprawki literówek
+-	poprawka sprawdzania usera dla dymku
+-	zmiana sposobu weryfikacji roota
+-	zmiana wielkości okien xterm
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
@@ -102,7 +107,7 @@ v0.9.63
 v0.9.62
 -	kubutnu backport for Wily
 v0.9.61
--	dodane dymki informujące o możliwości akutulizjacji APM i firmware
+-	dodane dymki informujące o możliwości aktualizacji APM i firmware
 -	dodane nowe pakiety firmware
 v0.9.60
 -	dociąganie zależności spotify
