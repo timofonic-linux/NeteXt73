@@ -6,6 +6,8 @@ v0.9.99
 -	poprawka sprawdzania usera dla dymku
 -	zmiana sposobu weryfikacji roota
 -	zmiana wielkości okien xterm
+-	zmiana orientacji okna "o programie"
+-	nowy dymek yad-splash
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
