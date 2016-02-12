@@ -1,1546 +1,1546 @@
-netext73 (0.9.99) stable; urgency=medium
+netext73 (0.9.99) trusty; urgency=medium
 
   * nowy rootmode
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 11 Feb 2016 09:07:42 +0100
 
-netext73 (0.9.98) stable; urgency=medium
+netext73 (0.9.98) trusty; urgency=medium
 
   * przyspieszenie startu
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 10 Feb 2016 20:04:45 +0100
 
-netext73 (0.9.97) stable; urgency=medium
+netext73 (0.9.97) trusty; urgency=medium
 
   * przyspieszenie otwierania listy dostępnych sterowników
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 09 Feb 2016 20:16:17 +0100
 
-netext73 (0.9.96) stable; urgency=medium
+netext73 (0.9.96) trusty; urgency=medium
 
   * zmiana okna xterm dla HiDPI
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 08 Feb 2016 21:15:39 +0100
 
-netext73 (0.9.95) stable; urgency=medium
+netext73 (0.9.95) trusty; urgency=medium
 
   * libxnvctrl0 - nowa zależność dla sterowników nvidia
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 07 Feb 2016 18:12:30 +0100
 
-netext73 (0.9.94) stable; urgency=medium
+netext73 (0.9.94) trusty; urgency=medium
 
   * koniec wsparcia dla vivid 15.04
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 05 Feb 2016 11:18:54 +0100
 
-netext73 (0.9.93) stable; urgency=medium
+netext73 (0.9.93) trusty; urgency=medium
 
   * naprawa okna wysyłki logów
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 04 Feb 2016 19:58:26 +0100
 
-netext73 (0.9.92) stable; urgency=medium
+netext73 (0.9.92) trusty; urgency=medium
 
   * nowe gcc
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 02 Feb 2016 11:09:13 +0100
 
-netext73 (0.9.91) stable; urgency=medium
+netext73 (0.9.91) trusty; urgency=medium
 
   * binutils-2.26
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 01 Feb 2016 16:21:05 +0100
 
-netext73 (0.9.90) stable; urgency=medium
+netext73 (0.9.90) trusty; urgency=medium
 
   * wykonanie dodatkowo autoclean i autoremove gdy w katalogu konfiguracyjnym clean=TRUE
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 01 Feb 2016 08:23:29 +0100
 
-netext73 (0.9.89) stable; urgency=medium
+netext73 (0.9.89) trusty; urgency=medium
 
   * dodanie nagłówków do okna monitora CPU/memory
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 31 Jan 2016 20:07:51 +0100
 
-netext73 (0.9.88) stable; urgency=medium
+netext73 (0.9.88) trusty; urgency=medium
 
   * monitor cpu/mem dane na podstawie free -m
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 31 Jan 2016 10:18:38 +0100
 
-netext73 (0.9.88) stable; urgency=medium
+netext73 (0.9.88) trusty; urgency=medium
 
   * naprawa monitora CPU/memory dla języków innych niż angielski
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 30 Jan 2016 22:07:14 +0100
 
-netext73 (0.9.87) stable; urgency=medium
+netext73 (0.9.87) trusty; urgency=medium
 
   * zmiana postinst i wielkości dymku yad
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 30 Jan 2016 12:40:00 +0100
 
-netext73 (0.9.86) stable; urgency=medium
+netext73 (0.9.86) trusty; urgency=medium
 
   * dymek - yad na root
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 29 Jan 2016 20:24:04 +0100
 
-netext73 (0.9.85) stable; urgency=medium
+netext73 (0.9.85) trusty; urgency=medium
 
   * logi format bash czas 7dni
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 19:55:24 +0100
 
-netext73 (0.9.84) stable; urgency=medium
+netext73 (0.9.84) trusty; urgency=medium
 
   * wysyłka logów na serwer NeteXt73
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 16:20:41 +0100
 
-netext73 (0.9.83) stable; urgency=medium
+netext73 (0.9.83) trusty; urgency=medium
 
   * zmiana linkowania gcc
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jan 2016 09:21:09 +0100
 
-netext73 (0.9.82) stable; urgency=medium
+netext73 (0.9.82) trusty; urgency=medium
 
   * poprawka instalatora intel-microcode
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 26 Jan 2016 22:33:49 +0100
 
-netext73 (0.9.81) stable; urgency=medium
+netext73 (0.9.81) trusty; urgency=medium
 
   * wstępne wsparcie dla xenial
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 23 Jan 2016 11:51:39 +0100
 
-netext73 (0.9.80) stable; urgency=medium
+netext73 (0.9.80) trusty; urgency=medium
 
   * dodany mint sarah
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 21 Jan 2016 16:09:28 +0100
 
-netext73 (0.9.79) stable; urgency=medium
+netext73 (0.9.79) trusty; urgency=medium
 
   * poprawka firmware i nowy bmc
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 21 Jan 2016 13:01:02 +0100
 
-netext73 (0.9.78) stable; urgency=medium
+netext73 (0.9.78) trusty; urgency=medium
 
   * instalator nv 16.04
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 19 Jan 2016 20:31:59 +0100
 
-netext73 (0.9.77) stable; urgency=medium
+netext73 (0.9.77) trusty; urgency=medium
 
   * zmiana zależności
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 19 Jan 2016 18:29:58 +0100
 
-netext73 (0.9.76) stable; urgency=medium
+netext73 (0.9.76) trusty; urgency=medium
 
   * czyszczenie kodu
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 17 Jan 2016 10:24:15 +0100
 
-netext73 (0.9.76) stable; urgency=medium
+netext73 (0.9.76) trusty; urgency=medium
 
   * zmiana sposobu sprawdzania aktualizacji
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 16 Jan 2016 22:05:16 +0100
 
-netext73 (0.9.75) stable; urgency=medium
+netext73 (0.9.75) trusty; urgency=medium
 
   * dymki o aktualizacjach
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 14 Jan 2016 22:07:49 +0100
 
-netext73 (0.9.74) stable; urgency=medium
+netext73 (0.9.74) trusty; urgency=medium
 
   * podświetlenie matrycy i zmiany w grub
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 14 Jan 2016 18:03:23 +0100
 
-netext73 (0.9.73) stable; urgency=medium
+netext73 (0.9.73) trusty; urgency=medium
 
   * gcc 5.3.1
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 10 Jan 2016 14:29:03 +0100
 
-netext73 (0.9.72) stable; urgency=medium
+netext73 (0.9.72) trusty; urgency=medium
 
   * zmiana linkowania gcc
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 10 Jan 2016 09:34:16 +0100
 
-netext73 (0.9.71) stable; urgency=medium
+netext73 (0.9.71) trusty; urgency=medium
 
   * linux-firmware 1.155
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 07 Jan 2016 18:36:27 +0100
 
-netext73 (0.9.70) stable; urgency=medium
+netext73 (0.9.70) trusty; urgency=medium
 
   * drobne poprawki
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 06 Jan 2016 18:01:33 +0100
 
-netext73 (0.9.69) stable; urgency=medium
+netext73 (0.9.69) trusty; urgency=medium
 
   * zmiana kolejności linkowania libisl13
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 04 Jan 2016 18:20:44 +0100
 
-netext73 (0.9.68) stable; urgency=medium
+netext73 (0.9.68) trusty; urgency=medium
 
   * zależności libisl13
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 29 Dec 2015 17:14:06 +0100
 
-netext73 (0.9.67) stable; urgency=medium
+netext73 (0.9.67) trusty; urgency=medium
 
   * automatyczna instalacja gcc
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 27 Dec 2015 13:58:51 +0100
 
-netext73 (0.9.66) stable; urgency=medium
+netext73 (0.9.66) trusty; urgency=medium
 
   * zmiana update i config
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 22 Dec 2015 06:42:45 +0100
 
-netext73 (0.9.65) stable; urgency=medium
+netext73 (0.9.65) trusty; urgency=medium
 
   * przeniesienie gcc do konfiguratora
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 21 Dec 2015 23:23:18 +0100
 
-netext73 (0.9.64) stable; urgency=medium
+netext73 (0.9.64) trusty; urgency=medium
 
   * poprawki w module gcc
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 21 Dec 2015 19:23:23 +0100
 
-netext73 (0.9.63) stable; urgency=medium
+netext73 (0.9.63) trusty; urgency=medium
 
   * gcc
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 20 Dec 2015 18:22:53 +0100
 
-netext73 (0.9.62) stable; urgency=medium
+netext73 (0.9.62) trusty; urgency=medium
 
   * kubutnu backport for Wily
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 16 Dec 2015 21:47:52 +0100
 
-netext73 (0.9.61) stable; urgency=medium
+netext73 (0.9.61) trusty; urgency=medium
 
   * dodane nowy firmware i dymki
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 15 Dec 2015 19:41:14 +0100
 
-netext73 (0.9.60) stable; urgency=medium
+netext73 (0.9.60) trusty; urgency=medium
 
   * zależności spotify
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 13 Dec 2015 10:22:18 +0100
 
-netext73 (0.9.59) stable; urgency=medium
+netext73 (0.9.59) trusty; urgency=medium
 
   * wstepne wsparcie dla mint
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 13 Dec 2015 09:39:58 +0100
 
-netext73 (0.9.58) stable; urgency=medium
+netext73 (0.9.58) trusty; urgency=medium
 
   * walidacja nr kernela sekcja update
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 09 Dec 2015 21:43:33 +0100
 
-netext73 (0.9.57) stable; urgency=medium
+netext73 (0.9.57) trusty; urgency=medium
 
   * gpu-manager.override - tryb manual dla 15.10
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 02 Dec 2015 21:59:45 +0100
 
-netext73 (0.9.56) stable; urgency=medium
+netext73 (0.9.56) trusty; urgency=medium
 
   * bcm + logi
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 26 Nov 2015 19:11:27 +0100
 
-netext73 (0.9.55) stable; urgency=medium
+netext73 (0.9.55) trusty; urgency=medium
 
   * kolejne zmiany w instalatorze NV
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 25 Nov 2015 22:14:15 +0100
 
-netext73 (0.9.54) stable; urgency=medium
+netext73 (0.9.54) trusty; urgency=medium
 
   * zmiany instalatora NV dla 15.10
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 23 Nov 2015 21:28:01 +0100
 
-netext73 (0.9.53) stable; urgency=medium
+netext73 (0.9.53) trusty; urgency=medium
 
   * zmiana serwera sum kontrolnych
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 20 Nov 2015 17:51:10 +0100
 
-netext73 (0.9.52) stable; urgency=medium
+netext73 (0.9.52) trusty; urgency=medium
 
   * naprawa instalatora NV optimus
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 19 Nov 2015 20:46:53 +0100
 
-netext73 (0.9.51) stable; urgency=medium
+netext73 (0.9.51) trusty; urgency=medium
 
   * dodanie opcji usuwania logów instalatora
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 15 Nov 2015 22:26:41 +0100
 
-netext73 (0.9.50) stable; urgency=medium
+netext73 (0.9.50) trusty; urgency=medium
 
   * przeglądarka logów instalacyjnych
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 15 Nov 2015 18:49:04 +0100
 
-netext73 (0.9.49) stable; urgency=medium
+netext73 (0.9.49) trusty; urgency=medium
 
   * logi instalacji w /tmp
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 15 Nov 2015 17:24:04 +0100
 
-netext73 (0.9.39) stable; urgency=medium
+netext73 (0.9.39) trusty; urgency=medium
 
   * zmiana repo ownCloud
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 13 Nov 2015 17:20:17 +0100
 
-netext73 (0.9.38) stable; urgency=medium
+netext73 (0.9.38) trusty; urgency=medium
 
   * naprawa instalatora NV normal
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 09 Nov 2015 18:54:38 +0100
 
-netext73 (0.9.37) stable; urgency=medium
+netext73 (0.9.37) trusty; urgency=medium
 
   * performance i powersave dla intela w grub
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 29 Oct 2015 19:43:17 +0100
 
-netext73 (0.9.36) stable; urgency=medium
+netext73 (0.9.36) trusty; urgency=medium
 
   * naprawa instalatora nv
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 28 Oct 2015 21:45:07 +0100
 
-netext73 (0.9.35) stable; urgency=medium
+netext73 (0.9.35) trusty; urgency=medium
 
   * wpisy do gruba dla intela
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 27 Oct 2015 21:40:58 +0100
 
-netext73 (0.9.34) stable; urgency=medium
+netext73 (0.9.34) trusty; urgency=medium
 
   * zmiana http na https dla sum kontrolnych
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 23 Oct 2015 09:29:49 +0200
 
-netext73 (0.9.33) stable; urgency=medium
+netext73 (0.9.33) trusty; urgency=medium
 
   * zmiana instlatora nvidia optimus
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 21 Oct 2015 19:07:51 +0200
 
-netext73 (0.9.32) stable; urgency=medium
+netext73 (0.9.32) trusty; urgency=medium
 
   * APM - dostosowanie do 15.10
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 18 Oct 2015 09:55:27 +0200
 
-netext73 (0.9.31) stable; urgency=medium
+netext73 (0.9.31) trusty; urgency=medium
 
   * usuniecie firmware iwlwifi dla kerneli 4.2
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 15 Oct 2015 18:47:24 +0200
 
-netext73 (0.9.30) stable; urgency=medium
+netext73 (0.9.30) trusty; urgency=medium
 
   * dodanie firmware iwlwifi dla kerneli 4.2
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 12 Oct 2015 20:36:15 +0200
 
-netext73 (0.9.29) stable; urgency=medium
+netext73 (0.9.29) trusty; urgency=medium
 
   * wsparcie dla bcm
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 03 Oct 2015 20:15:56 +0200
 
-netext73 (0.9.28) stable; urgency=medium
+netext73 (0.9.28) trusty; urgency=medium
 
   * naprawa zależności curl
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 24 Sep 2015 06:06:12 +0200
 
-netext73 (0.9.27) stable; urgency=medium
+netext73 (0.9.27) trusty; urgency=medium
 
   * wyłączenie jawnego pobierania sum kontrolnych na starcie
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 23 Sep 2015 17:36:15 +0200
 
-netext73 (0.9.26) stable; urgency=medium
+netext73 (0.9.26) trusty; urgency=medium
 
   * autozamykanie okna wyboru kerneli po dokonaniu wyboru
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 20 Sep 2015 16:00:18 +0200
 
-netext73 (0.9.25) stable; urgency=medium
+netext73 (0.9.25) trusty; urgency=medium
 
   * poprawka listowania kluczy GPG w module ich usuwania
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 18 Sep 2015 21:50:56 +0200
 
-netext73 (0.9.24) stable; urgency=medium
+netext73 (0.9.24) trusty; urgency=medium
 
   * wyłączenie skylake
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 08 Sep 2015 18:22:52 +0200
 
-netext73 (0.9.23) stable; urgency=medium
+netext73 (0.9.23) trusty; urgency=medium
 
   * dodanie instalatora nv i radeon do okna pierwszej instalacji
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 06 Sep 2015 12:55:33 +0200
 
-netext73 (0.9.22) stable; urgency=medium
+netext73 (0.9.22) trusty; urgency=medium
 
   * zmiana wyglądu okna monitor
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 05 Sep 2015 21:04:46 +0200
 
-netext73 (0.9.21) stable; urgency=medium
+netext73 (0.9.21) trusty; urgency=medium
 
   * zmiana wielkości okna z hasłem
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 05 Sep 2015 14:54:18 +0200
 
-netext73 (0.9.20) stable; urgency=medium
+netext73 (0.9.20) trusty; urgency=medium
 
   * skylake
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 03 Sep 2015 18:04:35 +0200
 
-netext73 (0.9.19) stable; urgency=medium
+netext73 (0.9.19) trusty; urgency=medium
 
   * zmiana zależności dla nowych sterowników nvidia
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 01 Sep 2015 17:38:26 +0200
 
-netext73 (0.9.18) stable; urgency=medium
+netext73 (0.9.18) trusty; urgency=medium
 
   * automatyzacja deinstalacji kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 31 Aug 2015 18:28:08 +0200
 
-netext73 (0.9.17) stable; urgency=medium
+netext73 (0.9.17) trusty; urgency=medium
 
   * dodanie aktualnego klucza GPG do instalatora spotify
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 27 Aug 2015 19:31:26 +0200
 
-netext73 (0.9.16) stable; urgency=medium
+netext73 (0.9.16) trusty; urgency=medium
 
   * zmiana sposobu instalacji sterowników NV
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 24 Aug 2015 21:33:08 +0200
 
-netext73 (0.9.15) stable; urgency=medium
+netext73 (0.9.15) trusty; urgency=medium
 
   * zmiana sposobu sprawdzania czy jest optimus
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 19 Aug 2015 19:59:13 +0200
 
-netext73 (0.9.14) stable; urgency=medium
+netext73 (0.9.14) trusty; urgency=medium
 
   * instalator nvidia optimus
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 15 Aug 2015 00:39:01 +0200
 
-netext73 (0.9.13) stable; urgency=medium
+netext73 (0.9.13) trusty; urgency=medium
 
   * automatyczne zamknięcie xterm przy backupie gruba
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 09 Aug 2015 13:27:57 +0200
 
-netext73 (0.9.12) stable; urgency=medium
+netext73 (0.9.12) trusty; urgency=medium
 
   * dodanie do APM opcji vsync
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 08 Aug 2015 13:45:35 +0200
 
-netext73 (0.9.11) stable; urgency=medium
+netext73 (0.9.11) trusty; urgency=medium
 
   * dodanie sprawdzania starych kerneli w o Netext'73
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 17 Jul 2015 10:16:12 +0200
 
-netext73 (0.9.10) stable; urgency=medium
+netext73 (0.9.10) trusty; urgency=medium
 
   * dodanie virtualbox 5.0
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 11 Jul 2015 12:33:38 +0200
 
-netext73 (0.9.09) stable; urgency=medium
+netext73 (0.9.09) trusty; urgency=medium
 
   * zmiana ikon kerneli i microcode
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 11 Jul 2015 08:48:53 +0200
 
-netext73 (0.9.08) stable; urgency=medium
+netext73 (0.9.08) trusty; urgency=medium
 
   * zmiana loga programu
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 09 Jul 2015 16:04:34 +0200
 
-netext73 (0.9.07) stable; urgency=medium
+netext73 (0.9.07) trusty; urgency=medium
 
   * przywrócenie menu tabeli testów pamięci
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 21:12:14 +0200
 
-netext73 (0.9.06) stable; urgency=medium
+netext73 (0.9.06) trusty; urgency=medium
 
   * nowe ikony, dostosowanie HiDPI
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 19:34:21 +0200
 
-netext73 (0.9.05) stable; urgency=medium
+netext73 (0.9.05) trusty; urgency=medium
 
   * poprawki tłumaczeń
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 15:44:03 +0200
 
-netext73 (0.9.04) stable; urgency=medium
+netext73 (0.9.04) trusty; urgency=medium
 
   * naprawa automatycznego wybierania kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 12:23:14 +0200
 
-netext73 (0.9.03) stable; urgency=medium
+netext73 (0.9.03) trusty; urgency=medium
 
   * wyłączenie języka francuskiego
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 10:30:02 +0200
 
-netext73 (0.9.02) stable; urgency=medium
+netext73 (0.9.02) trusty; urgency=medium
 
   * szczegółowe opisy kerneli premium w dymkach
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 07 Jul 2015 08:17:04 +0200
 
-netext73 (0.9.01) stable; urgency=medium
+netext73 (0.9.01) trusty; urgency=medium
 
   * modyfikacja sekcji GRUB usunięcie spejalnych ustawień dla iCorów
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 06 Jul 2015 10:12:48 +0200
 
-netext73 (0.9.00) stable; urgency=medium
+netext73 (0.9.00) trusty; urgency=medium
 
   * zatwierdzenie zmian
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 03 Jul 2015 09:31:27 +0200
 
-netext73 (0.8.97) stable; urgency=medium
+netext73 (0.8.97) trusty; urgency=medium
 
   * instalator i deinstalator poprawki
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 03 Jul 2015 09:25:05 +0200
 
-netext73 (0.8.96) stable; urgency=medium
+netext73 (0.8.96) trusty; urgency=medium
 
   * zmiana wyglądu listy usuwanych kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 02 Jul 2015 14:43:58 +0200
 
-netext73 (0.8.95) stable; urgency=medium
+netext73 (0.8.95) trusty; urgency=medium
 
   * przyspieszenie generowania listy kerneli do usunięcia
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 01 Jul 2015 11:01:23 +0200
 
-netext73 (0.8.94) stable; urgency=medium
+netext73 (0.8.94) trusty; urgency=medium
 
   * zmiana deinstalatora kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 01 Jul 2015 10:42:58 +0200
 
-netext73 (0.8.93) stable; urgency=medium
+netext73 (0.8.93) trusty; urgency=medium
 
   * dostosowanie okna netext73 do nowych kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 30 Jun 2015 18:39:28 +0200
 
-netext73 (0.8.92) stable; urgency=medium
+netext73 (0.8.92) trusty; urgency=medium
 
   * dostosowanie makefile
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 30 Jun 2015 15:54:19 +0200
 
-netext73 (0.8.91) stable; urgency=medium
+netext73 (0.8.91) trusty; urgency=medium
 
   * nparawa linkowania GCC i nowe linie kerneli premium
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 30 Jun 2015 15:46:13 +0200
 
-netext73 (0.8.90) stable; urgency=medium
+netext73 (0.8.90) trusty; urgency=medium
 
   * wyłączenie sprawdzania sensorów podczas instalacji programu
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 23 Jun 2015 09:48:31 +0200
 
-netext73 (0.8.89) stable; urgency=medium
+netext73 (0.8.89) trusty; urgency=medium
 
   * nowe okno APM
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 14 Jun 2015 16:08:06 +0200
 
-netext73 (0.8.88) stable; urgency=medium
+netext73 (0.8.88) trusty; urgency=medium
 
   * Naprawa Gtk-WARNING **: Theme file for default has no directories
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 11 Jun 2015 11:13:21 +0200
 
-netext73 (0.8.87) stable; urgency=medium
+netext73 (0.8.87) trusty; urgency=medium
 
   * przygotowanie okien do HiDPI
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 09 Jun 2015 19:17:03 +0200
 
-netext73 (0.8.86) stable; urgency=medium
+netext73 (0.8.86) trusty; urgency=medium
 
   * instalacja gcc-5 z repo NeteXt73
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 07 Jun 2015 22:05:17 +0200
 
-netext73 (0.8.85) stable; urgency=medium
+netext73 (0.8.85) trusty; urgency=medium
 
   * przeniesienie wyboru wysyłanych logów z configu do logów
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 30 May 2015 20:34:52 +0200
 
-netext73 (0.8.84) stable; urgency=medium
+netext73 (0.8.84) trusty; urgency=medium
 
   * zmiana wyglądu okna APM
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 29 May 2015 19:37:47 +0200
 
-netext73 (0.8.83) stable; urgency=medium
+netext73 (0.8.83) trusty; urgency=medium
 
   * naprawa błędu - brak modułu usługi
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 28 May 2015 08:16:26 +0200
 
-netext73 (0.8.82) stable; urgency=medium
+netext73 (0.8.82) trusty; urgency=medium
 
   * poprawki kodu
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 27 May 2015 08:51:27 +0200
 
-netext73 (0.8.81) stable; urgency=medium
+netext73 (0.8.81) trusty; urgency=medium
 
   * zmiana skryptu czas.py na czekaj.py
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 26 May 2015 09:44:27 +0200
 
-netext73 (0.8.80) stable; urgency=medium
+netext73 (0.8.80) trusty; urgency=medium
 
   * dodanie do zależności gcc-5
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 25 May 2015 08:22:44 +0200
 
-netext73 (0.8.79) stable; urgency=medium
+netext73 (0.8.79) trusty; urgency=medium
 
   * czyszczenie kodu
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 24 May 2015 12:03:05 +0200
 
-netext73 (0.8.78) stable; urgency=medium
+netext73 (0.8.78) trusty; urgency=medium
 
   * ustawianie LPT przy deinstalacji
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 18 May 2015 10:52:30 +0200
 
-netext73 (0.8.77) stable; urgency=medium
+netext73 (0.8.77) trusty; urgency=medium
 
   * wyłączenie LPT dla kerneli premium
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 18 May 2015 09:41:54 +0200
 
-netext73 (0.8.76) stable; urgency=medium
+netext73 (0.8.76) trusty; urgency=medium
 
   * naprawa zależności
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 14 May 2015 18:25:08 +0200
 
-netext73 (0.8.75) stable; urgency=medium
+netext73 (0.8.75) trusty; urgency=medium
 
   * usunięcie z paczki NeteXt73 YAD
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 14 May 2015 09:25:52 +0200
 
-netext73 (0.8.74) stable; urgency=medium
+netext73 (0.8.74) trusty; urgency=medium
 
   * dodanie wily do instalatora kerneli ppa
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 12 May 2015 14:59:20 +0200
 
-netext73 (0.8.73) stable; urgency=medium
+netext73 (0.8.73) trusty; urgency=medium
 
   * yad 0.28.1
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 24 Apr 2015 20:51:35 +0200
 
-netext73 (0.8.72) stable; urgency=medium
+netext73 (0.8.72) trusty; urgency=medium
 
   * zatwierdzenie zmian
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 06 Apr 2015 20:06:30 +0200
 
-netext73 (0.8.71) stable; urgency=medium
+netext73 (0.8.71) trusty; urgency=medium
 
   * cofnięcie do YAD 0.27
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 29 Mar 2015 22:56:09 +0200
 
-netext73 (0.8.70) stable; urgency=medium
+netext73 (0.8.70) trusty; urgency=medium
 
   * jasność skala 20-stopniowa
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 29 Mar 2015 20:47:57 +0200
 
-netext73 (0.8.69) stable; urgency=medium
+netext73 (0.8.69) trusty; urgency=medium
 
   * restart połączenia sieciowego po wzbudzeniu gdy nie ma IP
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 29 Mar 2015 11:21:09 +0200
 
-netext73 (0.8.68) stable; urgency=medium
+netext73 (0.8.68) trusty; urgency=medium
 
   * zmiany w APM_before
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 18 Mar 2015 10:01:58 +0100
 
-netext73 (0.8.67) stable; urgency=medium
+netext73 (0.8.67) trusty; urgency=medium
 
   * sterowanie jasnością z poziomu APM
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 17 Mar 2015 14:32:45 +0100
 
-netext73 (0.8.66) stable; urgency=medium
+netext73 (0.8.66) trusty; urgency=medium
 
   * zmiany w instalatorze APM 5.0
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 16 Mar 2015 19:23:21 +0100
 
-netext73 (0.8.65) stable; urgency=medium
+netext73 (0.8.65) trusty; urgency=medium
 
   * ujednolicenie APM do 5.0
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 13 Mar 2015 19:37:36 +0100
 
-netext73 (0.8.64) stable; urgency=medium
+netext73 (0.8.64) trusty; urgency=medium
 
   * YAD 0.28.1
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 12 Mar 2015 21:38:06 +0100
 
-netext73 (0.8.63) stable; urgency=medium
+netext73 (0.8.63) trusty; urgency=medium
 
   * poprawki APM 5.0
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 09 Mar 2015 21:59:32 +0100
 
-netext73 (0.8.62) stable; urgency=medium
+netext73 (0.8.62) trusty; urgency=medium
 
   * APM 5.0
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 06 Mar 2015 22:20:49 +0100
 
-netext73 (0.8.61) stable; urgency=medium
+netext73 (0.8.61) trusty; urgency=medium
 
   * YAD 0.28
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 06 Mar 2015 18:32:00 +0100
 
-netext73 (0.8.60) stable; urgency=medium
+netext73 (0.8.60) trusty; urgency=medium
 
   * APM 4.5
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 04 Mar 2015 21:33:10 +0100
 
-netext73 (0.8.59) stable; urgency=medium
+netext73 (0.8.59) trusty; urgency=medium
 
   * sprwadzanie połączenia z serwerem na strcie programu
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 04 Mar 2015 21:08:33 +0100
 
-netext73 (0.8.58) stable; urgency=medium
+netext73 (0.8.58) trusty; urgency=medium
 
   * poprawka w repo dla 15.04
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 28 Feb 2015 21:10:59 +0100
 
-netext73 (0.8.57) stable; urgency=medium
+netext73 (0.8.57) trusty; urgency=medium
 
   * naprawa pierwszej instalacji i usuwania APM
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 23 Feb 2015 21:41:22 +0100
 
-netext73 (0.8.56) stable; urgency=medium
+netext73 (0.8.56) trusty; urgency=medium
 
   * dodane repo homebank
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 23 Feb 2015 15:54:14 +0100
 
-netext73 (0.8.55) stable; urgency=medium
+netext73 (0.8.55) trusty; urgency=medium
 
   * wyłączenie glmark2 z zależności - brak wsparcia od roku
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 22 Feb 2015 10:10:19 +0100
 
-netext73 (0.8.54) stable; urgency=medium
+netext73 (0.8.54) trusty; urgency=medium
 
   * usunięcie x-terminal-emulator
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 21 Feb 2015 12:55:11 +0100
 
-netext73 (0.8.53) stable; urgency=medium
+netext73 (0.8.53) trusty; urgency=medium
 
   * lista udostępnianych plików wraz ze statusem instalcji
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 20 Feb 2015 19:29:11 +0100
 
-netext73 (0.8.52) stable; urgency=medium
+netext73 (0.8.52) trusty; urgency=medium
 
   * zatwierdzenie zmian
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 19 Feb 2015 21:38:19 +0100
 
-netext73 (0.8.51) stable; urgency=medium
+netext73 (0.8.51) trusty; urgency=medium
 
   * APM hibernacja
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 19 Feb 2015 14:25:15 +0100
 
-netext73 (0.8.50) stable; urgency=medium
+netext73 (0.8.50) trusty; urgency=medium
 
   * logi, konfigurator i tłumaczenia
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 19 Feb 2015 09:39:58 +0100
 
-netext73 (0.8.49) stable; urgency=medium
+netext73 (0.8.49) trusty; urgency=medium
 
   * zmiana w logach
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 18 Feb 2015 21:32:38 +0100
 
-netext73 (0.8.48) stable; urgency=medium
+netext73 (0.8.48) trusty; urgency=medium
 
   * poprawki kodu
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 13 Feb 2015 11:57:46 +0100
 
-netext73 (0.8.47) stable; urgency=medium
+netext73 (0.8.47) trusty; urgency=medium
 
   * dostosowanie APM do blk-mq
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 12 Feb 2015 13:17:16 +0100
 
-netext73 (0.8.46) stable; urgency=medium
+netext73 (0.8.46) trusty; urgency=medium
 
   * zmiany w logach
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 11 Feb 2015 09:40:03 +0100
 
-netext73 (0.8.45) stable; urgency=medium
+netext73 (0.8.45) trusty; urgency=medium
 
   * poprawki logów,configu i błedów w terminalu
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 07 Feb 2015 18:18:10 +0100
 
-netext73 (0.8.44) stable; urgency=medium
+netext73 (0.8.44) trusty; urgency=medium
 
   * dodanie repo inkscape
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 02 Feb 2015 18:03:54 +0100
 
-netext73 (0.8.43) stable; urgency=medium
+netext73 (0.8.43) trusty; urgency=medium
 
   * usuwanie cpufrequtils
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 28 Jan 2015 20:28:36 +0100
 
-netext73 (0.8.42) stable; urgency=medium
+netext73 (0.8.42) trusty; urgency=medium
 
   * poprawki tłumaczeń
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 22 Jan 2015 19:53:49 +0100
 
-netext73 (0.8.41) stable; urgency=medium
+netext73 (0.8.41) trusty; urgency=medium
 
   * intel turbo na AC
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 20 Jan 2015 19:33:30 +0100
 
-netext73 (0.8.40) stable; urgency=medium
+netext73 (0.8.40) trusty; urgency=medium
 
   * sprawdzanie połączenia internetowego na starcie programu
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 08 Jan 2015 22:19:01 +0100
 
-netext73 (0.8.39) stable; urgency=medium
+netext73 (0.8.39) trusty; urgency=medium
 
   * dodanie możliwości zmiany wydania w repozytorium
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 07 Jan 2015 20:46:40 +0100
 
-netext73 (0.8.38) stable; urgency=medium
+netext73 (0.8.38) trusty; urgency=medium
 
   * dodanie listowania i usuwania ppa
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 05 Jan 2015 11:33:59 +0100
 
-netext73 (0.8.37) stable; urgency=medium
+netext73 (0.8.37) trusty; urgency=medium
 
   * linSSID
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 30 Dec 2014 14:11:01 +0100
 
-netext73 (0.8.36) stable; urgency=medium
+netext73 (0.8.36) trusty; urgency=medium
 
   * życzenia noworoczne
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 29 Dec 2014 11:30:40 +0100
 
-netext73 (0.8.35) stable; urgency=medium
+netext73 (0.8.35) trusty; urgency=medium
 
   * poprawki w trybie root
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 28 Dec 2014 18:26:43 +0100
 
-netext73 (0.8.34) stable; urgency=medium
+netext73 (0.8.34) trusty; urgency=medium
 
   * zmiana okna konfiguratora programu
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 28 Dec 2014 15:34:24 +0100
 
-netext73 (0.8.33) stable; urgency=medium
+netext73 (0.8.33) trusty; urgency=medium
 
   * poprawki root-mode
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 28 Dec 2014 14:16:58 +0100
 
-netext73 (0.8.32) stable; urgency=medium
+netext73 (0.8.32) trusty; urgency=medium
 
   * prezentowanie logów w zakładkach
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 27 Dec 2014 21:07:13 +0100
 
-netext73 (0.8.31) stable; urgency=medium
+netext73 (0.8.31) trusty; urgency=medium
 
   * wycofanie 3.8.28 z instalatora PPA, bo jest pusty http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.8.13.28-utopic/
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 25 Dec 2014 11:09:16 +0100
 
-netext73 (0.8.30) stable; urgency=medium
+netext73 (0.8.30) trusty; urgency=medium
 
   * kodi zamiast xbmc
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 24 Dec 2014 09:58:21 +0100
 
-netext73 (0.8.29) stable; urgency=medium
+netext73 (0.8.29) trusty; urgency=medium
 
   * pokazywanie tabeli z wynikami po testach pamięci i procesora
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 20 Dec 2014 10:04:05 +0100
 
-netext73 (0.8.28) stable; urgency=medium
+netext73 (0.8.28) trusty; urgency=medium
 
   * APM 4.1
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 16 Dec 2014 11:00:13 +0100
 
-netext73 (0.8.27) stable; urgency=medium
+netext73 (0.8.27) trusty; urgency=medium
 
   * Dostosowanie instalatora NV do nowych paczek
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 14 Dec 2014 21:55:36 +0100
 
-netext73 (0.8.26) stable; urgency=medium
+netext73 (0.8.26) trusty; urgency=medium
 
   * dostosowanie do firmware 1.140
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 13 Dec 2014 10:24:37 +0100
 
-netext73 (0.8.25) stable; urgency=medium
+netext73 (0.8.25) trusty; urgency=medium
 
   * zmiany instalatora grafik radeon
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 09 Dec 2014 13:21:09 +0100
 
-netext73 (0.8.24) stable; urgency=medium
+netext73 (0.8.24) trusty; urgency=medium
 
   * drobne poprawki kodu
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 01 Dec 2014 11:50:11 +0100
 
-netext73 (0.8.23) stable; urgency=medium
+netext73 (0.8.23) trusty; urgency=medium
 
   * dodanie firmware iwlwifi-3160-10.ucode iwlwifi-7260-10.ucode iwlwifi-7265-10.ucode iwlwifi-7265D-10.ucode potrzebnych do kerneli 3.17+
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 30 Nov 2014 22:26:46 +0100
 
-netext73 (0.8.22) stable; urgency=medium
+netext73 (0.8.22) trusty; urgency=medium
 
   * naprawa forka w deinstalatorze przy zainstalowanym 1 kernelu
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 30 Nov 2014 12:24:36 +0100
 
-netext73 (0.8.21) stable; urgency=medium
+netext73 (0.8.21) trusty; urgency=medium
 
   * naprawa wifi N w APM
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 29 Nov 2014 10:41:44 +0100
 
-netext73 (0.8.20) stable; urgency=medium
+netext73 (0.8.20) trusty; urgency=medium
 
   * poprawki w testach
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 27 Nov 2014 17:48:32 +0100
 
-netext73 (0.8.19) stable; urgency=medium
+netext73 (0.8.19) trusty; urgency=medium
 
   * poprawki w instalatorze APM
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 26 Nov 2014 19:27:13 +0100
 
-netext73 (0.8.18) stable; urgency=medium
+netext73 (0.8.18) trusty; urgency=medium
 
   * APM v4.0
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 18 Nov 2014 09:07:05 +0100
 
-netext73 (0.8.17) stable; urgency=medium
+netext73 (0.8.17) trusty; urgency=medium
 
   * kernele vivid z ppa
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 10 Nov 2014 22:30:05 +0100
 
-netext73 (0.8.16) stable; urgency=medium
+netext73 (0.8.16) trusty; urgency=medium
 
   * APM v3.9
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 05 Nov 2014 11:42:59 +0100
 
-netext73 (0.8.15) stable; urgency=medium
+netext73 (0.8.15) trusty; urgency=medium
 
   * zarządzanie usługami systemd
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 30 Oct 2014 18:44:44 +0100
 
-netext73 (0.8.14) stable; urgency=medium
+netext73 (0.8.14) trusty; urgency=medium
 
   * APM v3.8
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 15 Oct 2014 12:25:14 +0200
 
-netext73 (0.8.13) stable; urgency=medium
+netext73 (0.8.13) trusty; urgency=medium
 
   * dynamiczna lista planisty I/O dla HDD i SSD
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 15 Oct 2014 06:48:05 +0200
 
-netext73 (0.8.12) stable; urgency=medium
+netext73 (0.8.12) trusty; urgency=medium
 
   * poprawki w konfliktach
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 14 Oct 2014 12:51:59 +0200
 
-netext73 (0.8.11) stable; urgency=medium
+netext73 (0.8.11) trusty; urgency=medium
 
   * czyszczenie kodu
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 13 Oct 2014 19:06:19 +0200
 
-netext73 (0.8.10) stable; urgency=medium
+netext73 (0.8.10) trusty; urgency=medium
 
   * deinstalator konflikotów z APM: tlp i laptop-mode-tools
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 10 Oct 2014 15:57:39 +0200
 
-netext73 (0.8.09) stable; urgency=medium
+netext73 (0.8.09) trusty; urgency=medium
 
   * GRUB - dodanie możliwości wyboru startowego kernela/systemu
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 09 Oct 2014 19:56:13 +0200
 
-netext73 (0.8.08) stable; urgency=medium
+netext73 (0.8.08) trusty; urgency=medium
 
   * usunięcie curl i perl z zależności
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 08 Oct 2014 20:50:33 +0200
 
-netext73 (0.8.07) stable; urgency=medium
+netext73 (0.8.07) trusty; urgency=medium
 
   * połączenie zarządzania upstart i sysv
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 06 Oct 2014 09:22:26 +0200
 
-netext73 (0.8.06) stable; urgency=medium
+netext73 (0.8.06) trusty; urgency=medium
 
   * poprawki tłumaczeń i ikony pp
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 02 Oct 2014 15:08:23 +0200
 
-netext73 (0.8.05) stable; urgency=medium
+netext73 (0.8.05) trusty; urgency=medium
 
   * naprawa konfliktu yad z webupd8 i yad-netext
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 01 Oct 2014 18:01:51 +0200
 
-netext73 (0.8.04) stable; urgency=medium
+netext73 (0.8.04) trusty; urgency=medium
 
   * poprawki w sysV
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 30 Sep 2014 20:19:23 +0200
 
-netext73 (0.8.03) stable; urgency=medium
+netext73 (0.8.03) trusty; urgency=medium
 
   * zmiana YAD na 0.27
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 28 Sep 2014 21:48:14 +0200
 
-netext73 (0.8.02) stable; urgency=medium
+netext73 (0.8.02) trusty; urgency=medium
 
   * usuwanie /tmp/netext73 netexta przy zmiania root-user i przy zamknięciu programu
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 25 Sep 2014 13:36:55 +0200
 
-netext73 (0.8.01) stable; urgency=medium
+netext73 (0.8.01) trusty; urgency=medium
 
   * czyszczenie kodu
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 23 Sep 2014 11:30:30 +0200
 
-netext73 (0.8.00) stable; urgency=medium
+netext73 (0.8.00) trusty; urgency=medium
 
   * stabilizacja netext'a
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 21 Sep 2014 21:14:17 +0200
 
-netext73 (0.7.96) stable; urgency=medium
+netext73 (0.7.96) trusty; urgency=medium
 
   * sumy kontrolne pobierana na starcie z innego serwera
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 20 Sep 2014 19:28:31 +0200
 
-netext73 (0.7.95) stable; urgency=medium
+netext73 (0.7.95) trusty; urgency=medium
 
   * zmiana uwierzytelniania klientów premim, indywidualne konta
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 16 Sep 2014 15:08:12 +0200
 
-netext73 (0.7.94) stable; urgency=medium
+netext73 (0.7.94) trusty; urgency=medium
 
   * przepisanie instalatora grafik na nowy serwer
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 15 Sep 2014 12:57:10 +0200
 
-netext73 (0.7.93) stable; urgency=medium
+netext73 (0.7.93) trusty; urgency=medium
 
   * dodanie do instalatora Nvidia brakujących zależności libvdpau1
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 09 Sep 2014 14:38:50 +0200
 
-netext73 (0.7.92) stable; urgency=medium
+netext73 (0.7.92) trusty; urgency=medium
 
   * rts51xx zmiany
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 29 Aug 2014 20:29:13 +0200
 
-netext73 (0.7.91) stable; urgency=medium
+netext73 (0.7.91) trusty; urgency=medium
 
   * APM 3.7
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 29 Aug 2014 12:23:42 +0200
 
-netext73 (0.7.90) stable; urgency=medium
+netext73 (0.7.90) trusty; urgency=medium
 
   * wdrożenie APM v3.6
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 23 Aug 2014 07:58:32 +0200
 
-netext73 (0.7.89) stable; urgency=medium
+netext73 (0.7.89) trusty; urgency=medium
 
   * wyłączenie wsparcia dla 32bit
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 21 Aug 2014 18:12:36 +0200
 
-netext73 (0.7.88) stable; urgency=medium
+netext73 (0.7.88) trusty; urgency=medium
 
   * GRUB nowe wpisy dla icore
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 07 Aug 2014 20:32:55 +0200
 
-netext73 (0.7.87) stable; urgency=medium
+netext73 (0.7.87) trusty; urgency=medium
 
   * update - otwieranie okna premium zamiast std, gdy mamy adres
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 21 Jul 2014 21:04:41 +0200
 
-netext73 (0.7.86) stable; urgency=medium
+netext73 (0.7.86) trusty; urgency=medium
 
   * skrypt do aktualizacji dropboxa
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 13 Jul 2014 14:39:55 +0200
 
-netext73 (0.7.85) stable; urgency=medium
+netext73 (0.7.85) trusty; urgency=medium
 
   * przywrócenie wykonania initramfs po instalacji kernela
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 09 Jul 2014 21:33:43 +0200
 
-netext73 (0.7.84) stable; urgency=medium
+netext73 (0.7.84) trusty; urgency=medium
 
   * naprawa błędu w sekcji update dla kerneli nie premium
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 08 Jul 2014 18:28:22 +0200
 
-netext73 (0.7.83) stable; urgency=medium
+netext73 (0.7.83) trusty; urgency=medium
 
   * zmiana w sekcji update - sprawdzanie dostępnych kerneli premium
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 04 Jul 2014 12:52:20 +0200
 
-netext73 (0.7.82) stable; urgency=medium
+netext73 (0.7.82) trusty; urgency=medium
 
   * zmiany w pliku makefile
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 02 Jul 2014 17:38:23 +0200
 
-netext73 (0.7.81) stable; urgency=medium
+netext73 (0.7.81) trusty; urgency=medium
 
   * APM - osobny planista SSD i HDD
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 26 Jun 2014 19:14:51 +0200
 
-netext73 (0.7.80) stable; urgency=medium
+netext73 (0.7.80) trusty; urgency=medium
 
   * zmiany dotyczące microcode dla AMD
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 26 Jun 2014 11:56:37 +0200
 
-netext73 (0.7.79) stable; urgency=medium
+netext73 (0.7.79) trusty; urgency=medium
 
   * dodanie glmark2
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 23 Jun 2014 21:54:42 +0200
 
-netext73 (0.7.78) stable; urgency=medium
+netext73 (0.7.78) trusty; urgency=medium
 
   * dodadnie do GRUB zswap.compressor lz4,lzo,deflate
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 21 Jun 2014 20:50:12 +0200
 
-netext73 (0.7.77) stable; urgency=medium
+netext73 (0.7.77) trusty; urgency=medium
 
   * poprawka sprawdzania zainstoalowanych kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 21 Jun 2014 08:04:58 +0200
 
-netext73 (0.7.76) stable; urgency=medium
+netext73 (0.7.76) trusty; urgency=medium
 
   * dodanie sysbench
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 19 Jun 2014 13:35:33 +0200
 
-netext73 (0.7.75) stable; urgency=medium
+netext73 (0.7.75) trusty; urgency=medium
 
   * wyłączenie update-initramfs z instalatora kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 17 Jun 2014 09:17:50 +0200
 
-netext73 (0.7.74) stable; urgency=medium
+netext73 (0.7.74) trusty; urgency=medium
 
   * poprawka sekcji update-dostosowanie do nowego nazewnictwa kerneli
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 16 Jun 2014 19:44:37 +0200
 
-netext73 (0.7.73) stable; urgency=medium
+netext73 (0.7.73) trusty; urgency=medium
 
   * poprawa kodu instalatora grafik
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 14 Jun 2014 19:40:14 +0200
 
-netext73 (0.7.72) stable; urgency=medium
+netext73 (0.7.72) trusty; urgency=medium
 
   * dostosowanie instalatora do nowych nazw paczek
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 08 Jun 2014 15:19:14 +0200
 
-netext73 (0.7.71) stable; urgency=medium
+netext73 (0.7.71) trusty; urgency=medium
 
   * zmiana ikony repo
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 05 Jun 2014 09:35:38 +0200
 
-netext73 (0.7.70) stable; urgency=medium
+netext73 (0.7.70) trusty; urgency=medium
 
   * poprawki kodu, szerokości okien
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 04 Jun 2014 08:07:13 +0200
 
-netext73 (0.7.69) stable; urgency=medium
+netext73 (0.7.69) trusty; urgency=medium
 
   * poprawki tłumaczeń
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 03 Jun 2014 12:30:48 +0200
 
-netext73 (0.7.68) stable; urgency=medium
+netext73 (0.7.68) trusty; urgency=medium
 
   * dodanie graficznego monitora RAM
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 02 Jun 2014 14:02:33 +0200
 
-netext73 (0.7.67) stable; urgency=medium
+netext73 (0.7.67) trusty; urgency=medium
 
   * ustawienie sztywnej skali do 6GHz dla core freq
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 02 Jun 2014 10:29:10 +0200
 
-netext73 (0.7.66) stable; urgency=medium
+netext73 (0.7.66) trusty; urgency=medium
 
   * zmiana instalatora Radeon i monitora baterii
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 31 May 2014 22:22:39 +0200
 
-netext73 (0.7.65) stable; urgency=medium
+netext73 (0.7.65) trusty; urgency=medium
 
   * zmiany w instalatorze NVidia - dostosowanie do nowych nazw paczek
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 30 May 2014 20:21:56 +0200
 
-netext73 (0.7.64) stable; urgency=medium
+netext73 (0.7.64) trusty; urgency=medium
 
   * dodanie do zależności sysv-rc-conf
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 25 May 2014 21:36:38 +0200
 
-netext73 (0.7.63) stable; urgency=medium
+netext73 (0.7.63) trusty; urgency=medium
 
   * wyłączenie wymuszenia grub background
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 25 May 2014 09:54:23 +0200
 
-netext73 (0.7.62) stable; urgency=medium
+netext73 (0.7.62) trusty; urgency=medium
 
   * stabilizowanie wersji
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 23 May 2014 14:13:53 +0200
 
-netext73 (0.7.61) stable; urgency=medium
+netext73 (0.7.61) trusty; urgency=medium
 
   * zmiana GRUB background z jpg na png
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 23 May 2014 11:37:50 +0200
 
-netext73 (0.7.60) stable; urgency=medium
+netext73 (0.7.60) trusty; urgency=medium
 
   * yad_wget multiprogress
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 20 May 2014 15:38:08 +0200
 
-netext73 (0.7.59) stable; urgency=medium
+netext73 (0.7.59) trusty; urgency=medium
 
   * dodanie grafiki do GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 18 May 2014 22:37:22 +0200
 
-netext73 (0.7.58) stable; urgency=medium
+netext73 (0.7.58) trusty; urgency=medium
 
   * możliwość wyboru rozdzielczości w GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 16 May 2014 11:19:55 +0200
 
-netext73 (0.7.58) stable; urgency=medium
+netext73 (0.7.58) trusty; urgency=medium
 
   * kubuntu ppa
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 14 May 2014 16:15:21 +0200
 
-netext73 (0.7.57) stable; urgency=medium
+netext73 (0.7.57) trusty; urgency=medium
 
   * dużo zbiór poprawek
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 13 May 2014 09:57:03 +0200
 
-netext73 (0.7.56) stable; urgency=medium
+netext73 (0.7.56) trusty; urgency=medium
 
   * poprawki w nvidia instalatorze
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 11 May 2014 14:39:38 +0200
 
-netext73 (0.7.55) stable; urgency=medium
+netext73 (0.7.55) trusty; urgency=medium
 
   * naprawa 2xnv settings
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 08 May 2014 21:25:44 +0200
 
-netext73 (0.7.54) stable; urgency=medium
+netext73 (0.7.54) trusty; urgency=medium
 
   * przejście na YAD 0.26.9
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 06 May 2014 18:31:06 +0200
 
-netext73 (0.7.53) stable; urgency=medium
+netext73 (0.7.53) trusty; urgency=medium
 
   * poprawki w repo
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 04 May 2014 18:43:48 +0200
 
-netext73 (0.7.52) stable; urgency=medium
+netext73 (0.7.52) trusty; urgency=medium
 
   * poprawka monitora systemu
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 30 Apr 2014 20:11:41 +0200
 
-netext73 (0.7.51) stable; urgency=medium
+netext73 (0.7.51) trusty; urgency=medium
 
   * integracja APM z NeteXt
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 30 Apr 2014 13:04:06 +0200
 
-netext73 (0.7.50) stable; urgency=medium
+netext73 (0.7.50) trusty; urgency=medium
 
   * firmware w repo
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 29 Apr 2014 19:03:32 +0200
 
-netext73 (0.7.49) stable; urgency=medium
+netext73 (0.7.49) trusty; urgency=medium
 
   * zmiany sprawdzania firmware w sekcji update
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 29 Apr 2014 12:33:12 +0200
 
-netext73 (0.7.48) stable; urgency=medium
+netext73 (0.7.48) trusty; urgency=medium
 
   * zmiany w module logów
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 25 Apr 2014 09:26:52 +0200
 
-netext73 (0.7.47) stable; urgency=medium
+netext73 (0.7.47) trusty; urgency=medium
 
   * zmiana natywnego serwera
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 24 Apr 2014 11:35:01 +0200
 
-netext73 (0.7.46) stable; urgency=medium
+netext73 (0.7.46) trusty; urgency=medium
 
   * dodanie kolejnego serwera do wyboru
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 24 Apr 2014 08:26:20 +0200
 
-netext73 (0.7.45) stable; urgency=medium
+netext73 (0.7.45) trusty; urgency=medium
 
   * włączanie i wyłączanie wifi N
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 22 Apr 2014 12:08:25 +0200
 
-netext73 (0.7.44) stable; urgency=medium
+netext73 (0.7.44) trusty; urgency=medium
 
   * zmiana podkreślników na spacje w module usuwania kluczy GPG
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 21 Apr 2014 08:40:54 +0200
 
-netext73 (0.7.43) stable; urgency=medium
+netext73 (0.7.43) trusty; urgency=medium
 
   * przepisanie SysV na rcconf
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 19 Apr 2014 21:05:51 +0200
 
-netext73 (0.7.42) stable; urgency=medium
+netext73 (0.7.42) trusty; urgency=medium
 
   * przepięcie na bug.netext73.pl
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 14 Apr 2014 09:12:19 +0200
 
-netext73 (0.7.42) stable; urgency=medium
+netext73 (0.7.42) trusty; urgency=medium
 
   * poprawki instalatora grafik
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 10 Apr 2014 19:09:44 +0200
 
-netext73 (0.7.41) stable; urgency=medium
+netext73 (0.7.41) trusty; urgency=medium
 
   * naprawa trybu root
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 10 Apr 2014 19:04:01 +0200
 
-netext73 (0.7.40) stable; urgency=medium
+netext73 (0.7.40) trusty; urgency=medium
 
   * zmiany w instalatorze NV i w monitorze
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 09 Apr 2014 21:16:00 +0200
 
-netext73 (0.7.39) stable; urgency=medium
+netext73 (0.7.39) trusty; urgency=medium
 
   * deinstalator przepisany na natywną konsolę
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 05 Apr 2014 12:34:57 +0200
 
-netext73 (0.7.38) stable; urgency=medium
+netext73 (0.7.38) trusty; urgency=medium
 
   * czyszczenie kodu
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 03 Apr 2014 15:38:08 +0200
 
-netext73 (0.7.37) stable; urgency=medium
+netext73 (0.7.37) trusty; urgency=medium
 
   * poprawki kodu, usunięcie dublujących się skryptów
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 02 Apr 2014 20:23:31 +0200
 
-netext73 (0.7.36) stable; urgency=medium
+netext73 (0.7.36) trusty; urgency=medium
 
   * dostosowanie Makefile do zmian
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 01 Apr 2014 13:11:11 +0200
 
-netext73 (0.7.35) stable; urgency=medium
+netext73 (0.7.35) trusty; urgency=medium
 
   * duży zestaw poprawek
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 01 Apr 2014 11:16:54 +0200
 
-netext73 (0.7.34) stable; urgency=low
+netext73 (0.7.34) trusty; urgency=low
 
   * wymuszenie hasła dla opcji restart
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 27 Mar 2014 18:54:23 +0100
 
-netext73 (0.7.33) stable; urgency=low
+netext73 (0.7.33) trusty; urgency=low
 
   * kolejne zmiany w zarządzaniu usługami, teraz cały zbiór obsługiwnany jest jednym hasłem roota
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 21 Mar 2014 17:59:13 +0100
 
-netext73 (0.7.32) stable; urgency=low
+netext73 (0.7.32) trusty; urgency=low
 
   * zmiana w tasksel i monitorach xterm na natywną konsolę
   * zmiana w upstart, hasło podawane graficznie zamiast z xterma
@@ -1550,165 +1550,165 @@ netext73 (0.7.32) stable; urgency=low
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 21 Mar 2014 13:58:01 +0100
 
-netext73 (0.7.31) stable; urgency=low
+netext73 (0.7.31) trusty; urgency=low
 
   * zmiana sposobu sprawdzania statusu usług upstart
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 15 Mar 2014 22:06:49 +0100
 
-netext73 (0.7.30) stable; urgency=low
+netext73 (0.7.30) trusty; urgency=low
 
   * dostosowanie zarządznia UPSTARTEM do trusty
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 15 Mar 2014 17:33:03 +0100
 
-netext73 (0.7.29) stable; urgency=low
+netext73 (0.7.29) trusty; urgency=low
 
   * zmiany w zarządzaniu UPSTART, sprawdznie stanu usługi nie będzie już wymagać podawania hasła
 
  -- NetBit73 <netbit73@gmail.com>  Sat, 15 Mar 2014 12:49:12 +0100
 
-netext73 (0.7.28) stable; urgency=low
+netext73 (0.7.28) trusty; urgency=low
 
   * poprawki w pliku MakeFile
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 13 Mar 2014 20:21:13 +0100
 
-netext73 (0.7.27) stable; urgency=low
+netext73 (0.7.27) trusty; urgency=low
 
   * dodanie terminalowego launchera pod nazwą: netext73
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 13 Mar 2014 19:17:31 +0100
 
-netext73 (0.7.26) stable; urgency=low
+netext73 (0.7.26) trusty; urgency=low
 
   * poprawki w instalatorach oprogramowania-przyspieszenie wyszukiwania i wyświetlania listy, doszły repozytoria
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 13 Mar 2014 18:13:44 +0100
 
-netext73 (0.7.25) stable; urgency=low
+netext73 (0.7.25) trusty; urgency=low
 
   * poprawki w tłumaczeniach, poprawki w sekcji GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 13 Mar 2014 11:06:33 +0100
 
-netext73 (0.7.24) stable; urgency=low
+netext73 (0.7.24) trusty; urgency=low
 
   * kolejne zmiany w sekcji GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 12 Mar 2014 11:12:52 +0100
 
-netext73 (0.7.23) stable; urgency=low
+netext73 (0.7.23) trusty; urgency=low
 
   * zmiany w sekcji GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 11 Mar 2014 21:43:02 +0100
 
-netext73 (0.7.22) stable; urgency=low
+netext73 (0.7.22) trusty; urgency=low
 
   * dodane nowe repozytoria
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 10 Mar 2014 15:28:20 +0100
 
-netext73 (0.7.21) stable; urgency=low
+netext73 (0.7.21) trusty; urgency=low
 
   * dodane nowe repozytoria oraz drobne poprawki
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 10 Mar 2014 15:15:08 +0100
 
-netext73 (0.7.20) stable; urgency=low
+netext73 (0.7.20) trusty; urgency=low
 
   * zmiana w sekcji APM - dodanie 4 fixów, powrót do okna APM po wykonaniu zmian celem sprawdzenia czy zaszyły
 
  -- NetBit73 <netbit73@gmail.com>  Wed, 05 Mar 2014 09:39:19 +0100
 
-netext73 (0.7.19) stable; urgency=low
+netext73 (0.7.19) trusty; urgency=low
 
   * dostosowanie APM do v3.3
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 03 Mar 2014 20:51:34 +0100
 
-netext73 (0.7.18) stable; urgency=low
+netext73 (0.7.18) trusty; urgency=low
 
   * naprawa modułu sysv
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 03 Mar 2014 11:35:32 +0100
 
-netext73 (0.7.17) stable; urgency=low
+netext73 (0.7.17) trusty; urgency=low
 
   * przywrócenie paczek i386
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 02 Mar 2014 20:54:50 +0100
 
-netext73 (0.7.16) stable; urgency=low
+netext73 (0.7.16) trusty; urgency=low
 
   * zmiany w sekcji GRUB
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 02 Mar 2014 20:39:58 +0100
 
-netext73 (0.7.15) stable; urgency=low
+netext73 (0.7.15) trusty; urgency=low
 
   * wyłączenie notify-send z zależności obowiązkowych
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 02 Mar 2014 17:39:58 +0100
 
 
-netext73 (0.7.14) stable; urgency=low
+netext73 (0.7.14) trusty; urgency=low
 
   * zmiana kolejności w changelog
   * wyłaczenie budowania paczek i386
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 28 Feb 2014 08:28:11 +0100
 
-netext73 (0.7.13) stable; urgency=low
+netext73 (0.7.13) trusty; urgency=low
 
   * dodana możliwość instalacji Vboxa
 
  -- NetBit73 <netbit73@gmail.com>  Thu, 27 Feb 2014 20:00:11 +0100
 
-netext73 (0.7.12) stable; urgency=low
+netext73 (0.7.12) trusty; urgency=low
 
   * poprawka pobierania kerneli dla K8
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 25 Feb 2014 14:16:17 +0100
 
-netext73 (0.7.11) stable; urgency=low
+netext73 (0.7.11) trusty; urgency=low
 
   * poprawki w zależnościach
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 24 Feb 2014 22:08:00 +0100
 
-netext73 (0.7.10) stable; urgency=low
+netext73 (0.7.10) trusty; urgency=low
 
   * dodanie zależnosci pm-utils, wsparcie APM dla ubuntu gnome
   * zmiana w configu programu, część opcji nie będzie wymagać restartu programu, root-mode wymaga ponownego uruchomienia programu, opcja jest zapamiętywana
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 24 Feb 2014 21:34:45 +0100
 
-netext73 (0.7.09) stable; urgency=low
+netext73 (0.7.09) trusty; urgency=low
 
   * zmiana modułu sysv, przepisanie kodu z chkconfig na sysv-rc-conf, zmniejszenie zależności programu
 
  -- NetBit73 <netbit73@gmail.com>  Mon, 24 Feb 2014 11:42:33 +0100
 
-netext73 (0.7.08) stable; urgency=low
+netext73 (0.7.08) trusty; urgency=low
 
   * wycentrowanie okien yad, poprawki kodu
 
  -- NetBit73 <netbit73@gmail.com>  Sun, 23 Feb 2014 19:17:22 +0100
 
 
-netext73 (0.7.07) unstable; urgency=medium
+netext73 (0.7.07) untrusty; urgency=medium
 
   * testowy build na githubie + launchpadzie
   * dodanie NetBit73'a - opiekuna paczek do kontaktów
-  * zmiana sposobu aktualizacji programu, testing zostaje na dotychczasowych warunkach, stable przez ppa
+  * zmiana sposobu aktualizacji programu, testing zostaje na dotychczasowych warunkach, trusty przez ppa
   * poprawki kodu celem dostosowania do potrzeb launchpada
   * zmiana yad na yad-netext, dzięki temu nie będzie on kolidował z paczkami pochodzącymi z webupd8
  
  -- NetBit73 <netbit73@gmail.com>  Sat, 22 Feb 2014 23:51:54 +0100
  
-netext73 (0.7.07-1) unstable; urgency=medium
+netext73 (0.7.07-1) untrusty; urgency=medium
 
   * rozszerzenie raportowania logów o: lspci, lsmod, lsusb
   * zmiany w modle przełączania HTTP/HTTPS - nie będzie już wymagane hasło root'a

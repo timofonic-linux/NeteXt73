@@ -4,16 +4,16 @@ Priority: extra
 Maintainer: NetBit73 <netbit73@gmail.com>
 Uploaders: NetBit73 <netbit73@gmail.com>
 Homepage: http://www.netext73.pl
-Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 7), 
+Standards-Version: 3.9.5 
 Vcs-Browser: https://github.com/NetBit73/NeteXt73
 Vcs-Git: https://github.com/NetBit73/NeteXt73.git
 
-Package: netext73
-Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Package: netext73 
+Architecture: amd64  
+Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, 
   netext73-pakiety, 
-  xterm,
+  xterm, 
   htop, 
   saidar, 
   dkms, 
@@ -33,13 +33,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
   sysbench, 
   ethtool, 
   python-gtk2, 
-  gir1.2-gtksource-3.0,
-  python, 
+  gir1.2-gtksource-3.0, 
   gcc, 
   yad, 
   ibus, 
   curl, 
   libisl13 
-Replaces: netext73
+Replaces: netext73 
 Description: NeteXt'73 - optymalizator systemu
   NeteXt'73 to rozbudowane narzedzie do wprowadzania optymalizacji systemow opartych o Ubuntu. Modyfikacje maja na celu podwyzszenie responsywnosci systemu przy jednoczesnym obnizeniu zuzycia energii.
