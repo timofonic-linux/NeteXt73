@@ -310,11 +310,11 @@ if [ "$twoj_firmware" != "$dostepny_firmware" ]; then
 	echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware)"  >> instaluj.sh
 fi
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-	if [ "$twoj_intel_microcode" != "$dostepny_intel_microcode" ]; then
-		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"  >> instaluj.sh
-	fi
 	if [ "$twoj_iucode" != "$dostepny_iucode" ]; then
 		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"  >> instaluj.sh
+	fi
+	if [ "$twoj_intel_microcode" != "$dostepny_intel_microcode" ]; then
+		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"  >> instaluj.sh
 	fi
 else
 	echo "sudo apt-get install amd64-microcode -y"  >> instaluj.sh

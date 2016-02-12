@@ -14,6 +14,7 @@ v0.9.99
 -	zmiana kolejności pierwszej instalacji
 -	poprawki kodu
 -	wyłączenie pokazywania okna z opisem programu po pierwszym użyciu
+-	zmiana kolejności instalacji iucode-tools -> intel-microcode
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
