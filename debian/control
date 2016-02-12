@@ -12,6 +12,7 @@ Vcs-Git: https://github.com/NetBit73/NeteXt73.git
 Package: netext73
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends},
+  netext73-pakiety, 
   xterm,
   htop, 
   saidar, 

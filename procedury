@@ -231,7 +231,7 @@ echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
-echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep broadcom-sta-dkms)"
+echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep broadcom-sta-dkms)"
 echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 }
@@ -261,13 +261,13 @@ echo "fi"
 
 stan_firmware(){
 export twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-export dostepny_firmware=$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware | cut -d "_" -f 2)
+export dostepny_firmware=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep linux-firmware | cut -d "_" -f 2)
 
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 	export twoj_iucode=$(dpkg -l | grep iucode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-	export dostepny_iucode=$(ls /opt/NeteXt73/pakiety/ | grep iucode | cut -d "_" -f 2)
+	export dostepny_iucode=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep iucode | cut -d "_" -f 2)
 	export twoj_intel_microcode=$(dpkg -l | grep intel-microcode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-	export dostepny_intel_microcode=$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode | cut -d "_" -f 2)
+	export dostepny_intel_microcode=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep intel-microcode | cut -d "_" -f 2)
 	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$twoj_iucode" = "$dostepny_iucode" ] && [ "$twoj_intel_microcode" = "$dostepny_intel_microcode" ]; then
 		stan_microcode=$TEXT_TAK
 	else
@@ -307,14 +307,14 @@ if [ "$non_free" = "TRUE" ]; then
 	echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
 fi
 if [ "$twoj_firmware" != "$dostepny_firmware" ]; then
-	echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep linux-firmware)"  >> instaluj.sh
+	echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep linux-firmware)"  >> instaluj.sh
 fi
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 	if [ "$twoj_iucode" != "$dostepny_iucode" ]; then
-		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep iucode-tool)"  >> instaluj.sh
+		echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep iucode-tool)"  >> instaluj.sh
 	fi
 	if [ "$twoj_intel_microcode" != "$dostepny_intel_microcode" ]; then
-		echo "sudo dpkg -i /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety/ | grep intel-microcode)"  >> instaluj.sh
+		echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep intel-microcode)"  >> instaluj.sh
 	fi
 else
 	echo "sudo apt-get install amd64-microcode -y"  >> instaluj.sh
@@ -1512,16 +1512,16 @@ echo "fi"
 
 instaluj_gcc(){
 if [ "$1" = "instaluj_nowy" ];then
-	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
-	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/"
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin"
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
+	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/"
+	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep binutils) -C /opt/"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "sudo ldconfig"
 	echo "sudo rm /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
