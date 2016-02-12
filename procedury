@@ -292,18 +292,18 @@ microcode_firmware_nonfree(){
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ]; then
       yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
-	    echo "tak" > /tmp/netext73/ok.txt
+	    non_free="TRUE"
       else
-	    echo "nie" > /tmp/netext73/ok.txt
+	    non_free="FALSE"
       fi
 else
-      echo "nie" > /tmp/netext73/ok.txt
+      non_free="TRUE"
 fi
 }
 
 microcode_instalacja(){
 echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
-if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
+if [ "$non_free" = "TRUE" ]; then
 	echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
 fi
 if [ "$twoj_firmware" != "$dostepny_firmware" ]; then
@@ -849,9 +849,9 @@ data_godzina
 if [ "$1" = "" ]; then
 	tekst_instalatora="instalator"
 else
-	tekst_instalatora=$1
+	tekst_instalatora="$1"
 fi
-xterm -T $1 -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 }
 
 #instalacja bez pytań
@@ -860,10 +860,10 @@ data_godzina
 if [ "$1" = "" ]; then
 	tekst_instalatora="instalator"
 else
-	tekst_instalatora=$1
+	tekst_instalatora="$1"
 fi
 #x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
-xterm -T $1 -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
 }
 
 #instalacja wciśnij enter
@@ -872,9 +872,9 @@ data_godzina
 if [ "$1" = "" ]; then
 	tekst_instalatora="instalator"
 else
-	tekst_instalatora=$1
+	tekst_instalatora="$1"
 fi
-xterm -T $1 -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 }
 
 pobierz_liste_kerneli(){
