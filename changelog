@@ -186,7 +186,7 @@ v0.9.26
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
 -	zmiany w obrębie modułu kluczy GPG
--	automatyczne zamykanie okna $XTERM po 5sec 
+-	automatyczne zamykanie okna xterm po 5sec 
 v0.9.24
 -	wyłączenie skylake do czasu wydania nowego gcc
 -	naprawa klawisza ppa
@@ -231,7 +231,7 @@ v0.9.14
 -	Optimus Steam Fix
 -	Logi primus opengl
 v0.9.13
--	automatyczne zamknięcie $XTERM przy backupie gruba
+-	automatyczne zamknięcie xterm przy backupie gruba
 -	odwrócenie oznaczeń vsync
 -	poprawka zmiennych
 v0.9.12
@@ -424,7 +424,7 @@ v0.8.41
 v0.8.40
 -	sprawdzanie połączenia internetowego na starcie programu
 -	poprawki w zmieniarce wydań repozytoriów
--	podświetlenie składni $XTERM
+-	podświetlenie składni xterm
 v0.8.39
 -	rozdzielenie gpg od repo
 -	dodanie otwarcia strony z opisem programu przy opcji 'pierwsza instalacja'
@@ -639,7 +639,7 @@ v0.7.72
 -	wyłączenie bug.netext73.pl - brak kasy na serwer:(
 v0.7.71
 -	zmiana ikony repo
--	pobieranie kluczy w oknie natywnym zamiast $XTERM
+-	pobieranie kluczy w oknie natywnym zamiast xterm
 -	kosmetyczne zmiany w logach APM
 -	dodanie aktywacji APM w momencie jak żaden tryb nie jest aktywny
 v0.7.70
@@ -761,8 +761,8 @@ v0.7.40
 -	zmiany w instalatorze Nvidia
 - 	zmiany w instalatorze sterowników kart graficznych
 v0.7.39
--	przeniesienie deinstalatorów z $XTERM do natywnej konsoli
--	przepisanie instalatora sterowników kart graficznych z $XTERM na natywną konsolę
+-	przeniesienie deinstalatorów z xterm do natywnej konsoli
+-	przepisanie instalatora sterowników kart graficznych z xterm na natywną konsolę
 v0.7.38
 -	czyszczenie kodu
 -	zmiana kolejności ikon programu - ustawienie tematyczne
@@ -772,7 +772,7 @@ v0.7.37
 -	poprawki w tłumaczeniach
 -	zmniejszenie ilości skryptów - usunięcie zdublowanego kodu
 -	drobne poprawki kodu
--	zmiana $XTERM na natywny terminal w zarządzaniu czyszczeniem pamięci
+-	zmiana xterm na natywny terminal w zarządzaniu czyszczeniem pamięci
 v0.7.36
 -	zmiany w pliku Makefile
 v0.7.35
@@ -785,8 +785,8 @@ v0.7.34
 v0.7.33
 -	kolejne zmiany w zarządzaniu usługami, teraz cały zbiór obsługiwany jest jednym hasłem roota
 v0.7.32
--	zmiana w tasksel i monitorach $XTERM na natywną konsolę
--	zmiana w upstart, hasło podawane graficznie zamiast z $XTERMa
+-	zmiana w tasksel i monitorach xterm na natywną konsolę
+-	zmiana w upstart, hasło podawane graficznie zamiast z xterma
 -	paypal :)
 -	zmiana w chkconfig długości nazw dla usług skanowanych
 -	zmiany w sekcji monitor, monitor baterii nie pokaże się w menu jeżeli nie mamy baterii
@@ -1018,7 +1018,7 @@ v0.6.20
 -	poprawki w sekcji microcode
 v0.6.19
 -	zmiany w sekcji monitor systemu, doszły dodatkowe okna: powertop, saidar i HTOP wraz z możliwością wybory, który ma się uruchomić, oczywiście programy HTOP, saidar i powertop muszą być zainstalowane, program zapamiętuje wybrane przez nas programy w pliku konfiguracyjnym
-- 	doszły nazwy okien XTERM, wcześniej wszystkie nazywały się bash
+- 	doszły nazwy okien xterm, wcześniej wszystkie nazywały się bash
 -	dodane pytanie o restart komputera po dodaniu lub usunięciu konta gościa, restart wymagany, aby ustawienia weszły w życie
 v0.6.18
 -	dodany powertop do modułu monitor systemu
