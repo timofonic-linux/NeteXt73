@@ -12,6 +12,7 @@ v0.9.99
 -	wget no-check-certificate
 -	nie ma takiego pliku ~/.gtkrc-2.0
 -	zmiana kolejności pierwszej instalacji
+-	poprawki kodu
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku

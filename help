@@ -50,37 +50,13 @@ elif [ "$1" = "kontakty" ]; then
 		su $userek -c "bash /opt/NeteXt73/NeteXt73_root kontakty"
 	else
 		bash /opt/NeteXt73/NeteXt73_root kontakty
-	  
 	fi
 	rm -f $res1 $res2 $res3
 else
 	if [ "$USER" = "root" ]; then
-		if [ -e ~/.netext73/jezyk ]; then
-			if [ "$(cat ~/.netext73/jezyk)" = "polski" ];then
-				sudo -u $userek bash << EOF
-				xdg-open $adres_opisu
-EOF
-			else
-				sudo -u $userek bash << EOF
-				xdg-open $adres_opisu
-EOF
-			fi
-		else
 			sudo -u $userek bash << EOF
 			xdg-open $adres_opisu
 EOF
-		fi
 	else
-		if [ -e ~/.netext73/jezyk ]; then
-			if [ "$(cat ~/.netext73/jezyk)" = "polski" ];then
-				xdg-open $adres_opisu
-			else
-				xdg-open $adres_opisu
-			fi
-		else
-			xdg-open $adres_opisu
-		fi
-	fi
-
-
+		xdg-open $adres_opisu
 fi

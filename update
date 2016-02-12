@@ -94,7 +94,10 @@ konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/s
 usun
 
 if [ "$1" = "first" ]; then
-	/opt/NeteXt73/./help & #odpalenie strony z opisem
+	if [ ! -e ~/.netext73/opis_programu ]; then
+		/opt/NeteXt73/./help & #odpalenie strony z opisem
+		echo "TRUE" > ~/.netext73/opis_programu
+	fi
 	a1="TRUE"
 	a2="TRUE"
 	a3="TRUE"
