@@ -54,10 +54,8 @@ if [ "$1" = "kontakty" ]; then
 	fi
 else
 	if [ "$USER" = "root" ]; then
-	#if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ] && [ -e /tmp/netext73/stan_netext ] && [ "$(cat /tmp/netext73/stan_netext)" = "root" ] && [ "$(echo $1 | grep 'NeteXt73')" = "" ]; then
 		sudo -S $1
 	else
-		#echo "root" > /tmp/netext73/stan_netext
 		while ! yad --center --on-top --title="$nazwa_skryptu1 -  Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
 			if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
 				exit 0

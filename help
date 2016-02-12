@@ -59,4 +59,5 @@ else
 EOF
 	else
 		xdg-open $adres_opisu
+	fi
 fi

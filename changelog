@@ -13,6 +13,7 @@ v0.9.99
 -	nie ma takiego pliku ~/.gtkrc-2.0
 -	zmiana kolejności pierwszej instalacji
 -	poprawki kodu
+-	wyłączenie pokazywania okna z opisem programu po pierwszym użyciu
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
@@ -891,19 +892,19 @@ v0.6.91.20
 v0.6.91.19
 -	przeniesienie ze skryptów włączania i wyłączania repo partnerów do sekcji zarządzania oprogramowaniem dawniej repo. Nowe funkcjonalności związane z instalacją oprogramowania w sekcji zarządzanie oprogramowaniem, nazwy własnych pakietów, które mają pojawiać się w menu instalatora można dodać do pliku ~/.netext73/soft
 v0.6.91.18
--	poprawki w sekcji instalatora sterowników Nv0., poprawki w sekcji update, dodatkowe wpisy dla sekcji grub
+-	poprawki w sekcji instalatora sterowników Nvidia, poprawki w sekcji update, dodatkowe wpisy dla sekcji grub
 v0.6.91.17
 -	nowy moduł w sekcji repozytorium, do dodawania i usuwania repozytoriów
 v0.6.91.16
 -	poprawki w sekcji update
 v0.6.91.15
--	naprawa dwukliku na ikonie logów, zmiana adresów na zmienne-przygotowanie pod migrację,poprawa splasha dla kart Nv0.
+-	naprawa dwukliku na ikonie logów, zmiana adresów na zmienne-przygotowanie pod migrację,poprawa splasha dla kart Nvidia
 v0.6.91.14
 -	zmiany w sekcji update: one click update itp
 v0.6.91.13
 -	zmieny w sekcji APM, sekcji gościa, sekcji kontakt i w instalatorze kerneli
 v0.6.91.12
--	poprawa ekranu splash po instalacji sterowników Nv0.idia, usuwanie katalogu /home/root/ po zakończeniu używania trybu root
+-	poprawa ekranu splash po instalacji sterowników Nvidia, usuwanie katalogu /home/root/ po zakończeniu używania trybu root
 v0.6.91.11
 -	poprawki dla powerbtn w APM
 v0.6.91.10
@@ -951,7 +952,7 @@ v0.6.73
 v0.6.72
 -	poprawki opisów i tłumaczeń ikon programu (FadeMind)
 v0.6.71
-- 	wyłączenie sprawdzania czy jest Nv0.idia, przy optimusie funkcja ta sprawiała kłopoty
+- 	wyłączenie sprawdzania czy jest Nvidia, przy optimusie funkcja ta sprawiała kłopoty
 v0.6.69-70
 -	poprawka w sekcji deinstalator kerneli, przy braku kerneli poza aktualnie używanym, zamiast pokazywać pustą listę wyświetla informację o braku kerneli do usunięcia, zmiana okna zenity na notify OSD przy instalatorach nvidia i radeon w przypadku nie wykrycia obsługiwanej karty graficznej
 v0.6.68
@@ -1006,7 +1007,7 @@ v0.6.26
 v0.6.25
 -	zmiany w tworzeniu i przywracaniu repozytoriów. Teraz archiwizowany jest cały katalog /etc/apt do pliku: ~/Pobrane/source.list.backup_$(date +%d-%m-%y)_$(lsb_release -irs | tr '\n' '_').tar.gz, przywracanie tworzy ze starego katalogu /etc/apt katalog /etc/apt~, tak aby w razie problemów przywrócić ręcznie stan wyjściowy
 v0.6.24
--v0.6.23
+v0.6.23
 -	instalowanie zależności, aby działała sekcja monitor
 	modyfikacja modułu instalator kerneli, doszła możliwość instalacji kerneli saucy z ppa
 v0.6.22
