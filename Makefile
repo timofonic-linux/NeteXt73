@@ -99,6 +99,7 @@ install_translations_files:
 install_launcher:
 	$(MKDIR) -p $(DESTDIR)$(PREFIX)$(BINDIR)
 	$(INSTALL) 0755 $(MENU_DIR)/netext73 $(DESTDIR)$(PREFIX)$(BINDIR)
+	$(INSTALL) 0755 $(MENU_DIR)/netext73-paste $(DESTDIR)$(PREFIX)$(BINDIR)
 	
 install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
