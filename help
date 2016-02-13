@@ -37,13 +37,7 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 
 if [ "$1" = "paypal" ]; then
-	if [ "$USER" = "root" ]; then
-		sudo -u $userek bash << EOF
-		xdg-open 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY'
-EOF
-	else
-		xdg-open "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY"
-	fi
+	yad --center --title="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --window-icon="/opt/NeteXt73/ikony/paypal.png" --html --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 
 elif [ "$1" = "kontakty" ]; then
 	if [ "$USER" = "root" ]; then
@@ -53,11 +47,5 @@ elif [ "$1" = "kontakty" ]; then
 	fi
 	rm -f $res1 $res2 $res3
 else
-	if [ "$USER" = "root" ]; then
-			sudo -u $userek bash << EOF
-			xdg-open $adres_opisu
-EOF
-	else
-		xdg-open $adres_opisu
-	fi
+	yad --center --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="$adres_opisu" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 fi

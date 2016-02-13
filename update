@@ -229,21 +229,9 @@ if [ "$1" != "start" ]; then
 	elif [ $klawisz = "3" ]; then  #lista zmian
 	    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
 		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
-			if [ "$USER" = "root" ]; then
-				sudo -u $userek bash << EOF
-				xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
-EOF
-			else
-				xdg-open "https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable"
-			fi
+			yad --center --title="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --width=$((950*$skala)) --height=$((600*$skala)) --browser
 		else
-			if [ "$USER" = "root" ]; then
-				sudo -u $userek bash << EOF
-				xdg-open "https://www.kernel.org"
-EOF
-			else
-				xdg-open "https://www.kernel.org"
-			fi
+			yad --center --title="https://www.kernel.org" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 		fi
 	    fi
 	fi

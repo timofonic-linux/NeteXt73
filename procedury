@@ -1582,7 +1582,7 @@ fi
 
 #odpalanie strony domowej 
 if [ ! -e ~/.netext73/strona_domowa ]; then
-	xdg-open "http://www.netext73.pl/p/netext73-poczatek.html"
+	yad --center --title="http://www.netext73.pl/p/netext73-poczatek.html" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="http://www.netext73.pl/p/netext73-poczatek.html" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 	echo "TRUE" > ~/.netext73/strona_domowa
 fi
 #życzenia świąteczne

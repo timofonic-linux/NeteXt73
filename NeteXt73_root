@@ -50,7 +50,7 @@ if [ "$1" = "kontakty" ]; then
 	klawisz=$?
 	rm $res0 $res1 $res2 $res3 -f
 	if [ "$klawisz" = "2" ]; then
-		xdg-open "http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html"
+		yad --center --title="http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html" --width=$((950*$skala)) --height=$((600*$skala)) --browser
 	fi
 else
 	if [ "$USER" = "root" ]; then
