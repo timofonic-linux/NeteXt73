@@ -86,7 +86,7 @@ fi
 if [ -e ~/.Xresources ] && [ "$(grep faceSize ~/.Xresources)" != "" ]; then
 	xterm_font="$(grep 'faceSize' ~/.Xresources | awk '{print $2}')"
 else
-	xterm_font="5"
+	xterm_font="8"
 fi
 #gcc
 if [ "$(gcc --version | grep -i ext73)" != "" ];then
