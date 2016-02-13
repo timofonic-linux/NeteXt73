@@ -116,7 +116,7 @@ res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
 
 yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="NeteXt'73 -root mode:CHK" --field="HiDPI:CHK" --field="$TEXT_XTERM_SIZE:NUM" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$(gcc --version | head -n 1)" "$(cat lista_gcc2.txt)" "$automatyczna_instalacja" "$archiwum_deb" "$root_mode" "$HiDPI" "$xterm_font[!8..20[!1]]" --button="$TEXT_CONFIG3:2" &> $res1 &
 yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu &> $res2 &
-yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((690*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$TEXT_SUMY_KONTROLNE:2"
+yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((690*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):2"
 klawisz=$?
 if [ "$klawisz" = 0 ]; then 
 	if [ "$(grep "$TEXT_TAK" $res1)" != "" ]; then
