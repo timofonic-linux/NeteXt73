@@ -878,7 +878,7 @@ xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/net
 }
 
 pobierz_liste_kerneli(){
-wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_POBIERANIE_GOTOWE\n\n($TEXT_SUMY_KONTROLNE)"
+wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_POBIERANIE_GOTOWE\n\n$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' ')"
 tar -xzf dostepne_kernele.tar.gz -C /tmp/netext73/sumy/
 rm -f dostepne_kernele.tar.gz
 }

@@ -18,6 +18,7 @@ v0.9.99
 -	oddzielenie pakietów od NeteXta
 -	poprawione zależności
 -	poprawka w sekcji config przy błędzie gtk-message
+-	xfont size w configu
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku

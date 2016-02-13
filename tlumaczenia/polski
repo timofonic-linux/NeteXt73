@@ -106,6 +106,7 @@ export TEXT_CONFIG13="Zmiana trybu ROOT wymaga ponownego ręcznego uruchomienia 
 export TEXT_PRZESLIJ_LOGI="Wysyłka logów"
 export TEXT_ZAZNACZ_LOGI="Zaznacz logi, które chcesz wysłać na serwer:"
 export TEXT_ZAZNACZ_LOGI_OPCJE="Opcje"
+export TEXT_XTERM_SIZE="xterm wielkość liter"
 
 #########################################################################################################################################################################
 #tlumaczenia_deinstalator
