@@ -145,9 +145,11 @@ if [ "$klawisz" = 0 ]; then
 			rm -f *.txt
 		fi
 		#kasowanie śmieci w configach
-		for i in $(echo apm_status HiDPI kernel_premium root_mode archiwum_deb instalator_kerneli kolor_textu soft wysylkalogow jezyk strona_domowa kernel_automat monitor); do
+		for i in $(ls -la ~/.netext73/ | grep -v drw | awk '{print $9}'); do
+		#echo apm_status HiDPI kernel_premium root_mode archiwum_deb instalator_kerneli kolor_textu soft wysylkalogow jezyk strona_domowa kernel_automat monitor); do
 			if [ -e ~/.netext73/$i ]; then
 				sed -i '/.*yad.*/ d' ~/.netext73/$i
+				sed -i '/Gtk-Message.*/ d' ~/.netext73/$i
 				sed -i '/^[ \t]*$/ d' ~/.netext73/$i
 			fi
 		done
