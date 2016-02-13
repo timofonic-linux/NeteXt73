@@ -20,6 +20,7 @@ v0.9.99
 -	poprawka w sekcji config przy błędzie gtk-message
 -	xfont size w configu
 -	otwieranie linków w yad zamiast przeglądarce
+-	zmiany okna "o programie"
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku

@@ -40,18 +40,19 @@ if [ "$1" = "kontakty" ]; then
 	res1=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
 	res2=$(mktemp --tmpdir=/tmp/netext73 netext73_2.XXXXXXXX)
 	res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
-
+	res4=$(mktemp --tmpdir=/tmp/netext73 netext73_4.XXXXXXXX)
+	res5=$(mktemp --tmpdir=/tmp/netext73 netext73_5.XXXXXXXX)
+	
 	yad --plug=$KEY --tabnum=1 --text="$TEXT_O_PROGRAMIE" &> $res0 &
 	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty &> $res1 &
 	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog &> $res2 &
 	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE &> $res3 &
-	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" \
-	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((340*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_BUG:2"
+	yad --plug=$KEY --tabnum=5 --html --uri="http://www.netext73.pl" --browser &> $res4 &
+	yad --plug=$KEY --tabnum=6 --html --uri="http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html" --browser &> $res5 &
+	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_HOME_PAGE" --tab="$TEXT_BUG" \
+	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((950*$skala)) --height=$((600*$skala)) --button="$TEXT_ZAMKNIJ:1"
 	klawisz=$?
-	rm $res0 $res1 $res2 $res3 -f
-	if [ "$klawisz" = "2" ]; then
-		yad --center --title="http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="http://www.netext73.pl/2014/02/netext73-zgaszanie-bedow.html" --width=$((950*$skala)) --height=$((600*$skala)) --browser
-	fi
+	rm $res0 $res1 $res2 $res3 $res4 $res5 -f
 else
 	if [ "$USER" = "root" ]; then
 		sudo -S $1
