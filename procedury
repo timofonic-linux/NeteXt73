@@ -319,7 +319,7 @@ if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 else
 	echo "sudo apt-get install amd64-microcode -y"  >> instaluj.sh
 fi
-echo "rm -f /tmp/netext73/ok.txt"  >> instaluj.sh
+
 }
 
 instalacja_firmware(){
@@ -1607,5 +1607,5 @@ fi
 }
 
 pastebinit_netext73(){
-curl -d title=$1 -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
+curl -d title="$1" -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
 }
