@@ -143,7 +143,7 @@ if [ "$1" = "nvidia" ]; then
 					fi
 					rm *.txt -f
 					if [ -z "$primus" ]; then
-						opusc__mala_petle
+						opusc_mala_petle
 					fi
 			done
 		fi

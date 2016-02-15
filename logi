@@ -36,6 +36,9 @@ source /opt/NeteXt73/procedury
 #Logi systemowe
 
 cd /tmp/netext73
+koniec="NIE"
+petla_duza="tak"
+while [ $petla_duza = "tak" ]; do
 please_wait
 
 if [ -e losowa ];then
@@ -390,8 +393,8 @@ if [ "$klawisz" = "2" ]; then
       rm /tmp/netext73/sumy/pliki.txt $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11 $res12 $res13 $res14 $res15 -f
 elif [ "$klawisz" = "3" ]; then
 
-	petla_duza="tak"
-	while [ $petla_duza = "tak" ]; do
+	petla="tak"
+	while [ $petla = "tak" ]; do
 		a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort | uniq) --button="$TEXT_USUN_WYNIK:2" --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
 		klawisz=$?
 		if [ "$klawisz" = "0" ]; then
@@ -416,7 +419,7 @@ elif [ "$klawisz" = "3" ]; then
 			wynik=$(echo $a | cut -d '|' -f 1)
 			rm /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik -f
 		else
-			opusc_petle
+			opusc_mala_petle
 		fi
 	done	      
 elif [ "$klawisz" = "0" ]; then
@@ -471,6 +474,12 @@ elif [ "$klawisz" = "0" ]; then
 		cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
 	fi
 #EOF
-	fi
+elif [ "$klawisz" = "1" ]; then
+	koniec="TAK"
+fi
 rm -f $res0 $res1 $res2 $res3 $res4 $res5 $res6 $res7 $res8 $res9 $res10 $res11 $res12 /tmp/netext73/sumy/pakiety.txt
 rm *.log losowa -f
+	if [ "$koniec" = "TAK" ]; then
+		opusc_petle
+	fi
+done

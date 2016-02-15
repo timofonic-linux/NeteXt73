@@ -1488,7 +1488,7 @@ opusc_petle(){
 	rm *.txt -f *.sh
 }
 
-opusc__mala_petle(){
+opusc_mala_petle(){
 	petla="nie"
 	rm *.txt -f *.sh
 }

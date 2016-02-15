@@ -81,7 +81,7 @@ while [ $petla_duza = "tak" ]; do
 			fi
 			rm *.txt -f
 		if [ -z "$a" ]; then
-			opusc__mala_petle
+			opusc_mala_petle
 		fi
 		done
 	    #menu="$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1B!$TEXT_MENU_USLUGI1C!$TEXT_MENU_USLUGI0 systemd"
@@ -173,7 +173,7 @@ while [ $petla_duza = "tak" ]; do
 					fi
 				fi
 				if [ -z "$a" ]; then
-					opusc__mala_petle
+					opusc_mala_petle
 				fi
 				done
 			#SysV - expert
@@ -242,7 +242,7 @@ while [ $petla_duza = "tak" ]; do
 						fi
 					fi
 					if [ -z "$a" ]; then
-						opusc__mala_petle
+						opusc_mala_petle
 					fi
 				  done
 			fi

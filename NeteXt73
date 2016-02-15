@@ -31,7 +31,7 @@
 #procedury
 
 source /opt/NeteXt73/procedury
-if [ -e /tmp/netext73/sumy ]; then
+if [ -e /tmp/netext73/sumy ] && [ "$USER" != "root" ]; then
 	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
 	exit 1
 fi
