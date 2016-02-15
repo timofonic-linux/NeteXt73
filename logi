@@ -335,19 +335,19 @@ res11=$(mktemp --tmpdir=/tmp/netext73 netext73_11.XXXXXXXX)
 res12=$(mktemp --tmpdir=/tmp/netext73 netext73_12.XXXXXXXX)
 
 #zakładki
-yad --plug=$KEY --tabnum=1 --text="$(cat zakladka1.log)"	&> $res0 &
-yad --plug=$KEY --tabnum=2 --text-info --filename="netext.log"	&> $res1 &
-yad --plug=$KEY --tabnum=3 --text-info --filename="opengl$losowa.log"	&> $res2 &
-yad --plug=$KEY --tabnum=4 --text-info --filename="dmesg.log"	&> $res3 &
-yad --plug=$KEY --tabnum=5 --text-info --filename="kern.log"	&> $res4 &
-yad --plug=$KEY --tabnum=6 --text-info --filename="firewall.log" 	&> $res5 &
-yad --plug=$KEY --tabnum=7 --text-info --filename="dmidecode.log" 	&> $res6 &
-yad --plug=$KEY --tabnum=8 --text-info --filename="glxinfo$losowa.log"	&> $res7 &
-yad --plug=$KEY --tabnum=9 --text-info --filename="apmsystem$losowa.log"	&> $res8 &
-yad --plug=$KEY --tabnum=10 --text-info --filename="lsmodsystem$losowa.log"	&> $res9 &
-yad --plug=$KEY --tabnum=11 --text-info --filename="lspcisystem$losowa.log"	&> $res10 &
-yad --plug=$KEY --tabnum=12 --text-info --filename="lsusbsystem$losowa.log"	&> $res11 &
-yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" --form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" --field="kern.log:CHK" --field="firewall.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" --field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" $s1 $s2 $s3 $s4 $s5 $s6 $s7 $s8 $s9	$s10 &> $res12 &
+yad --plug=$KEY --tabnum=1 --text="$(cat zakladka1.log)"	1> $res0 &
+yad --plug=$KEY --tabnum=2 --text-info --filename="netext.log"	1> $res1 &
+yad --plug=$KEY --tabnum=3 --text-info --filename="opengl$losowa.log"	1> $res2 &
+yad --plug=$KEY --tabnum=4 --text-info --filename="dmesg.log"	1> $res3 &
+yad --plug=$KEY --tabnum=5 --text-info --filename="kern.log"	1> $res4 &
+yad --plug=$KEY --tabnum=6 --text-info --filename="firewall.log" 	1> $res5 &
+yad --plug=$KEY --tabnum=7 --text-info --filename="dmidecode.log" 	1> $res6 &
+yad --plug=$KEY --tabnum=8 --text-info --filename="glxinfo$losowa.log"	1> $res7 &
+yad --plug=$KEY --tabnum=9 --text-info --filename="apmsystem$losowa.log"	1> $res8 &
+yad --plug=$KEY --tabnum=10 --text-info --filename="lsmodsystem$losowa.log"	1> $res9 &
+yad --plug=$KEY --tabnum=11 --text-info --filename="lspcisystem$losowa.log"	1> $res10 &
+yad --plug=$KEY --tabnum=12 --text-info --filename="lsusbsystem$losowa.log"	1> $res11 &
+yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" --form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" --field="kern.log:CHK" --field="firewall.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" --field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" $s1 $s2 $s3 $s4 $s5 $s6 $s7 $s8 $s9	$s10 1> $res12 &
 yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab-pos="left" \
 --tab="main" --tab="netext" --tab="OpenGl" --tab="dmesg" --tab="kern" --tab="firewall" --tab="dmidecode" \
 --tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
@@ -368,18 +368,18 @@ if [ "$klawisz" = "2" ]; then
 	res14=$(mktemp --tmpdir=/tmp/netext73 netext73_14.XXXXXXXX)
 	res15=$(mktemp --tmpdir=/tmp/netext73 netext73_15.XXXXXXXX)
 	
-	yad --plug=$KEY --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" &> $res4 &
-	yad --plug=$KEY --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" &> $res5 &
-	yad --plug=$KEY --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" &> $res6 &
-	yad --plug=$KEY --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" &> $res7 &
-	yad --plug=$KEY --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" &> $res8 &
-	yad --plug=$KEY --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" &> $res9 &
-	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" &> $res10 &
-	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" &> $res11 &
-	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" &> $res12 &
-	yad --plug=$KEY --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" &> $res13 &
-	yad --plug=$KEY --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" &> $res14 &
-	yad --plug=$KEY --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" &> $res15 &
+	yad --plug=$KEY --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> $res4 &
+	yad --plug=$KEY --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> $res5 &
+	yad --plug=$KEY --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" 1> $res6 &
+	yad --plug=$KEY --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" 1> $res7 &
+	yad --plug=$KEY --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> $res8 &
+	yad --plug=$KEY --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> $res9 &
+	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> $res10 &
+	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> $res11 &
+	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" 1> $res12 &
+	yad --plug=$KEY --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> $res13 &
+	yad --plug=$KEY --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> $res14 &
+	yad --plug=$KEY --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> $res15 &
 
 	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " \
       --tab="catalyst" --tab="nvidia" --tab="k8" --tab="atom" \
@@ -403,8 +403,8 @@ elif [ "$klawisz" = "3" ]; then
 			res0=$(mktemp --tmpdir=/tmp/netext73 netext73_0.XXXXXXXX)
 			res1=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
 
-			yad --plug=$KEY --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" &> $res0 &
-			yad --plug=$KEY --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" &> $res1 &
+			yad --plug=$KEY --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" 1> $res0 &
+			yad --plug=$KEY --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" 1> $res1 &
 			yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 			klawisz=$?
 			if [ "$klawisz" = "0" ]; then
