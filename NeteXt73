@@ -30,9 +30,13 @@
 #########################################################################################################################################################################
 #procedury
 
+source /opt/NeteXt73/procedury
+if [ -e /tmp/netext73/sumy ]; then
+	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
+	exit 1
+fi
 rm -rf /tmp/netext73/sumy/*
 mkdir -p /tmp/netext73/sumy
-source /opt/NeteXt73/procedury
 
 
 
