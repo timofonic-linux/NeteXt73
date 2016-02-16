@@ -25,6 +25,7 @@ v0.9.99
 -	ignorowanie błędów gtkrc
 -	walidacja podwójnego uruchomienia programu
 -	zapętlenie logów
+- 	poprawki tłumaczeń
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku

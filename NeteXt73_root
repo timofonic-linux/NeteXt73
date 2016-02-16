@@ -33,6 +33,7 @@ cd /opt/NeteXt73/
 source /opt/NeteXt73/procedury
 
 if [ "$1" = "kontakty" ]; then
+	please_wait
 	KEY="$(echo $RANDOM)"
 
 	#zmienne losowe
@@ -49,6 +50,7 @@ if [ "$1" = "kontakty" ]; then
 	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE 1> $res3 &
 	yad --plug=$KEY --tabnum=5 --html --uri="http://www.netext73.pl?m=1" --browser 1> $res4 &
 	yad --plug=$KEY --tabnum=6 --form --field="$TEXT_UZYTKOWNIK:RO" "$USER" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> $res5 &
+	please_wait kill
 	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_HOME_PAGE" --tab="$TEXT_BUG" \
 	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((950*$skala)) --height=$((600*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_WYSLIJ_ZGLOSZENIE:2"
 	klawisz=$?
