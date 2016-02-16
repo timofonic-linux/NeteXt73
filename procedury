@@ -266,8 +266,8 @@ export dostepny_firmware=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep linux-firmwa
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 	export twoj_iucode=$(dpkg -l | grep iucode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
 	export dostepny_iucode=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep iucode | cut -d "_" -f 2)
-	export twoj_intel_microcode=$(dpkg -l | grep intel-microcode | awk '{print $3}' | head -n 1 | sed 's/~.*//')
-	export dostepny_intel_microcode=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep intel-microcode | cut -d "_" -f 2)
+	export twoj_intel_microcode=$(dpkg -l | grep intel-microcode | awk '{print $3}' | head -n 1 | sed 's/~.*//' | cut -d '.' -f 2)
+	export dostepny_intel_microcode=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep intel-microcode | cut -d "_" -f 2 | cut -d '.' -f 2)
 	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$twoj_iucode" = "$dostepny_iucode" ] && [ "$twoj_intel_microcode" = "$dostepny_intel_microcode" ]; then
 		stan_microcode=$TEXT_TAK
 	else
@@ -280,13 +280,21 @@ elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
 		stan_microcode="-"
 	fi
 fi
-if [ "$twoj_firmware" = "$dostepny_firmware" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
+porownaj_liczby $twoj_firmware $dostepny_firmware
+if [ "$return_code" = "0" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
 	stan_microcode=$TEXT_TAK
 else
 	stan_microcode="-"
 fi
 }
 
+porownaj_liczby(){
+num1=$1
+num2=$2
+awk 'BEGIN {return_code=('$num1' >= '$num2') ? 0 : 1; exit} END {exit return_code}'
+   return_code=$?
+
+}
 microcode_firmware_nonfree(){
 #nonfree
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ]; then

@@ -26,6 +26,7 @@ v0.9.99
 -	walidacja podwójnego uruchomienia programu
 -	zapętlenie logów
 - 	poprawki tłumaczeń
+-	lepsze speradzanie dostępności linux-firmware
 v0.9.98
 -	przyspieszenie startu programu
 -	pobieranie listy kerneli w postaci pojedynczego spakowanego pliku
