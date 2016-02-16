@@ -31,7 +31,14 @@
 #procedury
 
 source /opt/NeteXt73/procedury
-if [ -e /tmp/netext73/sumy ] && [ "$USER" != "root" ]; then
+#zapobieganie dwukrotnemu uruchomieniu
+if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ] && [ "$(pgrep NeteXt73 | wc -l )" -gt "4" ]; then
+	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
+	exit 1
+elif [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" != "TRUE" ] && [ "$(pgrep NeteXt73 | wc -l )" -gt "2" ]; then
+	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
+	exit 1
+elif [ ! -e ~/.netext73/root_mode ] && [ "$(pgrep NeteXt73 | wc -l )" -gt "2" ]; then
 	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
 	exit 1
 fi
