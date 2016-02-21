@@ -399,7 +399,9 @@ export TEXT_BACK_OK="OK: Brak zagrożenia w procesach SSHD."
 export TEXT_SYSBENCH_PROGRESS="Trwa test Sysbench,\npo jego zakończeniu \npojawi się tabela z wynikiem."
 export TEXT_USUN_WYNIK="Usuń wynik"
 export TEXT_PPAPURGE="Usuń wskazane repozytorium i przywróć oficjalne pakiety jeżeli są dostępne"
-
+export TEXT_SELECT_TO_KILL="Wybierz proces, który chcesz zakończyć:"
+export TEXT_LISTA_PROCESOW="Lista wszystkich procesów użytkownika "
+export TEXT_PROCESY=" :"
 
 #########################################################################################################################################################################
 

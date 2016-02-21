@@ -408,6 +408,9 @@ export TEXT_BACK_OK="OK: No indication of Fokirtor found."
 export TEXT_SYSBENCH_PROGRESS="Sysbench test in progress."
 export TEXT_USUN_WYNIK="Remove result"
 export TEXT_PPAPURGE="Disable a PPA and reverts to the official packages if applicable"
+export TEXT_SELECT_TO_KILL="Please select a process to kill:"
+export TEXT_LISTA_PROCESOW="List all "
+export TEXT_PROCESY=" processes:"
 
 #########################################################################################################################################################################
 
