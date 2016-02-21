@@ -45,9 +45,9 @@ if [ "$1" = "testy" ]; then
 #inne skrypty
 else
 	if [ "$(cat /etc/sysctl.conf | grep 'net.ipv6.conf.all.disable_ipv6 = 1')" = "" ]; then
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17"
+		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
 	else
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17"
+		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
 	fi
 	ikonka="/opt/NeteXt73/ikony/skrypty.png"
 fi
@@ -324,6 +324,9 @@ if [ $klawisz = 0 ]; then
 		else
 			xterm -T "Dropbox" -e bash -c "killall dropbox;cd ~;rmdir --ignore-fail-on-non-empty .dropbox-dist && wget -O - 'http://www.dropbox.com/download?plat=lnx.x86_64' | tar xzf - ; echo -e \"$TEXT_INSTALACJA2\"; read ent"
 		fi
+	#kill process
+	elif [ "$skrypt" = "$MENU18" ]; then
+		kill_process
 	fi
 fi
 

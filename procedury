@@ -1617,3 +1617,19 @@ fi
 pastebinit_netext73(){
 curl -d title="$1" -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
 }
+
+kill_process(){
+petla="tak"
+while [ $petla = "tak" ]; do
+	process=$(ps -u $USER | yad --list --title="Kill Process" --window-icon="process-stop" --buttons-layout=center --column "Please select a process to kill:" --text="List all $USER processes:" --width $((350*$skala)) --height $((450*$skala)))
+	ans=`echo $?` 
+		if test "$ans" -eq "0"; then 
+			select=`echo $process | cut -d" " -f1` 
+			kill $select 
+		fi 
+		
+		if test "$ans" -eq "1"; then 
+			petla="nie" 
+		fi
+done
+}
