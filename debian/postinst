@@ -1,3 +1,12 @@
 #!/bin/bash
 
+#crontab
+uzytkownik=$(who | awk '{print $1}' | head -n 1)
+if [ -e /var/spool/cron/crontabs/$uzytkownik ]; then
+	if [ "$(grep 'update start' /var/spool/cron/crontabs/$uzytkownik)" = "" ]; then
+		echo '@hourly env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
+	fi
+else
+	echo '@hourly env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
+fi
 exit 0

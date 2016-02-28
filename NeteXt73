@@ -65,7 +65,7 @@ if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; 
 	fi
 fi
 
-sumy &
+#sumy &
 zaleznosci &
 /opt/NeteXt73/./update start &
 
