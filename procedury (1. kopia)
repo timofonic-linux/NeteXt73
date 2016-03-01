@@ -672,14 +672,8 @@ elif [ "$apmik" = "nowy" ]; then
 	if [ -e /etc/apm-ext73/ ] && [ "$(ls /etc/apm-ext73/ | wc -l)" != "11" ] || [ "$twoj_apm" != "$wersja_apm" ] ; then
 		stan_apm="-"
 	else
-		if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
-			katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
-		else
-			#desktop
-			katalog="/etc/rc.local"
-		fi
-		if [ "$(grep advanced_power_management $katalog)" != "" ]; then
-			stan_apm=$(cat $katalog | grep advanced_power_management | head -n 1 | sed 's/.*\///' | cut -d '_' -f 6)
+		if [ -e /etc/udev/rules.d/50-udev-apm-ext73.rules ]; then
+			stan_apm=$(cat /etc/udev/rules.d/50-udev-apm-ext73.rules | grep advanced_power_management | head -n 1 | sed 's/.*\///' | cut -d '_' -f 6)
 		else
 			stan_apm="-"
 		fi

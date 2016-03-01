@@ -675,7 +675,7 @@ elif [ "$apmik" = "nowy" ]; then
 		if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
 			katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
 		else
-			#desktop
+		#desktop
 			katalog="/etc/rc.local"
 		fi
 		if [ "$(grep advanced_power_management $katalog)" != "" ]; then

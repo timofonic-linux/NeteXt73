@@ -83,10 +83,10 @@ while [ $petla_duza = "tak" ]; do
 
 	#sprawdzenie stanu czeków
 	stan_apm_config
-
+	echo $stan_apm
 	aktualny_apm=$(echo $stan_apm | awk '{print $1}')
 	menu_apm=$(echo "!conservative-conservative!ondemand-ondemand!intel-performance!intel-powersave!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
-	menu=$(echo "$aktualny_apm$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
+	menu=$(echo "$aktualny_apm$menu_apm" | sed -e 's/!!/!/' -e sed 's/!$//')
 	
 	#ustawienie jasności wg aktualnej
         katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
