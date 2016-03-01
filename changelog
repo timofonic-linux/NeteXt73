@@ -4,6 +4,8 @@
 v1.0.01
 -	cron dla update'ów
 -	KDE Connect Indicator dla Ubuntu
+-	poprawka APM - desktop dla systemd
+-	poprawka usuwania APM dla desktop
 v1.0.00
 -	zatwierdzenie zmian
 v0.9.99
