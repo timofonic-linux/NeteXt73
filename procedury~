@@ -841,6 +841,10 @@ echo "sudo sed -i '/apm_status_fix/d' /etc/rc.local"
 echo "if [ -e /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then"
 echo "sudo rm -f /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla"
 echo "fi"
+#usunięcie wpisów rc.local
+echo "sudo sed -i '/apm-ext73/d' /etc/rc.local"
+echo "sudo sed -i '/apm_status_fix/d' /etc/rc.local"
+echo "sudo sed -i '/exit 0/d' /etc/rc.local"
 }
 
 usun_kernel(){

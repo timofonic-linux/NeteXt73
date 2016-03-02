@@ -379,14 +379,14 @@ if [ "$klawisz" = "2" ]; then
 	yad --plug=$KEY --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> $res9 &
 	yad --plug=$KEY --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> $res10 &
 	yad --plug=$KEY --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> $res11 &
-	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "silvermont") --column "$TEXT_ZNITY1" --column "kernel silvermont" 1> $res12 &
+	yad --plug=$KEY --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "skylake") --column "$TEXT_ZNITY1" --column "kernel skylake" 1> $res12 &
 	yad --plug=$KEY --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> $res13 &
 	yad --plug=$KEY --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> $res14 &
 	yad --plug=$KEY --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> $res15 &
 
 	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " \
       --tab="catalyst" --tab="nvidia" --tab="k8" --tab="atom" \
-      --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
+      --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="skylake" \
       --tab="brazos" --tab="buldozer" --tab="piledriver" \
       --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
 
