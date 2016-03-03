@@ -8,6 +8,7 @@ v1.0.01
 -	poprawka usuwania APM dla desktop
 -	silvermont
 -	nowe ikony celeron i atom
+-	zmiany w skrypcie zamykania procesów zombie
 v1.0.00
 -	zatwierdzenie zmian
 v0.9.99

@@ -71,20 +71,22 @@ if [ $klawisz = 0 ]; then
 	#zabijamy procesy zombie
 	elif [ "$skrypt" = "$MENU4" ]; then
 		ps axo stat,ppid,pid,comm | grep -w defunct > procesy.txt
-		if [ "$(cat procesy.txt)" = "" ]; then
-			yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --text="$TEXT_ZOMBIE2"
+		if [ "$(ls /tmp/netext73/ -la | grep procesy.txt | awk '{print $5}')" = "0" ]; then
+			dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_ZOMBIE2"
 		else
 			sed -i 1d procesy.txt
 			sed -i '/^[^#]/s:^:FALSE :' procesy.txt
 			a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/skrypty.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="$TEXT_ZOMBIE1" --column="" --column="STAT" --column="PPID" --column="PID" --column="COMMAND" --checklist --list $(cat procesy.txt))
-			echo $a > zabij
-			sed -i 's/TRUE/\n/g' zabij; sed -i '/^\ *$/d' zabij
-			for i in $(cat zabij  | cut -d '|' -f 3)
+			echo $a > zabij.txt
+			naglowek > instaluj.sh
+			sed -i 's/TRUE/\n/g' zabij.txt; sed -i '/^\ *$/d' zabij.txt
+			for i in $(cat zabij.txt  | cut -d '|' -f 3)
 			do
-				sudo kill $i
+				echo "sudo kill $i" >>instaluj.sh
 			done
+			instalacja
 		fi
-		rm *.txt -f
+		rm *.txt instaluj.sh -f
 	    
 	#odpalamy tasksel
 	elif [ "$skrypt" = "$MENU5" ]; then
