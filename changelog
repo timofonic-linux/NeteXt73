@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.02
+-	naprawa błędu krytycznego instalatora Radeona
 v1.0.01
 -	cron dla update'ów
 -	KDE Connect Indicator dla Ubuntu

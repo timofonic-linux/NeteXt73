@@ -159,25 +159,12 @@ elif [ "$1" = "radeon" ]; then
 			klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 			if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 				ster1=$(echo $ster.deb | sed "s/fglrx/fglrx-amdcccle/")
-				ster2="brak"
-				if [ "$(cat index.html | grep $(echo $ster.deb | sed "s/fglrx/fglrx-core/"))" = "" ];then
-					yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1
+				ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
+				yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
+				if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
+					instaluj_RADEON
 				else
-					ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
-					yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
-				fi
-				if [ "$ster2" = "brak" ]; then
-					if [ -e $ster.deb ] && [ -e $ster1 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ]; then
-						instaluj_RADEON
-					else
-						yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
-					fi
-				elif [ "$ster2" != "brak" ]; then
-					if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
-						instaluj_RADEON
-					else
-						yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
-					fi
+					yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
 				fi
 			fi
 		fi

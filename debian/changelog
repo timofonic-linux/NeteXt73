@@ -1,3 +1,9 @@
+netext73 (1.0.02) trusty; urgency=medium
+
+  * naprawa instlatora Radeon
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 03 Mar 2016 20:14:14 +0100
+
 netext73 (1.0.01) trusty; urgency=medium
 
   * cron dla update'ów
