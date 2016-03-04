@@ -40,9 +40,10 @@ if [ "$1" = "start" ]; then
 	if [ ! -e /tmp/netext73/sumy ]; then
 		mkdir -p /tmp/netext73/sumy
 	fi
+	cd /tmp/netext73
+	sumy &
 fi
 cd /tmp/netext73
-sumy &
 
 usun(){
 rm *.html* -f
@@ -158,13 +159,12 @@ fi
 sprawdz_kernel
 
 if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
-	stable=$TEXT_BRAK_DANYCH
+	stable="$TEXT_BRAK_DANYCH"
 	nr=""
 else
-	stable=$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')
-	nr=$stable
+	stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')"
+	nr="$stable"
 fi
-
 #kernel zainstalowany
 if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH

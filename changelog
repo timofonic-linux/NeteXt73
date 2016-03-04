@@ -6,6 +6,8 @@ v1.0.02
 -	poprawki tłumaczeń
 -	zmiana timeout dla kerneli z 5 na 15
 -	zmiana repo Chrome na arch=amd64
+-	poprawka sprawdzania ostatniego wydania na kernel.org
+-	drobne poprawki
 v1.0.01
 -	cron dla update'ów
 -	KDE Connect Indicator dla Ubuntu

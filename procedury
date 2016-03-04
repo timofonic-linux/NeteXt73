@@ -199,8 +199,6 @@ else
 	#pobieranie kerneli e X t 7 3
 	#nazwy paczek dla v30.x
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
-	echo $nazwa_paczki
-	echo $a
 	yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki
 fi
 rm ./index.html -f
@@ -1562,13 +1560,13 @@ sumy(){
 #pobranie sum kontrolnych
 cd /tmp
 #wydanie stable
-wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null &
+wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null 
 #Sumy kontrolne
 wget $adres_sum_kontrolnych --no-check-certificate 2> /dev/null
 openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 rm sumy_kontrolne.txt -f
 if [ "$(cat $sumy_kontrolne)" = "" ]; then
-		yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+	yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
 fi
 }
