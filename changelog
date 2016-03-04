@@ -3,6 +3,7 @@
 
 v1.0.03
 -	walidacja wyboru profili APM
+-	poprawka zarządzania usługami systemd
 v1.0.02
 -	naprawa błędu krytycznego instalatora Radeona
 -	poprawki tłumaczeń
