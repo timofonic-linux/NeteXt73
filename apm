@@ -85,8 +85,14 @@ while [ $petla_duza = "tak" ]; do
 	stan_apm_config
 
 	aktualny_apm=$(echo $stan_apm | awk '{print $1}')
-	menu_apm=$(echo "!conservative-conservative!ondemand-ondemand!intel-performance!intel-powersave!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
-	menu=$(echo "$aktualny_apm$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
+	if [ "$(cat /proc/cpuinfo | grep -i -e i3 -e i5 -e i7)" != "" ] ; then
+		#wybór APM dla i3, i5, i7
+		menu_apm=$(echo "intel-performance!intel-powersave" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
+	else
+		#wybór APM dla pozostałych
+		menu_apm=$(echo "!conservative-conservative!ondemand-ondemand!intel-performance!intel-powersave!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
+	fi
+	menu=$(echo "$aktualny_apm!$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
 	
 	#ustawienie jasności wg aktualnej
         katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
