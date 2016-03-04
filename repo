@@ -215,7 +215,7 @@ baza=(
 	"Spotify - is a digital music service"
 	"spotify-client"
 
-	"deb http://dl.google.com/linux/chrome/deb/ stable main"
+	"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
 	"Chrome - zamknięta przeglądarka www Google Chrome"
 	"Chrome - closed source web browser Google Chrome"
 	"google-chrome-stable"

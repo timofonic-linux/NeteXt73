@@ -5,6 +5,7 @@ v1.0.02
 -	naprawa błędu krytycznego instalatora Radeona
 -	poprawki tłumaczeń
 -	zmiana timeout dla kerneli z 5 na 15
+-	zmiana repo Chrome na arch=amd64
 v1.0.01
 -	cron dla update'ów
 -	KDE Connect Indicator dla Ubuntu
