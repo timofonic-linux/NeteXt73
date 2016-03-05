@@ -5,6 +5,7 @@ v1.0.04
 -	dymek systemowy w trybie root
 -	przebudowa zarządzania usługami dla systemd
 -	zmiana sposobu sprawdzania APM - intel pstate
+-	zmiana porządku ikon w kernelach premium
 v1.0.03
 -	walidacja wyboru profili APM
 -	poprawka zarządzania usługami systemd
