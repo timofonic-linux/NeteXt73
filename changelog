@@ -6,6 +6,7 @@ v1.0.03
 -	poprawka zarządzania usługami systemd
 -	dymek kdialog dla kde
 -	naprawa dymków yad dla kde
+-	nowy dymek yad dla trybu root
 v1.0.02
 -	naprawa błędu krytycznego instalatora Radeona
 -	poprawki tłumaczeń
