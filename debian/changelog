@@ -1,3 +1,9 @@
+netext73 (1.0.04) trusty; urgency=medium
+
+  * dymek systemowy w trybie root
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 05 Mar 2016 16:24:17 +0100
+
 netext73 (1.0.03) trusty; urgency=medium
 
   * walidacja wyboru profili APM

@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.04
+-	dymek systemowy w trybie root
 v1.0.03
 -	walidacja wyboru profili APM
 -	poprawka zarządzania usługami systemd
@@ -49,7 +51,7 @@ v0.9.99
 -	walidacja podwójnego uruchomienia programu
 -	zapętlenie logów
 - 	poprawki tłumaczeń
--	lepsze speradzanie dostępności linux-firmware
+-	lepsze sprawdzanie dostępności linux-firmware
 -	process killer
 v0.9.98
 -	przyspieszenie startu programu
