@@ -52,24 +52,29 @@ while [ $petla_duza = "tak" ]; do
 			elif [ "$(systemctl is-enabled $i | grep disabled)" != "" ];then
 				echo "FALSE "$i" - +" >> uslugi_off.txt
 			fi
-		 done 2>&1 | pobieranie
-		if [ "$(ls -la /etc/init.d | grep ondemand | grep 'rwxr-xr-x')" != "" ]; then
-			echo "FALSE ondemand + -" >> uslugi_on.txt
-		else
-			echo "FALSE ondemand - +" >> uslugi_off.txt
-		fi
-		 cat uslugi_on.txt uslugi_off.txt > uslugi.txt
-		 a=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat uslugi.txt))
+		done 2>&1 | pobieranie
+		ls /etc/init.d | grep -v "README" > sysv.txt
+		for i in $(cat sysv.txt); do
+			if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
+				echo "FALSE $i + -" >> uslugi_on.txt
+			else
+				echo "FALSE $i - +" >> uslugi_off.txt
+			fi
+		done
+		cat uslugi_on.txt uslugi_off.txt > uslugi.txt
+		a=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat uslugi.txt))
 			if [ $? = "0" ]; then
 				if [ "$a" != "" ]; then
 					echo $a | sed 's/|/\n/g' | sed '/^+/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > 12.txt
 					for a1 in $(cat 12.txt)
 					do
-						if [ "$a1" = "ondemand" ]; then
-							if [ "$(ls -la /etc/init.d | grep ondemand | grep 'rwxr-xr-x')" != "" ]; then
-								sudo chmod a-x /etc/init.d/ondemand
+						if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
+							if [ "$(ls -la /etc/init.d | grep $a1 | grep 'rwxr-xr-x')" != "" ]; then
+								sudo service $a1 stop
+								sudo chmod a-x /etc/init.d/$a1
 							else
-								sudo chmod a+x /etc/init.d/ondemand
+								sudo service $a1 start
+								sudo chmod a+x /etc/init.d/$a1
 							fi
 						else
 							if [ "$(cat uslugi_on.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then
