@@ -102,22 +102,6 @@ konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/s
 }
 usun
 
-if [ "$1" = "first" ]; then
-	if [ ! -e ~/.netext73/opis_programu ]; then
-		/opt/NeteXt73/./help & #odpalenie strony z opisem
-		echo "TRUE" > ~/.netext73/opis_programu
-	fi
-	a1="TRUE"
-	a2="TRUE"
-	a3="TRUE"
-	a4="TRUE"
-	a7="TRUE"
-	nv_radeon
-	aktualizuj_calosc
-	usun
-	exit 0
-fi
-
 #firmware
 stan_firmware
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
@@ -186,7 +170,7 @@ else
 	fi
 fi
 
-#GCC
+#gcc
 twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
 dostepny_gcc=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
 if [ "$twoj_gcc" = "$dostepny_gcc" ];then
@@ -196,6 +180,22 @@ else
 	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
 	a7="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
+fi
+
+if [ "$1" = "first" ]; then
+	if [ ! -e ~/.netext73/opis_programu ]; then
+		/opt/NeteXt73/./help & #odpalenie strony z opisem
+		echo "TRUE" > ~/.netext73/opis_programu
+	fi
+	a1="TRUE"
+	a2="TRUE"
+	a3="TRUE"
+	a4="TRUE"
+	#a7 zaznaczone na podstawie stanu gcc
+	nv_radeon
+	aktualizuj_calosc
+	usun
+	exit 0
 fi
 
 if [ "$1" != "start" ]; then

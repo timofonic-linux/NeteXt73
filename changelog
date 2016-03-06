@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.05
+-	pierwsza instalacja gcc zaznaczone tylko gdy jest inny niż dostarczany
 v1.0.04
 -	dymek systemowy w trybie root
 -	przebudowa zarządzania usługami dla systemd
