@@ -154,7 +154,7 @@ GenericName[zh_TW]=Bulldozer
 
 
 Exec=/opt/NeteXt73/./kernele bulldozer
-Icon=/opt/NeteXt73/ikony/amd.png
+Icon=/opt/NeteXt73/ikony/buldozer.png
 Terminal=false
 StartupNotify=true
 Type=Application

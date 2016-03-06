@@ -154,7 +154,7 @@ GenericName[zh_TW]=Piledriver
 
 
 Exec=/opt/NeteXt73/./kernele piledriver
-Icon=/opt/NeteXt73/ikony/amd.png
+Icon=/opt/NeteXt73/ikony/piledriver.png
 Terminal=false
 StartupNotify=true
 Type=Application
