@@ -42,10 +42,9 @@ while [ $petla_duza = "tak" ]; do
 	if [ "$(journalctl -u cron | grep systemd)" != "" ];then
 	 petla="tak"
 		 while [ $petla = "tak" ]; do
-		 rm uslugi*.txt -f
-		 systemctl list-unit-files | grep -v -E "@|systemd*|plymouth|dbus|initd|alsa|console|udev|masked|static" | grep service | sed 's/●/ /g' | awk '{print $1}' | sort | uniq  > uslugi.txt
-                 systemctl list-unit-files | grep 'forward.socket' | sed 's/●/ /g' | awk '{print $1}' | sed 's/-forward.socket//g' | sort | uniq  >> uslugi.txt
-		 #włączone
+		 rm uslugi.*.txt -f
+		 systemctl list-unit-files | grep -v -E "@|apport|systemd*|plymouth|dbus|initd|alsa|console|udev|masked|static" | grep -e service -e 'forward.socket' | sed 's/●/ /g' | awk '{print $1}' | sed 's/-forward.socket//g' | sort | uniq  > uslugi.txt
+                 #włączone
 		 for i in $(cat uslugi.txt); do
 			if [ "$(systemctl is-enabled $i | grep enabled)" != "" ];then
 				echo "FALSE "$i" +" >> uslugi_on.txt
@@ -60,8 +59,8 @@ while [ $petla_duza = "tak" ]; do
 			else
 				echo "FALSE "$i" -" >> uslugi_off.txt
 			fi
-		done
-		cat uslugi_on.txt uslugi_off.txt > uslugi.txt
+		done 2>&1 | pobieranie
+		cat uslugi_on.txt uslugi_off.txt |sort | uniq > uslugi.txt
 		a=$(yad --center --height=$((680*$skala)) --width=$((600*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --checklist --list $(cat uslugi.txt))
 			if [ $? = "0" ]; then
 				if [ "$a" != "" ]; then
