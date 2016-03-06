@@ -90,7 +90,7 @@ while [ $petla_duza = "tak" ]; do
 		menu_apm=$(echo "intel-performance!intel-powersave" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	else
 		#wybór APM dla pozostałych
-		menu_apm=$(echo "!conservative-conservative!ondemand-ondemand!intel-performance!intel-powersave!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
+		menu_apm=$(echo "conservative-conservative!ondemand-ondemand!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	fi
 	menu=$(echo "$aktualny_apm!$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
 	

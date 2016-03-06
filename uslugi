@@ -48,21 +48,21 @@ while [ $petla_duza = "tak" ]; do
 		 #włączone
 		 for i in $(cat uslugi.txt); do
 			if [ "$(systemctl is-enabled $i | grep enabled)" != "" ];then
-				echo "FALSE "$i" + -" >> uslugi_on.txt
+				echo "FALSE "$i" +" >> uslugi_on.txt
 			elif [ "$(systemctl is-enabled $i | grep disabled)" != "" ];then
-				echo "FALSE "$i" - +" >> uslugi_off.txt
+				echo "FALSE "$i" -" >> uslugi_off.txt
 			fi
 		done 2>&1 | pobieranie
 		ls /etc/init.d | grep -v "README" > sysv.txt
 		for i in $(cat sysv.txt); do
 			if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
-				echo "FALSE $i + -" >> uslugi_on.txt
+				echo "FALSE "$i" +" >> uslugi_on.txt
 			else
-				echo "FALSE $i - +" >> uslugi_off.txt
+				echo "FALSE "$i" -" >> uslugi_off.txt
 			fi
 		done
 		cat uslugi_on.txt uslugi_off.txt > uslugi.txt
-		a=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat uslugi.txt))
+		a=$(yad --center --height=$((680*$skala)) --width=$((600*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --checklist --list $(cat uslugi.txt))
 			if [ $? = "0" ]; then
 				if [ "$a" != "" ]; then
 					echo $a | sed 's/|/\n/g' | sed '/^+/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > 12.txt
@@ -93,7 +93,6 @@ while [ $petla_duza = "tak" ]; do
 			opusc_mala_petle
 		fi
 		done
-	    #menu="$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1B!$TEXT_MENU_USLUGI1C!$TEXT_MENU_USLUGI0 systemd"
 	else
 		uslugi=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --text="<span color=\"$kolor_textu\">$TEXT_MENU_USLUGI</span>" --form --field=" :CB" "$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1B!$TEXT_MENU_USLUGI1C"  --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 		klawisz=$?; uslugi=$(echo $uslugi | cut -d "|" -f 1)
