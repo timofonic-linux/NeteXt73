@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.06
+-	APM 5.1
+-	sterowanie wentylatorami dla 14.04
+-	podświetlenie dla samsunga
+-	naprawa uśpienia Yoga
 v1.0.05
 -	pierwsza instalacja gcc zaznaczone tylko gdy jest inny niż dostarczany
 -	posortowana lista repozytoriów

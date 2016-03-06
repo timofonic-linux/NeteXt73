@@ -1,3 +1,9 @@
+netext73 (1.0.06) trusty; urgency=medium
+
+  * APM 5.1
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 06 Mar 2016 22:07:49 +0100
+
 netext73 (1.0.05) trusty; urgency=medium
 
   * pierwsza instalacja gcc zaznaczone tylko gdy jest inny niż dostarczany

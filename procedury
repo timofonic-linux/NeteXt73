@@ -365,10 +365,12 @@ if [ "$apmik" = "stary" ]; then
 	#przegrywanie plików APM`
 	sudo cp /tmp/apm-ext73/advanced_power_management* /etc/pm/power.d/
 	sudo cp /tmp/apm-ext73/brightness /etc/apm-ext73/
-	sudo chmod a+x /usr/lib/pm-utils/power.d/xfs_buffer /usr/lib/pm-utils/power.d/disable_wol 
+	sudo cp /tmp/apm-ext73/99fancontrol  /etc/pm/sleep.d/
+	sudo chmod a+x /usr/lib/pm-utils/power.d/xfs_buffer /usr/lib/pm-utils/power.d/disable_wol /etc/pm/sleep.d/99fancontrol
 	sudo chmod a-x /etc/pm/power.d/*
 	sudo chown root:root /etc/pm/power.d/*
 	sudo chown root:root /etc/apm-ext73/*
+	sudo chown root:root /etc/pm/sleep.d/99fancontrol
 	#przegrywanie udev dla jasności
 	sudo cp /tmp/apm-ext73/60-brightness-udev-apm-ext73.rules /etc/udev/rules.d/
 	sudo chown root:root /etc/udev/rules.d/*
@@ -411,7 +413,7 @@ elif [ "$apmik" = "nowy" ]; then
 		sudo sed -i '/apm_status_fix/d' /etc/rc.local
 		sudo sed -i '/exit 0/d' /etc/rc.local
 		echo '/etc/apm-ext73/wol false'  | sudo tee -a /etc/rc.local
-		echo '/etc/apm-ext73/advanced_power_management_by_ext73_performance-ondemand_v5.0 false' | sudo tee -a /etc/rc.local
+		echo "/etc/apm-ext73/$(ls /etc/apm-ext73/ | grep advanced_power_management_by_ext73_performance-ondemand) false" | sudo tee -a /etc/rc.local
 		echo '/etc/apm-ext73/brightness false' | sudo tee -a /etc/rc.local
 		echo '/etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
 		echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
@@ -562,6 +564,14 @@ if [ "$vsync_on" = "FALSE" ]; then
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
 fi
+#samsung_laptop
+if [ "$samsung_laptop" = "TRUE" ]; then
+	sudo rmmod samsung_laptop
+	sudo sed - 's/#\/sbin\/rmmod samsung_laptop/\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+else
+	sudo modprobe samsung_laptop
+	sudo sed - 's/\/sbin\/rmmod samsung_laptop/#\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+fi
 }
 
 apm_zmiana_config(){
@@ -647,6 +657,14 @@ if [ "$(grep vsync ~/.netext73/apm_status | cut -d ' ' -f 2)" = "FALSE" ];then
 	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
 else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
+fi
+#samsung_laptop
+if [ "$( grep stan_samsung ~/.netext73/apm_status | cut -d ' ' -f 2)" = "TRUE" ];then
+	sudo rmmod samsung_laptop
+	sudo sed - 's/#\/sbin\/rmmod samsung_laptop/\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+else
+	sudo modprobe samsung_laptop
+	sudo sed - 's/\/sbin\/rmmod samsung_laptop/\#/sbin\/rmmod samsung_laptop/g' $katalog_apm
 fi
 }
 
@@ -776,7 +794,14 @@ stan_apm_config(){
 	else
 		export vsync_on="TRUE"
 	fi
-
+	
+	#stan samsung
+	if [ "$(lsmod | grep samsung_laptop)" != "" ]; then
+		export stan_samsung="FALSE"
+	else
+		export stan_samsung="TRUE"
+	fi
+	
 	export wifi_n_on_przed=$wifi_n_on
 	export wifi_batt_fix_przed=$wifi_batt_fix
 	export wifi_batt_on_przed=$wifi_batt_on
@@ -788,7 +813,8 @@ stan_apm_config(){
 	export turbo_ac_on_przed=$turbo_ac_on
 	export hibernacja_menu_przed=$hibernacja_menu
 	export vsync_on_przed=$vsync_on
-
+	export stan_samsung_przed=$stan_samsung
+	
 	#wysłanie danych do configu
 	if [ "$1" = "czeki" ]; then
 		if [ "$apmik" = "stary" ]; then
@@ -806,7 +832,8 @@ stan_apm_config(){
 		echo "turbo_batt_on 	$turbo_batt_on" >> ~/.netext73/apm_status
 		echo "turbo_ac_on 	$turbo_ac_on" >> ~/.netext73/apm_status
 		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
-		echo "vsync_on 	$vsync_on" >> ~/.netext73/apm_status
+		echo "vsync_on 		$vsync_on" >> ~/.netext73/apm_status
+		echo "stan_samsung 	$stan_samsung" >> ~/.netext73/apm_status
 	fi
 }
 

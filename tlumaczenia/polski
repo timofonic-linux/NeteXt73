@@ -52,6 +52,7 @@ export TEXT_BRIGHTNES="Podświetlenie"
 export TEXT_STEROWANIE_JASNOSCIA="Sterowanie jasnością"
 export TEXT_JASNOSC_NA_BATT="Jasność ekranu na baterii"
 export TEXT_JASNOSC_NA_AC="Jasność ekranu na zasilaczu"
+export TEXT_SAMSUNG="Samsung laptop - podświetlanie"
 
 #########################################################################################################################################################################
 #tlumaczenia_backuprepo
