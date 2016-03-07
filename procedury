@@ -368,6 +368,7 @@ if [ "$apmik" = "stary" ]; then
 	sudo cp /tmp/apm-ext73/99fancontrol  /etc/pm/sleep.d/
 	sudo chmod a+x /usr/lib/pm-utils/power.d/xfs_buffer /usr/lib/pm-utils/power.d/disable_wol /etc/pm/sleep.d/99fancontrol
 	sudo chmod a-x /etc/pm/power.d/*
+	sudo chmod a+x /etc/apm-ext73/*
 	sudo chown root:root /etc/pm/power.d/*
 	sudo chown root:root /etc/apm-ext73/*
 	sudo chown root:root /etc/pm/sleep.d/99fancontrol
@@ -391,6 +392,7 @@ elif [ "$apmik" = "nowy" ]; then
 	sudo cp /tmp/apm-ext73/apm_resume /etc/apm-ext73/
 	sudo cp /tmp/apm-ext73/wol /etc/apm-ext73/
 	sudo cp /tmp/apm-ext73/xfs_buffer /etc/apm-ext73/
+	sudo chmod a+x /etc/apm-ext73/*
 	sudo chown root:root /etc/apm-ext73/*
 	sudo cp /tmp/apm-ext73/*.rules /etc/udev/rules.d/
 	sudo chown root:root /etc/udev/rules.d/*
