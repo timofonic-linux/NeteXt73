@@ -565,12 +565,12 @@ else
 	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
 fi
 #samsung_laptop
-if [ "$samsung_laptop" = "TRUE" ]; then
+if [ "$stan_samsung" = "TRUE" ]; then
 	sudo rmmod samsung_laptop
-	sudo sed - 's/#\/sbin\/rmmod samsung_laptop/\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+	sudo sed -i 's/.*rmmod samsung_laptop/        \/sbin\/rmmod samsung_laptop/g' $katalog_apm
 else
 	sudo modprobe samsung_laptop
-	sudo sed - 's/\/sbin\/rmmod samsung_laptop/#\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+	sudo sed -i 's/.*rmmod samsung_laptop/        # \/sbin\/rmmod samsung_laptop/g' $katalog_apm
 fi
 }
 
@@ -661,16 +661,17 @@ fi
 #samsung_laptop
 if [ "$( grep stan_samsung ~/.netext73/apm_status | cut -d ' ' -f 2)" = "TRUE" ];then
 	sudo rmmod samsung_laptop
-	sudo sed - 's/#\/sbin\/rmmod samsung_laptop/\/sbin\/rmmod samsung_laptop/g' $katalog_apm
+	sudo sed -i 's/.*rmmod samsung_laptop/        \/sbin\/rmmod samsung_laptop/g' $katalog_apm
 else
 	sudo modprobe samsung_laptop
-	sudo sed - 's/\/sbin\/rmmod samsung_laptop/\#/sbin\/rmmod samsung_laptop/g' $katalog_apm
+	sudo sed -i 's/.*rmmod samsung_laptop/        # \/sbin\/rmmod samsung_laptop/g' $katalog_apm
 fi
 }
 
 stan_apm(){
+twoj_apm=$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)
 if [ "$apmik" = "stary" ]; then
-	if [ "$(ls /etc/pm/power.d/ | wc -l)" != "6" ]; then
+	if [ "$(ls /etc/pm/power.d/ | wc -l)" != "6" ] || [ "$twoj_apm" != "$wersja_apm" ]; then
 		stan_apm="-"
 	else
 		if [ -e /etc/pm/power.d/$wersja_apm1*$wersja_apm ]; then
@@ -680,11 +681,11 @@ if [ "$apmik" = "stary" ]; then
 		fi
 	fi
 
-	if [ "$(ls /etc/pm/power.d/ | wc -l)" = "6" ] && [ $( ls /usr/lib/pm-utils/power.d/ -la | grep rwxr | grep -v drwxr-xr-x | wc -l) != "2" ]; then 
+	if [ "$(ls /etc/pm/power.d/ | wc -l)" != "6" ] || [ $( ls /usr/lib/pm-utils/power.d/ -la | grep rwxr | grep -v drwxr-xr-x | wc -l) != "2" ]; then 
 		stan_apm="-"
 	fi
 elif [ "$apmik" = "nowy" ]; then
-	twoj_apm=$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)
+	
 	if [ -e /etc/apm-ext73/ ] && [ "$(ls /etc/apm-ext73/ | wc -l)" != "11" ] || [ "$twoj_apm" != "$wersja_apm" ] ; then
 		stan_apm="-"
 	else
@@ -701,7 +702,7 @@ elif [ "$apmik" = "nowy" ]; then
 		fi
 	fi
 fi
-if [ "$(grep apm_status_fix /etc/rc.local)" = "" ]; then
+if [ "$(grep apm_status_fix /etc/rc.local)" = "" ]  || [ "$twoj_apm" != "$wersja_apm" ]; then
 	    stan_apm="-"
 fi
 }
@@ -796,7 +797,7 @@ stan_apm_config(){
 	fi
 	
 	#stan samsung
-	if [ "$(lsmod | grep samsung_laptop)" != "" ]; then
+	if [ "$(cat $katalog_apm | grep -e "#.*samsung_laptop")" != "" ]; then
 		export stan_samsung="FALSE"
 	else
 		export stan_samsung="TRUE"

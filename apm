@@ -54,7 +54,7 @@ rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
 #zapamiętanie configu jeżeli był niepełen config
-if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "12" ]; then
+if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "13" ]; then
 	#sprawdzanie czy jest włączony jakiś APM
 	if [ "$apmik" = "stary" ]; then
 		if [ "$(ls /etc/pm/power.d/)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
@@ -154,7 +154,7 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_HIBERNACJA:CHK" "$hibernacja_menu" \
 		--field="$TEXT_SAMSUNG:CHK" "$stan_samsung" \
 		--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" )
-
+#
 		klawisz=$?
 		if [ $klawisz = 0 ]; then
 			a=$(echo $aa | cut -d "|" -f 3)
@@ -171,13 +171,12 @@ while [ $petla_duza = "tak" ]; do
 			export rts5139_on=$(echo $aa | cut -d "|" -f 14)
 			export wifi_n_on=$(echo $aa | cut -d "|" -f 15)
 			
-			export turbo_batt_on=$(echo $aa | cut -d "|" -f 17)
-			export turbo_ac_on=$(echo $aa | cut -d "|" -f 18)
+			export turbo_batt_on=$(echo $aa | cut -d "|" -f 16)
+			export turbo_ac_on=$(echo $aa | cut -d "|" -f 17)
 			
-			export vsync_on=$(echo $aa | cut -d "|" -f 19)
-			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
-			export stan_samsung=$(echo $aa | cut -d "|" -f 21)
-			
+			export vsync_on=$(echo $aa | cut -d "|" -f 18)
+			export hibernacja_menu=$(echo $aa | cut -d "|" -f 19)
+			export stan_samsung=$(echo $aa | cut -d "|" -f 20)
                         if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
                                 #if [ "$(echo $wart | cut -d "|" -f 1)" = "TRUE" ];then
                                 	wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")

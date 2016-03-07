@@ -6,6 +6,7 @@ v1.0.06
 -	sterowanie wentylatorami dla 14.04
 -	podświetlenie dla samsunga
 -	naprawa uśpienia Yoga
+-	zmiana sterowania w APM
 v1.0.05
 -	pierwsza instalacja gcc zaznaczone tylko gdy jest inny niż dostarczany
 -	posortowana lista repozytoriów

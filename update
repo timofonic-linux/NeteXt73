@@ -129,8 +129,10 @@ else
 fi
 
 #APM
+stan_apm #sprawdzenie stanu instalacji
 twoj_apm=$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)
-if [ "$twoj_apm" = "$wersja_apm" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ] ; then
+if [ "$stan_apm" != "-" ]; then
+#if [ "$twoj_apm" = "$wersja_apm" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ] ; then
 	apm="$TEXT_UPDATE4"
 	a3="FALSE"
 else
