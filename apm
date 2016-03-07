@@ -54,7 +54,7 @@ rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
 #zapamiętanie configu jeżeli był niepełen config
-if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "13" ]; then
+if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "14" ]; then
 	#sprawdzanie czy jest włączony jakiś APM
 	if [ "$apmik" = "stary" ]; then
 		if [ "$(ls /etc/pm/power.d/)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
@@ -125,12 +125,7 @@ while [ $petla_duza = "tak" ]; do
 		wartosc_ac="8"
 	fi
 
-	if [ "$katalog_jasnosc" != "" ] && [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
-		jasnosc_dziala="TRUE"
-	else
-		jasnosc_dziala="FALSE"
-	fi
-	#fi
+
 	if [ "$stan_apm" != "-" ]; then
 		aa=$(yad --center --columns=2 --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/apm.png"  --image="/opt/NeteXt73/ikony/apm.png" --form \
 		--field="$TEXT_WERSJA_APM:RO" "$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)" \
@@ -178,7 +173,6 @@ while [ $petla_duza = "tak" ]; do
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 19)
 			export stan_samsung=$(echo $aa | cut -d "|" -f 20)
                         if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
-                                #if [ "$(echo $wart | cut -d "|" -f 1)" = "TRUE" ];then
                                 	wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
 					wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
 					sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
@@ -190,21 +184,19 @@ while [ $petla_duza = "tak" ]; do
 					fi
                                         sudo sed -i 's/.*#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
                         else
+					#jasnosc_dziala="FALSE"
                                         sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
-                                #fi
-                        fi
-			
-			
+                        fi			
 			
 			#uruchomienie aktualizacji gdy zaszła jakaś zmiana
 			if [ "$hdd_scheduler" = "blk-mq" ] || [ "$ssd_scheduler" = "blk-mq" ]; then
-				if [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsync_on_przed" = "$vsync_on" ] && [ "$stan_samsung_przed" = "$stan_samsung" ]; then
+				if  [ "$jasnosc_dziala_przed" = "$jasnosc_dziala" ] && [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsync_on_przed" = "$vsync_on" ] && [ "$stan_samsung_przed" = "$stan_samsung" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM
 				fi
 			else
-				if [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$hdd_scheduler_przed" = "$hdd_scheduler" ] && [ "$ssd_scheduler_przed" = "$ssd_scheduler" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]  && [ "$vsync_on_przed" = "$vsync_on" ] && [ "$stan_samsung_przed" = "$stan_samsung" ]; then
+				if  [ "$jasnosc_dziala_przed" = "$jasnosc_dziala" ] && [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$hdd_scheduler_przed" = "$hdd_scheduler" ] && [ "$ssd_scheduler_przed" = "$ssd_scheduler" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ]  && [ "$vsync_on_przed" = "$vsync_on" ] && [ "$stan_samsung_przed" = "$stan_samsung" ]; then
 					opusc_petle
 				else
 					zmiany_w_APM

@@ -1,3 +1,9 @@
+netext73 (1.0.07) trusty; urgency=medium
+
+  * sterowanie APM
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 07 Mar 2016 21:36:15 +0100
+
 netext73 (1.0.06) trusty; urgency=medium
 
   * APM 5.1

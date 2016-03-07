@@ -605,12 +605,13 @@ fi
 #intel turbo bateria
 if [ "$(cat ~/.netext73/apm_status | grep turbo_batt_on | grep FALSE)" = "" ];then
 	sudo sed -i 's/echo 1 > \$batintel/echo 0 > \$batintel/g' $katalog_apm
+	
 else
 	sudo sed -i 's/echo 0 > \$batintel/echo 1 > \$batintel/g' $katalog_apm
 fi
 #intel turbo AC
 if [ "$(cat ~/.netext73/apm_status | grep turbo_ac_on | grep FALSE)" = "" ];then
-	sudo sed -i 's/echo 1 > \$actintel/echo 0 > \$acintel/g' $katalog_apm
+	sudo sed -i 's/echo 1 > \$acintel/echo 0 > \$acintel/g' $katalog_apm
 else
 	sudo sed -i 's/echo 0 > \$acintel/echo 1 > \$acintel/g' $katalog_apm
 fi
@@ -667,6 +668,17 @@ if [ "$(cat ~/.netext73/apm_status | grep stan_samsung | grep TRUE)" != "" ];the
 else
 	sudo modprobe samsung_laptop
 	sudo sed -i 's/.*rmmod samsung_laptop/        # \/sbin\/rmmod samsung_laptop/g' $katalog_apm
+fi
+#jasnosc
+if [ "$(cat ~/.netext73/apm_status | grep jasnosc | grep TRUE)" != "" ] && [ "$(ls /sys/class/backlight | head -n 1)" != "" ]; then
+		if [ "$(cat /sys/class/power_supply/*/online)" = "0" ];then
+			sudo /etc/apm-ext73/./brightness true
+		else
+			sudo /etc/apm-ext73/./brightness false
+		fi
+		sudo sed -i 's/.*#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
+else
+		sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
 fi
 }
 
@@ -804,7 +816,15 @@ stan_apm_config(){
 	else
 		export stan_samsung="TRUE"
 	fi
+	#jasność
+	katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
+	if [ "$katalog_jasnosc" != "" ] && [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
+		export jasnosc_dziala="TRUE"
+	else
+		export jasnosc_dziala="FALSE"
+	fi
 	
+	export jasnosc_dziala_przed=$jasnosc_dziala
 	export wifi_n_on_przed=$wifi_n_on
 	export wifi_batt_fix_przed=$wifi_batt_fix
 	export wifi_batt_on_przed=$wifi_batt_on
@@ -825,17 +845,19 @@ stan_apm_config(){
 		elif [ "$apmik" = "nowy" ]; then
 			cat /etc/udev/rules.d/50-udev-apm-ext73.rules | grep advanced_power_management_by_ext73_ | head -n 1 | cut -d '_' -f 9 > ~/.netext73/apm_status
 		fi
+		echo "hdd_scheduler 	$hdd_scheduler" >> ~/.netext73/apm_status
+		echo "ssd_scheduler 	$ssd_scheduler" >> ~/.netext73/apm_status
+		echo "jasnosc 		$jasnosc_dziala" >> ~/.netext73/apm_status
 		echo "wifi_batt_fix 	$wifi_batt_fix" >> ~/.netext73/apm_status
 		echo "wifi_batt_on 	$wifi_batt_on" >> ~/.netext73/apm_status
 		echo "bt_batt_on 	$bt_batt_on">> ~/.netext73/apm_status
 		echo "rts5139_on 	$rts5139_on" >> ~/.netext73/apm_status
 		echo "wifi_n_on 	$wifi_n_on" >> ~/.netext73/apm_status
-		echo "hdd_scheduler 	$hdd_scheduler" >> ~/.netext73/apm_status
-		echo "ssd_scheduler 	$ssd_scheduler" >> ~/.netext73/apm_status
+
 		echo "turbo_batt_on 	$turbo_batt_on" >> ~/.netext73/apm_status
 		echo "turbo_ac_on 	$turbo_ac_on" >> ~/.netext73/apm_status
-		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
 		echo "vsync_on 		$vsync_on" >> ~/.netext73/apm_status
+		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
 		echo "stan_samsung 	$stan_samsung" >> ~/.netext73/apm_status
 	fi
 }

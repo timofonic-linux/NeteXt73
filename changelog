@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.07
+-	poprawki w sterowaniu APM
+-	zapamiętywanie i przywracanie ustawień z configu APM
 v1.0.06
 -	APM 5.1
 -	sterowanie wentylatorami dla 14.04
