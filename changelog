@@ -8,6 +8,7 @@ v1.0.06
 -	naprawa uśpienia Yoga
 -	zmiana sterowania w APM
 -	poprawki wykonywalności plików APM
+-	przywracanie APM z configu po reinstalacji
 v1.0.05
 -	pierwsza instalacja gcc zaznaczone tylko gdy jest inny niż dostarczany
 -	posortowana lista repozytoriów
