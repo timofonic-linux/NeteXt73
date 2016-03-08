@@ -1,6 +1,12 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.08
+-	zmiana kolejności poleceń przy włączaniu init.d
+-	poprawki w deinstalatorze APM
+-	przywracanie profilu APM z configu po reinstalacji
+-	przywracanie ondemand po usunięciu APM
+-	integracja skryptu instalacji z procesem zmiany ustawień APM wg configu
 v1.0.07
 -	poprawki w sterowaniu APM
 -	zapamiętywanie i przywracanie ustawień z configu APM
