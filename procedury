@@ -415,8 +415,14 @@ elif [ "$apmik" = "nowy" ]; then
 	fi
 fi
 sudo chown root:root /usr/lib/pm-utils/power.d/*
-sudo /etc/init.d/ondemand stop
-sudo update-rc.d -f ondemand remove
+if [ "$(journalctl -u cron | grep systemd)" != "" ];then
+	sudo chmod a-x /etc/init.d/ondemand
+	sudo service ondemand stop
+else
+	sudo /etc/init.d/ondemand stop
+	sudo chmod a-x /etc/init.d/ondemand
+fi
+
 
 #ustawienie jasności wg aktualnej
 katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
@@ -452,7 +458,7 @@ fi
 #profil apm
 if [ -e ~/.netext73/apm_status ]; then
 	aktualny="$(cat ~/.netext73/apm_status | head -n 1)"
-	if [ "$aktualny" = "intel-performance" ] || [ "$aktualny" = "intel-powersave" ] ||[ "$aktualny" = "conservative-conservative" ] [ "$aktualny" = "ondemand-ondemand" ] [ "$aktualny" = "performance-conservative" ] [ "$aktualny" = "performance-ondemand)" ];then
+	if [ "$aktualny" = "intel-performance" ] || [ "$aktualny" = "intel-powersave" ] || [ "$aktualny" = "conservative-conservative" ] || [ "$aktualny" = "ondemand-ondemand" ] || [ "$aktualny" = "performance-conservative" ] || [ "$aktualny" = "performance-ondemand)" ];then
 		if [ "$apmik" = "stary" ]; then
 			sudo chmod a-x /etc/pm/power.d/*
 			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_$aktualny*
@@ -468,8 +474,8 @@ if [ -e ~/.netext73/apm_status ]; then
 			sudo sed -i "s/ondemand-ondemand/$aktualny/g" $katalog
 			sudo sed -i "s/intel-performance/$aktualny/g" $katalog
 			sudo sed -i "s/intel-powersave/$aktualny/g" $katalog
-			sudo sed -i "s/performance-conservative/$stan/g" $katalog
-			sudo sed -i "s/performance-ondemand/$stan/g" $katalog
+			sudo sed -i "s/performance-conservative/$aktualny/g" $katalog
+			sudo sed -i "s/performance-ondemand/$aktualny/g" $katalog
 		fi
 	fi
 fi

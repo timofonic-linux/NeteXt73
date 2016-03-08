@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.09
+-	poprawki instalatora APM dla systemów z systemd
+-	zmiana włączania/wyłączania ondemand
 v1.0.08
 -	zmiana kolejności poleceń przy włączaniu init.d
 -	poprawki w deinstalatorze APM

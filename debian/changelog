@@ -1,3 +1,9 @@
+netext73 (1.0.09) trusty; urgency=medium
+
+  * poprawki APM dla systemd
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 08 Mar 2016 13:32:09 +0100
+
 netext73 (1.0.08) trusty; urgency=medium
 
   * zmiana APM 5.1
