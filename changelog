@@ -4,6 +4,7 @@
 v1.0.10
 -	GRUB iommu on/off
 -	wyłączenie iommu podczas instalacji kernela
+-	warunek iommu tylko dla intela
 v1.0.09
 -	poprawki instalatora APM dla systemów z systemd
 -	zmiana włączania/wyłączania ondemand

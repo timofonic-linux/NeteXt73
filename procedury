@@ -113,9 +113,9 @@ export katalog2="2"
 export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
 export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
 
-if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
+if [ "$(cat /proc/cpuinfo | grep -i Intel)" != "" ]; then
 	export komputerek="INTEL"
-elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
+elif [ "$(cat /proc/cpuinfo | grep -i AMD)" != "" ]; then
 	export komputerek="AMD"
 fi
 #bity
@@ -232,7 +232,7 @@ echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
 echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep broadcom-sta-dkms)"
 echo "fi"
 #wpis iommu
-echo "if [ \"\$(grep intel_iommu=igfx_off /etc/default/grub)\" = \"\" ];then"
+echo "if [ \"\$(grep intel_iommu=igfx_off /etc/default/grub)\" = \"\" ] && [ \"\$komputerek\" = \"INTEL\" ];then"
 echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ intel_iommu=igfx_off\"/' /etc/default/grub"
 echo "sudo update-grub"
 echo "fi"
