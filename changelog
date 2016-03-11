@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.10
+-	GRUB iommu on/off
 v1.0.09
 -	poprawki instalatora APM dla systemów z systemd
 -	zmiana włączania/wyłączania ondemand

@@ -47,6 +47,7 @@ stan_apm_config czeki
 #APM
 
 cd /tmp/netext73
+
 rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
