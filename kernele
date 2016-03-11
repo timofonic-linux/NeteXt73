@@ -56,8 +56,12 @@ else
 	elif [ "$1" = "lokalne" ]; then
 		kern="$TEXT_MENU_INSTALATOR3"
 	fi
-	if [ "$1" = "premium" ]; then
+	if [ "$1" = "premium" ] && [ "$komputerek" = "INTEL" ]; then
 		pliki="/opt/NeteXt73/kernel-premium"
+		ikona="linux-premium.png"
+		menu_dodatkowe=""
+	elif [ "$1" = "premium" ] && [ "$komputerek" = "AMD" ]; then
+		pliki="/opt/NeteXt73/kernel-premium-amd"
 		ikona="linux-premium.png"
 		menu_dodatkowe=""
 	else
