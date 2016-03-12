@@ -158,14 +158,14 @@ fi
 
 #adres katalogu download
 if [ -e ~/Pobrane ]; then
-	export download="/home/$USER/Pobrane"
+	export download="/home/$userek/Pobrane"
 else
-	export download="/home/$USER/Downloads"
+	export download="/home/$userek/Downloads"
 fi
 
-if [ $USER = "root" ]; then
-	export download="/root"
-fi
+#if [ $USER = "root" ]; then
+#	export download="/root"
+#fi
 if [ ! -e $download ]; then
       mkdir -p $download
 fi

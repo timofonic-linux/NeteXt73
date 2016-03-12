@@ -6,6 +6,7 @@ v1.0.10
 -	wyłączenie iommu podczas instalacji kernela
 -	warunek iommu tylko dla intela
 -	kernele premium pokazywane zależnie od zainstalowanego procesora
+-	przestawienie katalogu pobrane w trybie root na katalog usera
 v1.0.09
 -	poprawki instalatora APM dla systemów z systemd
 -	zmiana włączania/wyłączania ondemand
