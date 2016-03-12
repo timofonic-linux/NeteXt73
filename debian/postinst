@@ -9,4 +9,6 @@ if [ -e /var/spool/cron/crontabs/$uzytkownik ]; then
 		echo '0 * * * * env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
 	fi
 fi
+#naprawa (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
+sed -i 's/,,/,/g' /usr/share/icons/oxygen/index.theme
 exit 0

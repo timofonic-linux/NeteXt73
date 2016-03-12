@@ -1243,8 +1243,8 @@ echo "fi"
 echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
-#usunięcie xorg 15.10
-echo "if [ \"\$(lsb_release -a | grep 15.10)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i wily)\" != \"\" ]; then"
+#usunięcie xorg 15.10 i 16.04
+echo "if [ \"\$(lsb_release -a | grep -e 15.10 -e 16.04)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -e wily -e xenial)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 echo "echo \"manual\" | sudo tee /etc/init/gpu-manager.override"

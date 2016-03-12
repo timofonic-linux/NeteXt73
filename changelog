@@ -7,6 +7,7 @@ v1.0.10
 -	warunek iommu tylko dla intela
 -	kernele premium pokazywane zależnie od zainstalowanego procesora
 -	przestawienie katalogu pobrane w trybie root na katalog usera
+-	naprawa błedu (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
 v1.0.09
 -	poprawki instalatora APM dla systemów z systemd
 -	zmiana włączania/wyłączania ondemand
