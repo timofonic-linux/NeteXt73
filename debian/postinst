@@ -10,5 +10,7 @@ if [ -e /var/spool/cron/crontabs/$uzytkownik ]; then
 	fi
 fi
 #naprawa (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
-sed -i 's/,,/,/g' /usr/share/icons/oxygen/index.theme
+if [ -e /usr/share/icons/oxygen/index.theme ]; then
+	sed -i 's/,,/,/g' /usr/share/icons/oxygen/index.theme
+fi
 exit 0
