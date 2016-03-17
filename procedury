@@ -222,7 +222,10 @@ echo '#!/bin/bash'
 
 instaluj_kernel(){
 echo "echo \"$TEXT_PROCEDURA_1\""
+#warunek dla 16.04
+echo "if [ -e /etc/init/mounted-proc.conf ]; then"
 echo "sudo sed -i 's+^start on mounted MOUNTPOINT=/proc TYPE=proc+start on mounted MOUNTPOINT=/var+' /etc/init/mounted-proc.conf"
+echo "fi"
 echo "sudo sed -i 's+^start on starting mountall+start on mounted MOUNTPOINT=/var+' /etc/init/ureadahead.conf"
 echo "/usr/bin/yes | sudo dpkg -i linux-headers* linux-image*"
 echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
@@ -1596,17 +1599,6 @@ kill_yad(){
 }
 
 
-#gcc
-sprawdz_gcc(){
-echo "if [ \"\$(gcc --version | head -n 1 | grep 5)\" = \"\" ]; then"
-echo "sudo apt-get update"
-echo "sudo apt-get install gcc-5 -y"
-echo "sudo apt-get dist-upgrade -y"
-echo "sudo ln -sf /usr/bin/gcc-5 /usr/bin/gcc"
-echo "sudo ln -sf /usr/bin/gcc-ar-5 /usr/bin/gcc-ar"
-echo "sudo ln -sf /usr/bin/cpp-5 /usr/bin/cpp"
-echo "fi"
-}
 
 instaluj_gcc(){
 if [ "$1" = "instaluj_nowy" ];then

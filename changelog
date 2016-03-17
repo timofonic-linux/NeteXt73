@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.11
+-	brak nadpisywania gcc przy instalacji ręcznej
+-	warunek dla 16.04 dotyczący /etc/init/mounted-proc.conf 
 v1.0.10
 -	GRUB iommu on/off
 -	wyłączenie iommu podczas instalacji kernela
