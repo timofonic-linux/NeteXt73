@@ -1,3 +1,9 @@
+netext73 (1.0.12) trusty; urgency=medium
+
+  * modyfikacja deinstalatora kerneli
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 18 Mar 2016 09:54:58 +0100
+
 netext73 (1.0.11) trusty; urgency=medium
 
   * poprawki instalatora kerneli

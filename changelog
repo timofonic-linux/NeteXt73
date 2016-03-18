@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.12
+-	modyfikacja deinstalatora kerneli
 v1.0.11
 -	brak nadpisywania gcc przy instalacji ręcznej
 -	warunek dla 16.04 dotyczący /etc/init/mounted-proc.conf 

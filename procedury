@@ -925,12 +925,19 @@ echo "sudo sed -i '/exit 0/d' /etc/rc.local"
 
 usun_kernel(){
 echo "echo \"$TEXT_KERNEL1\""
-echo "echo \"$(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' )\""
-echo "sudo apt-get purge -y $(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' | tr '\n' ' ')"
+echo "echo \"$(cat /tmp/netext73/kasuj.txt)\""
+echo "sudo apt-get purge $(cat /tmp/netext73/kasuj.txt  | tr '\n' ' ')"
 echo "sudo update-grub"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
 
+usun_kernel_expert(){
+echo "echo \"$TEXT_KERNEL1\""
+echo "echo \"$(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' )\""
+echo "sudo apt-get remove $(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' | tr '\n' ' ')"
+echo "sudo update-grub"
+echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
+}
 
 #data i godzina
 data_godzina(){
