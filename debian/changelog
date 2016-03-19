@@ -1,3 +1,9 @@
+netext73 (1.0.13) trusty; urgency=medium
+
+  * dymek fix
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 19 Mar 2016 14:24:28 +0100
+
 netext73 (1.0.12) trusty; urgency=medium
 
   * modyfikacja deinstalatora kerneli
