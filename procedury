@@ -1415,7 +1415,7 @@ dymek(){
 
 if [ "$USER" = "root" ];then
 	if [ -e ~/.netext73/notify_fix ] && [ "$(grep TRUE ~/.netext73/notify_fix)" != "" ];then
-		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((400*$skala))x$((150*$skala))+30+30" --no-buttons --undecorated &
+		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	else
 		sudo -u $userek bash << EOF
 		if [ "$(which notify-send)" != "" ];then
@@ -1423,7 +1423,7 @@ if [ "$USER" = "root" ];then
 		elif [ "$(which kdialog)" != "" ];then
 			kdialog --title "$3" -passivepopup "$4"
 		else
-			yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((400*$skala))x$((150*$skala))+30+30" --no-buttons --undecorated &
+			yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 		fi
 EOF
 	fi
@@ -1433,7 +1433,7 @@ else
 	elif [ "$(which kdialog)" != "" ];then
 		kdialog --title "$3" -passivepopup "$4"
 	else
-		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((400*$skala))x$((150*$skala))+30+30" --no-buttons --undecorated &
+		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	fi
 fi
 }
