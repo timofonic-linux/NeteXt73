@@ -1,3 +1,9 @@
+netext73 (1.0.14) trusty; urgency=medium
+
+  * repo OCR
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 21 Mar 2016 12:38:49 +0100
+
 netext73 (1.0.13) trusty; urgency=medium
 
   * dymek fix

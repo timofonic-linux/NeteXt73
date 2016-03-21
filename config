@@ -124,7 +124,7 @@ yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONF
 yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu 1> $res2 &
 yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((690*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):2"
 klawisz=$?
-if [ "$klawisz" = 0 ]; then 
+if [ "$klawisz" = "0" ]; then 
 	if [ "$(grep "$TEXT_TAK" $res1)" != "" ]; then
 		rm ~/.netext73/* -f
 		yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_CONFIG8" --timeout=5
@@ -183,9 +183,8 @@ if [ "$klawisz" = 0 ]; then
 			dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_CONFIG13"
 		fi    
 	fi
-elif [ "$klawisz" = 2 ]; then 
+elif [ "$klawisz" = "2" ]; then 
 	rm -f /tmp/netext73/sumy/*
 	/opt/NeteXt73/./update start &
-	sumy &
 fi
 rm -f $res1 $res2

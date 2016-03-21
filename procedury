@@ -1413,7 +1413,16 @@ echo "sudo sysctl -p"
 
 dymek(){
 
-if [ "$USER" = "root" ];then
+if [ "$USER" != "root" ];then
+	echo "normalny"
+	if [ "$(which notify-send)" != "" ];then
+		notify-send "$1" "$2" "$3" "$4"
+	elif [ "$(which kdialog)" != "" ];then
+		kdialog --title "$3" -passivepopup "$4"
+	else
+		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
+	fi
+elif [ "$USER" = "root" ];then
 	if [ -e ~/.netext73/notify_fix ] && [ "$(grep TRUE ~/.netext73/notify_fix)" != "" ];then
 		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	else
@@ -1426,14 +1435,6 @@ if [ "$USER" = "root" ];then
 			yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 		fi
 EOF
-	fi
-else
-	if [ "$(which notify-send)" != "" ];then
-		notify-send "$1" "$2" "$3" "$4"
-	elif [ "$(which kdialog)" != "" ];then
-		kdialog --title "$3" -passivepopup "$4"
-	else
-		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	fi
 fi
 }

@@ -40,7 +40,6 @@ if [ "$1" = "start" ]; then
 	if [ ! -e /tmp/netext73/sumy ]; then
 		mkdir -p /tmp/netext73/sumy
 	fi
-	cd /tmp/netext73
 	sumy &
 fi
 cd /tmp/netext73
@@ -55,6 +54,7 @@ naglowek > instaluj.sh
 instaluj_gcc instaluj_nowy >> instaluj.sh
 instalacja gcc
 }
+
 nv_radeon(){
 if [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
 	a5="TRUE"
