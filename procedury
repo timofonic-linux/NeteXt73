@@ -1184,7 +1184,7 @@ echo "/usr/bin/yes | sudo dpkg -i libcuda1-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-opencl-icd-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i \$(ls | grep nvidia-settings)"
 echo "if [ -e libxnvctrl* ]; then"
-echo "/usr/bin/yes | sudo dpkg -i \$(ls | libxnvctrl)"
+echo "/usr/bin/yes | sudo dpkg -i \$(ls | grep libxnvctrl)"
 echo "fi"
 echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.deb"
 }
