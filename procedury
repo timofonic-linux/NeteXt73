@@ -405,7 +405,7 @@ elif [ "$apmik" = "nowy" ]; then
 	sudo chown root:root /etc/systemd/system/suspend.target.wants/*
 	#udev jeżeli notebook
 	if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
-		sudo cp /tmp/apm-ext73/udev-ext73.tar.gz -C /etc/udev/rules.d/
+		sudo cp /tmp/apm-ext73/50-udev-apm-ext73.rules /etc/udev/rules.d/
 		sudo chown root:root /etc/udev/rules.d/*
 		katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
 	else
@@ -1192,36 +1192,37 @@ echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.d
 nvidia_optimus(){
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
 echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y" libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1
-echo "wget \$adres_sterownikow_optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1"
-echo "sudo cp libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
-echo "rm libGL.so.1 -f"
-echo "wget \$adres_sterownikow_optimus/usr/lib/i386-linux-gnu/primus/libGL.so.1"
-echo "sudo cp libGL.so.1 /usr/lib/i386-linux-gnu/primus/libGL.so.1 -f"
-echo "rm libGL.so.1 -f"
+echo "wget $adres_glowny/nvidia-optimus.tar.xz"
+echo "mkdir -p /tmp/nvidia-optimus"
+echo "tar -Jxf nvidia-optimus.tar.xz -C /tmp/nvidia-optimus/"
+echo "rm -f nvidia-optimus.tar.xz"
+echo "sudo cp /tmp/nvidia-optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
+echo "sudo cp /tmp/nvidia-optimus/usr/lib/i386-linux-gnu/primus/libGL.so.1 /usr/lib/i386-linux-gnu/primus/libGL.so.1 -f"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i libcuda1-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-opencl-icd-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i \$(ls | grep nvidia-settings)"
 echo "if [ -e libxnvctrl* ]; then"
-echo "/usr/bin/yes | sudo dpkg -i \$(ls | libxnvctrl)"
+echo "/usr/bin/yes | sudo dpkg -i \$(ls | grep libxnvctrl)"
 echo "fi"
 echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.deb"
-echo "wget \$adres_sterownikow_optimus/etc/bumblebee/bumblebee.conf"
-echo "wget \$adres_sterownikow_optimus/etc/bumblebee/xorg.conf.nvidia"
-echo "sudo cp xorg.conf.nvidia bumblebee.conf /etc/bumblebee/ -f"
-echo "rm bumblebee.conf xorg.conf.nvidia -f"
+echo "sudo cp /tmp/nvidia-optimus/etc/bumblebee/bumblebee.conf /etc/bumblebee/ -f"
+echo "sudo cp /tmp/nvidia-optimus/etc/bumblebee/xorg.conf.nvidia /etc/bumblebee/ -f"
 echo "if [ \"\$(lsb_release -a | grep -e 15.10 -e 16.04)\" = \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -e wily -e xenial)\" = \"\" ]; then"
-echo "wget \$adres_sterownikow_optimus/etc/modprobe.d/bumblebee.conf"
-echo "sudo cp bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
-echo "rm bumblebee.conf -f"
+echo "sudo cp /tmp/nvidia-optimus/etc/modprobe.d/bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
 echo "fi"
-echo "wget \$adres_sterownikow_optimus/usr/sbin/bumblebeed"
-echo "wget \$adres_sterownikow_optimus/usr/bin/optirun"
-echo "sudo cp -f bumblebeed /usr/sbin/bumblebeed"
-echo "sudo cp -f optirun /usr/bin/optirun"
-echo "rm -f optirun bumblebeed"
-echo "sudo chmod a+x /usr/sbin/bumblebeed /usr/bin/optirun"
-echo "sudo chown root:root /usr/sbin/bumblebeed /usr/bin/optirun"
+echo "rm -fr /usr/sbin/bumblebeed"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/optirun"
+echo "if [ \"\$(ls | grep 364)\" != \"\" ]; then"
+echo "rm -fr /usr/sbin/bumblebeed"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/bumbleed /usr/bin/"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
+echo "sudo cp -f /tmp/nvidia-optimus/etc/modprobe.d/* /etc/modprobe.d/"
+echo "fi"
+echo "sudo chmod a+x /usr/sbin/bumblebeed /usr/bin/optirun /usr/bin/bumblebeed"
+echo "sudo chown root:root /usr/sbin/bumblebeed /usr/bin/bumblebeed /usr/bin/optirun"
 echo "export wersja_sterownika=\"\$(ls /tmp/netext73 | grep tar.xz | cut -d '_' -f 1 | cut -d '-' -f 2 | head -n 1)\""
 echo "if [ \"\$(grep 'nvidia-updates-' /etc/bumblebee/bumblebee.conf)\" = \"\" ];then"
 echo "sudo sed -i \"s/nvidia-.../nvidia-\$wersja_sterownika/g\" /etc/bumblebee/bumblebee.conf"
@@ -1230,6 +1231,7 @@ echo "sudo sed -i \"s/nvidia-updates-.../nvidia-\$wersja_sterownika/g\" /etc/bum
 echo "fi"
 echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')/g\" /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
+echo "rm -rf /tmp/nvidia-optimus/"
 }
 
 nvidia_stopka(){
@@ -1256,7 +1258,9 @@ echo "fi"
 #usunięcie xorg 15.10 i 16.04
 echo "if [ \"\$(lsb_release -a | grep -e 15.10 -e 16.04)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -e wily -e xenial)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
+echo "if [ -e /etc/X11/xorg.conf ]; then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
+echo "fi"
 echo "echo \"manual\" | sudo tee /etc/init/gpu-manager.override"
 #nogpumanager
 echo "if [ \"\$(grep nogpumanager /etc/default/grub)\" = \"\" ]; then"
