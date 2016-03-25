@@ -4,6 +4,7 @@
 v1.0.15
 -	przebudowa instalatora NV
 -	wymuszanie binutils jeżeli został nadpisany
+-	naprawa apm-fix
 v1.0.14
 -	repo OCR
 -	naprawa błędu instalatora nv
