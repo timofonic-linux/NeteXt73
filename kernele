@@ -171,8 +171,23 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 					rm ./index.html -f; rm $a -rf
 					mkdir $a; cd $a
 					#wywołanie funkcji pobierania odpowiednich wersji kerneli
-					
-					pobieranie_kerneli
+					if [ "$premium" = "tak" ] && [ "$kernel_premium" != "tak" ]; then
+						str=""
+						strona=$(yad --center --entry --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_STRONA1" --entry-text="$str" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+						klawisz=$?
+						if [ "$klawisz" = "1" ] || [ "$(echo $strona | grep '@'  | grep '@')" = "" ]; then
+							exit 1
+						elif [ "$klawisz" = "0" ]; then
+							echo $strona > ~/.netext73/kernel_premium
+							strona="$adres_glowny/kernele_premium$katalog2/"
+							export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1) 
+							export PASS1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 3)
+							export kernel_premium="tak"
+							pobieranie_kerneli
+						fi
+					else
+						pobieranie_kerneli
+					fi
 					if [ "$(grep $(md5sum linux-image*) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum linux-headers*) $sumy_kontrolne)" != "" ]; then
 						echo "nie" > /tmp/netext73/ok.txt
 						if [ -e linux-headers* ] && [ -e linux-image* ]; then
