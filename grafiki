@@ -81,7 +81,7 @@ if [ "$1" = "nvidia" ]; then
 	fi
 	
 	if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
-		grep nvidia /tmp/netext73/sumy/sumy_kontrolne.txt  | sed 's/.tar.xz//' | awk '{print $2}' | sort -r > 2a.txt
+		grep nvidia /tmp/netext73/sumy/sumy_kontrolne.txt | grep -v nvidia-optimus | sed 's/.tar.xz//' | awk '{print $2}' | sort -r > 2a.txt
 		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
 		ster=$(yad --center --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
