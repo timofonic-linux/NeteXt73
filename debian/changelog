@@ -1,3 +1,9 @@
+netext73 (1.0.17) trusty; urgency=medium
+
+  * grub
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 03 Apr 2016 14:24:03 +0200
+
 netext73 (1.0.16) trusty; urgency=medium
 
   * zmiana instalatora kernela premium
