@@ -261,6 +261,11 @@ baza=(
 	"VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product"
 	"virtualbox-5.0"
 
+	"deb http://repo.vivaldi.com/stable/deb/ stable main"
+	"Vivaldi - przeglądarka"
+	"Vivaldi - browser"
+	"vivaldi"
+	
 	"ppa:videolan/stable-daily"
 	"VLC - to darmowy i otwarty, wieloplatformowy odtwarzacz multimedialny"
 	"VLC - is a free and open, cross-platform media player"
@@ -437,6 +442,9 @@ else
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:kubuntu-ppa/backports" ]; then
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
+						elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
+						      echo "sudo rm /etc/apt/sources.list.d/vivaldi.*" >> instaluj.sh
+						      echo "sudo apt-get purge -f vivaldi-stable" >> instaluj.sh
 						else
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
 						fi
@@ -461,7 +469,11 @@ else
 						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
 						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$NR_WERSJA_UBUNTU/Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
-						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt    
+						elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
+						      echo "wget https://download.vivaldi.com/stable/vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
+						      echo "sudo dpkg -i vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
+						      echo "rm -f vivaldi-stable*" >> instaluj.sh
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
 								echo "slot-allocation = dynamic" > ~/.notify-osd

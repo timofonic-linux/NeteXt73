@@ -39,15 +39,15 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 #testy
 if [ "$1" = "testy" ]; then
-	menu="BurnTest!$MENU01!$MENU02!$MENU03!$MENU04"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
+	menu="BurnTest!$MENU01!$MENU02!$MENU03"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
 	ikonka="/opt/NeteXt73/ikony/testy.png"
 
 #inne skrypty
 else
 	if [ "$(cat /etc/sysctl.conf | grep 'net.ipv6.conf.all.disable_ipv6 = 1')" = "" ]; then
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
+		menu="$MENU3!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
 	else
-		menu="$MENU3!$MENU4!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
+		menu="$MENU3!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18"
 	fi
 	ikonka="/opt/NeteXt73/ikony/skrypty.png"
 fi
@@ -68,26 +68,6 @@ if [ $klawisz = 0 ]; then
 	elif [ "$skrypt" = "$MENU14" ]; then   
 		xterm -T "free mem" -e bash -c "echo -e \"$TEXT_RAM6\n\"; echo \"$TEXT_RAM7\"; free -m; sync; sudo bash -c 'echo 3 > /proc/sys/vm/drop_caches'; echo -e \"\n$TEXT_RAM8\"; free -m; echo -e \"$TEXT_INSTALACJA2\"; read ent"
 
-	#zabijamy procesy zombie
-	elif [ "$skrypt" = "$MENU4" ]; then
-		ps axo stat,ppid,pid,comm | grep -w defunct > procesy.txt
-		if [ "$(ls /tmp/netext73/ -la | grep procesy.txt | awk '{print $5}')" = "0" ]; then
-			dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_ZOMBIE2"
-		else
-			sed -i 1d procesy.txt
-			sed -i '/^[^#]/s:^:FALSE :' procesy.txt
-			a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/skrypty.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="$TEXT_ZOMBIE1" --column="" --column="STAT" --column="PPID" --column="PID" --column="COMMAND" --checklist --list $(cat procesy.txt))
-			echo $a > zabij.txt
-			naglowek > instaluj.sh
-			sed -i 's/TRUE/\n/g' zabij.txt; sed -i '/^\ *$/d' zabij.txt
-			for i in $(cat zabij.txt  | cut -d '|' -f 3)
-			do
-				echo "sudo kill $i" >>instaluj.sh
-			done
-			instalacja
-		fi
-		rm *.txt instaluj.sh -f
-	    
 	#odpalamy tasksel
 	elif [ "$skrypt" = "$MENU5" ]; then
 		cd /tmp/netext73
