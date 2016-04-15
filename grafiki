@@ -150,7 +150,7 @@ if [ "$1" = "nvidia" ]; then
 	fi
 elif [ "$1" = "radeon" ]; then
 	#sprawdzanie xorga
-	if [ "$cat /var/log/Xorg.0.log | grep 'X.Org X Server' | grep '18')" != "" ];then
+	if [ "$(cat /var/log/Xorg.0.log | grep 'X.Org X Server' | grep '18')" != "" ];then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI4"
 	else
 		if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
