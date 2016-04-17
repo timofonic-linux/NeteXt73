@@ -274,7 +274,7 @@ baza=(
 	"ppa:ubuntu-wine/ppa"
 	"WINE - Uruchamianie aplikacji Windows na Linuksie"
 	"WINE - running Windows applications on Linux"
-	"wine1.7"
+	"wine"
 
 	"ppa:x2go/stable"
 	"X2Go - klient zdalnego dostępu"
