@@ -36,7 +36,6 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   gir1.2-gtksource-3.0, 
   gcc, 
   yad, 
-  ibus, 
   curl, 
   libisl13 
 Replaces: netext73 

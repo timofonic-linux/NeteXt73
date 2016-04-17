@@ -1,3 +1,9 @@
+netext73 (1.0.20) trusty; urgency=medium
+
+  * usunięcie testowo ibus
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 17 Apr 2016 15:24:20 +0200
+
 netext73 (1.0.19) trusty; urgency=medium
 
   * radeon i xorg 1.18
