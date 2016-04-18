@@ -1396,7 +1396,6 @@ echo "sudo sysctl -p"
 dymek(){
 
 if [ "$USER" != "root" ];then
-	echo "normalny"
 	if [ "$(which notify-send)" != "" ];then
 		notify-send "$1" "$2" "$3" "$4"
 	elif [ "$(which kdialog)" != "" ];then
