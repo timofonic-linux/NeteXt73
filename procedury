@@ -285,10 +285,18 @@ elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
 	fi
 fi
 porownaj_liczby $twoj_firmware $dostepny_firmware
-if [ "$return_code" = "0" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
-	stan_microcode=$TEXT_TAK
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e xenial)" != "" ] ; then
+    if [ "$return_code" = "0" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
+	    stan_microcode=$TEXT_TAK
+    else
+	    stan_microcode="-"
+    fi
 else
-	stan_microcode="-"
+    if [ "$return_code" = "0" ] && [ "$(dpkg -l | grep linux-firmware-nonfree)" != "" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
+	    stan_microcode=$TEXT_TAK
+    else
+	    stan_microcode="-"
+    fi
 fi
 }
 

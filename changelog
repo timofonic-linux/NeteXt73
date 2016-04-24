@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.21
+-       Wyłączenie linux-firmware-nonfree dla 16.04
 v1.0.20
 -	usunięcie testowo ibus, gcc
 -	drobne poprawki
