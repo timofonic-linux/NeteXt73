@@ -153,7 +153,7 @@ GenericName[zh_CN]=Skylake
 GenericName[zh_TW]=Skylake
 
 Exec=/opt/NeteXt73/./kernele skylake
-Icon=/opt/NeteXt73/ikony/i7.png
+Icon=/opt/NeteXt73/ikony/broadwell.png
 Terminal=false
 StartupNotify=true
 Type=Application
