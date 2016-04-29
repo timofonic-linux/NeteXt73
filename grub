@@ -97,11 +97,11 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				menu1="acpi_osi=Linux@acpi_osi='!Windows 2012' acpi_osi=Linux"
 			fi
 			if [ "$(echo $wpis_grub | grep '915.enable')" != "" ] ; then
-				menu2="$TEXT_GRUB_INTEL@$TEXT_GRUB_STD@$TEXT_GRUB_RADEON" #$TEXT_GRUB_INTEL@
+				menu2="$TEXT_GRUB_STD@$TEXT_GRUB_RADEON" #$TEXT_GRUB_INTEL@
 			elif [ "$(echo $wpis_grub | grep 'radeon')" != "" ] ; then
-				menu2="$TEXT_GRUB_RADEON@$TEXT_GRUB_STD@$TEXT_GRUB_INTEL"
+				menu2="$TEXT_GRUB_RADEON@$TEXT_GRUB_STD"
 			else
-				menu2="$TEXT_GRUB_STD@$TEXT_GRUB_RADEON@$TEXT_GRUB_INTEL"
+				menu2="$TEXT_GRUB_STD@$TEXT_GRUB_RADEON"
 			fi
 			if [ "$(echo $wpis_grub | grep 'vendor')" != "" ] ; then
 				menu3="$TEXT_GRUB19@standard"
