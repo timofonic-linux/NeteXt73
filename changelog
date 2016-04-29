@@ -3,7 +3,7 @@
 
 v1.0.21
 -	Wyłączenie linux-firmware-nonfree dla 16.04
--	wyłączenie opcji grub dla intela
+-	zmiana opcji grub dla intela
 v1.0.20
 -	usunięcie testowo ibus, gcc
 -	drobne poprawki

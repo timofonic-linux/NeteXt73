@@ -1,6 +1,6 @@
 netext73 (1.0.21) trusty; urgency=medium
 
-  * wyłączenie opcji grub dla intela
+  * zmiana opcji grub dla intela
 
  -- NetBit73 <netbit73@gmail.com>  Fri, 29 Apr 2016 13:32:56 +0200
 
