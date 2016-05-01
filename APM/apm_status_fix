@@ -29,7 +29,7 @@ fi
 
 if [ ! -e /usr/lib/pm-utils/power.d/laptop-mode ];then
 	sudo cp /opt/NeteXt73/APM/laptop-mode /usr/lib/pm-utils/power.d/
-fil
+fi
 
 #wyłączenie bfq jak kernel go nie posiada
 if [ "$(grep bfq /sys/block/sd*/queue/scheduler)" = "" ]; then
