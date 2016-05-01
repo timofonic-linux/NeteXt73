@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.22
+-	naprawa apm-fix
 v1.0.21
 -	Wyłączenie linux-firmware-nonfree dla 16.04
 -	zmiana opcji grub dla intela
