@@ -56,6 +56,13 @@ else
 	elif [ "$1" = "lokalne" ]; then
 		kern="$TEXT_MENU_INSTALATOR3"
 	fi
+	#szerokość i wysokość dla premium
+	szer="650"
+	if [ "$skala" = "2" ];then
+		wysokosc="400"
+	else
+		wysokosc="300"
+	fi
 	if [ "$1" = "premium" ] && [ "$komputerek" = "INTEL" ]; then
 		pliki="/opt/NeteXt73/kernel-premium"
 		ikona="linux-premium.png"
@@ -64,19 +71,20 @@ else
 		pliki="/opt/NeteXt73/kernel-premium-amd"
 		ikona="linux-premium.png"
 		menu_dodatkowe=""
+		if [ "$skala" = "2" ];then
+			wysokosc="250"
+		else
+			wysokosc="170"
+		fi
 	else
 		pliki="/opt/NeteXt73/kernel"
 		ikona="linux.png"
 		menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
+		szer="460"
 	fi
 	if [ "$kern" = "" ]; then
-		if [ "$skala" = "2" ];then
-			wysokosc="400"
-		else
-			wysokosc="300"
-		fi
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
-		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$((860*$skala))" --height="$wysokosc" \
+		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
 		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
 		klawisz=$?
 	fi
