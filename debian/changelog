@@ -1,3 +1,9 @@
+netext73 (1.0.23) trusty; urgency=medium
+
+  * akonadi on/off
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 02 May 2016 11:58:42 +0200
+
 netext73 (1.0.22) trusty; urgency=medium
 
   * apm-fix

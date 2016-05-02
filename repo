@@ -65,7 +65,11 @@ sofcik(){
 }
 
 baza=(
-
+	"ppa:rebuntu16/avidemux+unofficial"
+	"Avidemux"
+	"Avidemux"
+	"avidemux"
+	
 	"ppa:irie/blender"
 	"Blender - darmowym/open source pakiet animacji 3D"
 	"Blender - free and open source 3D animation suite"
@@ -261,10 +265,10 @@ baza=(
 	"VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product"
 	"virtualbox-5.0"
 
-	"deb http://repo.vivaldi.com/stable/deb/ stable main"
-	"Vivaldi - przeglądarka"
-	"Vivaldi - browser"
-	"vivaldi"
+#	"deb http://repo.vivaldi.com/stable/deb/ stable main"
+#	"Vivaldi - przeglądarka"
+#	"Vivaldi - browser"
+#	"vivaldi"
 	
 	"ppa:videolan/stable-daily"
 	"VLC - to darmowy i otwarty, wieloplatformowy odtwarzacz multimedialny"
@@ -442,9 +446,12 @@ else
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:kubuntu-ppa/backports" ]; then
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
-						elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
-						      echo "sudo rm /etc/apt/sources.list.d/vivaldi.*" >> instaluj.sh
-						      echo "sudo apt-get purge -f vivaldi-stable" >> instaluj.sh
+					#	elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
+					#	      echo "sudo rm /etc/apt/sources.list.d/vivaldi.*" >> instaluj.sh
+					#	      echo "sudo apt-get purge -f vivaldi-stable" >> instaluj.sh
+						elif [ "${repo[$i]}" = "ppa:rebuntu16/avidemux+unofficial" ]; then
+						      echo "sudo rm /etc/apt/sources.list.d/rebuntu16-ubuntu-avidemux*" >> instaluj.sh
+						      echo "sudo apt-get purge -f avidemux" >> instaluj.sh
 						else
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
 						fi
@@ -470,10 +477,10 @@ else
 						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$NR_WERSJA_UBUNTU/Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
 						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt    
-						elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
-						      echo "wget https://download.vivaldi.com/stable/vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
-						      echo "sudo dpkg -i vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
-						      echo "rm -f vivaldi-stable*" >> instaluj.sh
+				#		elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
+				#		      echo "wget https://download.vivaldi.com/stable/vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
+				#		      echo "sudo dpkg -i vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
+				#		      echo "rm -f vivaldi-stable*" >> instaluj.sh
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
 								echo "slot-allocation = dynamic" > ~/.notify-osd
