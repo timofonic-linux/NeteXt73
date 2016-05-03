@@ -6,7 +6,7 @@ class ProgressBarWindow(Gtk.Window):
     def __init__(sefl):
         Gtk.Window.__init__(sefl, title="NeteXt'73 - Please Wait")
         sefl.set_default_size(450, 35)
-        sefl.set_border_width(10)
+        sefl.set_border_width(5)
         sefl.set_position(Gtk.WindowPosition.CENTER)
 	sefl.set_icon_from_file('/opt/NeteXt73/menu/NeteXt73.png')
         

@@ -65,7 +65,6 @@ rm nvidia-settings -f
 
 usun
 if [ "$1" = "nvidia" ]; then
-	#wget $adres_sterownikow  2>&1 | pobieranie
 	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
 	
 	#sprawdzanie Optimusa

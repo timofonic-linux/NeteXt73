@@ -55,11 +55,8 @@ stan_apm=""
 if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "14" ]; then
 	#sprawdzanie czy jest włączony jakiś APM
 	if [ "$apmik" = "stary" ]; then
-		if [ -e /etc/pm/power.d/advanced_power_management_by_ext73* ];then
-			if [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
-				sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_conservative*
-			fi
-		echo "" >/dev/null
+		if [ -e /etc/pm/power.d ] && [ "$(ls /etc/pm/power.d | grep advanced_power_management_by_ext73)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
+			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_conservative*
 		fi
 		#sprawdzenie stanu czeków
 		stan_apm_config
@@ -147,7 +144,6 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_HIBERNACJA:CHK" "$hibernacja_menu" \
 		--field="$TEXT_SAMSUNG:CHK" "$stan_samsung" \
 		--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" )
-#
 		klawisz=$?
 		if [ $klawisz = 0 ]; then
 			a=$(echo $aa | cut -d "|" -f 3)
@@ -170,22 +166,21 @@ while [ $petla_duza = "tak" ]; do
 			export vsync_on=$(echo $aa | cut -d "|" -f 18)
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 19)
 			export stan_samsung=$(echo $aa | cut -d "|" -f 20)
-                        if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
-                                	wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
-					wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
-					sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
-					sudo sed -i "/#bateria/ s/echo.*>/echo $wart_batt >/" /etc/apm-ext73/brightness
-					if [ "$(cat /sys/class/power_supply/*/online)" = "0" ];then
-						sudo /etc/apm-ext73/./brightness true
-					else
-						sudo /etc/apm-ext73/./brightness false
-					fi
-                                        sudo sed -i 's/.*#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
-                        else
-					#jasnosc_dziala="FALSE"
-                                        sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
-                        fi			
-			
+            if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
+				wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
+				wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
+				sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
+				sudo sed -i "/#bateria/ s/echo.*>/echo $wart_batt >/" /etc/apm-ext73/brightness
+				if [ "$(cat /sys/class/power_supply/*/online)" = "0" ];then
+					sudo /etc/apm-ext73/./brightness true
+				else
+					sudo /etc/apm-ext73/./brightness false
+				fi
+				sudo sed -i 's/.*#SUBSYSTEM/SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
+			else
+			#jasnosc_dziala="FALSE"
+				sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
+			fi
 			#uruchomienie aktualizacji gdy zaszła jakaś zmiana
 			if [ "$hdd_scheduler" = "blk-mq" ] || [ "$ssd_scheduler" = "blk-mq" ]; then
 				if  [ "$jasnosc_dziala_przed" = "$jasnosc_dziala" ] && [ "$a" = "$aktualny_apm" ] && [ "$wifi_batt_fix_przed" = "$wifi_batt_fix" ] && [ "$wifi_batt_on_przed" = "$wifi_batt_on" ] && [ "$bt_batt_on_przed" = "$bt_batt_on" ] && [ "$rts5139_on_przed" = "$rts5139_on" ] && [ "$wifi_n_on_przed" = "$wifi_n_on" ] && [ "$turbo_batt_on_przed" = "$turbo_batt_on" ] && [ "$turbo_ac_on_przed" = "$turbo_ac_on" ] && [ "$hibernacja_menu_przed" = "$hibernacja_menu" ] && [ "$vsync_on_przed" = "$vsync_on" ] && [ "$stan_samsung_przed" = "$stan_samsung" ]; then
@@ -207,4 +202,3 @@ while [ $petla_duza = "tak" ]; do
 		opusc_petle
 	fi
 done
-

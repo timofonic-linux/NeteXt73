@@ -84,6 +84,9 @@ export wersja_apm3="advanced_power_management_by_ext73_intel-performance"
 export wersja_apm4="advanced_power_management_by_ext73_intel-powersave"
 export wersja_apm5="advanced_power_management_by_ext73_performance-conservative"
 export wersja_apm6="advanced_power_management_by_ext73_performance-ondemand"
+#lista kerneli premium i standard
+export lista_kerneli_premium="silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver"
+export lista_kerneli_standard="K8|atom"
 #nazwy ikon do dymków
 export error1="dialog-error"
 export ikona_info1="dialog-information"
@@ -97,9 +100,13 @@ export wersje_ubu="xenial!wily!trusty!unstable"
 export WERSJA_UBUNTU="$(lsb_release -cs)"
 export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
 case `lsb_release -cs` in
-		qiana|rebecca|rafaela|freya|rosa|sarah)
+	qiana|rebecca|rafaela|freya|rosa)
 		export WERSJA_UBUNTU="trusty" 
 		export NR_WERSJA_UBUNTU="14.04" ;;
+	sarah)
+		export WERSJA_UBUNTU="xenial" 
+		export NR_WERSJA_UBUNTU="16.04" ;;
+	
 esac
 
 #adres serwera
@@ -1691,7 +1698,7 @@ if [ "$DATA" = "01-01" ]; then
 fi
 
 #sprawdzanie wersji systemu
-if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e trusty -e wily -e xenial)" != "" ] ; then
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "trusty|wily|xenial)" != "" ] ; then
       echo 'ok' > /dev/null
 else
       dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
@@ -1709,7 +1716,7 @@ while [ $petla = "tak" ]; do
 	ans=$(echo $?) 
 	if test "$ans" -eq "0"; then 
 		select=$(echo $process | cut -d" " -f1)
-		kill $select 
+		kill $select # 2> /dev/null
 	fi 
 	
 	if test "$ans" -eq "1"; then 

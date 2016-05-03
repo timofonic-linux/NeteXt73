@@ -37,15 +37,16 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 
 if [ "$1" = "paypal" ]; then
-	yad --center --title="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --window-icon="/opt/NeteXt73/ikony/paypal.png" --html --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --width=$((950*$skala))  --height=$((600*$skala)) --browser
-
+	please_wait &
+	sleep 4 && please_wait kill &
+	yad --center --html --browser --title="We will help you, you will help us. Thank You for Your donation. NeteXt Team." --window-icon="/opt/NeteXt73/ikony/paypal.png" --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --width=$((860*$skala))  --height=$((600*$skala))
+	please_wait kill
 elif [ "$1" = "kontakty" ]; then
 	if [ "$USER" = "root" ]; then
 		su $userek -c "bash /opt/NeteXt73/NeteXt73_root kontakty"
 	else
 		bash /opt/NeteXt73/NeteXt73_root kontakty
 	fi
-	rm -f $res1 $res2 $res3
 else
-	yad --center --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="$adres_opisu" --width=$((950*$skala))  --height=$((600*$skala)) --browser
+	yad --center --html --browser --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/netext.png"  --uri="$adres_opisu" --width=$((950*$skala)) --height=$((600*$skala))
 fi

@@ -43,16 +43,18 @@ if [ "$1" = "kontakty" ]; then
 	res3=$(mktemp --tmpdir=/tmp/netext73 netext73_3.XXXXXXXX)
 	res4=$(mktemp --tmpdir=/tmp/netext73 netext73_4.XXXXXXXX)
 	res5=$(mktemp --tmpdir=/tmp/netext73 netext73_5.XXXXXXXX)
-	
+	res6=$(mktemp --tmpdir=/tmp/netext73 netext73_6.XXXXXXXX)
+		
 	yad --plug=$KEY --tabnum=1 --text="$TEXT_O_PROGRAMIE" 1> $res0 &
 	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty 1> $res1 &
 	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog 1> $res2 &
 	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE 1> $res3 &
 	yad --plug=$KEY --tabnum=5 --html --uri="http://www.netext73.pl?m=1" --browser 1> $res4 &
 	yad --plug=$KEY --tabnum=6 --form --field="$TEXT_UZYTKOWNIK:RO" "$USER" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> $res5 &
+	yad --plug=$KEY --tabnum=7 --html --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --browser 1> $res6 &
 	please_wait kill
-	yad --notebook --key=$KEY --tab-pos="left" --center --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_HOME_PAGE" --tab="$TEXT_BUG" \
-	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((950*$skala)) --height=$((600*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_WYSLIJ_ZGLOSZENIE:2"
+	yad --notebook --center --key=$KEY --tab-pos="left" --title="$nazwa_skryptu1 " --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_HOME_PAGE" --tab="$TEXT_BUG"  --tab="$TEXT_DONATE" \
+	--window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_WYSLIJ_ZGLOSZENIE:2"
 	klawisz=$?
 	if [ "$klawisz" = "2" ]; then
 		#wycinanie błędów
@@ -60,7 +62,7 @@ if [ "$1" = "kontakty" ]; then
 			echo -e "$(cat $res5 | cut -d '|' -f 3) \n $(cat $res5 | cut -d '|' -f 5) \n $(cat $res5 | cut -d '|' -f 4)"  | pastebinit_netext73 "$(cat $res5 | cut -d "|" -f 2)" && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "\n$TEXT_WYSLANO_ZGLOSZENIE"
 		fi
 	fi
-	rm $res0 $res1 $res2 $res3 $res4 $res5 -f
+	rm $res0 $res1 $res2 $res3 $res4 $res5 $res6 -f
 else
 	if [ "$USER" = "root" ]; then
 		sudo -S $1

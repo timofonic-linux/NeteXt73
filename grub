@@ -245,16 +245,22 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 					fi
 				fi
 				export wpis_nowy=$(echo $wpis_nowy | sed 's/\//\\\//g') # poprawka z / \/
-				if [ "$w0" = "acpi_osi='!Windows 2012' acpi_osi=Linux" ]; then w0="acpi_osi='!Windows 2012' acpi_osi=Linux pcie_aspm=force"
+				if [ "$w0" = "acpi_osi='!Windows 2012' acpi_osi=Linux" ]; then 
+					w0="acpi_osi='!Windows 2012' acpi_osi=Linux pcie_aspm=force"
 				else 
 					w0="acpi_osi=Linux pcie_aspm=force"
 				fi    
-				if [ "$w1" = "$TEXT_GRUB_STD" ]; then		w1=" acpi_enforce_resources=lax"
-				elif [ "$w1" = "$TEXT_GRUB_INTEL" ]; then 	w1=" acpi_enforce_resources=lax drm.vblankoffdelay=1"
-				elif [ "$w1" = "$TEXT_GRUB_RADEON" ]; then	w1=" acpi_enforce_resources=lax radeon.dpm=1"
+				if [ "$w1" = "$TEXT_GRUB_STD" ]; then		
+					w1=" acpi_enforce_resources=lax"
+				elif [ "$w1" = "$TEXT_GRUB_INTEL" ]; then 	
+					w1=" acpi_enforce_resources=lax drm.vblankoffdelay=1"
+				elif [ "$w1" = "$TEXT_GRUB_RADEON" ]; then	
+					w1=" acpi_enforce_resources=lax radeon.dpm=1"
 				fi
-				if [ "$w2" = "standard" ]; then      		w2=""
-				elif [ "$w2" = "$TEXT_GRUB19" ]; then  		w2=" acpi_backlight=vendor"
+				if [ "$w2" = "standard" ]; then      		
+					w2=""
+				elif [ "$w2" = "$TEXT_GRUB19" ]; then  		
+					w2=" acpi_backlight=vendor"
 				fi
 				if [ "$zswap" = "TRUE" ];then
 					w6=" zswap.enabled=1 zswap.compressor=$zswap_compressor"

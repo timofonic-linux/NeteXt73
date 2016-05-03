@@ -3,6 +3,10 @@
 
 v1.0.24
 -	skalowanie okien kerneli
+-	poprawki kodu w sekcji kerneli
+-	poprawki kodu w sekcji monitor
+-	testowe włączenie wsparcia dla mint sarah
+-	drobne poprawki kodu
 v1.0.23
 -	+avidemux, -vivaldi
 -	akonadi on/off

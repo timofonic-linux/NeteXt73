@@ -39,16 +39,16 @@ cd /tmp/netext73
 
 if [ -e ~/.netext73/kernel_automat ] && [ -e ~/.netext73/instalator_kerneli ] && [ "$(cat ~/.netext73/kernel_automat)" = "TRUE" ]; then
 	kern="$(cat ~/.netext73/instalator_kerneli)"
-	if [ "$(echo $kern | grep -E "sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver")" != "" ]; then
+	if [ "$(echo $kern | grep -E $lista_kerneli_premium)" != "" ]; then
 		export premium="tak"
 	else
 		export premium="nie"
 	fi
 else
-	if [ "$1" = "K8" ] || [ "$1" = "atom" ]; then
+	if [ "$(echo $1 | grep -E $lista_kerneli_standard)" != "" ]; then
 		kern="$1"
 		export premium="nie"
-	elif [ "$(echo $1 | grep -E "silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver")" != "" ]; then
+	elif [ "$(echo $1 | grep -E $lista_kerneli_premium)" != "" ]; then
 		kern="$1"
 		export premium="tak"
 	elif [ "$1" = "naglowki" ]; then
@@ -97,7 +97,7 @@ fi
 rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 	#lokalne
 	if [ "$kern" = "$TEXT_MENU_INSTALATOR3" ]; then
-		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/headers/headers ext73 /' | sed 's/image/image ext73 /')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((650*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/headers/headers ext73 /' | sed 's/image/image ext73 /')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((750*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		if [ $? = 0 ]; then
 			if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
 				cd $(echo $a | sed -e 's/linux.*//g');     b=$(echo $a | sed -e 's/linux-image/linux-headers/g')
@@ -123,7 +123,7 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 		fi
 	#tylko nagłówki
 	elif [ "$kern" = "$TEXT_MENU_INSTALATOR4" ]; then
-		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/lub linux-image//' | sed 's/headers/headers ext73/')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((650*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		a=$(yad --center --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/lub linux-image//' | sed 's/headers/headers ext73/')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((750*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		if [ $? = 0 ]; then
 		if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
 			cd $(echo $a | sed -e 's/linux.*//g');	b=$(echo $a | sed -e 's/linux-image/linux-headers/g')
