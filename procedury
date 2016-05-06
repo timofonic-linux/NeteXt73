@@ -1242,6 +1242,8 @@ echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.
 echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules"
 echo "sudo ldconfig"
 echo "fi"
+echo "echo 'sprawdz linkowanie'"
+echo "read a"
 }
 
 nvidia_stopka(){
@@ -1428,7 +1430,6 @@ echo "sudo sysctl -p"
 dymek(){
 
 if [ "$USER" != "root" ];then
-
 	if [ "$(which notify-send)" != "" ];then
 		notify-send "$1" "$2" "$3" "$4"
 	elif [ "$(which kdialog)" != "" ];then
