@@ -5,6 +5,8 @@ v1.0.25
 -	nvidia optimus dla 16.04
 -	poprawka w wysyłaniu logów
 -	naprawa dymków przy wysyłaniu logów
+-	usunięcie stron www z zakadek o Netext - wieszały wysyłkę zgłaszania błędów
+-	optymalizacja kodu w sekcjach z zakładkami
 v1.0.24
 -	skalowanie okien kerneli
 -	poprawki kodu w sekcji kerneli
