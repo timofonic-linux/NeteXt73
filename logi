@@ -437,7 +437,7 @@ elif [ "$klawisz" = "0" ]; then
 	cat $rs12 | cut -d "|" -f 10 >> ~/.netext73/wysylkalogow
 
 	export userek=$(cat /tmp/netext73/userek)
-	#sudo -u $userek bash << EOF
+
 	if [ -e ~/.netext73/wysylkalogow ]; then
 		if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
 			cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
@@ -474,7 +474,7 @@ elif [ "$klawisz" = "0" ]; then
 	else
 		cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
 	fi
-#EOF
+
 elif [ "$klawisz" = "1" ]; then
 	koniec="TAK"
 fi
