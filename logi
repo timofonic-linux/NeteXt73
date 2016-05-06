@@ -413,8 +413,11 @@ elif [ "$klawisz" = "3" ]; then
 			yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 			klawisz=$?
 			if [ "$klawisz" = "0" ]; then
-				cat /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik | pastebinit_netext73 "instalujsh_$wynik" && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI instalujsh_$wynik"
-				cat /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik | pastebinit_netext73 "instalacja_$wynik" && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI instalacja_$wynik"
+				export userek=$(cat /tmp/netext73/userek)
+				cat /home/$userek/.netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
+				cat /home/$userek/.netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
+				wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
+				dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
 			fi
 			rm $res0 $res1 -f
 		elif [ "$klawisz" = "2" ]; then

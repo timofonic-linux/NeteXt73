@@ -1428,11 +1428,12 @@ echo "sudo sysctl -p"
 dymek(){
 
 if [ "$USER" != "root" ];then
+
 	if [ "$(which notify-send)" != "" ];then
 		notify-send "$1" "$2" "$3" "$4"
 	elif [ "$(which kdialog)" != "" ];then
 		kdialog --title "$3" -passivepopup "$4"
-	else
+	else	
 		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	fi
 elif [ "$USER" = "root" ];then
