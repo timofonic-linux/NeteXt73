@@ -1221,7 +1221,7 @@ echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
 echo "rm -rf /tmp/nvidia-optimus/"
 #linkowanie dla 16.04
-echo "if [ \"\$(lsb_release -a | grep 16.04)\" = \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i xenial)\" = \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep 16.04)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i xenial)\" != \"\" ]; then"
 echo "sudo rm -f /etc/alternatives/x86_64-linux-gnu_nvidia_modconf"
 echo "sudo rm -f /etc/modprobe.d/nvidia-graphics-drivers.conf"
 echo "sudo rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf"
