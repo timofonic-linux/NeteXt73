@@ -1,3 +1,9 @@
+netext73 (1.0.26) xenial; urgency=medium
+
+  * poprawka w logach sum kontrolnych
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 12 May 2016 19:04:15 +0200
+
 netext73 (1.0.25) xenial; urgency=medium
 
   * duże poprawki kodu
