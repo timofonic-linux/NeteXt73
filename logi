@@ -164,6 +164,7 @@ while [ $petla_duza = "tak" ]; do
 	ls -la /tmp/netext73 | grep -v drwxr | sed '1s/.*//' >> system$losowa.log
 	echo -e "\n\nsumy kontrolne " >> system$losowa.log
 	echo -e "##############################################################################################" >> system$losowa.log
+	ls -la /tmp/netext73/sumy/  >> system$losowa.log
 	cat /tmp/netext73/sumy/sumy_kontrolne.txt >> system$losowa.log
 
 	echo -e "\n\nmounted-proc.conf " >> system$losowa.log
