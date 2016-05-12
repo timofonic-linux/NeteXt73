@@ -1718,7 +1718,8 @@ fi
 
 #dostosowanie steam do optimusa
 if [ -e ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 ]; then
-	mv ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/_libstdc++.so.6
+	cp ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/_libstdc++.so.6
+	rm ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 -f
 fi 
 }
 
