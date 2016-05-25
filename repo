@@ -161,13 +161,13 @@ baza=(
 	"ksuperkey"
 
 	"ppa:kubuntu-ppa/backports"
-	"Kubuntu Backports - repozytorium nowych wersji środowiska KDE oraz najważniejszych aplikacji KDE dla Kubuntu Trusty"
-	"Kubuntu Backports - backports of new versions of KDE and major KDE apps for Kubuntu Trusty"
+	"Kubuntu Backports - repozytorium nowych wersji środowiska KDE oraz najważniejszych aplikacji KDE dla Kubuntu"
+	"Kubuntu Backports - backports of new versions of KDE and major KDE apps for Kubuntu"
 	"kubuntu-desktop"
 
 	"ppa:kubuntu-ppa/backports-landing"
-	"Kubuntu Backports - repozytorium nowych wersji środowiska KDE oraz najważniejszych aplikacji KDE dla Kubuntu Wily"
-	"Kubuntu Backports - backports of new versions of KDE and major KDE apps for Kubuntu Wily"
+	"Kubuntu Backports-landing - repozytorium nowych wersji środowiska KDE oraz najważniejszych aplikacji KDE dla Kubuntu Xenial"
+	"Kubuntu Backports-landing - backports of new versions of KDE and major KDE apps for Kubuntu Xenial"
 	"kubuntu-desktop"
 
 	"ppa:kubuntu-ppa/ppa"
