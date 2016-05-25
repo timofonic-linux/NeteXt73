@@ -108,7 +108,7 @@ install_launcher:
 	$(INSTALL) 0755 $(MENU_DIR)/netext73-paste $(DESTDIR)$(PREFIX)$(BINDIR)
 	$(INSTALL) 0755 $(MENU_DIR)/admin $(DESTDIR)$(PREFIX)$(BINDIR)
 	$(INSTALL) 0755 $(MENU_DIR)/update $(DESTDIR)$(PREFIX)$(BINDIR)
-        $(INSTALL) 0755 $(MENU_DIR)/autoremove $(DESTDIR)$(PREFIX)$(BINDIR)
+	$(INSTALL) 0755 $(MENU_DIR)/autoremove $(DESTDIR)$(PREFIX)$(BINDIR)
 	
 install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
@@ -152,5 +152,4 @@ install_file_uslugi:
 	$(INSTALL) 0755 uslugi $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_czekaj:	
 	$(INSTALL) 0755 czekaj.py $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
-		
-	
+
