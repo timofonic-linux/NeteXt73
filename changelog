@@ -2,7 +2,8 @@
 -------------------------------------
 
 v1.0.27
--	polecenia admin i update z bash
+-	polecenia admin i update - bash
+-	polecenie autoremove - bash
 v1.0.26
 -	poprawka w logach sum kontrolnych
 v1.0.25
