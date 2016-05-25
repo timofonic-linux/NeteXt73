@@ -311,7 +311,7 @@ awk 'BEGIN {return_code=('$num1' >= '$num2') ? 0 : 1; exit} END {exit return_cod
 }
 microcode_firmware_nonfree(){
 #nonfree
-if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ]; then
+if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -e xenial)" = "" ]; then
       yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
 	    non_free="TRUE"
