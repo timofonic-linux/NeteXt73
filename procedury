@@ -280,7 +280,13 @@ if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 		stan_microcode="-"
 	fi
 elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
-	if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ]; then
+	export twoj_amd=$(dpkg -l | grep amd64-microcode | awk '{print $3}' | head -n 1 | cut -d '.' -f 2)
+	if [ "$twoj_amd" = "" ];then
+			twoj_amd=0
+	fi
+	export dostepny_amd=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep amd64-microcode | cut -d '_' -f 2 | cut -d '.' -f 2)
+	porownaj_liczby $twoj_amd $dostepny_amd
+	if [ "$return_code" = "0" ]; then
 		stan_microcode=$TEXT_TAK
 	else
 		stan_microcode="-"
@@ -339,7 +345,7 @@ if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 		echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep intel-microcode)"  >> instaluj.sh
 	fi
 else
-	echo "sudo apt-get install amd64-microcode -y"  >> instaluj.sh
+	echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep amd64-microcode)"  >> instaluj.sh
 fi
 
 }
