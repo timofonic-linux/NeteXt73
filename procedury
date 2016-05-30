@@ -1730,7 +1730,7 @@ fi
 }
 
 pastebinit_netext73(){
-curl -d title="$1" -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
+curl -0 -d title="$1" -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=bash -d expire=10080 --data-urlencode text@- $adres_logi
 }
 
 kill_process(){
