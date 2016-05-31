@@ -397,6 +397,7 @@ export TEXT_PPAPURGE="Usuń wskazane repozytorium i przywróć oficjalne pakiety
 export TEXT_SELECT_TO_KILL="Wybierz proces, który chcesz zakończyć:"
 export TEXT_LISTA_PROCESOW="Lista wszystkich procesów użytkownika "
 export TEXT_PROCESY=" :"
+export MENU_RKHUNTER="Root-Kit Hunter"
 
 #########################################################################################################################################################################
 

@@ -34,7 +34,7 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 #testy
 if [ "$1" = "testy" ]; then
-	menu="BurnTest!$MENU01!$MENU02!$MENU03!Rkhunter"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
+	menu="BurnTest!$MENU01!$MENU02!$MENU03!$MENU_RKHUNTER"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
 	ikonka="/opt/NeteXt73/ikony/testy.png"
 
 #inne skrypty
@@ -322,7 +322,7 @@ if [ $klawisz = 0 ]; then
 	#kill process
 	elif [ "$skrypt" = "$MENU18" ]; then
 		kill_process
-	elif [ "$skrypt" = "Rkhunter" ]; then
+	elif [ "$skrypt" = "$MENU_RKHUNTER" ]; then
 		if [ -e /usr/local/bin/rkhunter ]; then
 			naglowek > instaluj.sh
 			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh

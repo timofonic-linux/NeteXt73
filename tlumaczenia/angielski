@@ -405,6 +405,7 @@ export TEXT_PPAPURGE="Disable a PPA and reverts to the official packages if appl
 export TEXT_SELECT_TO_KILL="Please select a process to kill:"
 export TEXT_LISTA_PROCESOW="List all "
 export TEXT_PROCESY=" processes:"
+export MENU_RKHUNTER="Root-Kit Hunter"
 
 #########################################################################################################################################################################
 
