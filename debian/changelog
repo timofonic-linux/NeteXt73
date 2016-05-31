@@ -1,3 +1,9 @@
+netext73 (1.0.30) xenial; urgency=medium
+
+  * rkhunter
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 31 May 2016 19:44:00 +0200
+
 netext73 (1.0.29) xenial; urgency=medium
 
   * Expect: 100-continue

@@ -34,7 +34,7 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 #testy
 if [ "$1" = "testy" ]; then
-	menu="BurnTest!$MENU01!$MENU02!$MENU03"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
+	menu="BurnTest!$MENU01!$MENU02!$MENU03!Rkhunter"  #!$MENU04!$MENU15!$MENU16" - wyłączone testy glmark2
 	ikonka="/opt/NeteXt73/ikony/testy.png"
 
 #inne skrypty
@@ -322,6 +322,29 @@ if [ $klawisz = 0 ]; then
 	#kill process
 	elif [ "$skrypt" = "$MENU18" ]; then
 		kill_process
+	elif [ "$skrypt" = "Rkhunter" ]; then
+		if [ -e /usr/local/bin/rkhunter ]; then
+			naglowek > instaluj.sh
+			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh
+			echo "sudo /usr/local/bin/rkhunter --propupd" >> instaluj.sh
+			echo "rkhunter --check" >> instaluj.sh
+			echo "sudo chmod 644 /var/log/rkhunter.log" >> instaluj.sh
+			instalacja3 Rkhunter
+		else
+			naglowek > instaluj.sh
+			echo "tar -xvf /opt/NeteXt73/menu/rkhunter-1.4.2.tar.gz -C /tmp/" >> instaluj.sh
+			echo "sudo /tmp/rkhunter-1.4.2/./installer.sh --layout default --install" >> instaluj.sh
+			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh
+			echo "sudo /usr/local/bin/rkhunter --propupd" >> instaluj.sh
+			echo "rkhunter --check" >> instaluj.sh
+			echo "cd /tmp/netext73" >> instaluj.sh
+			echo "sudo rm -rf /tmp/rkhunter-1.4.2" >> instaluj.sh
+			echo "sudo chmod 644 /var/log/rkhunter.log" >> instaluj.sh
+			instalacja3 Rkhunter
+		fi
+		if [ -e /var/log/rkhunter.log ]; then
+			yad --center --title="$nazwa_skryptu1 - rkhunter.log" --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --text-info --filename=/var/log/rkhunter.log --button="$TEXT_ZAMKNIJ:1"
+		fi
 	fi
 fi
 
