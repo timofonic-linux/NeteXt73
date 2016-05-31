@@ -335,11 +335,11 @@ if [ $klawisz = 0 ]; then
 			echo "tar -xvf /opt/NeteXt73/menu/rkhunter-1.4.2.tar.gz -C /tmp/" >> instaluj.sh
 			echo "cd /tmp/rkhunter-1.4.2/"  >> instaluj.sh
 			echo "sudo ./installer.sh --layout default --install" >> instaluj.sh
+			echo "cd /tmp/netext73" >> instaluj.sh
+			echo "sudo rm -rf /tmp/rkhunter-1.4.2" >> instaluj.sh
 			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh
 			echo "sudo /usr/local/bin/rkhunter --propupd" >> instaluj.sh
 			echo "rkhunter --check" >> instaluj.sh
-			echo "cd /tmp/netext73" >> instaluj.sh
-			echo "sudo rm -rf /tmp/rkhunter-1.4.2" >> instaluj.sh
 			echo "sudo chmod 644 /var/log/rkhunter.log" >> instaluj.sh
 			instalacja3 Rkhunter
 		fi
