@@ -323,26 +323,19 @@ if [ $klawisz = 0 ]; then
 	elif [ "$skrypt" = "$MENU18" ]; then
 		kill_process
 	elif [ "$skrypt" = "$MENU_RKHUNTER" ]; then
-		if [ -e /usr/local/bin/rkhunter ]; then
-			naglowek > instaluj.sh
-			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh
-			echo "sudo /usr/local/bin/rkhunter --propupd" >> instaluj.sh
-			echo "rkhunter --check" >> instaluj.sh
-			echo "sudo chmod 644 /var/log/rkhunter.log" >> instaluj.sh
-			instalacja3 Rkhunter
-		else
-			naglowek > instaluj.sh
-			echo "tar -xvf /opt/NeteXt73/menu/rkhunter-1.4.2.tar.gz -C /tmp/" >> instaluj.sh
-			echo "cd /tmp/rkhunter-1.4.2/"  >> instaluj.sh
-			echo "sudo ./installer.sh --layout default --install" >> instaluj.sh
-			echo "cd /tmp/netext73" >> instaluj.sh
-			echo "sudo rm -rf /tmp/rkhunter-1.4.2" >> instaluj.sh
-			echo "sudo /usr/local/bin/rkhunter --update" >> instaluj.sh
-			echo "sudo /usr/local/bin/rkhunter --propupd" >> instaluj.sh
-			echo "rkhunter --check" >> instaluj.sh
-			echo "sudo chmod 644 /var/log/rkhunter.log" >> instaluj.sh
-			instalacja3 Rkhunter
+		naglowek 																> instaluj.sh
+		if [ ! -e /usr/local/bin/rkhunter ]; then
+			echo "tar -xvf /opt/NeteXt73/menu/rkhunter-1.4.2.tar.gz -C /tmp/" 	>> instaluj.sh
+			echo "cd /tmp/rkhunter-1.4.2/"  									>> instaluj.sh
+			echo "sudo ./installer.sh --layout default --install" 				>> instaluj.sh
+			echo "cd /tmp/netext73" 											>> instaluj.sh
+			echo "sudo rm -rf /tmp/rkhunter-1.4.2" 								>> instaluj.sh
 		fi
+		echo "sudo /usr/local/bin/rkhunter --update" 							>> instaluj.sh
+		echo "sudo /usr/local/bin/rkhunter --propupd" 							>> instaluj.sh
+		echo "/usr/bin/yes | sudo rkhunter --check" 							>> instaluj.sh
+		echo "sudo chmod 644 /var/log/rkhunter.log" 							>> instaluj.sh
+		instalacja2 Rkhunter
 		if [ -e /var/log/rkhunter.log ]; then
 			yad --center --title="$nazwa_skryptu1 - rkhunter.log" --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --text-info --filename=/var/log/rkhunter.log --button="$TEXT_ZAMKNIJ:1"
 		fi
