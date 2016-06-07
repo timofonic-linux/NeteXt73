@@ -147,11 +147,12 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				blk_mq="TRUE"
 			fi
 			
-			if [ "$(grep 'intel_iommu=igfx_off' /etc/default/grub)" = "" ]; then
-				iommu="TRUE"
-			else
+			#wymuszenie iommu - false
+			#if [ "$(grep 'intel_iommu=igfx_off' /etc/default/grub)" = "" ]; then
+			#	iommu="TRUE"
+			#else
 				iommu="FALSE"
-			fi
+			#fi
 			
 			#rozdzielczość plymouth
 			aktualna=$(cat /etc/default/grub | grep 'GRUB_GFXPAYLOAD_LINUX' | head -n 1 | sed 's/.*GRUB_GFXPAYLOAD_LINUX=//')
