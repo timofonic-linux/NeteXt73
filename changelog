@@ -4,6 +4,7 @@
 v1.0.31
 -	wymuszenie iommu na off
 -	poprawka usuwająca tworzenie katalogu /home/Pobrane
+-	dodanie software-properties-common do zależności
 v1.0.30
 -	Rkhunter
 v1.0.29

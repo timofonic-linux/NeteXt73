@@ -36,6 +36,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   gir1.2-gtksource-3.0,  
   yad, 
   curl, 
+  software-properties-common, 
   libisl13 
 Replaces: netext73 
 Description: NeteXt'73 - optymalizator systemu
