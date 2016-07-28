@@ -1,3 +1,9 @@
+netext73 (1.0.32) xenial; urgency=medium
+
+  * wyłączenie wsparcia dla Wily
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 28 Jul 2016 15:36:12 +0200
+
 netext73 (1.0.31) xenial; urgency=medium
 
   * wymuszenie iommu na off

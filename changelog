@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+
+v1.0.32
+-	wyłączenie wsparcia dla Wily
 v1.0.31
 -	wymuszenie iommu na off
 -	poprawka usuwająca tworzenie katalogu /home/Pobrane
