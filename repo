@@ -64,7 +64,7 @@ baza=(
 	"Avidemux"
 	"Avidemux"
 	"avidemux"
-	
+
 	"ppa:irie/blender"
 	"Blender - darmowym/open source pakiet animacji 3D"
 	"Blender - free and open source 3D animation suite"
@@ -220,6 +220,10 @@ baza=(
 	"Pipelight - Silverlight"
 	"Pipelight"
 
+	"ppa:haecker-felix/gradio-daily"
+	"gradio"
+	"gradio browser"
+	"gradio"
 	"ppa:hydr0g3n/qbittorrent-stable"
 	"qBittorrent - Codziennie wersje stabilnej gałęzi klienta BitTorrent - qBittorrent"
 	"qBittorrent - daily builds for the stable branch of qBittorrent BitTorrent client"
