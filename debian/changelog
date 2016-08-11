@@ -1,3 +1,9 @@
+netext73 (1.0.33) xenial; urgency=medium
+
+  * apm_status_fix
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 11 Aug 2016 23:00:49 +0200
+
 netext73 (1.0.32) xenial; urgency=medium
 
   * wyłączenie wsparcia dla Wily

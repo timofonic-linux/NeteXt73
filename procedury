@@ -419,17 +419,22 @@ elif [ "$apmik" = "nowy" ]; then
 		sudo cp /tmp/apm-ext73/50-udev-apm-ext73.rules /etc/udev/rules.d/
 		sudo chown root:root /etc/udev/rules.d/*
 		katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
+		#dodanie apm fixa do rc.local
+		sudo sed -i '/apm_status_fix/d' /etc/rc.local
+		sudo sed -i '/exit 0/d' /etc/rc.local
+		echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
+		echo 'exit 0' | sudo tee -a /etc/rc.local
 	else
 	#dodanie apm fixa do rc.local
 		katalog="/etc/rc.local"
 		sudo sed -i '/apm-ext73/d' /etc/rc.local
 		sudo sed -i '/apm_status_fix/d' /etc/rc.local
 		sudo sed -i '/exit 0/d' /etc/rc.local
-		echo '/etc/apm-ext73/wol false'  | sudo tee -a /etc/rc.local
-		echo "/etc/apm-ext73/$(ls /etc/apm-ext73/ | grep advanced_power_management_by_ext73_performance-ondemand) false" | sudo tee -a /etc/rc.local
-		echo '/etc/apm-ext73/brightness false' | sudo tee -a /etc/rc.local
-		echo '/etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
 		echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
+		echo "bash /etc/apm-ext73/$(ls /etc/apm-ext73/ | grep advanced_power_management_by_ext73_performance-ondemand) false" | sudo tee -a /etc/rc.local
+		echo 'bash /etc/apm-ext73/brightness false' | sudo tee -a /etc/rc.local
+		echo 'bash /etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
+		echo 'bash /etc/apm-ext73/wol false' | sudo tee -a /etc/rc.local
 		echo 'exit 0' | sudo tee -a /etc/rc.local
 	fi
 fi
@@ -461,11 +466,6 @@ if [ "$(cat /etc/acpi/powerbtn.sh | grep '/usr/.../qdbus')" != "" ]; then
 		sudo sed -i '/Power button pressed/ s/\/sbin/#\/sbin/' /etc/acpi/powerbtn.sh
 	fi
 fi
-#dodanie apm fixa do rc.local
-sudo sed -i '/apm_status_fix/d' /etc/rc.local
-sudo sed -i '/exit 0/d' /etc/rc.local
-echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
-echo 'exit 0' | sudo tee -a /etc/rc.local
 rm -Rf /tmp/apm-ext73
 #zmiana vsync
 if [ "$vsync_on" = "FALSE" ]; then
