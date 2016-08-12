@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.34
+-	poprawki APM dla stacjonarnych komputerów - wymagana reinstalacja APM
 v1.0.33
 -	naprawa apm_status_fix - wymaga reinstlacji APM
 v1.0.32
