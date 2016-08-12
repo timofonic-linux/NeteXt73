@@ -436,7 +436,9 @@ elif [ "$apmik" = "nowy" ]; then
 		echo 'bash /etc/apm-ext73/brightness false' | sudo tee -a /etc/rc.local
 		echo 'bash /etc/apm-ext73/wol false' | sudo tee -a /etc/rc.local
 		echo "bash /etc/apm-ext73/$(ls /etc/apm-ext73/ | grep advanced_power_management_by_ext73_performance-ondemand) false" | sudo tee -a /etc/rc.local
-		echo 'bash /etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
+		if [ -e /proc/sys/fs/xfs/age_buffer_centisecs ]; then
+			echo 'bash /etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
+		fi
 		echo 'exit 0' | sudo tee -a /etc/rc.local
 	fi
 fi
