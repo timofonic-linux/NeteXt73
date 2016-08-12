@@ -47,5 +47,3 @@ if [ "$(ld -v | grep -i ubuntu)" != "" ] || [ "$(gcc --version | grep -i ext73)"
 	rm /usr/lib/x86_64-linux-gnu/libisl.so.10
 	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
 fi
-
-
