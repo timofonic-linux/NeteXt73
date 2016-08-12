@@ -437,8 +437,12 @@ elif [ "$apmik" = "nowy" ]; then
 		echo "bash /etc/apm-ext73/$(ls /etc/apm-ext73/ | grep advanced_power_management_by_ext73_performance-ondemand) false" | sudo tee -a /etc/rc.local
 		if [ -e /proc/sys/fs/xfs/age_buffer_centisecs ]; then
 			echo 'bash /etc/apm-ext73/xfs_buffer false' | sudo tee -a /etc/rc.local
+		else
+			rm -f /etc/udev/rules.d/80-xfs-udev-apm-ext73.rules
 		fi
 		echo 'exit 0' | sudo tee -a /etc/rc.local
+		#usunięcie dla desktop zbędnych regół udev
+		rm -f /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
 	fi
 fi
 sudo chown root:root /usr/lib/pm-utils/power.d/*
@@ -487,18 +491,14 @@ if [ -e ~/.netext73/apm_status ]; then
 			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_$aktualny*
 			sudo chown root:root /etc/pm/power.d/*
 		elif [ "$apmik" = "nowy" ]; then
-			if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
-				katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
-			else
-				#dodanie apm fixa do rc.local
-				katalog="/etc/rc.local"
-			fi
-			sudo sed -i "s/conservative-conservative/$aktualny/g" $katalog
-			sudo sed -i "s/ondemand-ondemand/$aktualny/g" $katalog
-			sudo sed -i "s/intel-performance/$aktualny/g" $katalog
-			sudo sed -i "s/intel-powersave/$aktualny/g" $katalog
-			sudo sed -i "s/performance-conservative/$aktualny/g" $katalog
-			sudo sed -i "s/performance-ondemand/$aktualny/g" $katalog
+			katalog1="/etc/udev/rules.d/50-udev-apm-ext73.rules"
+			katalog2="/etc/rc.local"
+			sudo sed -i "s/conservative-conservative/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/ondemand-ondemand/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/intel-performance/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/intel-powersave/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/performance-conservative/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/performance-ondemand/$aktualny/g" $katalog1 $katalog2
 		fi
 	fi
 fi
@@ -614,18 +614,15 @@ if [ "$apmik" = "stary" ]; then
 	sudo chmod a+x /etc/pm/power.d/$2
 	sudo chown root:root /etc/pm/power.d/*
 elif [ "$apmik" = "nowy" ]; then
-	if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
-		katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
-	else
+	katalog1="/etc/udev/rules.d/50-udev-apm-ext73.rules"
 	#dodanie apm fixa do rc.local
-		katalog="/etc/rc.local"
-	fi
-	sudo sed -i "s/conservative-conservative/$1/g" $katalog
-	sudo sed -i "s/ondemand-ondemand/$1/g" $katalog
-	sudo sed -i "s/intel-performance/$1/g" $katalog
-	sudo sed -i "s/intel-powersave/$1/g" $katalog
-	sudo sed -i "s/performance-conservative/$1/g" $katalog
-	sudo sed -i "s/performance-ondemand/$1/g" $katalog
+	katalog2="/etc/rc.local"
+	sudo sed -i "s/conservative-conservative/$1/g" $katalog1 $katalog2
+	sudo sed -i "s/ondemand-ondemand/$1/g" $katalog1 $katalog2
+	sudo sed -i "s/intel-performance/$1/g" $katalog1 $katalog2
+	sudo sed -i "s/intel-powersave/$1/g" $katalog1 $katalog2
+	sudo sed -i "s/performance-conservative/$1/g" $katalog1 $katalog2
+	sudo sed -i "s/performance-ondemand/$1/g" $katalog1 $katalog2
 fi
 #wifi_batt_fix
 if [ "$wifi_batt_fix" = "FALSE" ];then
@@ -903,7 +900,7 @@ echo "sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/udev/rules.d/40-wol-udev-apm-ext73.rules"
 echo "sudo rm -f /etc/udev/rules.d/50-udev-apm-ext73.rules"
-echo "sudo rm -f /etc/udev/rules.d/70-brightness-udev-apm-ext73.rules"
+echo "sudo rm -f /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules"
 echo "sudo rm -f /etc/udev/rules.d/80-xfs-udev-apm-ext73.rules"
 echo "sudo rm -rf /etc/apm-ext73"
 echo "sudo sed -i '/apm_status_fix/d' /etc/rc.local"
