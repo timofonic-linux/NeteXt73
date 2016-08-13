@@ -1,3 +1,9 @@
+netext73 (1.0.35) xenial; urgency=medium
+
+  * poprawka APM dla 14.04 
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 13 Aug 2016 16:02:48 +0200
+
 netext73 (1.0.34) xenial; urgency=medium
 
   * poprawka APM dla stacjonarnych
