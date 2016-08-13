@@ -381,7 +381,7 @@ mkdir /tmp/apm-ext73 -p
 rm /tmp/apm-ext73/* -f
 tar -xvzf /opt/NeteXt73/APM/advanced_power_management_by_ext73_$wersja_apm.tar.gz -C /tmp/apm-ext73/
 if [ "$apmik" = "stary" ]; then
-	#przegrywanie plików APM`
+	#przegrywanie plików APM
 	sudo cp /tmp/apm-ext73/advanced_power_management* /etc/pm/power.d/
 	sudo cp /tmp/apm-ext73/brightness /etc/apm-ext73/
 	sudo cp /tmp/apm-ext73/99fancontrol  /etc/pm/sleep.d/
@@ -395,7 +395,12 @@ if [ "$apmik" = "stary" ]; then
 	#przegrywanie udev dla jasności
 	sudo cp /tmp/apm-ext73/60-brightness-udev-apm-ext73.rules /etc/udev/rules.d/
 	sudo chown root:root /etc/udev/rules.d/*
-
+	#dodanie apm fixa do rc.local
+	sudo sed -i '/apm_status_fix/d' /etc/rc.local
+	sudo sed -i '/exit 0/d' /etc/rc.local
+	sudo sed -i '/^[ \t]*$/ d' /etc/rc.local
+	echo 'bash /opt/NeteXt73/APM/apm_status_fix' | sudo tee -a /etc/rc.local
+	echo 'exit 0' | sudo tee -a /etc/rc.local
 elif [ "$apmik" = "nowy" ]; then
 	sudo cp /tmp/apm-ext73/advanced_power_management* /etc/apm-ext73/
 	sudo cp /tmp/apm-ext73/brightness /etc/apm-ext73/
