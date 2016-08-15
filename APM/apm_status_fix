@@ -47,3 +47,10 @@ if [ "$(ld -v | grep -i ubuntu)" != "" ] || [ "$(gcc --version | grep -i ext73)"
 	rm /usr/lib/x86_64-linux-gnu/libisl.so.10
 	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
 fi
+#TPC
+if [ -e /etc/sysctl.conf ]; then
+	if [ "$(grep 'net.ipv4.tcp_challenge_ack_limit = 999999999' /etc/sysctl.conf)" != "" ]; then
+		echo 'net.ipv4.tcp_challenge_ack_limit = 999999999' >> /etc/sysctl.conf
+		sysctl -p
+	fi
+fi

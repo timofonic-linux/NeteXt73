@@ -2,6 +2,8 @@
 -------------------------------------
 
 v1.0.35
+-	apm fix dla TPC inject
+v1.0.35
 -	poprawka APM dla 14.04
 v1.0.34
 -	poprawki APM dla stacjonarnych komputerów - wymagana reinstalacja APM
