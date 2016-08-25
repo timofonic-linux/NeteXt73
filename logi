@@ -110,6 +110,7 @@ while [ $petla_duza = "tak" ]; do
 	grep "GRUB_CMDLINE_LINUX=" /etc/default/grub >> system$losowa.log
 	echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI10</b></span>" >> system$losowa.log
 	echo "GCC - $(gcc --version | head -n 1)" >> system$losowa.log
+	echo "Binutils - $(ld -v | head -n 1)" >> system$losowa.log
 	echo "Powertop - $(dpkg -l | grep powertop | awk '{print $3}' | head -n 1)" >> system$losowa.log
 	mv system$losowa.log zakladka1.log
 
