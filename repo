@@ -205,7 +205,7 @@ baza=(
 	"OCR gimagereader"
 	"gimagereader tesseract-ocr tesseract-ocr-pol"
 
-	"ownCloud"
+	"deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /"
 	"owncloud-client"
 	"owncloud-client"
 	"owncloud-client"
@@ -435,8 +435,9 @@ else
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list"  >> instaluj.sh
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
-						elif [ "${repo[$i]}" = "ownCloud" ]; then
+						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
 						      echo "sudo sed -i '/download.opensuse.org\/repositories\/isv:\/ownCloud/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
+						      echo " sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> instaluj.sh
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "deb \[arch=amd64\] http://dl.google.com/linux/chrome/deb/ stable main" ]; then
 						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list"  >> instaluj.sh
@@ -471,9 +472,9 @@ else
 						      echo "sudo apt-get install --install-recommends pipelight-multi" >> instaluj.txt
 						      echo "sudo pipelight-plugin --update" >> instaluj.txt
 						      echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
-						elif [ "${repo[$i]}" = "ownCloud" ]; then
-						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
-						      echo "wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_$NR_WERSJA_UBUNTU/Release.key" >> instaluj.sh
+						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
+						      echo "sudo sh -c \"echo 'deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
+						      echo "wget -nv https://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
 						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt    
 				#		elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then

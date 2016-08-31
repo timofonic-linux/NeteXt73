@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.38
+-	poprawka instalatora owncloud
+-	zmiana instalatora APM
+-	nowa wersja APM - v5.2
+-	zahaszownia modułów w /etc/modules-load.d/cups-filters.conf
 v1.0.37
 -	poprawka w logach
 v1.0.36

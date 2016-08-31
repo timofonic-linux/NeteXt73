@@ -198,7 +198,9 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 								naglowek > instaluj.sh
 								#sprawdz_gcc >> instaluj.sh
 								instaluj_kernel >> instaluj.sh
-								usun_lpt >> instaluj.sh
+								if [ "$kern" = "atom" ] || [ "$premium" = "tak" ]; then
+									usun_lpt >> instaluj.sh
+								fi
 								instalacja2
 								#wywalenie plików po instalacji
 								wywal_pobrane_pliki_kernela
