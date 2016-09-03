@@ -1,3 +1,9 @@
+netext73 (1.0.38) xenial; urgency=medium
+
+  * apm 5.2
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 03 Sep 2016 15:12:44 +0200
+
 netext73 (1.0.37) xenial; urgency=medium
 
   * poprawka w logach
