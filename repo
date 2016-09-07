@@ -195,6 +195,11 @@ baza=(
 	"The latest open graphics drivers + Mesa"
 	"vainfo"
 
+	"ppa:joe-yasi/xorg-xenial"
+	"Najnowsze stabilne graficzne sterowniki otwarte + Mesa"
+	"The latest stable open graphics drivers + Mesa"
+	"vainfo"
+	
 	"ppa:leolik/leolik"
 	"notifyOSD Patch - poprawiona wersja OSD notify"
 	"notifyOSD Patch - fixed OSD notify version"
