@@ -50,7 +50,7 @@ if [ "$1" = "kontakty" ]; then
 	#yad --plug=$KEY --tabnum=7 --html --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --browser 1> ${res[6]} &
 	please_wait kill # --tab="$TEXT_HOME_PAGE" --tab="$TEXT_DONATE"
 	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_BUG"   \
-	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_ZAMKNIJ:1" --button="$TEXT_WYSLIJ_ZGLOSZENIE:0"
+	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then
 		#wycinanie błędów

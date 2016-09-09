@@ -52,7 +52,7 @@ else
 		kern="$TEXT_MENU_INSTALATOR3"
 	fi
 	#szerokość i wysokość dla premium
-	szer="650"
+	szer="720"
 	if [ "$skala" = "2" ];then
 		wysokosc="400"
 	else
@@ -75,11 +75,11 @@ else
 		pliki="/opt/NeteXt73/kernel"
 		ikona="linux.png"
 		menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
-		szer="460"
+		szer="500"
 	fi
 	if [ "$kern" = "" ]; then
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
-		 --image-on-top --item-width="$((200*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
+		 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
 		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
 		klawisz=$?
 	fi
