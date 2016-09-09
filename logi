@@ -39,7 +39,7 @@ while [ $petla_duza = "tak" ]; do
 	if [ "$klawisz" = "3" ];then
 		petla="tak"
 		while [ $petla = "tak" ]; do
-			a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort | uniq) --button="$TEXT_USUN_WYNIK:2" --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
+			a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort | uniq) --button="$TEXT_USUN_WYNIK:2" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 			klawisz=$?
 			if [ "$klawisz" = "0" ]; then
 				wynik=$(echo $a | cut -d '|' -f 1)
