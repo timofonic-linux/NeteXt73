@@ -220,6 +220,8 @@ export TEXT_PASTE="Press CTRL+V to paste the generated logs"
 export TEXT_PASTEBIN="Pastebin"
 export TEXT_CLIPBOARD="Copy to clipboard"
 export TEXT_LISTAPAKIETOW="Packages"
+export TEXT_INSTALLED="installed"
+export TEXT_NOT_INSTALLED="not installed"
 
 #########################################################################################################################################################################
 #tlumaczenia_microcode

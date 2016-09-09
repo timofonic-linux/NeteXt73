@@ -88,8 +88,15 @@ while [ $petla_duza = "tak" ]; do
 	fi
 
 	#sprawdzanie czy jest nvidia_optimus
+	if [ -e /proc/acpi/bbswitch ];then
+		if [ "$(dpkg -l primus | grep 'ii')" != "" ] && [ "$(dpkg -l bbswitch-dkms | grep 'ii')" != "" ]; then
+			echo -e "Nvidia Optimus - <b>$TEXT_INSTALLED</b>" >> system$losowa.log
+		else
+			echo -e "Nvidia Optimus - <b>$TEXT_NOT_INSTALLED</b>" >> system$losowa.log
+		fi
+	fi
 	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
-		if [ "$(cat /proc/acpi/bbswitch 0000:03:00.0 | grep -i on)" != "" ]; then
+		if [ "$(cat /proc/acpi/bbswitch | grep 0000:03:00.0 | grep -i on)" != "" ]; then
 			echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log
 		else
 			echo -e "Nvidia Optimus - <b>OFF</b>" >> system$losowa.log
@@ -265,7 +272,7 @@ while [ $petla_duza = "tak" ]; do
 	rm /tmp/netext73/sumy/pliki.txt -f
 	dpkg -l | grep -wE "linux-headers|nvidia|fglrx" | grep ii > /tmp/netext73/sumy/pakiety.txt
 	cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| sed 's/-headers//g' | awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
-	cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	  	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
+	cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	     	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
 	cat /tmp/netext73/sumy/pakiety.txt | awk '{print $2"_"$3}' 	| sed 's/.://g' | grep fglrx_ >> /tmp/netext73/sumy/lista.txt
 	cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' | sed 's/-headers//g' > /tmp/netext73/sumy/wydane.txt
 
@@ -338,7 +345,7 @@ while [ $petla_duza = "tak" ]; do
 			res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 		done 
 		yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> ${res[4]} &
-		yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
+		yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
 		yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" 1> ${res[6]} &
 		yad --plug=$KEY1 --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" 1> ${res[7]} &
 		yad --plug=$KEY1 --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> ${res[8]} &
