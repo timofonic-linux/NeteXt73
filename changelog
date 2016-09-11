@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.41
+-	Radeon dla 16.04 - otwarte sterowniki mesa 12.02 i 12.1
 v1.0.40
 -	poprawka wykrywania optimusa
 -	zmiana modułu logi

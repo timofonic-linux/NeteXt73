@@ -1,3 +1,9 @@
+netext73 (1.0.41) xenial; urgency=medium
+
+  * Radeon dla 16.04 - otwarte sterowniki mesa 12.02 i 12.1
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 11 Sep 2016 20:13:54 +0200
+
 netext73 (1.0.40) xenial; urgency=medium
 
   * poprawka wykrywania optimusa
