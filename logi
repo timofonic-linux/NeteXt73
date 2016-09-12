@@ -33,434 +33,437 @@ koniec="NIE"
 petla_duza="tak"
 while [ $petla_duza = "tak" ]; do
 	cd /tmp/netext73
-	yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top \
+	rm netext73_* -f
+	#yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top \
 	--button="$TEXT_WYGENERUJ:2" --button="$TEXT_LISTA_LOGOW:3" --button="$TEXT_LISTAPAKIETOW:4" --button="$TEXT_ZAMKNIJ:1"
-	klawisz=$?
-	if [ "$klawisz" = "3" ];then
-		petla="tak"
-		while [ $petla = "tak" ]; do
-			a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort | uniq) --button="$TEXT_USUN_WYNIK:2" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
-			klawisz=$?
-			if [ "$klawisz" = "0" ]; then
-				wynik=$(echo $a | cut -d '|' -f 1)
-				KEY2="$(echo $RANDOM)"
-				#zmienne losowe
-				for i in $(seq 0 1); do
-					res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
-				done
-				yad --plug=$KEY2 --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" 1> ${res[0]} &
-				yad --plug=$KEY2 --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" 1> ${res[1]} &
-				yad --notebook --key=$KEY2 --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
+	skrypt=$(yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --form --field="$TEXT_DEINSTALATOR1:CB" \
+	"$TEXT_WYGENERUJ!$TEXT_LISTA_LOGOW!$TEXT_LISTAPAKIETOW" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1"  )
+	klawisz=$?; skrypt=$(echo $skrypt | cut -d "|" -f 1)
+	if [ "$klawisz" = "0" ] ;then
+		if [ "$skrypt" = "$TEXT_LISTA_LOGOW" ];then
+			petla="tak"
+			while [ $petla = "tak" ]; do
+				a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort | uniq) --button="$TEXT_USUN_WYNIK:2" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
-					export userek=$(cat /tmp/netext73/userek)
-					cat /home/$userek/.netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
-					cat /home/$userek/.netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
-					wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
-					dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
-				fi
-				for i in $(seq 0 1); do
-					rm res[$i] -f
-				done
-			elif [ "$klawisz" = "2" ]; then
-				wynik=$(echo $a | cut -d '|' -f 1)
-				rm /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik -f
-			else
-				opusc_mala_petle
-			fi
-		done
-	elif [ "$klawisz" = "4" ];then
-		please_wait
-		#przygotowanie informacji o zainstalowanych plikach
-		rm /tmp/netext73/sumy/pliki.txt -f
-		dpkg -l | grep -wE "linux-headers|nvidia|fglrx" | grep ii > /tmp/netext73/sumy/pakiety.txt
-		cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| sed 's/-headers//g' | awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
-		cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	     	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
-		cat /tmp/netext73/sumy/pakiety.txt | awk '{print $2"_"$3}' 	| sed 's/.://g' | grep fglrx_ >> /tmp/netext73/sumy/lista.txt
-		cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' | sed 's/-headers//g' > /tmp/netext73/sumy/wydane.txt
-
-		for i in $(cat /tmp/netext73/sumy/wydane.txt); do
-			if [ "$(echo $i | grep fglrx )" = "" ];then
-				if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $i)" = "" ]; then
-					echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
+					wynik=$(echo $a | cut -d '|' -f 1)
+					KEY2="$(echo $RANDOM)"
+					#zmienne losowe
+					for i in $(seq 0 1); do
+						res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
+					done
+					yad --plug=$KEY2 --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" 1> ${res[0]} &
+					yad --plug=$KEY2 --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" 1> ${res[1]} &
+					yad --notebook --key=$KEY2 --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
+					klawisz=$?
+					if [ "$klawisz" = "0" ]; then
+						export userek=$(cat /tmp/netext73/userek)
+						cat /home/$userek/.netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
+						cat /home/$userek/.netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
+						wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
+						dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
+					fi
+					for i in $(seq 0 1); do
+						rm res[$i] -f
+					done
+				elif [ "$klawisz" = "2" ]; then
+					wynik=$(echo $a | cut -d '|' -f 1)
+					rm /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik -f
 				else
-					echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
+					opusc_mala_petle
 				fi
-			else
-				if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $(echo $i | sed 's/.*_fglrx/fglrx/g'))" = "" ]; then
-					echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
-				else
-					echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
-				fi
-			fi
-		done
-		please_wait kill
-		cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
-		rm -f /tmp/netext73/sumy/pliki.txt /tmp/netext73/sumy/wydane.txt /tmp/netext73/sumy/lista.txt
-		KEY1="$(echo $RANDOM)"
-			for i in $(seq 4 16); do 
-				res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
-			done 
-			yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> ${res[4]} &
-			yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
-			yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" 1> ${res[6]} &
-			yad --plug=$KEY1 --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" 1> ${res[7]} &
-			yad --plug=$KEY1 --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> ${res[8]} &
-			yad --plug=$KEY1 --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> ${res[9]} &
-			yad --plug=$KEY1 --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> ${res[10]} &
-			yad --plug=$KEY1 --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> ${res[11]} &
-			yad --plug=$KEY1 --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "silvermont") --column "$TEXT_ZNITY1" --column "kernel silvermont" 1> ${res[12]} &
-			yad --plug=$KEY1 --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> ${res[13]} &
-			yad --plug=$KEY1 --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> ${res[14]} &
-			yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> ${res[15]} &
-			yad --plug=$KEY1 --tabnum=13 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernle skylake" 1> ${res[16]} &
-
-			yad --notebook --key=$KEY1 --tab-pos="left" --center --title="$nazwa_skryptu1 " \
-			  --tab="catalyst" --tab="nvidia" --tab="k8" --tab="atom" \
-			  --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
-			  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" \
-			  --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
-
-			rm /tmp/netext73/sumy/pliki.txt -f
-			for i in $(seq 4 16); do 
-				rm res[i] -f
-			done 
-	elif [ "$klawisz" = "2" ];then
+			done
+		elif [ "$skrypt" = "$TEXT_LISTAPAKIETOW" ];then
 			please_wait
-			if [ -e losowa ];then
-				export losowa=$(cat losowa)
-				(( losowa++ ))
-				echo $losowa > losowa
-			else
-				export losowa=1; echo $losowa > losowa
-			fi
+			#przygotowanie informacji o zainstalowanych plikach
+			rm /tmp/netext73/sumy/pliki.txt -f
+			dpkg -l | grep -wE "linux-headers|nvidia|fglrx" | grep ii > /tmp/netext73/sumy/pakiety.txt
+			cat /tmp/netext73/sumy/pakiety.txt | grep linux-headers		| sed 's/-headers//g' | awk '{print $2}'  	> /tmp/netext73/sumy/lista.txt
+			cat /tmp/netext73/sumy/pakiety.txt | grep nvidia 	     	| awk '{print $2"_"$3}' >> /tmp/netext73/sumy/lista.txt
+			cat /tmp/netext73/sumy/pakiety.txt | awk '{print $2"_"$3}' 	| sed 's/.://g' | grep fglrx_ >> /tmp/netext73/sumy/lista.txt
+			cat /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' 	| grep -v -E 'image|amdcccle' -v | sed 's/_amd64.deb//g' | sed 's/.tar.xz//g' | sed 's/-headers//g' > /tmp/netext73/sumy/wydane.txt
 
-			#informacje o systemie
-			#GCC
-			if [ "$(dmesg | grep gcc)" != "" ]; then
-				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI0</b></span>\n$(dmesg | grep gcc  | sed 's/.*Linux/Linux/g' )" > system$losowa.log
-			else
-				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI0</b></span>\n$(uname -a  | sed 's/.*Linux/Linux/g' )" > system$losowa.log
-			fi
-			#procesor i wifi
-			echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI2</b></span>" >> system$losowa.log
-			echo -e "$(grep 'model name' /proc/cpuinfo | head -n1 | sed -e 's/model name'[[:space:]]:'//g' | sed -e 's/ //')" >>system$losowa.log
-			if [ "$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')" = "" ]; then
-				wifi="no wifi"
-			else
-				wifi="$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')"
-			fi
-			echo -e "$wifi" >> system$losowa.log
-			#scheduler
-			if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
-				echo -e "scheduler I/O :\nblk-mq" >> system$losowa.log
-			else
-				echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> system$losowa.log
-			fi
-			#system
-			echo -e "<span color=\"$kolor_textu\"><b>SYSTEM:</b></span> $(lsb_release -i | awk '{print $3}') $NR_WERSJA_UBUNTU $WERSJA_UBUNTU $bit" >> system$losowa.log
-			echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI6</b></span>" >> system$losowa.log
-			#microcode intel
-			if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then
-				echo "microcode Intel - <b>ON</b>" >> system$losowa.log
-			else
-				echo "microcode Intel- <b>OFF</b>" >> system$losowa.log
-			fi
-			#microcode amd
-			if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ];  then
-				echo "microcode AMD - <b>ON</b>" >> system$losowa.log
-			else
-				echo "microcode AMD - <b>OFF</b>" >> system$losowa.log
-			fi
-			#apm status
-			if [ "$stan_apm" != "-" ]; then
-				echo -e "$TEXT_SKRYPT APM - <b>ON</b>" >> system$losowa.log
-			else
-				echo -e "$TEXT_SKRYPT APM - <b>$TEXT_LOGI7</b>" >> system$losowa.log
-			fi
-
-			#sprawdzanie czy jest nvidia_optimus
-			if [ -e /proc/acpi/bbswitch ];then
-				if [ "$(dpkg -l primus | grep 'ii')" != "" ] && [ "$(dpkg -l bbswitch-dkms | grep 'ii')" != "" ]; then
-					echo -e "Nvidia Optimus - <b>$TEXT_INSTALLED</b>" >> system$losowa.log
+			for i in $(cat /tmp/netext73/sumy/wydane.txt); do
+				if [ "$(echo $i | grep fglrx )" = "" ];then
+					if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $i)" = "" ]; then
+						echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
+					else
+						echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
+					fi
 				else
-					echo -e "Nvidia Optimus - <b>$TEXT_NOT_INSTALLED</b>" >> system$losowa.log
+					if [ "$(cat /tmp/netext73/sumy/lista.txt | grep -x $(echo $i | sed 's/.*_fglrx/fglrx/g'))" = "" ]; then
+						echo "FALSE $i" >> /tmp/netext73/sumy/pliki.txt
+					else
+						echo "TRUE $i" >> /tmp/netext73/sumy/pliki.txt
+					fi
 				fi
-			fi
-			if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
-				if [ "$(cat /proc/acpi/bbswitch | grep 0000:03:00.0 | grep -i on)" != "" ]; then
-					echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log
-				else
-					echo -e "Nvidia Optimus - <b>OFF</b>" >> system$losowa.log
-				fi
-			fi
-
-			if [ -e $wersja_apm ]; then
-				echo "$TEXT_LOGI8 APM: <b>$(ls -al /etc/default/grub | cut -d " " -f 3)</b>" >> system$losowa.log
-			fi
-			if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ]; then
-				echo "$TEXT_LOGI8 microcode_amd.bin: <b>$(ls -al /lib/firmware/amd-ucode/microcode_amd.bin | cut -d " " -f 3)</b>" >> system$losowa.log
-			fi
-			if [ -e /lib/firmware/amd-ucode/microcode_amd_fam15h.bin ]; then
-				echo "$TEXT_LOGI8 microcode_amd_fam15h.bin: <b>$(ls -al /lib/firmware/amd-ucode/microcode_amd_fam15h.bin | cut -d " " -f 3)</b>" >> system$losowa.log
-			fi
-			echo "$TEXT_LOGI8 GRUB: <b>$(ls -al /etc/default/grub | cut -d " " -f 3)</b>" >> system$losowa.log
-			echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI9</b></span>" >> system$losowa.log
-			grep "GRUB_CMDLINE_LINUX=" /etc/default/grub >> system$losowa.log
-			echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI10</b></span>" >> system$losowa.log
-			echo "GCC - $(gcc --version | head -n 1)" >> system$losowa.log
-			echo "Binutils - $(ld -v | head -n 1)" >> system$losowa.log
-			echo "Powertop - $(dpkg -l | grep powertop | awk '{print $3}' | head -n 1)" >> system$losowa.log
-			mv system$losowa.log zakladka1.log
-
-			#OpenGl
-			echo -e "OpenGL" > opengl$losowa.log
-			echo -e "##############################################################################################" >> opengl$losowa.log
-			glxinfo | grep OpenGL | sed 's/OpenGL ext.*//g' | sed 's/OpenGL core profile extensions://g' | sed '/^[ \t]*$/ d' >> opengl$losowa.log
-			if [ "$(lspci | grep 3D)" != "" ]; then
-				echo -e "Optimus OpenGL" >> opengl$losowa.log
-				echo -e "##############################################################################################" >> opengl$losowa.log
-				primusrun glxinfo | grep OpenGL  >> opengl$losowa.log
-			fi
-
-			#zakładka2
-			echo -e "NeteXt73 i kernel" > system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			echo -e "\n$TEXT_LOGI12" >> system$losowa.log
-			echo -e "$(lsb_release -a)" >> system$losowa.log
-			echo -e "$(uname -a)" >> system$losowa.log
-			echo -e "\n$nazwa_skryptu"  >> system$losowa.log
-			echo -e "\n$TEXT_LOGI1\n$(dpkg -l | grep 'linux-image*'| grep -v -E 'linux-image-extra*|linux-image-generic' | sed -e 's/linux-image-//g' | awk '{print $2}'| sort -r | column -n)" >> system$losowa.log
-			echo -e "\n\nKonfiguracja netext73" >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			#katalogi
-			ls -la ~/.netext73 | grep drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
-			#pliki
-			ls -la ~/.netext73 | grep rw-rw >> system$losowa.log
-			echo -e "\n\narchiwum_deb" >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat ~/.netext73/archiwum_deb >> system$losowa.log
-			echo -e "\n\ninstalator_kerneli" >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat ~/.netext73/instalator_kerneli >> system$losowa.log
-			echo -e "\n\njezyk" >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat ~/.netext73/jezyk >> system$losowa.log
-			echo -e "\n\nkernel_automat " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat ~/.netext73/kernel_automat >> system$losowa.log
-			echo -e "\n\nroot_mode " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat ~/.netext73/root_mode >> system$losowa.log
-			echo -e "\n\nzswap " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			dmesg | grep zswap: >> system$losowa.log
-			echo -e "\n\nkonflikty " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			dpkg -l | awk '{print $2}' | grep laptop-mode-tools -x >> system$losowa.log
-			dpkg -l | awk '{print $2}' | grep tlp -x >> system$losowa.log
-			echo -e "\n\nstan tmp " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			ls -la /tmp/netext73 | grep -v drwxr | sed '1s/.*//' >> system$losowa.log
-			echo -e "\n\nsumy kontrolne " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			ls -la /tmp/netext73/sumy/ | grep -v drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
-			echo -e "\n" >> system$losowa.log
-			cat /tmp/netext73/sumy/sumy_kontrolne.txt >> system$losowa.log
-			echo -e "\n\nmounted-proc.conf " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat /etc/init/mounted-proc.conf >> system$losowa.log
-			echo -e "\n\nureadahead.conf  " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			cat /etc/init/ureadahead.conf >> system$losowa.log
-			echo -e "\n\nreadahead  " >> system$losowa.log
-			echo -e "##############################################################################################" >> system$losowa.log
-			if [ -e /usr/lib/pm-utils/power.d/readahead ]; then
-				cat /usr/lib/pm-utils/power.d/readahead >> system$losowa.log
-			fi
-			echo -e "microcode  " >> apmsystem$losowa.log
-			echo -e "##############################################################################################" >> apmsystem$losowa.log
-			if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then
-				  echo "microcode Intel - ON" >> apmsystem$losowa.log
-			else
-				  echo "microcode Intel- OFF" >> apmsystem$losowa.log
-			fi
-			if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ];  then
-				  echo "microcode AMD - ON" >> apmsystem$losowa.log
-			else
-				  echo "microcode AMD - OFF" >> apmsystem$losowa.log
-			fi
-			dpkg -l | grep linux-firmware | awk '{print $2" "$3}' | head -n 1 | sed 's/~.*//'  >> apmsystem$losowa.log
-
-			echo -e "\n\nwersja APM  " >> apmsystem$losowa.log
-			echo -e "##############################################################################################" >> apmsystem$losowa.log
-			ls $katalog_apm | cut -d "_" -f 7 | head -n 1 >> apmsystem$losowa.log
-			echo -e "\napm_status " >> apmsystem$losowa.log
-
-			ls /usr/lib/pm-utils/power.d/ -la | grep rwxr | grep -v drwxr-xr-x >> apmsystem$losowa.log
-			ls /etc/pm/power.d/ -la | grep -v drwxr-xr-x | sed '1s/.*//' >>  apmsystem$losowa.log
-			echo -e "\nls /usr/lib/pm-utils/power.d/ -la" >> apmsystem$losowa.log
-			ls /usr/lib/pm-utils/power.d/ -la | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
-			echo -e "\nls /etc/apm/event.d/ -la" >> apmsystem$losowa.log
-			ls -la /etc/apm/event.d/ | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
-			if [ "$apmik" = "nowy" ]; then
-				cat /etc/systemd/system/hibernate.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-				cat /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-				cat /etc/systemd/system/suspend.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-				cat /etc/udev/rules.d/50-udev-apm.rules  >> apmsystem$losowa.log
-			fi
-
-
-			echo -e "##############################################################################################" >> apmsystem$losowa.log
-			cat ~/.netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log
-			echo -e "\n\nscheduler  " >> apmsystem$losowa.log
-			echo -e "##############################################################################################" >> apmsystem$losowa.log
-			if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
-				echo -e "scheduler I/O :\nblk-mq" >> apmsystem$losowa.log
-			else
-				echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> apmsystem$losowa.log
-			fi
-
-			echo -e "lsmod" >> lsmodsystem$losowa.log
-			echo -e "##############################################################################################" >> lsmodsystem$losowa.log
-			lsmod >> lsmodsystem$losowa.log
-			echo -e "lspci" >> lspcisystem$losowa.log
-			echo -e "##############################################################################################" >> lspcisystem$losowa.log
-			lspci >> lspcisystem$losowa.log
-			echo -e "lsusb" >> lsusbsystem$losowa.log
-			echo -e "##############################################################################################" >> lsusbsystem$losowa.log
-			lsusb >> lsusbsystem$losowa.log
-			echo -e "qlxinfo" >> glxinfo$losowa.log
-			echo -e "##############################################################################################" >> glxinfo$losowa.log
-			glxinfo >> glxinfo$losowa.log
-			if [ "$(lspci | grep 3D)" != "" ]; then
-				echo -e "##############################################################################################" >> glxinfo$losowa.log
-				primusrun glxinfo | grep OpenGL  >> glxinfo$losowa.log
-			fi
-
-			sed -i 's/<\/span>//g' system$losowa.log
-			sed -i 's/<span.*">//g' system$losowa.log
-			sed -i 's/<\/b>//g' system$losowa.log
-			sed -i 's/<b>//g' system$losowa.log
-			mv system$losowa.log netext.log
-
-			echo -e "dmesg".log > dmesg.log
-			echo -e "##############################################################################################" >> dmesg.log
-			dmesg >> dmesg.log
-
-			echo -e "firewall.log" > firewall.log
-			echo -e "##############################################################################################" >> firewall.log
-			sudo ufw status verbose >> firewall.log
-
-			echo -e "dmidecode.log" > dmidecode.log
-			echo -e "##############################################################################################" >> dmidecode.log
-			for i in $(seq 1 42); do sudo dmidecode --type $i >> dmidecode.log; done
-
-			echo -e "kern.log" > kern.log
-			echo -e "##############################################################################################" >> kern.log
-			sudo tac /var/log/kern.log | sed -n 1,1000p >> kern.log
-
-			
-			#system logi
+			done
 			please_wait kill
-			#czeki wysyłek
-			if [ -e ~/.netext73/wysylkalogow ]; then
-				i=0
-				for lista in $(cat ~/.netext73/wysylkalogow); do
-					i=$(($i + 1))
-					s[$i]=$lista
-				done	
-			else
-				for i in $(seq 1 10); do
-					s[$i]="TRUE"
-				done
-				#log firewall nie
-				s[5]="FALSE"
-			fi
+			cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
+			rm -f /tmp/netext73/sumy/pliki.txt /tmp/netext73/sumy/wydane.txt /tmp/netext73/sumy/lista.txt
+			KEY1="$(echo $RANDOM)"
+				for i in $(seq 4 16); do 
+					res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
+				done 
+				yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> ${res[4]} &
+				yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
+				yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep k8 	  ) --column "$TEXT_ZNITY1" --column "kernel k8" 1> ${res[6]} &
+				yad --plug=$KEY1 --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep atom	  ) --column "$TEXT_ZNITY1" --column "kernel atom" 1> ${res[7]} &
+				yad --plug=$KEY1 --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> ${res[8]} &
+				yad --plug=$KEY1 --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> ${res[9]} &
+				yad --plug=$KEY1 --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> ${res[10]} &
+				yad --plug=$KEY1 --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> ${res[11]} &
+				yad --plug=$KEY1 --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "silvermont") --column "$TEXT_ZNITY1" --column "kernel silvermont" 1> ${res[12]} &
+				yad --plug=$KEY1 --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> ${res[13]} &
+				yad --plug=$KEY1 --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> ${res[14]} &
+				yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> ${res[15]} &
+				yad --plug=$KEY1 --tabnum=13 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernle skylake" 1> ${res[16]} &
 
-			KEY="$(echo $RANDOM)"
-			#zmienne losowe
-			for i in $(seq 0 12); do
-				rs[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
-			done
-			#zakładki
-			yad --plug=$KEY --tabnum=1  --text="$(cat zakladka1.log)"				1> ${rs[0]} &
-			yad --plug=$KEY --tabnum=2  --text-info --filename="netext.log"			1> ${rs[1]} &
-			yad --plug=$KEY --tabnum=3  --text-info --filename="opengl$losowa.log"	1> ${rs[2]} &
-			yad --plug=$KEY --tabnum=4  --text-info --filename="dmesg.log"			1> ${rs[3]} &
-			yad --plug=$KEY --tabnum=5  --text-info --filename="kern.log"			1> ${rs[4]} &
-			yad --plug=$KEY --tabnum=6  --text-info --filename="firewall.log" 		1> ${rs[5]} &
-			yad --plug=$KEY --tabnum=7  --text-info --filename="dmidecode.log" 		1> ${rs[6]} &
-			yad --plug=$KEY --tabnum=8  --text-info --filename="glxinfo$losowa.log"	1> ${rs[7]} &
-			yad --plug=$KEY --tabnum=9  --text-info --filename="apmsystem$losowa.log"	1> ${rs[8]} &
-			yad --plug=$KEY --tabnum=10 --text-info --filename="lsmodsystem$losowa.log"	1> ${rs[9]} &
-			yad --plug=$KEY --tabnum=11 --text-info --filename="lspcisystem$losowa.log"	1> ${rs[10]} &
-			yad --plug=$KEY --tabnum=12 --text-info --filename="lsusbsystem$losowa.log"	1> ${rs[11]} &
-			yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" \
-			--form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" \
-			--field="kern.log:CHK" --field="firewall.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" \
-			--field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" \
-			$(for i in $(seq 1 10); do echo ${s[$i]}; done) 1> ${rs[12]} &
-			yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab-pos="left" \
-			--tab="main" --tab="netext" --tab="OpenGl" --tab="dmesg" --tab="kern" --tab="firewall" --tab="dmidecode" \
-			--tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
-			--window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((860*$skala)) --height=$((500*$skala)) --on-top \
-			--button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
-			klawisz=$?
-			if [ "$klawisz" = "0" ]; then	
-				rm ~/.netext73/wysylkalogow -f
-				for i in $(seq 1 10); do
-					cat ${rs[12]} | cut -d "|" -f $i >> ~/.netext73/wysylkalogow
-				done
-				
-				export userek=$(cat /tmp/netext73/userek)
+				yad --notebook --key=$KEY1 --tab-pos="left" --center --title="$nazwa_skryptu1 " \
+				  --tab="catalyst" --tab="nvidia" --tab="k8" --tab="atom" \
+				  --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
+				  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" \
+				  --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
 
-				if [ -e ~/.netext73/wysylkalogow ]; then
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
-						cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 2p)" != "FALSE" ]; then
-						cat opengl$losowa.log | pastebinit_netext73 opengl.log && log2="opengl.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 3p)" != "FALSE" ]; then
-						cat dmesg.log | pastebinit_netext73 dmesg.log && log3="dmesg.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 4p)" != "FALSE" ]; then
-						cat kern.log | pastebinit_netext73 kern.log && log4="kern.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 5p)" != "FALSE" ]; then
-						cat firewall.log | pastebinit_netext73 firewall.log && log5="firewall.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 6p)" != "FALSE" ]; then
-						cat glxinfo$losowa.log | pastebinit_netext73 glxinfo.log && log6="glxinfo.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 7p)" != "FALSE" ]; then
-						cat apmsystem$losowa.log | pastebinit_netext73 apmsystem.log && log7="apmsystem.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 8p)" != "FALSE" ]; then
-						cat lsmodsystem$losowa.log | pastebinit_netext73 lsmodsystem.log && log8="lsmodsystem.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 9p)" != "FALSE" ]; then
-						cat lspcisystem$losowa.log | pastebinit_netext73 lspcisystem.log && log9="lspcisystem.log"
-					fi
-					if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
-						cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && log10="lsusbsystem.log"
-					fi
-					wyslane_logi=$(echo $log1 $log2 $log3 $log4 $log5 $log6 $log7 $log8 $log9 $log10 | tr ' ' '\n')
-					dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
+				rm /tmp/netext73/sumy/pliki.txt -f
+				for i in $(seq 4 16); do 
+					rm res[i] -f
+				done 
+		elif [ "$skrypt" = "$TEXT_WYGENERUJ" ];then
+				please_wait
+				if [ -e losowa ];then
+					export losowa=$(cat losowa)
+					(( losowa++ ))
+					echo $losowa > losowa
 				else
-					cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
+					export losowa=1; echo $losowa > losowa
 				fi
-			fi
-			rm /tmp/netext73/sumy/pakiety.txt -f
-			rm *.log losowa -f
-			for i in $(seq 0 12); do
-				rm rs[$i] -f
-			done
+
+				#informacje o systemie
+				#GCC
+				if [ "$(dmesg | grep gcc)" != "" ]; then
+					echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI0</b></span>\n$(dmesg | grep gcc  | sed 's/.*Linux/Linux/g' )" > system$losowa.log
+				else
+					echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI0</b></span>\n$(uname -a  | sed 's/.*Linux/Linux/g' )" > system$losowa.log
+				fi
+				#procesor i wifi
+				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI2</b></span>" >> system$losowa.log
+				echo -e "$(grep 'model name' /proc/cpuinfo | head -n1 | sed -e 's/model name'[[:space:]]:'//g' | sed -e 's/ //')" >>system$losowa.log
+				if [ "$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')" = "" ]; then
+					wifi="no wifi"
+				else
+					wifi="$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')"
+				fi
+				echo -e "$wifi" >> system$losowa.log
+				#scheduler
+				if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
+					echo -e "scheduler I/O :\nblk-mq" >> system$losowa.log
+				else
+					echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> system$losowa.log
+				fi
+				#system
+				echo -e "<span color=\"$kolor_textu\"><b>SYSTEM:</b></span> $(lsb_release -i | awk '{print $3}') $NR_WERSJA_UBUNTU $WERSJA_UBUNTU $bit" >> system$losowa.log
+				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI6</b></span>" >> system$losowa.log
+				#microcode intel
+				if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then
+					echo "microcode Intel - <b>ON</b>" >> system$losowa.log
+				else
+					echo "microcode Intel- <b>OFF</b>" >> system$losowa.log
+				fi
+				#microcode amd
+				if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ];  then
+					echo "microcode AMD - <b>ON</b>" >> system$losowa.log
+				else
+					echo "microcode AMD - <b>OFF</b>" >> system$losowa.log
+				fi
+				#apm status
+				if [ "$stan_apm" != "-" ]; then
+					echo -e "$TEXT_SKRYPT APM - <b>ON</b>" >> system$losowa.log
+				else
+					echo -e "$TEXT_SKRYPT APM - <b>$TEXT_LOGI7</b>" >> system$losowa.log
+				fi
+
+				#sprawdzanie czy jest nvidia_optimus
+				if [ -e /proc/acpi/bbswitch ];then
+					if [ "$(dpkg -l primus | grep 'ii')" != "" ] && [ "$(dpkg -l bbswitch-dkms | grep 'ii')" != "" ]; then
+						echo -e "Nvidia Optimus - <b>$TEXT_INSTALLED</b>" >> system$losowa.log
+					else
+						echo -e "Nvidia Optimus - <b>$TEXT_NOT_INSTALLED</b>" >> system$losowa.log
+					fi
+				fi
+				if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+					if [ "$(cat /proc/acpi/bbswitch | grep 0000:03:00.0 | grep -i on)" != "" ]; then
+						echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log
+					else
+						echo -e "Nvidia Optimus - <b>OFF</b>" >> system$losowa.log
+					fi
+				fi
+
+				if [ -e $wersja_apm ]; then
+					echo "$TEXT_LOGI8 APM: <b>$(ls -al /etc/default/grub | cut -d " " -f 3)</b>" >> system$losowa.log
+				fi
+				if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ]; then
+					echo "$TEXT_LOGI8 microcode_amd.bin: <b>$(ls -al /lib/firmware/amd-ucode/microcode_amd.bin | cut -d " " -f 3)</b>" >> system$losowa.log
+				fi
+				if [ -e /lib/firmware/amd-ucode/microcode_amd_fam15h.bin ]; then
+					echo "$TEXT_LOGI8 microcode_amd_fam15h.bin: <b>$(ls -al /lib/firmware/amd-ucode/microcode_amd_fam15h.bin | cut -d " " -f 3)</b>" >> system$losowa.log
+				fi
+				echo "$TEXT_LOGI8 GRUB: <b>$(ls -al /etc/default/grub | cut -d " " -f 3)</b>" >> system$losowa.log
+				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI9</b></span>" >> system$losowa.log
+				grep "GRUB_CMDLINE_LINUX=" /etc/default/grub >> system$losowa.log
+				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI10</b></span>" >> system$losowa.log
+				echo "GCC - $(gcc --version | head -n 1)" >> system$losowa.log
+				echo "Binutils - $(ld -v | head -n 1)" >> system$losowa.log
+				echo "Powertop - $(dpkg -l | grep powertop | awk '{print $3}' | head -n 1)" >> system$losowa.log
+				mv system$losowa.log zakladka1.log
+
+				#OpenGl
+				echo -e "OpenGL" > opengl$losowa.log
+				echo -e "##############################################################################################" >> opengl$losowa.log
+				glxinfo | grep OpenGL | sed 's/OpenGL ext.*//g' | sed 's/OpenGL core profile extensions://g' | sed '/^[ \t]*$/ d' >> opengl$losowa.log
+				if [ "$(lspci | grep 3D)" != "" ]; then
+					echo -e "Optimus OpenGL" >> opengl$losowa.log
+					echo -e "##############################################################################################" >> opengl$losowa.log
+					primusrun glxinfo | grep OpenGL  >> opengl$losowa.log
+				fi
+
+				#zakładka2
+				echo -e "NeteXt73 i kernel" > system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				echo -e "\n$TEXT_LOGI12" >> system$losowa.log
+				echo -e "$(lsb_release -a)" >> system$losowa.log
+				echo -e "$(uname -a)" >> system$losowa.log
+				echo -e "\n$nazwa_skryptu"  >> system$losowa.log
+				echo -e "\n$TEXT_LOGI1\n$(dpkg -l | grep 'linux-image*'| grep -v -E 'linux-image-extra*|linux-image-generic' | sed -e 's/linux-image-//g' | awk '{print $2}'| sort -r | column -n)" >> system$losowa.log
+				echo -e "\n\nKonfiguracja netext73" >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				#katalogi
+				ls -la ~/.netext73 | grep drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
+				#pliki
+				ls -la ~/.netext73 | grep rw-rw >> system$losowa.log
+				echo -e "\n\narchiwum_deb" >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/archiwum_deb >> system$losowa.log
+				echo -e "\n\ninstalator_kerneli" >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/instalator_kerneli >> system$losowa.log
+				echo -e "\n\njezyk" >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/jezyk >> system$losowa.log
+				echo -e "\n\nkernel_automat " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/kernel_automat >> system$losowa.log
+				echo -e "\n\nroot_mode " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/root_mode >> system$losowa.log
+				echo -e "\n\nzswap " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				dmesg | grep zswap: >> system$losowa.log
+				echo -e "\n\nkonflikty " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				dpkg -l | awk '{print $2}' | grep laptop-mode-tools -x >> system$losowa.log
+				dpkg -l | awk '{print $2}' | grep tlp -x >> system$losowa.log
+				echo -e "\n\nstan tmp " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				ls -la /tmp/netext73 | grep -v drwxr | sed '1s/.*//' >> system$losowa.log
+				echo -e "\n\nsumy kontrolne " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				ls -la /tmp/netext73/sumy/ | grep -v drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
+				echo -e "\n" >> system$losowa.log
+				cat /tmp/netext73/sumy/sumy_kontrolne.txt >> system$losowa.log
+				echo -e "\n\nmounted-proc.conf " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat /etc/init/mounted-proc.conf >> system$losowa.log
+				echo -e "\n\nureadahead.conf  " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat /etc/init/ureadahead.conf >> system$losowa.log
+				echo -e "\n\nreadahead  " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				if [ -e /usr/lib/pm-utils/power.d/readahead ]; then
+					cat /usr/lib/pm-utils/power.d/readahead >> system$losowa.log
+				fi
+				echo -e "microcode  " >> apmsystem$losowa.log
+				echo -e "##############################################################################################" >> apmsystem$losowa.log
+				if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then
+					  echo "microcode Intel - ON" >> apmsystem$losowa.log
+				else
+					  echo "microcode Intel- OFF" >> apmsystem$losowa.log
+				fi
+				if [ -e /lib/firmware/amd-ucode/microcode_amd.bin ];  then
+					  echo "microcode AMD - ON" >> apmsystem$losowa.log
+				else
+					  echo "microcode AMD - OFF" >> apmsystem$losowa.log
+				fi
+				dpkg -l | grep linux-firmware | awk '{print $2" "$3}' | head -n 1 | sed 's/~.*//'  >> apmsystem$losowa.log
+
+				echo -e "\n\nwersja APM  " >> apmsystem$losowa.log
+				echo -e "##############################################################################################" >> apmsystem$losowa.log
+				ls $katalog_apm | cut -d "_" -f 7 | head -n 1 >> apmsystem$losowa.log
+				echo -e "\napm_status " >> apmsystem$losowa.log
+
+				ls /usr/lib/pm-utils/power.d/ -la | grep rwxr | grep -v drwxr-xr-x >> apmsystem$losowa.log
+				ls /etc/pm/power.d/ -la | grep -v drwxr-xr-x | sed '1s/.*//' >>  apmsystem$losowa.log
+				echo -e "\nls /usr/lib/pm-utils/power.d/ -la" >> apmsystem$losowa.log
+				ls /usr/lib/pm-utils/power.d/ -la | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
+				echo -e "\nls /etc/apm/event.d/ -la" >> apmsystem$losowa.log
+				ls -la /etc/apm/event.d/ | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
+				if [ "$apmik" = "nowy" ]; then
+					cat /etc/systemd/system/hibernate.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+					cat /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+					cat /etc/systemd/system/suspend.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+					cat /etc/udev/rules.d/50-udev-apm.rules  >> apmsystem$losowa.log
+				fi
+
+
+				echo -e "##############################################################################################" >> apmsystem$losowa.log
+				cat ~/.netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log
+				echo -e "\n\nscheduler  " >> apmsystem$losowa.log
+				echo -e "##############################################################################################" >> apmsystem$losowa.log
+				if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
+					echo -e "scheduler I/O :\nblk-mq" >> apmsystem$losowa.log
+				else
+					echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> apmsystem$losowa.log
+				fi
+
+				echo -e "lsmod" >> lsmodsystem$losowa.log
+				echo -e "##############################################################################################" >> lsmodsystem$losowa.log
+				lsmod >> lsmodsystem$losowa.log
+				echo -e "lspci" >> lspcisystem$losowa.log
+				echo -e "##############################################################################################" >> lspcisystem$losowa.log
+				lspci >> lspcisystem$losowa.log
+				echo -e "lsusb" >> lsusbsystem$losowa.log
+				echo -e "##############################################################################################" >> lsusbsystem$losowa.log
+				lsusb >> lsusbsystem$losowa.log
+				echo -e "qlxinfo" >> glxinfo$losowa.log
+				echo -e "##############################################################################################" >> glxinfo$losowa.log
+				glxinfo >> glxinfo$losowa.log
+				if [ "$(lspci | grep 3D)" != "" ]; then
+					echo -e "##############################################################################################" >> glxinfo$losowa.log
+					primusrun glxinfo | grep OpenGL  >> glxinfo$losowa.log
+				fi
+
+				sed -i 's/<\/span>//g' system$losowa.log
+				sed -i 's/<span.*">//g' system$losowa.log
+				sed -i 's/<\/b>//g' system$losowa.log
+				sed -i 's/<b>//g' system$losowa.log
+				mv system$losowa.log netext.log
+
+				echo -e "dmesg".log > dmesg.log
+				echo -e "##############################################################################################" >> dmesg.log
+				dmesg >> dmesg.log
+
+				echo -e "firewall.log" > firewall.log
+				echo -e "##############################################################################################" >> firewall.log
+				sudo ufw status verbose >> firewall.log
+
+				echo -e "dmidecode.log" > dmidecode.log
+				echo -e "##############################################################################################" >> dmidecode.log
+				for i in $(seq 1 42); do sudo dmidecode --type $i >> dmidecode.log; done
+
+				echo -e "kern.log" > kern.log
+				echo -e "##############################################################################################" >> kern.log
+				sudo tac /var/log/kern.log | sed -n 1,1000p >> kern.log
+
+				
+				#system logi
+				please_wait kill
+				#czeki wysyłek
+				if [ -e ~/.netext73/wysylkalogow ]; then
+					i=0
+					for lista in $(cat ~/.netext73/wysylkalogow); do
+						i=$(($i + 1))
+						s[$i]=$lista
+					done	
+				else
+					for i in $(seq 1 10); do
+						s[$i]="TRUE"
+					done
+					#log firewall nie
+					s[5]="FALSE"
+				fi
+
+				KEY="$(echo $RANDOM)"
+				#zmienne losowe
+				for i in $(seq 0 12); do
+					rs[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
+				done
+				#zakładki
+				yad --plug=$KEY --tabnum=1  --text="$(cat zakladka1.log)"				1> ${rs[0]} &
+				yad --plug=$KEY --tabnum=2  --text-info --filename="netext.log"			1> ${rs[1]} &
+				yad --plug=$KEY --tabnum=3  --text-info --filename="opengl$losowa.log"	1> ${rs[2]} &
+				yad --plug=$KEY --tabnum=4  --text-info --filename="dmesg.log"			1> ${rs[3]} &
+				yad --plug=$KEY --tabnum=5  --text-info --filename="kern.log"			1> ${rs[4]} &
+				yad --plug=$KEY --tabnum=6  --text-info --filename="firewall.log" 		1> ${rs[5]} &
+				yad --plug=$KEY --tabnum=7  --text-info --filename="dmidecode.log" 		1> ${rs[6]} &
+				yad --plug=$KEY --tabnum=8  --text-info --filename="glxinfo$losowa.log"	1> ${rs[7]} &
+				yad --plug=$KEY --tabnum=9  --text-info --filename="apmsystem$losowa.log"	1> ${rs[8]} &
+				yad --plug=$KEY --tabnum=10 --text-info --filename="lsmodsystem$losowa.log"	1> ${rs[9]} &
+				yad --plug=$KEY --tabnum=11 --text-info --filename="lspcisystem$losowa.log"	1> ${rs[10]} &
+				yad --plug=$KEY --tabnum=12 --text-info --filename="lsusbsystem$losowa.log"	1> ${rs[11]} &
+				yad --plug=$KEY --tabnum=13 --text="<span color=\"$kolor_textu\"><b>$TEXT_ZAZNACZ_LOGI</b></span>" \
+				--form --columns=4 --field="netext.log:CHK" --field="opengl.log:CHK" --field="dmesg.log:CHK" \
+				--field="kern.log:CHK" --field="firewall.log:CHK" --field="glxinfo.log:CHK" --field="apm-microcode.log:CHK" \
+				--field="lsmod.log:CHK" --field="lspci.log:CHK" --field="lsusb.log:CHK" \
+				$(for i in $(seq 1 10); do echo ${s[$i]}; done) 1> ${rs[12]} &
+				yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab-pos="left" \
+				--tab="main" --tab="netext" --tab="OpenGl" --tab="dmesg" --tab="kern" --tab="firewall" --tab="dmidecode" \
+				--tab="glxinfo" --tab="APM-microcode" --tab="lsmod" --tab="lspci" --tab="lsusb" --tab="$TEXT_ZAZNACZ_LOGI_OPCJE" \
+				--window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((860*$skala)) --height=$((500*$skala)) --on-top \
+				--button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
+				klawisz=$?
+				if [ "$klawisz" = "0" ]; then	
+					rm ~/.netext73/wysylkalogow -f
+					for i in $(seq 1 10); do
+						cat ${rs[12]} | cut -d "|" -f $i >> ~/.netext73/wysylkalogow
+					done
+					
+					export userek=$(cat /tmp/netext73/userek)
+
+					if [ -e ~/.netext73/wysylkalogow ]; then
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
+							cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 2p)" != "FALSE" ]; then
+							cat opengl$losowa.log | pastebinit_netext73 opengl.log && log2="opengl.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 3p)" != "FALSE" ]; then
+							cat dmesg.log | pastebinit_netext73 dmesg.log && log3="dmesg.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 4p)" != "FALSE" ]; then
+							cat kern.log | pastebinit_netext73 kern.log && log4="kern.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 5p)" != "FALSE" ]; then
+							cat firewall.log | pastebinit_netext73 firewall.log && log5="firewall.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 6p)" != "FALSE" ]; then
+							cat glxinfo$losowa.log | pastebinit_netext73 glxinfo.log && log6="glxinfo.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 7p)" != "FALSE" ]; then
+							cat apmsystem$losowa.log | pastebinit_netext73 apmsystem.log && log7="apmsystem.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 8p)" != "FALSE" ]; then
+							cat lsmodsystem$losowa.log | pastebinit_netext73 lsmodsystem.log && log8="lsmodsystem.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 9p)" != "FALSE" ]; then
+							cat lspcisystem$losowa.log | pastebinit_netext73 lspcisystem.log && log9="lspcisystem.log"
+						fi
+						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
+							cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && log10="lsusbsystem.log"
+						fi
+						wyslane_logi=$(echo $log1 $log2 $log3 $log4 $log5 $log6 $log7 $log8 $log9 $log10 | tr ' ' '\n')
+						dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
+					else
+						cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
+					fi
+				fi
+				rm /tmp/netext73/sumy/pakiety.txt -f
+				rm *.log losowa -f
+				for i in $(seq 0 12); do
+					rm rs[$i] -f
+				done
+		fi
 	elif [ "$klawisz" = "1" ]; then
 		koniec="TAK"
-	fi
-	if [ "$koniec" = "TAK" ]; then
 		opusc_petle
 	fi
 done		
