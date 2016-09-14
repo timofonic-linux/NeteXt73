@@ -36,7 +36,7 @@ while [ $petla_duza = "tak" ]; do
 	rm netext73_* -f
 	#yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top \
 	--button="$TEXT_WYGENERUJ:2" --button="$TEXT_LISTA_LOGOW:3" --button="$TEXT_LISTAPAKIETOW:4" --button="$TEXT_ZAMKNIJ:1"
-	skrypt=$(yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --form --field="$TEXT_DEINSTALATOR1:CB" \
+	skrypt=$(yad --center --on-top --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --form --field="$TEXT_DEINSTALATOR1:CB" \
 	"$TEXT_WYGENERUJ!$TEXT_LISTA_LOGOW!$TEXT_LISTAPAKIETOW" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1"  )
 	klawisz=$?; skrypt=$(echo $skrypt | cut -d "|" -f 1)
 	if [ "$klawisz" = "0" ] ;then

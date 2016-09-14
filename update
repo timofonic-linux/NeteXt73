@@ -65,7 +65,7 @@ fi
 
 aktualizuj_calosc(){
 nv_radeon
-konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=3 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" --field="NVIDIA:CHK" --field="RADEON:CHK" --field="gcc:CHK"  $a1 $a2 $a3 $a4 $a5 $a6 $a7 --width="$((650*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/opt/NeteXt73/ikony/start.png" --image="/opt/NeteXt73/ikony/start.png" --text="<span color=\"$kolor_textu\">$TEXT_UPDATE1</span>" --center --form --columns=3 --field="system microcode:CHK" --field="grub:CHK" --field="apm:CHK" --field="kernel:CHK" --field="NVIDIA:CHK" --field="RADEON:CHK" --field="gcc:CHK"  $a1 $a2 $a3 $a4 $a5 $a6 $a7 --width="$((650*$skala))" --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then
 		if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
@@ -203,7 +203,7 @@ if [ "$1" != "start" ]; then
 		menu="$TEXT_UPDATE2!$TEXT_UPDATE8"
 	fi
 
-	a=$(yad --center --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
+	a=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
 	--field="Firmware/microcode:RO" "$firm" \
 	--field="Kernel $twoj_kernel:RO" "$kern" \
 	--field="APM $twoj_apm:RO" "$apm" \
@@ -235,9 +235,9 @@ if [ "$1" != "start" ]; then
 	elif [ $klawisz = "3" ]; then  #lista zmian
 	    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
 		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
-			yad --center --title="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --width=$((950*$skala)) --height=$((600*$skala)) --browser
+			yad --center --on-top --title="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --width=$((950*$skala)) --height=$((600*$skala)) --browser
 		else
-			yad --center --title="https://www.kernel.org" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org" --width=$((950*$skala))  --height=$((600*$skala)) --browser
+			yad --center --on-top --title="https://www.kernel.org" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 		fi
 	    fi
 	fi

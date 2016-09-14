@@ -117,7 +117,7 @@ while [ $petla_duza = "tak" ]; do
 
 
 	if [ "$stan_apm" != "-" ]; then
-		aa=$(yad --center --columns=2 --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/apm.png"  --image="/opt/NeteXt73/ikony/apm.png" --form \
+		aa=$(yad --center --on-top --columns=2 --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/apm.png"  --image="/opt/NeteXt73/ikony/apm.png" --form \
 		--field="$TEXT_WERSJA_APM:RO" "$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)" \
 		--field="$TEXT_AKTUALNY_PROFIL_APM:RO" "$aktualny_apm" \
 		--field="$TEXT_ZMIEN_PROFIL_APM:CB" "$menu"\

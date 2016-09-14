@@ -33,7 +33,7 @@ petla_duza="tak"
 while [ "$petla_duza" = "tak" ]; do
 
 	menu="$a3!$a4!$a5"
-	gpg=$(yad --center --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	gpg=$(yad --center --on-top --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; gpg=$(echo $gpg | cut -d "|" -f 1)
 	if [ "$klawisz" = "0" ]; then
 		

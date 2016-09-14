@@ -303,7 +303,7 @@ if [ "$1" = "GPG" ]; then
 
 
 	menu="$a3!$a4!$a5"
-	gpg=$(yad --center --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	gpg=$(yad --center --on-top --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; gpg=$(echo $gpg | cut -d "|" -f 1)
 	if [ "$klawisz" = "0" ]; then
 
@@ -546,7 +546,7 @@ else
 			elif [ "$klawisz" = "2" ]; then
 			#PPA PURGE
 				lista_ppa
-				usunppa=$(yad --center --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_PPAPURGE</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ADD:3" --button="$TEXT_PURGE:0" --button="$TEXT_USUN:2" --button="$TEXT_ZAMKNIJ:1")
+				usunppa=$(yad --center --on-top --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_PPAPURGE</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ADD:3" --button="$TEXT_PURGE:0" --button="$TEXT_USUN:2" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
 					naglowek > instaluj.sh
@@ -562,7 +562,7 @@ else
 					echo "done" >> instaluj.sh
 					instalacja
 				elif [ "$klawisz" = "3" ]; then
-					DODAJ_PPA=$(yad --center --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((350*$skala)) --entry --title="  $nazwa_skryptu" --text="$TEXT_ADD $TEXT_NP\n<span color=\"$kolor_textu\"><b>ppa:netext/netext73 </b></span>\n" --entry-label="PPA:"  --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
+					DODAJ_PPA=$(yad --center --on-top --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((350*$skala)) --entry --title="  $nazwa_skryptu" --text="$TEXT_ADD $TEXT_NP\n<span color=\"$kolor_textu\"><b>ppa:netext/netext73 </b></span>\n" --entry-label="PPA:"  --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
 					klawisz=$?
 					if [ "$klawisz" = "0" ]; then
 						naglowek > instaluj.sh
@@ -614,7 +614,7 @@ else
 				paste -d " " 1.txt 2.txt > lista_softu.txt
 				grep TRUE lista_softu.txt | awk '{print $2}' > lista_przed.txt
 
-				instalka=$(yad --center --height=$((540*$skala)) --width=$((640*$skala)) --image="/opt/NeteXt73/ikony/backuprepo.png" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$a8:2" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Soft - automat</b></span>" \
+				instalka=$(yad --center --on-top --height=$((540*$skala)) --width=$((640*$skala)) --image="/opt/NeteXt73/ikony/backuprepo.png" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="$a8:2" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Soft - automat</b></span>" \
 				--column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --checklist --list $(cat lista_softu.txt))
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
@@ -644,7 +644,7 @@ else
 					if [ ! -e ~/.netext73/soft ]; then
 						sofcik
 					fi
-					nowa_lista=$(yad  --title="$nazwa_skryptu  " --center --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((400*$skala)) --height=$((600*$skala)) --form --field="<span color=\"$kolor_textu\"><b>$MENU_OPIS</b></span>:TXT" "$(cat -e ~/.netext73/soft | tr ' ' '\n' | sed 's/\$//g' | sort)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+					nowa_lista=$(yad --on-top --title="$nazwa_skryptu  " --center --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((400*$skala)) --height=$((600*$skala)) --form --field="<span color=\"$kolor_textu\"><b>$MENU_OPIS</b></span>:TXT" "$(cat -e ~/.netext73/soft | tr ' ' '\n' | sed 's/\$//g' | sort)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 					if [ $? = "0" ]; then
 						echo -e $nowa_lista | sed 's/|//g'| tr ' ' '\n' | sed 's/\$//g' | sort | uniq > ~/.netext73/soft
 						sed -i '/^[ \t]*$/ d' ~/.netext73/soft
@@ -689,7 +689,7 @@ else
 		#zmień wydanie z/na
 		elif [ "$backup" = "$TEXT_ZMIEN_WYDANIA" ]; then
 			lista_ppa
-			usunppa=$(yad --center --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ZMIEN_CALOSC:2" --button="$TEXT_ZMIEN:0" --button="$TEXT_ZAMKNIJ:1")
+			usunppa=$(yad --center --on-top --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ZMIEN_CALOSC:2" --button="$TEXT_ZMIEN:0" --button="$TEXT_ZAMKNIJ:1")
 			klawisz=$?
 			if [ "$klawisz" = "2" ]; then
 				#zmień wszystkie repo
@@ -697,7 +697,7 @@ else
 				if [ "$przed" = "" ]; then
 					przed=$WERSJA_UBUNTU
 				fi
-				zmiana=$(yad --center --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/backuprepo.png"  --image="/opt/NeteXt73/ikony/backuprepo.png" --form --field="$TEXT_ZMIEN_Z:CB" "$przed" --field="$TEXT_ZMIEN_NA:CB" "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
+				zmiana=$(yad --center --on-top --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/backuprepo.png"  --image="/opt/NeteXt73/ikony/backuprepo.png" --form --field="$TEXT_ZMIEN_Z:CB" "$przed" --field="$TEXT_ZMIEN_NA:CB" "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
 					export przed=$(echo $zmiana | cut -d "|" -f 1)
@@ -711,7 +711,7 @@ else
 			elif [ "$klawisz" = "0" ]; then
 				#zmień wskazane repo
 				przed=$(echo $usunppa | cut -d '|' -f 1 | cut -d "(" -f 2 | sed 's/)//')
-				zmiana=$(yad --center --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/backuprepo.png"  --image="/opt/NeteXt73/ikony/backuprepo.png" --form --field="$TEXT_ZMIEN_Z:RO" "$przed" --field="$TEXT_ZMIEN_NA:CB" "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
+				zmiana=$(yad --center --on-top --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>$TEXT_ZMIEN_WYDANIA</b></span>" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/backuprepo.png"  --image="/opt/NeteXt73/ikony/backuprepo.png" --form --field="$TEXT_ZMIEN_Z:RO" "$przed" --field="$TEXT_ZMIEN_NA:CB" "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
 					export nazwa_pliku=$(echo $usunppa | cut -d '|' -f 1 | cut -d " " -f 1 | sed -e 's/ppa://' -e 's/\//-/g' | cut -d '-' -f 1)

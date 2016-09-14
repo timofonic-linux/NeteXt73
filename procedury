@@ -229,6 +229,7 @@ echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
+echo "sudo apt-get purge broadcom-sta* bcmwl-kernel-source* -y"
 echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep broadcom-sta-dkms)"
 echo "fi"
 #wpis iommu
@@ -297,7 +298,7 @@ awk 'BEGIN {return_code=('$num1' >= '$num2') ? 0 : 1; exit} END {exit return_cod
 microcode_firmware_nonfree(){
 #nonfree
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -e xenial)" = "" ]; then
-      yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
+      yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
 			non_free="TRUE"
       else
@@ -995,7 +996,7 @@ if [ "$1" = "update" ]; then
 	fi
 	#sprawdzanie połączenia z netem
 	if [ "$(cat /tmp/netext73/sumy/kernel_standard.txt)" = '' ] || [ "$(cat /tmp/netext73/sumy/kernel_premium.txt)" = '' ]; then
-		yad --center --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
+		yad --center --on-top --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
 	exit 1
 fi
 else
@@ -1040,10 +1041,10 @@ else
 	a1="-"
 	blad=0
 	if [ "$(echo $lista)" = "TRUE" ]; then
-		yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_SERVER_ERROR"
+		yad --center --on-top --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_SERVER_ERROR"
 		blad=1
 	else
-		aa=$(yad --center --height=$((340*$skala)) --width=$((690*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_PLATFORMA1 <b><span color=\"$kolor_textu\">$rodzaj</span></b>$TEXT_PLATFORMA2" --column="$TEXT_ZAZNACZ" --column="$TEXT_WYBIERZ_KERNEL" --column="$TEXT_ZNITY1" --button="$TEXT_POWROT:1" --button="gtk-ok:0" --list --radiolist $lista)
+		aa=$(yad --center --on-top --height=$((340*$skala)) --width=$((690*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_PLATFORMA1 <b><span color=\"$kolor_textu\">$rodzaj</span></b>$TEXT_PLATFORMA2" --column="$TEXT_ZAZNACZ" --column="$TEXT_WYBIERZ_KERNEL" --column="$TEXT_ZNITY1" --button="$TEXT_POWROT:1" --button="gtk-ok:0" --list --radiolist $lista)
 		klawisz=$?
 		a=$(echo $aa | cut -d "|" -f 2)	 #wybrany kernel
 		a1=$(echo $aa | cut -d "|" -f 3) #czy zainstalowany jeżeli '-' można instalować
@@ -1126,7 +1127,7 @@ fi
 
 wywal_pobrane_pliki_kernela(){
 if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
-	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
+	yad --center --on-top --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
 	rm -rf $PWD
 elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_INFO2<br>/tmp/netext73/$a"
@@ -1273,7 +1274,7 @@ echo "sudo update-grub"
 
 restart(){
 echo "tete"
-yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
+yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
 	if [ $? = 0 ]; then
 		cd /opt/NeteXt73 && ./NeteXt73_root reboot
 	fi
@@ -1394,7 +1395,7 @@ for i in $(seq 1 2); do
 	echo "9:#${stan[9]} %      $bateria_teraz $jednostka"; echo "9:${stan[9]}" # % baterii
 	echo "10:#${stan[10]} %        $bateria_full $jednostka"; echo "10:${stan[10]}" # % baterii
 
-done | yad --center --multi-progress  --title=" $nazwa_skryptu" --bar="$(echo ${bar[1]})" --bar="$(echo ${bar[2]})" --bar="$(echo ${bar[3]})" --bar="$(echo ${bar[4]})" --bar="$(echo ${bar[5]})" --bar="$(echo ${bar[6]})" --bar="$(echo ${bar[7]})" --bar="$(echo ${bar[8]})" --bar="$(echo ${bar[9]})"  --bar="$(echo ${bar[10]})" --auto-kill --window-icon="/opt/NeteXt73/ikony/apm.png" --image="/opt/NeteXt73/ikony/apm.png" --text="$Stan_baterii:\n" --button="$TEXT_ZAMKNIJ:1"
+done | yad --center --on-top --multi-progress  --title=" $nazwa_skryptu" --bar="$(echo ${bar[1]})" --bar="$(echo ${bar[2]})" --bar="$(echo ${bar[3]})" --bar="$(echo ${bar[4]})" --bar="$(echo ${bar[5]})" --bar="$(echo ${bar[6]})" --bar="$(echo ${bar[7]})" --bar="$(echo ${bar[8]})" --bar="$(echo ${bar[9]})"  --bar="$(echo ${bar[10]})" --auto-kill --window-icon="/opt/NeteXt73/ikony/apm.png" --image="/opt/NeteXt73/ikony/apm.png" --text="$Stan_baterii:\n" --button="$TEXT_ZAMKNIJ:1"
 }
 
 ipv6_off(){
@@ -1423,11 +1424,11 @@ if [ "$USER" != "root" ];then
 	elif [ "$(which kdialog)" != "" ];then
 		kdialog --title "$3" -passivepopup "$4"
 	else	
-		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
+		yad --center --on-top --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	fi
 elif [ "$USER" = "root" ];then
 	if [ -e ~/.netext73/notify_fix ] && [ "$(grep TRUE ~/.netext73/notify_fix)" != "" ];then
-		yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
+		yad --center --on-top --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	else
 		sudo -u $userek bash << EOF
 		if [ "$(which notify-send)" != "" ];then
@@ -1435,7 +1436,7 @@ elif [ "$USER" = "root" ];then
 		elif [ "$(which kdialog)" != "" ];then
 			kdialog --title "$3" -passivepopup "$4"
 		else
-			yad --center --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
+			yad --center --on-top --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 		fi
 EOF
 	fi

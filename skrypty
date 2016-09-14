@@ -291,7 +291,7 @@ if [ $klawisz = 0 ]; then
 				done
 				sed -i '/^[ \t]*$/ d' tymczasowy.txt
 				IFS=$'\n'
-				pliczek=$(yad --center --title="$nazwa_skryptu" --text="$MENU16" --width=$((1024*$skala)) --height=$((450*$skala)) --window-icon="/opt/NeteXt73/ikony/glmark.png" --image="/opt/NeteXt73/ikony/glmark.png" \
+				pliczek=$(yad --center --on-top --title="$nazwa_skryptu" --text="$MENU16" --width=$((1024*$skala)) --height=$((450*$skala)) --window-icon="/opt/NeteXt73/ikony/glmark.png" --image="/opt/NeteXt73/ikony/glmark.png" \
 				--column="uname -r" --column="test dates:" --column="GL_VENDOR:" --column="GL_RENDERER:" --column="GL_VERSION:" --column="Total score:" --column="glmark2 version:" --separator=$'\n' --list $(cat tymczasowy.txt) --button="$TEXT_USUN_WYNIK:0"  --button="$TEXT_ZAMKNIJ:1" )
 				klawisz=$?; pliczek=$(echo $pliczek | cut -d " " -f 2)
 				if [ "$klawisz" = "0" ]; then

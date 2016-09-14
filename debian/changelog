@@ -1,3 +1,9 @@
+netext73 (1.0.42) xenial; urgency=medium
+
+  * poprawka dla broadcom
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 14 Sep 2016 15:25:59 +0200
+
 netext73 (1.0.41) xenial; urgency=medium
 
   * Radeon dla 16.04 - otwarte sterowniki mesa 12.02 i 12.1
