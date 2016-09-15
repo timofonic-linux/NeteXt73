@@ -181,7 +181,7 @@ fi
 
 #pasek postępu pobierania pulsujący gdy coś długo trwa
 pobieranie(){
-yad --center --width=$((560*$skala)) --title="  $nazwa_skryptu" --text="$TEXT_POBIERANIE" --progress --pulsate --auto-close --auto-kill --window-icon="/opt/NeteXt73/ikony/download.png" --button="$TEXT_POWROT:1"
+yad --center --on-top --width=$((560*$skala)) --title="  $nazwa_skryptu" --text="$TEXT_POBIERANIE" --progress --pulsate --auto-close --auto-kill --window-icon="/opt/NeteXt73/ikony/download.png" --button="$TEXT_POWROT:1"
 }
 
 #pobieranie plików do instalacji kerneli
@@ -1556,7 +1556,7 @@ for URI in $URILIST; do
 		  DYNAMIC_COUNTER="$[$DYNAMIC_COUNTER+1]"
 	fi
 	COUNTER="$[$COUNTER+1]"                 # increment counter
-done | yad --center --multi-progress --auto-kill --auto-close --width=$((700*$skala)) $YADBARS --title "$nazwa_skryptu" \
+done | yad --center --on-top --multi-progress --auto-kill --auto-close --width=$((700*$skala)) $YADBARS --title "$nazwa_skryptu" \
 --text "<b>$TEXT_POB2</b>" --window-icon="/opt/NeteXt73/ikony/download.png" --image="/opt/NeteXt73/ikony/download.png" --button="$TEXT_ZAMKNIJ:1"
 # ↑ launch yad multi progress-bar window 
 }
