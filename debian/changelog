@@ -1,3 +1,9 @@
+netext73 (1.0.43) xenial; urgency=medium
+
+  * lz4
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 15 Sep 2016 14:17:22 +0200
+
 netext73 (1.0.42) xenial; urgency=medium
 
   * poprawka dla broadcom

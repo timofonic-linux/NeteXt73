@@ -128,7 +128,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 			elif [ "$(echo $wpis_grub | grep 'deflate')" != "" ] ; then
 				zswap_compressor="deflate@lz4@lzo"
 			else
-				zswap_compressor="lzo@lz4@deflate"
+				zswap_compressor="lz4@lzo@deflate"
 			fi
 			#grub 2 lista
 			if [ "$(dpkg -l | grep grub2-common | awk '{print $1}')" = "ii" ] && [ "$(grep menuentry /boot/grub/grub.cfg | grep class | sed '/reco/ d' | sed '/simple/ d' | cut -d "'" -f 2 | grep buntu)" != "" ];then 
