@@ -1,3 +1,9 @@
+netext73 (1.0.44) xenial; urgency=medium
+
+  * obsługa pstate tylko dla i-core'ów
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 18 Sep 2016 11:41:04 +0200
+
 netext73 (1.0.43) xenial; urgency=medium
 
   * lz4
