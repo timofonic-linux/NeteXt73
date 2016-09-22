@@ -1,3 +1,9 @@
+netext73 (1.0.45) xenial; urgency=medium
+
+  * instalator nv - dekompresja error dymek
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 22 Sep 2016 19:33:15 +0200
+
 netext73 (1.0.44) xenial; urgency=medium
 
   * obsługa pstate tylko dla i-core'ów

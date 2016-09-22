@@ -78,7 +78,7 @@ else
 		szer="500"
 	fi
 	if [ "$kern" = "" ]; then
-		yad --center --on-top --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
+		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
 		 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
 		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
 		klawisz=$?
@@ -176,7 +176,7 @@ rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 					#wywołanie funkcji pobierania odpowiednich wersji kerneli
 					if [ "$premium" = "tak" ] && [ "$kernel_premium" != "tak" ]; then
 						str=""
-						strona=$(yad --center --on-top --entry --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_STRONA1" --entry-text="$str" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+						strona=$(yad --center  --entry --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_STRONA1" --entry-text="$str" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 						klawisz=$?
 						if [ "$klawisz" = "1" ] || [ "$(echo $strona | grep '@'  | grep '@')" = "" ]; then
 							exit 1

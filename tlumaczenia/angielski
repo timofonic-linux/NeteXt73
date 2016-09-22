@@ -373,6 +373,7 @@ export TEXT_BLAD_POBIERANIA="Download error."
 export TEXT_POBIERANIE_GOTOWE="Download completed."
 export TEXT_SUMY_KONTROLNE="checksums"
 export TEXT_SERVER_ERROR="Error retrieving data from the server"
+export TEXT_ROZPAKOWANIE_ERROR="Decompressing error"
 
 #########################################################################################################################################################################
 
