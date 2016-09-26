@@ -1646,6 +1646,7 @@ elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar"
 	echo "sudo ln -sf /usr/bin/cpp-\$wersja /usr/bin/cpp"
 	echo "sudo ln -sf /usr/bin/g++-\$wersja /usr/bin/g++"
+	#echo "sudo rm -f /usr/bin/c++"
 fi
 }
 
