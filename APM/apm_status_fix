@@ -64,4 +64,10 @@ if [ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 ] || [ "$(md5sum /usr/li
 	fi
 	ldconfig
 fi
+#linkowanie steam
+if [ -e /home/*/.local/share/Steam/ ]; then 
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
+	cp -f /opt/gcc-6.2.0/lib64/libstdc++.so.6.0.22 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-6.2.0/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
+fi
 
