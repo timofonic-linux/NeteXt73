@@ -41,7 +41,7 @@ cd /tmp/netext73
 
 usun(){
 rm *.html* -f
-rm -f /tmp/netext73/*.txt 
+rm -f /tmp/netext73/*.txt
 }
 
 instalacja_gcc(){
@@ -93,7 +93,7 @@ konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/op
 		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ]; then
 			instalacja_gcc
 		fi
-	
+
 	fi
 }
 usun
@@ -215,7 +215,7 @@ if [ "$1" != "start" ]; then
 	--button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; a=$(echo $a | cut -d "|" -f 6)
 
-	if [ $klawisz = "0" ]; then 
+	if [ $klawisz = "0" ]; then
 		if [ "$a" = "$TEXT_UPDATE2" ]; then
 			if [ -e ~/.netext73/clean ] && [ "$(grep TRUE ~/.netext73/clean)" = "" ] || [ ! -e ~/.netext73/clean ]; then
 				xterm -T  "dist-upgrade" -e bash -c "echo 'sudo apt-get update && sudo apt-get dist-upgrade'; sudo apt-get update && sudo apt-get dist-upgrade -y;echo -e \"$TEXT_INSTALACJA2\"; read ent"
@@ -231,7 +231,7 @@ if [ "$1" != "start" ]; then
 		a3="TRUE"
 		a4="TRUE"
 		a7="TRUE"
-		aktualizuj_calosc 
+		aktualizuj_calosc
 	elif [ $klawisz = "3" ]; then  #lista zmian
 	    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
 		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then

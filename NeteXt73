@@ -79,7 +79,7 @@ if [ "$klawisz" = "2" ]; then
 elif [ "$klawisz" = "1" ]; then
 	killall yad
 	rm -rf /tmp/netext73
-elif  [ "$klawisz" = "3" ] ; then    
+elif  [ "$klawisz" = "3" ] ; then
 	chmod a+x ~/.netext73/vsftpd/vsftpd
 	~/.netext73/vsftpd/./vsftpd
 fi

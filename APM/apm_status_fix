@@ -54,3 +54,14 @@ if [ -e /etc/sysctl.conf ]; then
 		sysctl -p
 	fi
 fi
+#linkowanie
+if [ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 | awk '{print $1}')" != "$(md5sum /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 | awk '{print $1}')" ]; then
+	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 -f
+	cp /opt/gcc-6.2.0/lib64/libstdc++.so.6.0.22 /usr/lib/x86_64-linux-gnu/ -f
+	if [ "$(ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep libstdc++.so.6.0.22)" = "" ]; then
+		rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 -f
+		ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+	fi
+	ldconfig
+fi
+
