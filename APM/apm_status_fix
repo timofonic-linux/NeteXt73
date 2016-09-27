@@ -58,20 +58,17 @@ fi
 wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
 plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py)
 suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
-
 if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
-	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" != "$suma" ]; then
+	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" != "$suma" ] || [ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ]; then
 		rm /usr/lib/x86_64-linux-gnu/$plik -f
 		cp /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/ -f
-		if [ "$(ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep $plik)" = "" ]; then
-			rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 -f
-			ln -sf /usr/lib/x86_64-linux-gnu/$plik /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-		fi
+		rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 -f
+		ln -sf /usr/lib/x86_64-linux-gnu/$plik /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 		ldconfig
 	fi
-	#linkowanie steam
-	if [ -e /home/*/.local/share/Steam/ ]; then 
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
+#linkowanie steam
+	if [ -e /home/*/.local/share/Steam/ ]; then
+		rm -f /home/*/.local/share/Ste# am/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
 		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 	fi
@@ -81,8 +78,8 @@ else
 	ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 	ldconfig
 	#linkowanie steam
-	if [ -e /home/*/.local/share/Steam/ ]; then 
+	if [ -e /home/*/.local/share/Steam/ ]; then
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
-	fi	
+	fi
 fi
