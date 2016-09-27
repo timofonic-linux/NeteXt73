@@ -55,10 +55,11 @@ if [ -e /etc/sysctl.conf ]; then
 	fi
 fi
 #linkowanie
-plik=$(ls /opt/gcc-$(gcc --version | grep -i ext73 | awk '{print $3}')/lib64 | grep libstdc++.so.6. | grep -v gdb.py)
 wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
+plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py)
+
 if [ "$(uname -a | grep ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
-	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" != "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" ]; then
+	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')" != "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" ]; then
 		rm /usr/lib/x86_64-linux-gnu/$plik -f
 		cp /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/ -f
 		if [ "$(ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep $plik)" = "" ]; then
