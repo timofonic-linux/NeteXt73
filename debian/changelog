@@ -1,3 +1,9 @@
+netext73 (1.0.47) xenial; urgency=medium
+
+  * zmiana repo owncloud
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 27 Sep 2016 18:55:08 +0200
+
 netext73 (1.0.46) xenial; urgency=medium
 
   * linkowania gcc
