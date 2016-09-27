@@ -57,9 +57,10 @@ fi
 #linkowanie
 wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
 plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py)
+suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
 
-if [ "$(uname -a | grep ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
-	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')" != "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" ]; then
+if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
+	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" != "$suma" ]; then
 		rm /usr/lib/x86_64-linux-gnu/$plik -f
 		cp /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/ -f
 		if [ "$(ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep $plik)" = "" ]; then
@@ -75,13 +76,13 @@ if [ "$(uname -a | grep ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" 
 		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 	fi
 else
-	rm /usr/lib/x86_64-linux-gnu/$plik -f
+	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 -f
 	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 -f
 	ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 	ldconfig
 	#linkowanie steam
 	if [ -e /home/*/.local/share/Steam/ ]; then 
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/$plik
+		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
 	fi	
 fi
