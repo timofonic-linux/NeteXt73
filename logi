@@ -192,7 +192,8 @@ while [ $petla_duza = "tak" ]; do
 					fi
 				fi
 				if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
-					if [ "$(cat /proc/acpi/bbswitch | grep 0000:03:00.0 | grep -i on)" != "" ]; then
+					porcik=$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')
+					if [ "$(cat /proc/acpi/bbswitch | grep $porcik | grep -i on)" != "" ]; then
 						echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log
 					else
 						echo -e "Nvidia Optimus - <b>OFF</b>" >> system$losowa.log
