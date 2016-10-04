@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.49
+-	naprawa błędnego warunku w instalatorze NV
 v1.0.48
 -	poprawka logów dla Nvidia
 -	zmiana instalatora Optimus
