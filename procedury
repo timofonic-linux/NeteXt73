@@ -89,7 +89,7 @@ export warning1="dialog-warning"
 
 export adres_opisu="http://www.netext73.pl/search/label/opis_netext73"
 
-export wersje_ubu="xenial!trusty!unstable"
+export wersje_ubu="yakkety|xenial!trusty!unstable"
 export wspierane_wersje="xenial|yakkety"
 export wspierane_nr="16.04|16.10"
 
@@ -1198,11 +1198,9 @@ echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" = \"\" ] || [ \"\$(ech
 echo "sudo cp /tmp/nvidia-optimus/etc/modprobe.d/bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
 echo "fi"
 echo "sudo rm -fr /usr/sbin/bumblebeed"
-echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
-echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/optirun"
-echo "sudo rm -fr /usr/sbin/bumblebeed"
 echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/bumblebeed /usr/bin/"
-echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/optirun"
+echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
 echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
 echo "sudo cp -f /tmp/nvidia-optimus/etc/modprobe.d/* /etc/modprobe.d/"
 echo "sudo chmod a+x /usr/sbin/bumblebeed /usr/bin/optirun /usr/bin/bumblebeed"
@@ -1218,10 +1216,10 @@ echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo rm -rf /tmp/nvidia-optimus/"
 #linkowanie dla 16.04
 echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
-echo "sudo rm -f /etc/alternatives/x86_64-linux-gnu_nvidia_modconf"
 echo "sudo rm -f /etc/modprobe.d/nvidia-graphics-drivers.conf"
 echo "sudo rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf"
 echo "sudo rm -f /etc/alternatives/i386-linux-gnu_xorg_extra_modules"
+echo "sudo rm -f /etc/alternatives/x86_64-linux-gnu_nvidia_modconf"
 echo "sudo rm -f /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules"
 echo "sudo rm -f /etc/ld.so.conf.d/x86_64-linux-gnu_GL.conf"
 echo "sudo ln -sf /usr/lib/i386-linux-gnu/mesa/ld.so.conf /etc/alternatives/i386-linux-gnu_gl_conf"
@@ -1273,7 +1271,6 @@ echo "sudo update-grub"
 }
 
 restart(){
-echo "tete"
 yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
 	if [ $? = 0 ]; then
 		cd /opt/NeteXt73 && ./NeteXt73_root reboot

@@ -167,7 +167,7 @@ elif [ "$1" = "radeon" ]; then
 	if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
-		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -e $wspierane_wersje)" = "" ]; then			
+		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)" = "" ]; then			
 			if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
 				grep fglrx_ /tmp/netext73/sumy/sumy_kontrolne.txt | sed 's/.deb//' | awk '{print $2}' | sort -r > 2a.txt
 				lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
