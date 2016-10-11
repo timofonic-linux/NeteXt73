@@ -277,7 +277,7 @@ elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
 	fi
 fi
 porownaj_liczby $twoj_firmware $dostepny_firmware
-if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)" != "" ] ; then
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ] ; then
     if [ "$return_code" = "0" ] && [ "$stan_microcode" = "$TEXT_TAK" ]; then
 	    stan_microcode=$TEXT_TAK
     else
@@ -299,7 +299,7 @@ awk 'BEGIN {return_code=('$1' >= '$2') ? 0 : 1; exit} END {exit return_code}'
 }
 microcode_firmware_nonfree(){
 #nonfree
-if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)" = "" ]; then
+if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
       yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
 			non_free="TRUE"
@@ -1101,7 +1101,7 @@ echo "sudo sed -i -e \"s/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/\" /etc/default/grub"
 echo "fi"
 echo "sudo chown root:root /etc/default/grub"
 #nogpumanager dla > 16.04
-echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"$wspierane_wersje\")\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
 echo "if [ \"\$(grep nogpumanager /etc/default/grub)\" = \"\" ]; then"
@@ -1192,7 +1192,7 @@ echo "fi"
 echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.deb"
 echo "sudo cp /tmp/nvidia-optimus/etc/bumblebee/bumblebee.conf /etc/bumblebee/ -f"
 echo "sudo cp /tmp/nvidia-optimus/etc/bumblebee/xorg.conf.nvidia /etc/bumblebee/ -f"
-echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" = \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" = \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep -E \"$wspierane_nr\")\" = \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"$wspierane_wersje\")\" = \"\" ]; then"
 echo "sudo cp /tmp/nvidia-optimus/etc/modprobe.d/bumblebee.conf /etc/modprobe.d/bumblebee.conf -f"
 echo "fi"
 echo "sudo rm -fr /usr/sbin/bumblebeed"
@@ -1212,7 +1212,7 @@ echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo rm -rf /tmp/nvidia-optimus/"
 #linkowanie dla > 16.04
-echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"$wspierane_wersje\")\" != \"\" ]; then"
 echo "sudo rm -f /etc/modprobe.d/nvidia-graphics-drivers.conf"
 echo "sudo rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf"
 echo "sudo rm -f /etc/alternatives/i386-linux-gnu_xorg_extra_modules"
@@ -1252,7 +1252,7 @@ echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
 #usunięcie xorg > 16.04
-echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
+echo "if [ \"\$(lsb_release -a | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"$wspierane_wersje\")\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "if [ -e /etc/X11/xorg.conf ]; then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
@@ -1705,11 +1705,6 @@ else
       dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
 fi
 
-#dostosowanie steam do optimusa
-#if [ -e ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 ]; then
-#	cp ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/_libstdc++.so.6
-#	rm ~/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/libstdc++.so.6 -f
-#fi 
 }
 
 pastebinit_netext73(){
