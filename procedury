@@ -223,7 +223,7 @@ echo '#!/bin/bash'
 
 instaluj_kernel(){
 echo "echo \"$TEXT_PROCEDURA_1\""
-#warunek dla 16.04
+#warunek dla > 16.04
 echo "if [ -e /etc/init/mounted-proc.conf ]; then"
 echo "sudo sed -i 's+^start on mounted MOUNTPOINT=/proc TYPE=proc+start on mounted MOUNTPOINT=/var+' /etc/init/mounted-proc.conf"
 echo "fi"
@@ -293,9 +293,7 @@ fi
 }
 
 porownaj_liczby(){
-num1=$1
-num2=$2
-awk 'BEGIN {return_code=('$num1' >= '$num2') ? 0 : 1; exit} END {exit return_code}'
+awk 'BEGIN {return_code=('$1' >= '$2') ? 0 : 1; exit} END {exit return_code}'
    return_code=$?
 
 }
@@ -1102,7 +1100,7 @@ echo "else"
 echo "sudo sed -i -e \"s/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/\" /etc/default/grub"
 echo "fi"
 echo "sudo chown root:root /etc/default/grub"
-#nogpumanager dla 16.04
+#nogpumanager dla > 16.04
 echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf_backup -f"
@@ -1201,7 +1199,6 @@ echo "sudo rm -fr /usr/sbin/bumblebeed"
 echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/bumblebeed /usr/bin/"
 echo "sudo cp -f /tmp/nvidia-optimus/usr/bin/optirun /usr/bin/optirun"
 echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
-echo "sudo cp -f /tmp/nvidia-optimus/usr/sbin/bumblebeed /usr/sbin/bumblebeed"
 echo "sudo cp -f /tmp/nvidia-optimus/etc/modprobe.d/* /etc/modprobe.d/"
 echo "sudo chmod a+x /usr/sbin/bumblebeed /usr/bin/optirun /usr/bin/bumblebeed"
 echo "sudo chown root:root /usr/sbin/bumblebeed /usr/bin/bumblebeed /usr/bin/optirun"
@@ -1214,7 +1211,7 @@ echo "fi"
 echo "sudo sed -i \"/BusID/ s/PCI:..:..:./PCI:$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')/g\" /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo sed -i '/BusID/ s/\./:/g' /etc/bumblebee/xorg.conf.nvidia"
 echo "sudo rm -rf /tmp/nvidia-optimus/"
-#linkowanie dla 16.04
+#linkowanie dla > 16.04
 echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
 echo "sudo rm -f /etc/modprobe.d/nvidia-graphics-drivers.conf"
 echo "sudo rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf"
@@ -1254,7 +1251,7 @@ echo "fi"
 echo "if [ -e /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") ]; then"
 echo "sudo mv /etc/X11/xorg.conf.\$(date +\"%m%d%Y\") /etc/X11/xorg.conf"
 echo "fi"
-#usunięcie xorg 16.04
+#usunięcie xorg > 16.04
 echo "if [ \"\$(lsb_release -a | grep -E $wspierane_nr)\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E $wspierane_wersje)\" != \"\" ]; then"
 echo "if [ \"\$(lspci | grep -i VGA | grep -i Intel)\" != \"\" ] && [ \"\$(lspci | grep -i GeForce | grep -i NVIDIA)\" != \"\" ];then"
 echo "if [ -e /etc/X11/xorg.conf ]; then"
@@ -1276,7 +1273,6 @@ yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/Ne
 		cd /opt/NeteXt73 && ./NeteXt73_root reboot
 	fi
 }
-
 
 sprawdz_klucze(){
 #xterm -T GPG-KEY -e bash -c "echo 'sudo apt-key list';
@@ -1414,7 +1410,6 @@ echo "sudo sysctl -p"
 }
 
 dymek(){
-
 if [ "$USER" != "root" ];then
 	if [ "$(which notify-send)" != "" ];then
 		notify-send "$1" "$2" "$3" "$4"
