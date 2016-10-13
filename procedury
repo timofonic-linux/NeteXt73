@@ -931,8 +931,9 @@ echo "sudo sed -i '/exit 0/d' /etc/rc.local"
 
 usun_kernel(){
 echo "echo \"$TEXT_KERNEL1\""
-echo "echo \"$(cat /tmp/netext73/kasuj.txt)\""
-echo "sudo apt-get purge $(cat /tmp/netext73/kasuj.txt  | tr '\n' ' ')"
+echo "$(for i in $(cat kasuj.txt); do dpkg -l | grep $i | awk '{print $2}' >> kasuj2.txt; done)"
+echo "echo \"$(cat /tmp/netext73/kasuj2.txt)\""
+echo "sudo apt-get purge $(cat /tmp/netext73/kasuj2.txt  | tr '\n' ' ')"
 echo "sudo update-grub"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
