@@ -49,14 +49,11 @@ if [ ! -e /tmp/netext73/userek ]; then
 fi
 export userek=$(cat /tmp/netext73/userek)
 
-if [ -e ~/.netext73/root_mode ] && [ "$(cat ~/.netext73/root_mode)" = "TRUE" ]; then
-	if [ "$USER" = "root" ]; then
-	#[ -e /tmp/netext73/stan_netext ] && [ $(cat /tmp/netext73/stan_netext) = "root" ]; then
-	      sudo -K
-	else
-	      cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
-	      exit 0
-	fi
+if [ "$USER" = "root" ]; then
+      sudo -K
+else
+      cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
+      exit 0
 fi
 
 #sumy &
