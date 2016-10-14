@@ -1,3 +1,9 @@
+netext73 (1.0.54) xenial; urgency=medium
+
+  * warunki podwójnego uruchomienia
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 14 Oct 2016 19:32:41 +0200
+
 netext73 (1.0.53) xenial; urgency=medium
 
   * zmiana zależności dla 16.10
