@@ -1,3 +1,9 @@
+netext73 (1.0.53) xenial; urgency=medium
+
+  * zmiana zależności dla 16.10
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 14 Oct 2016 12:22:01 +0200
+
 netext73 (1.0.52) xenial; urgency=medium
 
   * wymuszenie trybu roota

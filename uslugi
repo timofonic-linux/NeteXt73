@@ -89,7 +89,7 @@ while [ $petla_duza = "tak" ]; do
 		fi
 		done
 	else
-		uslugi=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --text="<span color=\"$kolor_textu\">$TEXT_MENU_USLUGI</span>" --form --field=" :CB" "$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1B!$TEXT_MENU_USLUGI1C"  --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
+		uslugi=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --text="<span color=\"$kolor_textu\">$TEXT_MENU_USLUGI</span>" --form --field=" :CB" "$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1C"  --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 		klawisz=$?; uslugi=$(echo $uslugi | cut -d "|" -f 1)
 		if [ $klawisz = 0 ]; then 
 		#usługisysv i upstart automat
@@ -110,6 +110,11 @@ while [ $petla_duza = "tak" ]; do
 				sed -i -e 's/wył/- off/g' upstart.txt
 				
 				#sysv
+				
+				#sprawdzenie zależności
+				if [ "$(which rcconf)" = "" ]; then
+					xterm  -T "rcconf" -e bash -c "sudo apt-get install rcconf -y"
+				fi
 				sudo rcconf --list | sort > sysv.txt
 				cat sysv.txt | awk '{print $1}' > nazwy_uslug.txt #nazwa usługi
 				sed -i 's/ on/X/g' sysv.txt
@@ -178,14 +183,7 @@ while [ $petla_duza = "tak" ]; do
 				if [ -z "$a" ]; then
 					opusc_mala_petle
 				fi
-				done
-			#SysV - expert
-			elif [ "$uslugi" = "$TEXT_MENU_USLUGI1B" ] ; then
-				xterm -T "sysv-rc-conf" -e bash -c "echo -e \"$TEXT_MENU_USLUGI7 sysv-rc-conf\n\"; sudo sysv-rc-conf"
-				exit 0
-			#elif  [ "$uslugi" = "$TEXT_MENU_USLUGI0 systemd" ]; then
-				
-					
+				done	
 			#Upstart - expert
 			elif [ "$uslugi" = "$TEXT_MENU_USLUGI1C" ] ; then
 				petla="tak"
