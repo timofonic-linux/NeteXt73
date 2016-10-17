@@ -150,11 +150,11 @@ if [ "$klawisz" = "0" ]; then
 		#zmiana wielkości liter xterm
 		if [ -e ~/.Xresources ] && [ "$(grep faceSize ~/.Xresources)" != "" ]; then
 			sed -i "s/faceSize:.*/faceSize: $(cat ${res[1]} | cut -d '|' -f 11)/" ~/.Xresources
-			xrdb -merge ~/.Xresources
+			xrdb -merge /home/$userek/.Xresources
 		else
 			echo "XTerm*faceName: DejaVu Sans Mono" >>  ~/.Xresources
 			echo "XTerm*faceSize: $(cat ${res[1]} | cut -d '|' -f 11)" >>  ~/.Xresources
-			xrdb -merge ~/.Xresources
+			xrdb -merge /home/$userek/.Xresources
 		fi
 	
 		#kasowanie śmieci w configach
