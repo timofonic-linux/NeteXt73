@@ -254,9 +254,6 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "\n\nkernel_automat " >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				cat ~/.netext73/kernel_automat >> system$losowa.log
-				echo -e "\n\nroot_mode " >> system$losowa.log
-				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/root_mode >> system$losowa.log
 				echo -e "\n\nzswap " >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				dmesg | grep zswap: >> system$losowa.log

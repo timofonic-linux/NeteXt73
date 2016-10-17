@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.55
+-	czyszczenie kodu
+-	popraka dla przełączania gcc
 v1.0.54
 -	zmiana warunków podwójnego uruchomienia
 v1.0.53

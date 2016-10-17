@@ -1,3 +1,9 @@
+netext73 (1.0.55) xenial; urgency=medium
+
+  * poprawki linkowania gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 17 Oct 2016 10:01:13 +0200
+
 netext73 (1.0.54) xenial; urgency=medium
 
   * warunki podwójnego uruchomienia

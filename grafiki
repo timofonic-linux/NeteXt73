@@ -55,14 +55,12 @@ instaluj_RADEON_mesa_12.02(){
 	instalacja2
 }
 
-
 instaluj_RADEON_mesa_12.1(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
 	instalacja2
 }
-	
 	
 #########################################################################################################################################################################
 #instalator sterowników do grafik Nvidia
@@ -178,7 +176,10 @@ elif [ "$1" = "radeon" ]; then
 					ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
 					yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
 					if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
-						instaluj_RADEON
+		echo -e "\n\nroot_mode " >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
+				cat ~/.netext73/root_mode >> system$losowa.log
+								instaluj_RADEON
 					else
 						yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
 					fi

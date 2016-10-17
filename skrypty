@@ -49,9 +49,9 @@ else
 		MENU19=""
 	fi
 	if [ "$(cat /etc/sysctl.conf | grep 'net.ipv6.conf.all.disable_ipv6 = 1')" = "" ]; then
-		menu="$MENU3!$MENU5!$MENU6!$MENU7!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18!$MENU19"
+		menu="$MENU3!$MENU5!$MENU6!$MENU7!$MENU14!$MENU17!$MENU18!$MENU19"
 	else
-		menu="$MENU3!$MENU5!$MENU6!$MENU8!$MENU10!$MENU11!$MENU13!$MENU14!$MENU17!$MENU18!$MENU19"
+		menu="$MENU3!$MENU5!$MENU6!$MENU8!$MENU14!$MENU17!$MENU18!$MENU19"
 	fi
 	if [ "$MENU19" = "" ]; then
 		menu=$(echo $menu | sed -e '$s/\!$//g')
@@ -95,26 +95,16 @@ if [ $klawisz = 0 ]; then
 		naglowek > instaluj.sh
 		ipv6_on >> instaluj.sh
 		instalacja
-
-	#chrome gtk fix
-	elif [ "$skrypt" = "$MENU10" ]; then
-		naglowek > instaluj.sh
-		echo "sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome" >> instaluj.sh
-		echo "sudo sed -i 's/google-chrome-stable/google-chrome/' /usr/share/applications/google-chrome.desktop" >> instaluj.sh
-		instalacja3
-
-	#modem usb fix
-	elif [ "$skrypt" = "$MENU11" ]; then
-		naglowek > instaluj.sh
-		echo "sudo mv /lib/udev/rules.d/40-usb_modeswitch.rules /lib/udev/rules.d/61-usb_modeswitch.rules" >> instaluj.sh
-		instalacja3
+	
 	#OPTIMUS FIX
 	elif [ "$skrypt" = "$MENU17" ]; then
 		cat /opt/NeteXt73/APM/nvidia-optimus-intel-drm-fix.sh > instaluj.sh
 		instalacja
+	
 	#burntest
 	elif [ "$skrypt" = "BurnTest" ]; then
 		burntest
+	
 	#akonadi on/off
 	elif [ "$skrypt" = "$MENU19" ]; then
 		if [ "$MENU19" = "$MENU20a" ]; then
@@ -122,6 +112,7 @@ if [ $klawisz = 0 ]; then
 		elif [ "$MENU19" = "$MENU19a" ]; then
 			sed -i 's/StartServer=true/StartServer=false/g' ~/.config/akonadi/akonadiserverrc
 		fi
+	
 	#sysbench
 	elif [ "$(echo $skrypt | grep 'sysbench')" != "" ]; then
 		#zmienne
@@ -309,15 +300,6 @@ if [ $klawisz = 0 ]; then
 			porownanie
 		elif [ "$skrypt" = "$MENU16" ]; then
 			porownanie
-		fi
-
-	#aktualizacja dropboxa
-	elif [ "$skrypt" = "$MENU13" ]; then
-		if [ "$USER" = "root" ]; then
-			userek=$(cat /tmp/netext73/userek)
-			su $userek -c "xterm -T "Dropbox" -e bash -c \"killall dropbox;cd ~;rmdir --ignore-fail-on-non-empty .dropbox-dist && wget -O - 'http://www.dropbox.com/download?plat=lnx.x86_64' | tar xzf - ; echo -e \"$TEXT_INSTALACJA2\"; read ent\""
-		else
-			xterm -T "Dropbox" -e bash -c "killall dropbox;cd ~;rmdir --ignore-fail-on-non-empty .dropbox-dist && wget -O - 'http://www.dropbox.com/download?plat=lnx.x86_64' | tar xzf - ; echo -e \"$TEXT_INSTALACJA2\"; read ent"
 		fi
 	#kill process
 	elif [ "$skrypt" = "$MENU18" ]; then
