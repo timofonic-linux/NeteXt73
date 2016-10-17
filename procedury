@@ -1623,7 +1623,7 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "sudo ldconfig"
-	echo "sudo rm /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
 elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc"

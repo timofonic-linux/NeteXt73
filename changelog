@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.56
+-	przywrócenie zależności libisl13
 v1.0.55
 -	czyszczenie kodu
 -	popraka dla przełączania gcc

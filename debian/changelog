@@ -1,3 +1,9 @@
+netext73 (1.0.56) xenial; urgency=medium
+
+  * przywrócenie zależności libisl13
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 17 Oct 2016 21:35:02 +0200
+
 netext73 (1.0.55) xenial; urgency=medium
 
   * poprawki linkowania gcc
