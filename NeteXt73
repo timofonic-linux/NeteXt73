@@ -40,6 +40,7 @@ mkdir -p /tmp/netext73/sumy
 
 if [ ! -e /tmp/netext73/userek ]; then
 	echo $USER > /tmp/netext73/userek
+#	echo $HOME > /tmp/netext73/katalog
 fi
 export userek=$(cat /tmp/netext73/userek)
 
