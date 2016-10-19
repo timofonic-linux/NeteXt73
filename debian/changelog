@@ -1,3 +1,9 @@
+netext73 (1.0.60) xenial; urgency=medium
+
+  * uproszczenie modułu sprawdzania i instalacji microcode
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 19 Oct 2016 19:28:45 +0200
+
 netext73 (1.0.59) xenial; urgency=medium
 
   * cofnięcie do libisl13

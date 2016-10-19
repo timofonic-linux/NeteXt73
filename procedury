@@ -250,44 +250,34 @@ echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
 }
 
 stan_firmware(){
-if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$(dpkg -l linux-firmware | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
-		stan_microcode=$TEXT_TAK
-	else
-		stan_microcode="-"
-	fi
-elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
-	if [ "$(dpkg -l amd64-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$(dpkg -l linux-firmware | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
-		stan_microcode=$TEXT_TAK
-	else
-		stan_microcode="-"
+if [ "$(dpkg -l linux-firmware | grep "ii" | awk '{print $1}'| head -n1)" != "ii" ]; then
+	stan_microcode="-"
+else
+	if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
+		if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
+			stan_microcode=$TEXT_TAK
+		else
+			stan_microcode="-"
+		fi
+	elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
+		if [ "$(dpkg -l amd64-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
+			stan_microcode=$TEXT_TAK
+		else
+			stan_microcode="-"
+		fi
 	fi
 fi
 }
 
-porownaj_liczby(){
-awk 'BEGIN {return_code=('$1' >= '$2') ? 0 : 1; exit} END {exit return_code}'
-   return_code=$?
-
-}
-microcode_firmware_nonfree(){
+instalacja_firmware(){
+naglowek > instaluj.sh
+echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
 #nonfree
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
       yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
-			non_free="TRUE"
-      else
-			non_free="FALSE"
+			echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
       fi
-else
-      non_free="FALSE"
-fi
-}
-
-microcode_instalacja(){
-echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
-if [ "$non_free" = "TRUE" ]; then
-	echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
 fi
 echo "sudo apt-get install linux-firmware"  >> instaluj.sh
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
@@ -296,13 +286,6 @@ if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 else
 	echo "sudo apt-get install amd64-microcode"  >> instaluj.sh
 fi
-
-}
-
-instalacja_firmware(){
-microcode_firmware_nonfree
-naglowek > instaluj.sh
-microcode_instalacja
 instalacja 
 }
 
@@ -311,6 +294,11 @@ echo "echo \"$TEXT_PROCEDURA_3\""
 echo "/usr/bin/yes | sudo dpkg -r linux-firmware-nonfree"
 echo "if [ \"\$(cat /proc/cpuinfo | grep Intel)\" != \"\" ]; then sudo apt-get purge intel-microcode -y; fi"
 echo "sudo rm /lib/firmware/* -rf"
+}
+
+porownaj_liczby(){
+awk 'BEGIN {return_code=('$1' >= '$2') ? 0 : 1; exit} END {exit return_code}'
+   return_code=$?
 }
 
 apm_inst(){
@@ -1024,10 +1012,7 @@ fi
 
 sprawdz_kernel(){
 lista_kerneli update
-#sprawdzanie kerneli od wersji v30.x
-if [ "$(uname -r | grep ext | grep pro )" != "" ];then
-	twoj_kernel="e X t 7 3 - pro v$(uname -r | cut -d "-" -f 3)-$(uname -r | cut -d '-' -f 1)"
-elif [ "$(uname -r | grep ext )" != "" ];then
+if [ "$(uname -r | grep ext )" != "" ];then
 	twoj_kernel="e X t 7 3 v$(uname -r| cut -d "-" -f 3)-$(uname -r | cut -d '-' -f 1)"
 else
 	twoj_kernel=$(uname -r)

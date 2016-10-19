@@ -34,8 +34,6 @@ fi
 rm -rf /tmp/netext73/sumy/*
 mkdir -p /tmp/netext73/sumy
 
-
-
 #########################################################################################################################################################################
 
 if [ ! -e /tmp/netext73/userek ]; then
@@ -44,15 +42,16 @@ fi
 export userek=$(cat /tmp/netext73/userek)
 
 if [ "$USER" = "root" ]; then
-      sudo -K
+    sudo -K
 else
-      cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
-      exit 0
+    cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
+    exit 0
 fi
 
-#sumy &
-zaleznosci &
-/opt/NeteXt73/./update start &
+	#sumy &
+	zaleznosci &
+	/opt/NeteXt73/./update start &
+	
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
 else
