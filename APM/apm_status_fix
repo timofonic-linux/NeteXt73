@@ -45,7 +45,7 @@ if [ "$(ld -v | grep -i ubuntu)" != "" ] || [ "$(gcc --version | grep -i ext73)"
 	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++
 	ldconfig
 	rm /usr/lib/x86_64-linux-gnu/libisl.so.10
-	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
+	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.15 /usr/lib/x86_64-linux-gnu/libisl.so.10
 fi
 #TPC
 if [ -e /etc/sysctl.conf ]; then

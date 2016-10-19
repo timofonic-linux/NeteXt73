@@ -3,6 +3,7 @@
 
 v1.0.58
 -	libisl15
+-	apmfix - libisl15
 v1.0.57
 -	zmiana zależności
 -	zmiana sposobu instalacji firmware'ów
