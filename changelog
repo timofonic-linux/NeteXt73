@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.59
+-	cofnięcie zależności do libisl13
 v1.0.58
 -	libisl15
 -	apmfix - libisl15
