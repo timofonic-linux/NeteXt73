@@ -103,11 +103,7 @@ stan_firmware
 twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | sed 's/~.*//')
 
 #microcode
-if [ "$stan_microcode" != "-" ] && [ "$twoj_firmware" = "" ]; then
-	firm=$TEXT_UPDATE5a
-	a1="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
-elif [ "$stan_microcode" = "-" ]; then
+if [ "$stan_microcode" = "-" ]; then
 	firm=$TEXT_UPDATE5a
 	a1="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"

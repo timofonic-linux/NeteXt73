@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.57
+-	zmiana zależności
+-	zmiana sposobu instalacji firmware'ów
 v1.0.56
 -	przywrócenie zależności libisl13
 v1.0.55
