@@ -251,13 +251,13 @@ echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
 
 stan_firmware(){
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
-	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
+	if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$(dpkg -l linux-firmware | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
 		stan_microcode=$TEXT_TAK
 	else
 		stan_microcode="-"
 	fi
 elif [ "$(cat /proc/cpuinfo | grep AMD)" != "" ]; then
-	if [ "$(dpkg -l amd64-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
+	if [ "$(dpkg -l amd64-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ] && [ "$(dpkg -l linux-firmware | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ]; then
 		stan_microcode=$TEXT_TAK
 	else
 		stan_microcode="-"
@@ -289,6 +289,7 @@ echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
 if [ "$non_free" = "TRUE" ]; then
 	echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
 fi
+echo "sudo apt-get install linux-firmware"  >> instaluj.sh
 if [ "$(cat /proc/cpuinfo | grep Intel)" != "" ]; then
 	echo "sudo apt-get install iucode-tool"  >> instaluj.sh
 	echo "sudo apt-get install intel-microcode"  >> instaluj.sh

@@ -13,7 +13,6 @@ Package: netext73
 Architecture: amd64  
 Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, 
   netext73-pakiety, 
-  linux-firmware, 
   xterm, 
   htop, 
   saidar, 
