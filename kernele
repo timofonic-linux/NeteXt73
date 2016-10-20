@@ -74,13 +74,15 @@ else
 	else
 		pliki="/opt/NeteXt73/kernel"
 		ikona="linux.png"
-		menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
+		if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
+			menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
+		fi
 		szer="500"
 	fi
 	if [ "$kern" = "" ]; then
 		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
 		 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
-		--title="$nazwa_skryptu " $menu_dodatkowe  --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
+		--title="$nazwa_skryptu " $menu_dodatkowe --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
 		klawisz=$?
 	fi
 fi

@@ -1223,7 +1223,8 @@ echo "sudo update-grub"
 restart(){
 yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
 	if [ $? = 0 ]; then
-		cd /opt/NeteXt73 && ./NeteXt73_root reboot
+		#cd /opt/NeteXt73 && ./NeteXt73_root 
+		reboot
 	fi
 }
 
@@ -1595,7 +1596,6 @@ elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/g++ /usr/bin/c++"
 fi
 }
-
 
 sumy(){
 #pobranie sum kontrolnych

@@ -68,8 +68,7 @@ while [ $petla_duza = "tak" ]; do
 								sudo chmod a-x /etc/init.d/$a1
 							else
 								sudo chmod a+x /etc/init.d/$a1
-								sudo service $a1 start
-								
+								sudo service $a1 start					
 							fi
 						else
 							if [ "$(cat uslugi_on.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then

@@ -75,7 +75,7 @@ konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/op
 			/opt/NeteXt73/./grub
 		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
-			/opt/NeteXt73/./NeteXt73_root ./apm
+			/opt/NeteXt73/./apm
 		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
 			if [ "$kernel_premium" = "tak" ]; then
