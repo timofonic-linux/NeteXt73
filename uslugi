@@ -34,7 +34,7 @@ cd /tmp/netext73
 petla_duza="tak"
 while [ $petla_duza = "tak" ]; do
 #sprawdzanie czy jest systemd - generowanie menu
-	if [ "$(journalctl -u cron | grep systemd)" != "" ];then
+	if [ "$(which systemd-analyze)" != "" ] && [ "$(systemd-analyze)" != "" ];then
 	 petla="tak"
 		while [ $petla = "tak" ]; do
 		rm *.txt -f

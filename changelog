@@ -3,6 +3,7 @@
 
 v1.0.62
 -	przebudowa zarządzania usługami
+-	zmiana sposobu sprawdzania systemd
 v1.0.61
 -	zmiany trybu root
 v1.0.60
