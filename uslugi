@@ -47,14 +47,14 @@ while [ $petla_duza = "tak" ]; do
 				echo "FALSE "$i" -" >> uslugi_off.txt
 			fi
 		done 2>&1 | pobieranie
-		ls /etc/init.d | grep -v "README" > sysv.txt
-		for i in $(cat sysv.txt); do
-			if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
-				echo "FALSE "$i" +" >> uslugi_on.txt
-			else
-				echo "FALSE "$i" -" >> uslugi_off.txt
-			fi
-		done 2>&1 | pobieranie
+	#	ls /etc/init.d | grep -v "README" > sysv.txt
+	#	for i in $(cat sysv.txt); do
+	#		if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
+	#			echo "FALSE "$i" +" >> uslugi_on.txt
+	#		else
+	#			echo "FALSE "$i" -" >> uslugi_off.txt
+	#		fi
+	#	done 2>&1 | pobieranie
 		cat uslugi_on.txt uslugi_off.txt |sort | uniq > uslugi.txt
 		a=$(yad --center --on-top --height=$((680*$skala)) --width=$((600*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --checklist --list $(cat uslugi.txt))
 			if [ $? = "0" ]; then
@@ -62,15 +62,15 @@ while [ $petla_duza = "tak" ]; do
 					echo $a | sed 's/|/\n/g' | sed '/^+/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > 12.txt
 					for a1 in $(cat 12.txt)
 					do
-						if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
-							if [ "$(ls -la /etc/init.d | grep $a1 | grep 'rwxr-xr-x')" != "" ]; then
-								sudo service $a1 stop
-								sudo chmod a-x /etc/init.d/$a1
-							else
-								sudo chmod a+x /etc/init.d/$a1
-								sudo service $a1 start					
-							fi
-						else
+						#if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
+	#						if [ "$(ls -la /etc/init.d | grep $a1 | grep 'rwxr-xr-x')" != "" ]; then
+	#							sudo service $a1 stop
+	#							sudo chmod a-x /etc/init.d/$a1
+	#						else
+	#							sudo chmod a+x /etc/init.d/$a1
+	#							sudo service $a1 start					
+	#						fi
+						
 							if [ "$(cat uslugi_on.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then
 								sudo systemctl stop $a1
 								sudo systemctl disable $a1
@@ -78,7 +78,7 @@ while [ $petla_duza = "tak" ]; do
 								sudo systemctl start $a1
 								sudo systemctl enable $a1
 							fi
-						fi
+						#fi
 					done
 				fi
 			fi
