@@ -110,7 +110,7 @@ for i in $(seq 1 2); do
 	res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 done
 
-yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="HiDPI:CHK" --field="$TEXT_XTERM_SIZE:NUM" --field="root notify fix:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$(gcc --version | head -n 1)" "$(cat lista_gcc2.txt)" "$automatyczna_instalacja" "$archiwum_deb" "$HiDPI" "$xterm_font[!8..20[!1]]" "$notify_fix" --button="$TEXT_CONFIG3:2" 1> ${res[1]} &
+yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" --field="$TEXT_XTERM_SIZE:NUM" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="HiDPI:CHK" --field="root notify fix:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$(gcc --version | head -n 1)" "$(cat lista_gcc2.txt)" "$xterm_font[!8..20[!1]]" "$automatyczna_instalacja" "$archiwum_deb" "$HiDPI" "$notify_fix" --button="$TEXT_CONFIG3:2" 1> ${res[1]} &
 yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu 1> ${res[2]} &
 yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((690*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):2" --button="$TEXT_POWROT:1"
 klawisz=$?
@@ -128,9 +128,9 @@ if [ "$klawisz" = "0" ]; then
 			cat ${res[1]} | grep '@' | cut -d "|" -f 2 > ~/.netext73/kernel_premium
 		fi
 		cat ${res[1]} | cut -d "|" -f 3 > ~/.netext73/jezyk
-		cat ${res[1]} | cut -d "|" -f 8 > ~/.netext73/kernel_automat
-		cat ${res[1]} | cut -d "|" -f 9 > ~/.netext73/archiwum_deb
-		cat ${res[1]} | cut -d "|" -f 10 > ~/.netext73/HiDPI
+		cat ${res[1]} | cut -d "|" -f 9 > ~/.netext73/kernel_automat
+		cat ${res[1]} | cut -d "|" -f 10 > ~/.netext73/archiwum_deb
+		cat ${res[1]} | cut -d "|" -f 11 > ~/.netext73/HiDPI
 		cat ${res[1]} | cut -d "|" -f 12 > ~/.netext73/notify_fix
 		cat ${res[2]} > ~/.netext73/kolor_textu
 		wersja=$(cat  ${res[1]} | cut -d "|" -f 7)
@@ -149,11 +149,11 @@ if [ "$klawisz" = "0" ]; then
 		
 		#zmiana wielkości liter xterm
 		if [ -e ~/.Xresources ] && [ "$(grep faceSize ~/.Xresources)" != "" ]; then
-			sed -i "s/faceSize:.*/faceSize: $(cat ${res[1]} | cut -d '|' -f 11)/" ~/.Xresources
+			sed -i "s/faceSize:.*/faceSize: $(cat ${res[1]} | cut -d '|' -f 8)/" ~/.Xresources
 			xrdb -merge /home/$userek/.Xresources
 		else
 			echo "XTerm*faceName: DejaVu Sans Mono" >>  ~/.Xresources
-			echo "XTerm*faceSize: $(cat ${res[1]} | cut -d '|' -f 11)" >>  ~/.Xresources
+			echo "XTerm*faceSize: $(cat ${res[1]} | cut -d '|' -f 8)" >>  ~/.Xresources
 			xrdb -merge /home/$userek/.Xresources
 		fi
 	

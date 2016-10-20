@@ -3,6 +3,7 @@
 
 v1.0.60
 -	uproszczenie kodu sprawdzania i instalacji microcode
+-	uporządkowanie okna config
 v1.0.59
 -	cofnięcie zależności do libisl13
 v1.0.58
