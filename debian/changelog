@@ -1,3 +1,9 @@
+netext73 (1.0.62) xenial; urgency=medium
+
+  * przebudowa zarządzania usługami
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 20 Oct 2016 20:57:05 +0200
+
 netext73 (1.0.61) xenial; urgency=medium
 
   * poprawki trybu root

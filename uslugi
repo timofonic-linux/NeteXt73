@@ -33,52 +33,70 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 petla_duza="tak"
 while [ $petla_duza = "tak" ]; do
-	#sprawdzanie czy jest systemd - generowanie menu
+#sprawdzanie czy jest systemd - generowanie menu
 	if [ "$(journalctl -u cron | grep systemd)" != "" ];then
 	 petla="tak"
-		 while [ $petla = "tak" ]; do
-		 rm uslugi.*.txt -f
-		 systemctl list-unit-files | grep -v -E "@|apport|systemd*|plymouth|dbus|initd|alsa|console|udev|masked|static" | grep -e service -e 'forward.socket' | sed 's/●/ /g' | awk '{print $1}' | sed 's/-forward.socket//g' | sort | uniq  > uslugi.txt
-                 #włączone
-		 for i in $(cat uslugi.txt); do
+		while [ $petla = "tak" ]; do
+		rm *.txt -f
+		if [ "$(ps aux | grep 'python /opt/NeteXt73/czekaj.py' | wc -l)" = 1 ]; then
+			please_wait
+		fi
+		systemctl list-unit-files | grep -v -E "@|apport|systemd*|plymouth|dbus|initd|alsa|console|udev|masked|static" | grep -e service -e 'forward.socket' | sed 's/●/ /g' | awk '{print $1}' | sed 's/-forward.socket//g' | sort | uniq  | sed 's/.service//g' > systemd.txt
+		ls /etc/init.d | grep -v "README" > sysv.txt
+		for i in $(cat sysv.txt); do
+			if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
+				echo "FALSE "$i" +" >> uslugi_on1.txt
+			else
+				echo "FALSE "$i" -" >> uslugi_off1.txt
+			fi
+		done
+		 for i in $(cat systemd.txt); do
 			if [ "$(systemctl is-enabled $i | grep enabled)" != "" ];then
 				echo "FALSE "$i" +" >> uslugi_on.txt
 			elif [ "$(systemctl is-enabled $i | grep disabled)" != "" ];then
 				echo "FALSE "$i" -" >> uslugi_off.txt
 			fi
-		done 2>&1 | pobieranie
-	#	ls /etc/init.d | grep -v "README" > sysv.txt
-	#	for i in $(cat sysv.txt); do
-	#		if [ "$(ls -la /etc/init.d | grep $i | grep 'rwxr-xr-x')" != "" ]; then
-	#			echo "FALSE "$i" +" >> uslugi_on.txt
-	#		else
-	#			echo "FALSE "$i" -" >> uslugi_off.txt
-	#		fi
-	#	done 2>&1 | pobieranie
-		cat uslugi_on.txt uslugi_off.txt |sort | uniq > uslugi.txt
-		a=$(yad --center --on-top --height=$((680*$skala)) --width=$((600*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Systemd - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --checklist --list $(cat uslugi.txt))
+			if [ "$(cat sysv.txt | grep $i)" != "" ];then
+				sed -i "/$i/ d" uslugi_on1.txt
+				sed -i "/$i/ d" uslugi_off1.txt
+			fi
+		done
+		cat uslugi_on1.txt uslugi_off1.txt > uslugi_sysv.txt
+		cat uslugi_on.txt uslugi_off.txt uslugi_on1.txt uslugi_off1.txt | sort | uniq > uslugi.txt
+		please_wait kill
+		a=$(yad --center --on-top --height=$((680*$skala)) --width=$((600*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Services - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --checklist --list $(cat uslugi.txt))
 			if [ $? = "0" ]; then
 				if [ "$a" != "" ]; then
-					echo $a | sed 's/|/\n/g' | sed '/^+/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > 12.txt
-					for a1 in $(cat 12.txt)
+					please_wait
+					echo $a | sed 's/|/\n/g' | sed '/^+/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zmiana_on_off.txt
+					for a1 in $(cat zmiana_on_off.txt)
 					do
-						#if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
-	#						if [ "$(ls -la /etc/init.d | grep $a1 | grep 'rwxr-xr-x')" != "" ]; then
-	#							sudo service $a1 stop
-	#							sudo chmod a-x /etc/init.d/$a1
-	#						else
-	#							sudo chmod a+x /etc/init.d/$a1
-	#							sudo service $a1 start					
-	#						fi
-						
+						if [ "$(cat uslugi_sysv.txt | grep $a1 -x)" != "" ]; then
+							if [ "$(ls -la /etc/init.d | grep $a1 | grep 'rwxr-xr-x')" != "" ]; then
+								sudo service $a1 stop
+								sudo chmod a-x /etc/init.d/$a1
+							else
+								sudo chmod a+x /etc/init.d/$a1
+								sudo service $a1 start
+							fi
+						fi
+						if [ "$(cat systemd.txt | grep $a1 -x)" != "" ]; then
 							if [ "$(cat uslugi_on.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then
 								sudo systemctl stop $a1
 								sudo systemctl disable $a1
+								if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
+									sudo service $a1 stop
+									sudo chmod a-x /etc/init.d/$a1								
+								fi
 							elif [ "$(cat uslugi_off.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then
 								sudo systemctl start $a1
 								sudo systemctl enable $a1
+								if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
+									sudo chmod a+x /etc/init.d/$a1
+									sudo service $a1 start								
+								fi
 							fi
-						#fi
+						fi
 					done
 				fi
 			fi
