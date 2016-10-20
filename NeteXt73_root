@@ -33,7 +33,6 @@ cd /opt/NeteXt73/
 source /opt/NeteXt73/procedury
 
 if [ "$1" = "kontakty" ]; then
-	please_wait && sleep 1
 	KEY="$(echo $RANDOM)"
 
 	#zmienne losowe
@@ -45,10 +44,7 @@ if [ "$1" = "kontakty" ]; then
 	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty 1> ${res[1]} &
 	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog 1> ${res[2]} &
 	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE 1> ${res[3]} &
-	#yad --plug=$KEY --tabnum=5 --html --uri="http://www.netext73.pl?m=1" --browser 1> ${res[4]} &
 	yad --plug=$KEY --tabnum=5 --form --field="$TEXT_UZYTKOWNIK:RO" "$USER" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> ${res[5]} &
-	#yad --plug=$KEY --tabnum=7 --html --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --browser 1> ${res[6]} &
-	please_wait kill # --tab="$TEXT_HOME_PAGE" --tab="$TEXT_DONATE"
 	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_BUG"   \
 	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
 	klawisz=$?
@@ -63,16 +59,11 @@ if [ "$1" = "kontakty" ]; then
 		rm ${res[$i]} -f
 	done
 else
-	if [ "$USER" = "root" ]; then
-		sudo -S $1
-	else
-		while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
-			if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
-				exit 0
-			fi
-		done
-
-	fi
+	while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
+		if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
+			exit 0
+		fi
+	done
 fi
 sudo -K
 

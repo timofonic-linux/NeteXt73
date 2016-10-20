@@ -152,7 +152,7 @@ GenericName[vi]=GPG key management
 GenericName[zh_CN]=GPG key management
 GenericName[zh_TW]=GPG key management
 
-Exec=/opt/NeteXt73/./NeteXt73_root ./gpg
+Exec=/opt/NeteXt73/./gpg
 Icon=/opt/NeteXt73/ikony/pgp.png
 Terminal=false
 StartupNotify=true

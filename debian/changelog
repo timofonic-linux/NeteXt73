@@ -1,3 +1,9 @@
+netext73 (1.0.61) xenial; urgency=medium
+
+  * poprawki trybu root
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 20 Oct 2016 09:14:54 +0200
+
 netext73 (1.0.60) xenial; urgency=medium
 
   * uproszczenie modułu sprawdzania i instalacji microcode

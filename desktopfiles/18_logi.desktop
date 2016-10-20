@@ -152,7 +152,7 @@ GenericName[vi]=Generating a logs
 GenericName[zh_CN]=Generating a logs
 GenericName[zh_TW]=Generating a logs
 
-Exec=/opt/NeteXt73/./NeteXt73_root ./logi
+Exec=/opt/NeteXt73/./logi
 Icon=/opt/NeteXt73/ikony/logi.png
 Terminal=false
 StartupNotify=true
