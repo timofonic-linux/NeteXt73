@@ -48,20 +48,60 @@ instaluj_RADEON(){
 	instalacja2
 }
 
-instaluj_RADEON_mesa_12.02(){
+instaluj_RADEON_mesa_13.0(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
 	instalacja2
 }
 
-instaluj_RADEON_mesa_12.1(){
+instaluj_RADEON_mesa_13.1(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
 	instalacja2
 }
-	
+
+
+instaluj_trusty(){
+if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+	grep fglrx_ /tmp/netext73/sumy/sumy_kontrolne.txt | sed 's/.deb//' | awk '{print $2}' | sort -r > 2a.txt
+	lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
+	ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+	if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+		ster1=$(echo $ster.deb | sed "s/fglrx/fglrx-amdcccle/")
+		ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
+		yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
+		if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
+			instaluj_RADEON
+		else
+			yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
+		fi
+	fi
+fi
+}	
+
+instaluj_mese(){
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then	
+	instaluj_trusty
+else
+	if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
+		lista="mesa 13.0!mesa 13.1"
+	elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then			
+		lista="mesa 13.1"
+	fi
+	ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+	if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+		if [ "$ster" = "mesa 13.0" ]; then
+			instaluj_RADEON_mesa_13.0
+		elif [ "$ster" = "mesa 13.1" ]; then
+			instaluj_RADEON_mesa_13.1
+		fi
+	fi
+fi
+}
 #########################################################################################################################################################################
 #instalator sterowników do grafik Nvidia
 cd /tmp/netext73
@@ -164,39 +204,12 @@ elif [ "$1" = "radeon" ]; then
 	#sprawdzanie xorga
 	if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
+		instaluj_mese
 	else
 		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then			
-			if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
-				grep fglrx_ /tmp/netext73/sumy/sumy_kontrolne.txt | sed 's/.deb//' | awk '{print $2}' | sort -r > 2a.txt
-				lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
-				ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
-				klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
-				if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-					ster1=$(echo $ster.deb | sed "s/fglrx/fglrx-amdcccle/")
-					ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
-					yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
-					if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
-		echo -e "\n\nroot_mode " >> system$losowa.log
-				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/root_mode >> system$losowa.log
-								instaluj_RADEON
-					else
-						yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
-					fi
-				fi
-			fi
+			instaluj_trusty
 		else
-			lista="mesa 12.02!mesa 12.1"
-			ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
-			klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
-			if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-				if [ "$ster" = "mesa 12.02" ]; then
-					instaluj_RADEON_mesa_12.02
-				elif [ "$ster" = "mesa 12.1" ]; then
-					instaluj_RADEON_mesa_12.1
-				fi
-			fi
-			
+			instaluj_mese
 		fi
 	fi
 fi

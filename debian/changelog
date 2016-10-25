@@ -1,3 +1,9 @@
+netext73 (1.0.63) xenial; urgency=medium
+
+  * zmiana warunków dla instalatora Radeona
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 25 Oct 2016 19:09:15 +0200
+
 netext73 (1.0.62) xenial; urgency=medium
 
   * przebudowa zarządzania usługami
