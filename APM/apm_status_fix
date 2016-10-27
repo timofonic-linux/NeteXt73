@@ -83,3 +83,6 @@ else
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
 	fi
 fi
+
+
+

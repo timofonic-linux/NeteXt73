@@ -1178,6 +1178,14 @@ echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.
 echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules"
 echo "sudo ldconfig"
 echo "fi"
+echo "if [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" != \"\" ] && [ \"$(grep 'pcie_port_pm=off' /etc/default/grub)\" = \"\" ]; then"
+echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ pcie_port_pm=off\"/' /etc/default/grub"
+echo "sudo update-grub"
+echo "elif [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" = \"\" ] && [ \"$(grep 'pcie_port_pm=off' /etc/default/grub)\" != \"\" ]; then"
+echo "sudo sed -i 's/ pcie_port_pm=off//g' /etc/default/grub"
+echo "sudo update-grub"
+echo "fi"
+
 }
 
 nvidia_stopka(){
