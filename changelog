@@ -1,6 +1,9 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.65
+-	usunięcie wsparcia dla kerneli atom i k8
+-	zastąpienie kerneli atom i k8 kerneliami standard dla Intela i AMD
 v1.0.64
 -	zmiana w instalatorze NV dla optimusa - nowy wpis w grub
 v1.0.63

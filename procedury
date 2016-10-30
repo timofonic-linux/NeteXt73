@@ -81,7 +81,7 @@ export wersja_apm5="advanced_power_management_by_ext73_performance-conservative"
 export wersja_apm6="advanced_power_management_by_ext73_performance-ondemand"
 #lista kerneli premium i standard
 export lista_kerneli_premium="silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver"
-export lista_kerneli_standard="K8|atom"
+export lista_kerneli_standard="intelstandard|amdstandard"
 #nazwy ikon do dymków
 export error1="dialog-error"
 export ikona_info1="dialog-information"
@@ -239,10 +239,7 @@ echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ intel_iommu=igfx_off\"/' /etc/de
 echo "sudo update-grub"
 echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
-}
-
-usun_lpt(){
-#wyłączenie LPT dla premium
+#wyłączenie LPT
 echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
 }
 
@@ -999,7 +996,7 @@ else
 		yad --center --on-top --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_SERVER_ERROR"
 		blad=1
 	else
-		aa=$(yad --center --on-top --height=$((340*$skala)) --width=$((690*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_PLATFORMA1 <b><span color=\"$kolor_textu\">$rodzaj</span></b>$TEXT_PLATFORMA2" --column="$TEXT_ZAZNACZ" --column="$TEXT_WYBIERZ_KERNEL" --column="$TEXT_ZNITY1" --button="$TEXT_POWROT:1" --button="gtk-ok:0" --list --radiolist $lista)
+		aa=$(yad --center --on-top --height=$((340*$skala)) --width=$((690*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --title="$nazwa_skryptu" --text="$TEXT_PLATFORMA1: <b><span color=\"$kolor_textu\">$rodzaj</span></b>$TEXT_PLATFORMA2" --column="$TEXT_ZAZNACZ" --column="$TEXT_WYBIERZ_KERNEL" --column="$TEXT_ZNITY1" --button="$TEXT_POWROT:1" --button="gtk-ok:0" --list --radiolist $lista)
 		klawisz=$?
 		a=$(echo $aa | cut -d "|" -f 2)	 #wybrany kernel
 		a1=$(echo $aa | cut -d "|" -f 3) #czy zainstalowany jeżeli '-' można instalować

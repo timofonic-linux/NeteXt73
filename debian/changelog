@@ -1,3 +1,9 @@
+netext73 (1.0.65) xenial; urgency=medium
+
+  * intel i amd standard zamiast atom i k8
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 30 Oct 2016 16:06:37 +0100
+
 netext73 (1.0.64) xenial; urgency=medium
 
   * nv

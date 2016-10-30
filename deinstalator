@@ -92,13 +92,11 @@ elif [ "$usun" =  "$TEXT_MENU_DEINSTALATOR1" ] || [ "$usun" =  "$TEXT_MENU_DEINS
 						#proces kasowania kerneli
 						naglowek > instaluj.sh
 						usun_kernel_expert >> instaluj.sh
-						#usun_lpt >> instaluj.sh
 					else
 						echo $a | sed 's/TRUE//g' | tr '|' '\n' | sed '/^$/d'| sort | uniq  > kasuj.txt
 						#proces kasowania kerneli
 						naglowek > instaluj.sh
 						usun_kernel >> instaluj.sh
-						#usun_lpt >> instaluj.sh
 					fi
 
 					instalacja2
