@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -29,7 +29,7 @@ source /opt/NeteXt73/procedury
 
 zmiany_w_APM(){
 if [ "$a" != "-" ]; then
-	apm_zmiana $a "advanced_power_management_by_ext73_$a*" 
+	apm_zmiana $a "advanced_power_management_by_ext73_$a*"
 elif [ "$a" = "-" ]; then
 	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --text="$TEXT_APM2"
 	apm_inst
@@ -83,7 +83,7 @@ while [ $petla_duza = "tak" ]; do
 		menu_apm=$(echo "conservative-conservative!ondemand-ondemand!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	fi
 	menu=$(echo "$aktualny_apm!$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
-	
+
 	#ustawienie jasności wg aktualnej
         katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
         if [ "$katalog_jasnosc" != "" ]; then
@@ -144,24 +144,24 @@ while [ $petla_duza = "tak" ]; do
 			a=$(echo $aa | cut -d "|" -f 3)
 			export hdd_scheduler=$(echo $aa | cut -d "|" -f 5)
 			export ssd_scheduler=$(echo $aa | cut -d "|" -f 6)
-			
+
 			export jasnosc_dziala=$(echo $aa | cut -d "|" -f 8)
 			export wart_batt1=$(echo $aa | cut -d "|" -f 9)
 			export wart_ac1=$(echo $aa | cut -d "|" -f 10)
-			
+
 			export wifi_batt_fix=$(echo $aa | cut -d "|" -f 11)
 			export wifi_batt_on=$(echo $aa | cut -d "|" -f 12)
 			export bt_batt_on=$(echo $aa | cut -d "|" -f 13)
 			export rts5139_on=$(echo $aa | cut -d "|" -f 14)
 			export wifi_n_on=$(echo $aa | cut -d "|" -f 15)
-			
+
 			export turbo_batt_on=$(echo $aa | cut -d "|" -f 16)
 			export turbo_ac_on=$(echo $aa | cut -d "|" -f 17)
-			
+
 			export vsync_on=$(echo $aa | cut -d "|" -f 18)
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 19)
 			export stan_samsung=$(echo $aa | cut -d "|" -f 20)
-            if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
+	       if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
 				wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
 				wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
 				sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
@@ -190,7 +190,7 @@ while [ $petla_duza = "tak" ]; do
 					zmiany_w_APM
 				fi
 			fi
-                        
+
 		fi
 	fi
 	if [ -z "$aa" ]; then

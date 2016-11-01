@@ -50,7 +50,7 @@ if [ -e ~/.netext73/monitor ]; then
 		else
 			a[licznik]=FALSE
 		fi
-	done 
+	done
 else
 	a[1]=TRUE
 	for i in $(seq 2 6); do

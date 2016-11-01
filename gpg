@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -36,13 +36,13 @@ while [ "$petla_duza" = "tak" ]; do
 	gpg=$(yad --center --on-top --title="$nazwa_skryptu   " --width=500 --window-icon="/opt/NeteXt73/ikony/pgp.png" --image="/opt/NeteXt73/ikony/pgp.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1</b></span>"  --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; gpg=$(echo $gpg | cut -d "|" -f 1)
 	if [ "$klawisz" = "0" ]; then
-		
+
 		#Pobieranie brakujących kluczy GPG
 		if [ "$gpg" = "$a3" ]; then
 			rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 			naglowek > instaluj.sh
 			klucze >> instaluj.sh
-			instalacja	
+			instalacja
 		#napraw błędne klucze
 		elif [ "$gpg" = "$a4" ]; then
 			export $a4
@@ -73,14 +73,14 @@ while [ "$petla_duza" = "tak" ]; do
 					IFS=]
 					wybor=$(yad --center --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/key.png" --image="/opt/NeteXt73/ikony/key.png" --height=$((420*$skala)) --width=$((690*$skala))  --column="" --column="$TEXT_KLUCZ" --column="$TEXT_DOSTAWCA_KLUCZA" --text="<span color=\"$kolor_textu\">$TEXT_ZAZNACZ_KLUCZE</span>" --list --checklist $(cat lista.txt)  --separator="]" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 					klawisz=$?
-					if [ "$klawisz" = "0" ]; then 
+					if [ "$klawisz" = "0" ]; then
 						if [ "$(echo $wybor)" != "" ]; then
 							echo $wybor | sed -e 's/TRUE|/\n/g' | cut -d '|' -f 1 | sed -e '/^\ *$/d' | awk '{print $2}' > usun.txt
 							usun_klucze
 						else
 							yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_NIC_NIE_ZAZNACZYLES"
 						fi
-					elif [ "$klawisz" = "1" ]; then 
+					elif [ "$klawisz" = "1" ]; then
 						petla="nie"
 						rm *.txt -f
 					fi

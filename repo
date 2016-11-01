@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -199,7 +199,7 @@ baza=(
 	"Najnowsze stabilne graficzne sterowniki otwarte + Mesa"
 	"The latest stable open graphics drivers + Mesa"
 	"vainfo"
-	
+
 	"ppa:leolik/leolik"
 	"notifyOSD Patch - poprawiona wersja OSD notify"
 	"notifyOSD Patch - fixed OSD notify version"
@@ -269,11 +269,6 @@ baza=(
 	"VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product"
 	"virtualbox-5.0"
 
-#	"deb http://repo.vivaldi.com/stable/deb/ stable main"
-#	"Vivaldi - przeglądarka"
-#	"Vivaldi - browser"
-#	"vivaldi"
-	
 	"ppa:videolan/stable-daily"
 	"VLC - to darmowy i otwarty, wieloplatformowy odtwarzacz multimedialny"
 	"VLC - is a free and open, cross-platform media player"
@@ -481,11 +476,7 @@ else
 						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
 						      echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
 						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
-						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt    
-				#		elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
-				#		      echo "wget https://download.vivaldi.com/stable/vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
-				#		      echo "sudo dpkg -i vivaldi-stable_1.0.435.42-1_amd64.deb" >> instaluj.sh
-				#		      echo "rm -f vivaldi-stable*" >> instaluj.sh
+						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
 								echo "slot-allocation = dynamic" > ~/.notify-osd
@@ -596,10 +587,10 @@ else
 						soft1[$ilosc]=$a
 					done
 				fi
-				soft=( $(for el in "${soft1[@]}" 
+				soft=( $(for el in "${soft1[@]}"
 				do
-					echo "$el" 
-				done | sort )) 
+					echo "$el"
+				done | sort ))
 				ilosc_softu=$(( ${#soft[*]} - 1 ))
 				dpkg -l | awk '{print $2}'| sed 's/:.*//g' > programy.txt
 				for (( i=0; i<=$ilosc_softu; i++ )); do

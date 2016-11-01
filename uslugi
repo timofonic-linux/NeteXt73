@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -86,14 +86,14 @@ while [ $petla_duza = "tak" ]; do
 								sudo systemctl disable $a1
 								if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
 									sudo service $a1 stop
-									sudo chmod a-x /etc/init.d/$a1								
+									sudo chmod a-x /etc/init.d/$a1
 								fi
 							elif [ "$(cat uslugi_off.txt | tr ' ' '\n' | grep $a1 -x)" != "" ]; then
 								sudo systemctl start $a1
 								sudo systemctl enable $a1
 								if [ "$(cat sysv.txt | grep $a1 -x)" != "" ]; then
 									sudo chmod a+x /etc/init.d/$a1
-									sudo service $a1 start								
+									sudo service $a1 start
 								fi
 							fi
 						fi
@@ -108,7 +108,7 @@ while [ $petla_duza = "tak" ]; do
 	else
 		uslugi=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --text="<span color=\"$kolor_textu\">$TEXT_MENU_USLUGI</span>" --form --field=" :CB" "$TEXT_MENU_USLUGI0 upstart,sysV!$TEXT_MENU_USLUGI1C"  --button="gtk-ok:0" --button="$TEXT_POWROT:1" )
 		klawisz=$?; uslugi=$(echo $uslugi | cut -d "|" -f 1)
-		if [ $klawisz = 0 ]; then 
+		if [ $klawisz = 0 ]; then
 		#usługisysv i upstart automat
 			if [ "$uslugi" = "$TEXT_MENU_USLUGI0 upstart,sysV" ] ; then
 				petla="tak"
@@ -117,17 +117,17 @@ while [ $petla_duza = "tak" ]; do
 				upstart_test
 				cat lista.txt | cut -d " " -f 1 > 1.txt #nazwa usługi
 				sed -e 's/,//g' lista.txt | cut -d " " -f 2 | sed -e 's/start.*/wł/g' | sed -e 's/stop.*waiting*/wł/g'  > 2.txt #stan usługi
-				
+
 				paste -d " " 1.txt 2.txt  > upstart.txt
 				for SOFT in $(ls /etc/init/*.conf-disabled | sed 's/\.conf-disabled//g' | cut -d "/" -f 4 | grep -v -E "cryptdisks-udev|network-interface|network-interface-security|wait-for-state"); do
 				      echo "$SOFT wył" >> upstart.txt
 				done
-				    
+
 				sed -i -e 's/wł/on -/g' upstart.txt
 				sed -i -e 's/wył/- off/g' upstart.txt
-				
+
 				#sysv
-				
+
 				#sprawdzenie zależności
 				if [ "$(which rcconf)" = "" ]; then
 					xterm  -T "rcconf" -e bash -c "sudo apt-get install rcconf -y"
@@ -136,7 +136,7 @@ while [ $petla_duza = "tak" ]; do
 				cat sysv.txt | awk '{print $1}' > nazwy_uslug.txt #nazwa usługi
 				sed -i 's/ on/X/g' sysv.txt
 				sed -i 's/ off/-/g' sysv.txt
-				for i in $(seq 1 $(wc -l sysv.txt | awk '{print $1}')); do 
+				for i in $(seq 1 $(wc -l sysv.txt | awk '{print $1}')); do
 				head sysv.txt -n$i | tail -n1 > 10.txt
 					if  [ "$(grep "X" 10.txt | head -n1)" != "" ]
 					then
@@ -145,20 +145,20 @@ while [ $petla_duza = "tak" ]; do
 						echo -e "-\toff" >> stan_uslug.txt
 					fi
 				done  2>&1 | pobieranie
-				
+
 				paste -d " " nazwy_uslug.txt stan_uslug.txt > sysv.txt
 				#usunięcie usług upstart z sysV
 				ls /etc/init/*.conf* | sed 's/\.conf.*//g' | cut -d "/" -f 4 | tr '\n' ' ' > 1.txt
 				for i in $(cat 1.txt) ; do
 					sed -i "/$i/d" sysv.txt
 				done  2>&1 | pobieranie
-				
+
 				cat upstart.txt sysv.txt | sort > uslugi.txt
 
 				sed -i "s/ on - / on -\n/g" uslugi.txt
 				sed -i "s/ - off / - off\n/g" uslugi.txt
 				sed -i -e '/^[^#]/s:^:FALSE :' uslugi.txt
-				
+
 				a=$(yad --center --height=$((680*$skala)) --width=$((490*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>SysV, Upstart - automat</b></span>\n$TEXT_MENU_USLUGI2" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI3"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5"  --checklist --list $(cat uslugi.txt))
 				if [ $? = "0" ]; then
 					if [ "$a" != "" ]; then
@@ -175,7 +175,7 @@ while [ $petla_duza = "tak" ]; do
 									#włączanie sysv
 									sudo update-rc.d -f $a1 remove
 									sudo update-rc.d -f $a1 remove
-									sudo update-rc.d $a1 defaults 
+									sudo update-rc.d $a1 defaults
 									sudo service $a1 start
 								fi
 							elif [ "$(grep $a1 upstart.txt)" != "" ]; then
@@ -200,7 +200,7 @@ while [ $petla_duza = "tak" ]; do
 				if [ -z "$a" ]; then
 					opusc_mala_petle
 				fi
-				done	
+				done
 			#Upstart - expert
 			elif [ "$uslugi" = "$TEXT_MENU_USLUGI1C" ] ; then
 				petla="tak"

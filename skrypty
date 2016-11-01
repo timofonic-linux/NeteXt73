@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -95,16 +95,16 @@ if [ $klawisz = 0 ]; then
 		naglowek > instaluj.sh
 		ipv6_on >> instaluj.sh
 		instalacja
-	
+
 	#OPTIMUS FIX
 	elif [ "$skrypt" = "$MENU17" ]; then
 		cat /opt/NeteXt73/APM/nvidia-optimus-intel-drm-fix.sh > instaluj.sh
 		instalacja
-	
+
 	#burntest
 	elif [ "$skrypt" = "BurnTest" ]; then
 		burntest
-	
+
 	#akonadi on/off
 	elif [ "$skrypt" = "$MENU19" ]; then
 		if [ "$MENU19" = "$MENU20a" ]; then
@@ -112,7 +112,7 @@ if [ $klawisz = 0 ]; then
 		elif [ "$MENU19" = "$MENU19a" ]; then
 			sed -i 's/StartServer=true/StartServer=false/g' ~/.config/akonadi/akonadiserverrc
 		fi
-	
+
 	#sysbench
 	elif [ "$(echo $skrypt | grep 'sysbench')" != "" ]; then
 		#zmienne
@@ -151,8 +151,6 @@ if [ $klawisz = 0 ]; then
 			please_wait kill
 		}
 
-
-
 		wynik_testu(){
 			yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --form \
 			--field="uname -r:RO" "$(grep "uname" $1 | cut -d " " -f 2 )" \
@@ -168,7 +166,6 @@ if [ $klawisz = 0 ]; then
 			--field="Threads fairness $a9:RO" "$(grep "$a9" $1 | sed 's/.*: *//')" \
 			--field="Threads fairness $a10:RO" "$(grep "$a10" $1 | sed 's/.*: *//')" 
 		}
-
 
 		porownanie(){
 			rm pliki -f

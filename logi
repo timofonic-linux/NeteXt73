@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -102,9 +102,9 @@ while [ $petla_duza = "tak" ]; do
 			cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
 			rm -f /tmp/netext73/sumy/pliki.txt /tmp/netext73/sumy/wydane.txt /tmp/netext73/sumy/lista.txt
 			KEY1="$(echo $RANDOM)"
-				for i in $(seq 4 16); do 
+				for i in $(seq 4 16); do
 					res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
-				done 
+				done
 				yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> ${res[4]} &
 				yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
 				yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep amdstandard ) --column "$TEXT_ZNITY1" --column "kernel amd standatd" 1> ${res[6]} &
@@ -126,9 +126,9 @@ while [ $petla_duza = "tak" ]; do
 				  --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
 
 				rm /tmp/netext73/sumy/pliki.txt -f
-				for i in $(seq 4 16); do 
+				for i in $(seq 4 16); do
 					rm res[i] -f
-				done 
+				done
 		elif [ "$skrypt" = "$TEXT_WYGENERUJ" ];then
 				please_wait
 				if [ -e losowa ];then
@@ -362,7 +362,7 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "##############################################################################################" >> kern.log
 				sudo tac /var/log/kern.log | sed -n 1,1000p >> kern.log
 
-				
+
 				#system logi
 				please_wait kill
 				#czeki wysyłek
@@ -371,7 +371,7 @@ while [ $petla_duza = "tak" ]; do
 					for lista in $(cat ~/.netext73/wysylkalogow); do
 						i=$(($i + 1))
 						s[$i]=$lista
-					done	
+					done
 				else
 					for i in $(seq 1 10); do
 						s[$i]="TRUE"
@@ -409,12 +409,12 @@ while [ $petla_duza = "tak" ]; do
 				--window-icon="/opt/NeteXt73/ikony/logi.png"  --width=$((860*$skala)) --height=$((500*$skala)) --on-top \
 				--button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 				klawisz=$?
-				if [ "$klawisz" = "0" ]; then	
+				if [ "$klawisz" = "0" ]; then
 					rm ~/.netext73/wysylkalogow -f
 					for i in $(seq 1 10); do
 						cat ${rs[12]} | cut -d "|" -f $i >> ~/.netext73/wysylkalogow
 					done
-					
+
 					export userek=$(cat /tmp/netext73/userek)
 
 					if [ -e ~/.netext73/wysylkalogow ]; then
@@ -464,4 +464,4 @@ while [ $petla_duza = "tak" ]; do
 		koniec="TAK"
 		opusc_petle
 	fi
-done		
+done

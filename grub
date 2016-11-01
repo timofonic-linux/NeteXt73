@@ -11,10 +11,10 @@
 #		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
 #		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
 #
-#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _ 
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
 # /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
 #| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
-# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/ 
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
 #
 #            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
 #       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
@@ -113,14 +113,14 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 			else
 				grub_back="TRUE"
 			fi
-			
+
 			#zswap
 			if [ "$(grep 'zswap.enabled=1' /etc/default/grub)" = "" ]; then
 				zswap_czek="FALSE"
 			else
 				zswap_czek="TRUE"
 			fi
-			
+
 			if [ "$(echo $wpis_grub | grep 'lz4')" != "" ] ; then
 				zswap_compressor="lz4@lzo@deflate"
 			elif [ "$(echo $wpis_grub | grep 'lzo')" != "" ] ; then
@@ -140,20 +140,20 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 			menu_rozdz=$(echo $menu_rozdzielczosci | sed "s/$aktualna//" | sed 's/@@/@/')
 			menu4=$(echo "$aktualna$menu_rozdz" | sed 's/@@/@/')
 			menu5=""
-			
+
 			if [ "$(grep 'scsi_mod.use_blk_mq=1' /etc/default/grub)" = "" ]; then
 				blk_mq="FALSE"
 			else
 				blk_mq="TRUE"
 			fi
-			
+
 			#wymuszenie iommu - false
 			#if [ "$(grep 'intel_iommu=igfx_off' /etc/default/grub)" = "" ]; then
 			#	iommu="TRUE"
 			#else
 				iommu="FALSE"
 			#fi
-			
+
 			#rozdzielczość plymouth
 			aktualna=$(cat /etc/default/grub | grep 'GRUB_GFXPAYLOAD_LINUX' | head -n 1 | sed 's/.*GRUB_GFXPAYLOAD_LINUX=//')
 			if [ "$(echo $aktualna | grep 'x')" = "" ]; then
@@ -241,21 +241,21 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 					fi
 				fi
 				export wpis_nowy=$(echo $wpis_nowy | sed 's/\//\\\//g') # poprawka z / \/
-				if [ "$w0" = "acpi_osi='!Windows 2012' acpi_osi=Linux" ]; then 
+				if [ "$w0" = "acpi_osi='!Windows 2012' acpi_osi=Linux" ]; then
 					w0="acpi_osi='!Windows 2012' acpi_osi=Linux pcie_aspm=force"
-				else 
+				else
 					w0="acpi_osi=Linux pcie_aspm=force"
-				fi    
-				if [ "$w1" = "$TEXT_GRUB_STD" ]; then		
+				fi
+				if [ "$w1" = "$TEXT_GRUB_STD" ]; then
 					w1=" acpi_enforce_resources=lax"
-				elif [ "$w1" = "$TEXT_GRUB_INTEL" ]; then 	
+				elif [ "$w1" = "$TEXT_GRUB_INTEL" ]; then
 					w1=" acpi_enforce_resources=lax drm.vblankoffdelay=1"
-				elif [ "$w1" = "$TEXT_GRUB_RADEON" ]; then	
+				elif [ "$w1" = "$TEXT_GRUB_RADEON" ]; then
 					w1=" acpi_enforce_resources=lax radeon.dpm=1"
 				fi
-				if [ "$w2" = "standard" ]; then      		
+				if [ "$w2" = "standard" ]; then
 					w2=""
-				elif [ "$w2" = "$TEXT_GRUB19" ]; then  		
+				elif [ "$w2" = "$TEXT_GRUB19" ]; then
 					w2=" acpi_backlight=vendor"
 				fi
 				if [ "$zswap" = "TRUE" ];then
