@@ -1,3 +1,0 @@
-#!/bin/bash
-rm -rf /opt/NeteXt73/*
-exit 0
