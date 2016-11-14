@@ -36,6 +36,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   curl, 
   libisl13, 
   libgls, 
+  libatlas3-base, 
   software-properties-common 
 Replaces: netext73 
 Description: NeteXt'73 - optymalizator systemu
