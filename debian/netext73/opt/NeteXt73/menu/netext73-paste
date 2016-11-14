@@ -1,0 +1,4 @@
+#/bin/bash
+curl -0 -d title=$1 -d private=1 -d name=$USER -d lang=bash -d expire=10080 --data-urlencode text@- http://37.59.165.105/htdocs/api/create?apikey=dodawanie_wpisow
+
+

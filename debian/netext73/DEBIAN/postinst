@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#crontab
+uzytkownik=$(who | awk '{print $1}' | head -n 1)
+
+if [ -e /var/spool/cron/crontabs/$uzytkownik ]; then
+	sed -i '/NeteXt73/ d' /var/spool/cron/crontabs/$uzytkownik
+	if [ "$(grep 'update start' /var/spool/cron/crontabs/$uzytkownik)" = "" ]; then
+		echo '0 * * * * env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
+	fi
+fi
+#naprawa (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
+if [ -e /usr/share/icons/oxygen/index.theme ]; then
+	sed -i 's/,,/,/g' /usr/share/icons/oxygen/index.theme
+fi
+exit 0

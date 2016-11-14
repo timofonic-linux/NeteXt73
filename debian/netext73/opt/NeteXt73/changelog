@@ -1,8 +1,6 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
-v1.0.67
--	zmiana zależności
 v1.0.66
 -	linkowanie gcc i zależności
 -	zmiana apm-fix

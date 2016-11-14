@@ -1,0 +1,216 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    	   		 _   _      _      __  ___   _ _____ _____
+#					    | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#					    |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
+# /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
+#| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
+#
+#            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#      / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+#     |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#      \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#procedury
+
+source /opt/NeteXt73/procedury
+
+instaluj_NV(){
+	echo "nie" > /tmp/netext73/ok.txt
+	naglowek > instaluj.sh
+	nvidia_naglowek >> instaluj.sh
+	#sprawdzanie czy jest nvidia_optimus
+	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+		nvidia_optimus >> instaluj.sh
+	else
+		nvidia >> instaluj.sh
+	fi
+	nvidia_stopka >> instaluj.sh
+	instalacja2
+}
+
+instaluj_RADEON(){
+	echo "nie" > /tmp/netext73/ok.txt
+	naglowek > instaluj.sh
+	radeon >> instaluj.sh
+	instalacja2
+}
+
+instaluj_RADEON_mesa_13.0(){
+	naglowek > instaluj.sh
+	echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
+	echo "sudo apt-get install vainfo -y" >> instaluj.sh
+	instalacja2
+}
+
+instaluj_RADEON_mesa_13.1(){
+	naglowek > instaluj.sh
+	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
+	echo "sudo apt-get install vainfo -y" >> instaluj.sh
+	instalacja2
+}
+
+
+instaluj_trusty(){
+if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+	grep fglrx_ /tmp/netext73/sumy/sumy_kontrolne.txt | sed 's/.deb//' | awk '{print $2}' | sort -r > 2a.txt
+	lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
+	ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+	if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+		ster1=$(echo $ster.deb | sed "s/fglrx/fglrx-amdcccle/")
+		ster2=$(echo $ster.deb | sed "s/fglrx/fglrx-core/")
+		yad_wget $adres_sterownikow/$ster.deb $adres_sterownikow/$ster1 $adres_sterownikow/$ster2
+		if [ -e $ster.deb ] && [ -e $ster1 ] && [ -e $ster2 ] && [ "$(grep $(md5sum $ster.deb) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster1) $sumy_kontrolne)" != "" ] && [ "$(grep $(md5sum $ster2) $sumy_kontrolne)" != "" ]; then
+			instaluj_RADEON
+		else
+			yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
+		fi
+	fi
+fi
+}
+
+instaluj_mese(){
+if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
+	instaluj_trusty
+else
+	if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
+		lista="mesa 13.0!mesa 13.1"
+	elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
+		lista="mesa 13.1"
+	fi
+	ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+	klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+	if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+		if [ "$ster" = "mesa 13.0" ]; then
+			instaluj_RADEON_mesa_13.0
+		elif [ "$ster" = "mesa 13.1" ]; then
+			instaluj_RADEON_mesa_13.1
+		fi
+	fi
+fi
+}
+#########################################################################################################################################################################
+#instalator sterowników do grafik Nvidia
+cd /tmp/netext73
+
+usun(){
+rm *.txt* -f; rm *.sh -f; rm *.html* -f
+rm *.deb -f
+rm nvidia-settings -f
+}
+
+usun
+if [ "$1" = "nvidia" ]; then
+	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
+
+	#sprawdzanie Optimusa
+	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+		if [ "$(ls $katalog_pulpit/ | grep \.desktop)" = "" ]; then
+			menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="primus-menu-start:2""
+		else
+			menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="primus-menu-start:2" --button="primus-desktop-start:3""
+		fi
+
+	else
+		menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1""
+	fi
+
+	if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+		grep nvidia /tmp/netext73/sumy/sumy_kontrolne.txt | grep -v nvidia-optimus | sed 's/.tar.xz//' | awk '{print $2}' | sort -r > 2a.txt
+		lista=$(cat 2a.txt | tr '\n' '!' | sed -e '$s/!$//g' )
+		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
+		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+			yad_wget $adres_sterownikow/$ster.tar.xz
+			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ]; then
+				rm -f index.html 2a.txt
+				tar -Jxf $ster.tar.xz
+				if [ -e $ster ]; then
+					cd $ster
+					export wersja_nvidia=$(echo $ster"_amd64" | sed 's/nvidia-//')
+					instaluj_NV
+				else
+					dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_ROZPAKOWANIE_ERROR"
+				fi
+			else
+				yad --center --error --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_SUMA_KONTROLNA"
+			fi
+		elif [ "$klawisz" = "2" ] || [ "$klawisz" = "3" ]; then
+			petla="tak"
+			while [ $petla = "tak" ]; do
+				rm primusrun*.txt -f
+				if [ "$klawisz" = "2" ]; then
+				      katalog="/usr/share/applications"
+				elif [ "$klawisz" = "3" ]; then
+				      katalog="$katalog_pulpit"
+				fi
+				IFS=$'\n'
+				for i in $(ls $katalog/ | grep desktop); do
+					nazwa=$(echo "$i" | sed 's/.desktop//')
+					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i)" = "" ]; then
+						echo "FALSE@"$nazwa"@-@off" >> primusrun1.txt 
+					else
+						echo "FALSE@"$nazwa"@on@-" >> primusrun1.txt 
+					fi
+				done
+					cat primusrun1.txt | tr '\n' '@' > primusrun.txt
+					IFS='@'
+					primus=$(yad --center --height=$((680*$skala)) --width=$((680*$skala))   --window-icon="/opt/NeteXt73/ikony/uslugi.png" --image="/opt/NeteXt73/ikony/uslugi.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Primusrun - automat</b></span>\n" --column="$TEXT_ZAZNACZ" --column="$TEXT_MENU_USLUGI39"  --column="$TEXT_MENU_USLUGI4" --column="$TEXT_MENU_USLUGI5" --item-separator='@' --checklist --list $(cat primusrun.txt))
+					if [ $? = "0" ]; then
+						if [ "$primus" != "" ]; then
+							rm -f index.html 2a.txt
+							echo $primus | sed 's/|/\n/g' | sed '/^on/ d' | sed '/^off/ d' | sed '/^-/ d' | sed '/^.*TRUE/ d' > zaznaczone.txt
+							naglowek > instaluj.sh
+							IFS=$'\n'
+							for i in $(cat zaznaczone.txt); do
+							echo $i
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' "$katalog/$i.desktop")" = "" ]; then
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" \"$katalog/$i.desktop\"" >> instaluj.sh
+									if [ "$klawisz" = "3" ] && [ $USER = "root" ]; then
+										echo "sudo chown $userek:$userek  \"$katalog/$i.desktop\"" >> instaluj.sh
+									fi
+								else
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" \"$katalog/$i.desktop\"" >> instaluj.sh
+									if [ "$klawisz" = "3" ] && [ $USER = "root" ]; then
+										echo "sudo chown $userek:$userek  \"$katalog/$i.desktop\"" >> instaluj.sh
+									fi
+								fi
+							done
+							instalacja2
+							IFS=$' \t\n'
+						fi
+					fi
+					rm *.txt -f
+					if [ -z "$primus" ]; then
+						opusc_mala_petle
+					fi
+			done
+		fi
+	fi
+elif [ "$1" = "radeon" ]; then
+	#sprawdzanie xorga
+	if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ]; then
+		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
+		instaluj_mese
+	else
+		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
+			instaluj_trusty
+		else
+			instaluj_mese
+		fi
+	fi
+fi
+usun

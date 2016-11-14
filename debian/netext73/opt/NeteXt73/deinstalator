@@ -1,0 +1,116 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    	   		 _   _      _      __  ___   _ _____ _____
+#					    | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#					    |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
+# /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
+#| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
+#
+#            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#      / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+#     |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#      \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#procedury
+
+source /opt/NeteXt73/procedury
+
+#########################################################################################################################################################################
+#usuwanie zbędnych kerneli
+
+cd /tmp/netext73
+rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
+usun=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((420*$skala)) --window-icon="/opt/NeteXt73/ikony/delete.png" --image="/opt/NeteXt73/ikony/delete.png" --text="<span color=\"$kolor_textu\">$TEXT_DEINSTALATOR</span>" --form --field="$TEXT_DEINSTALATOR1:CB"  "$TEXT_MENU_DEINSTALATOR1!$TEXT_MENU_DEINSTALATOR2!$TEXT_MENU_DEINSTALATOR4!$TEXT_MENU_DEINSTALATOR5!$TEXT_MENU_DEINSTALATOR7" --button="gtk-ok:0" --button="$TEXT_POWROT:1"  )
+klawisz=$?; usun=$(echo $usun | cut -d "|" -f 1)
+
+#usuwanie apm
+if [ "$usun" = "$TEXT_MENU_DEINSTALATOR4" ]; then
+	naglowek > instaluj.sh
+	yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_DEINSTALATOR10"
+	if [ $? = 0 ]; then
+		apm_usun >> instaluj.sh
+		instalacja
+	fi
+#usuwanie microcode
+elif [ "$usun" = "$TEXT_MENU_DEINSTALATOR5" ]; then
+	naglowek > instaluj.sh
+	yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_DEINSTALATOR11"
+	if [ $? = 0 ]; then
+		microcode_usun >> instaluj.sh
+		instalacja
+	fi
+#usuwanie netexta
+elif [  "$usun" = "$TEXT_MENU_DEINSTALATOR7" ]; then
+	xterm -T "deinstalator" -e bash -c "echo \"$TEXT_INSTALACJA1\";sudo apt-get purge netext73; sudo rm -rf /opt/NeteXt73 /usr/share/applications/NeteXt73.desktop /usr/share/pixmaps/NeteXt73.png /usr/local/bin/install_netext; echo -e \"$TEXT_INSTALACJA2\";killall -9 yad"
+#usuwanie kerneli
+elif [ "$usun" =  "$TEXT_MENU_DEINSTALATOR1" ] || [ "$usun" =  "$TEXT_MENU_DEINSTALATOR2" ]; then
+	petla="tak"
+	while [ $petla = "tak" ]; do
+		#usuwanie kerneli
+		if [ "$usun" = "$TEXT_MENU_DEINSTALATOR1" ]; then
+			#generowanie listy na podstawie plików linux-image
+			ls /boot | grep vmlinuz | sed 's/vmlinuz-//g' | grep -x -v $(uname -r) | grep -v signed > /tmp/netext73/lista_kerneli.txt
+			#dpkg -l | grep 'linux-image.*ext'  | grep 'ii' | grep -v -E "linux-image-extra*|linux-image-generic" | awk '{print $2}'| grep -x -v "linux-image-$(uname -r)" > /tmp/netext73/lista_kerneli.txt
+		#usuwanie kerneli expert
+		elif [  "$usun" = "$TEXT_MENU_DEINSTALATOR2" ]; then
+			#generowanie listy na podstawie plików linux-image oraz linux-headers
+			dpkg -l | grep 'linux-image'   | grep 'ii' | awk '{print $2}' | grep -x -v "linux-image-$(uname -r)" > /tmp/netext73/lista_kerneli.txt
+			dpkg -l | grep 'linux-headers'  | grep 'ii' | awk '{print $2}' | grep -x -v "linux-headers-$(uname -r)" >> /tmp/netext73/lista_kerneli.txt
+			#dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -x -v "linux-*-$(uname -r)" > /tmp/netext73/lista_kerneli.txt
+		fi
+		if [ "$(cat lista_kerneli.txt)" != "" ]; then
+		a=$(yad --center --on-top --height=$((440*$skala)) --width=$((560*$skala)) --window-icon="/opt/NeteXt73/ikony/delete.png" --text="$TEXT_DEINSTALATOR4  <span color=\"$kolor_textu\"><b> linux-image-$(uname -r) </b></span>,\n$TEXT_DEINSTALATOR5\n" --title="$TEXT_MENU_DEINSTALATOR1" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --checklist --list  --column="$TEXT_ZAZNACZ" --column="$TEXT_DEINSTALATOR6"  $(sed -e '/^[^#]/s:^:FALSE :' /tmp/netext73/lista_kerneli.txt ))
+			if [ $? = 0 ]; then
+				if [ "$a" != "" ]; then
+					if [ "$usun" = "$TEXT_MENU_DEINSTALATOR2" ]; then
+						rm /tmp/netext73/*.txt -f
+						#spradzanie czy są pliki linux-headers na podstawie linux-image
+						echo $a > /tmp/netext73/lista_kerneli.txt
+						echo $a | sed "s/linux-image/linux-headers/g"  >> /tmp/netext73/lista_kerneli.txt
+						cat /tmp/netext73/lista_kerneli.txt | sed 's/TRUE//g' | tr '|' '\n' | sed '/^$/d'| sort | uniq > /tmp/netext73/lista.txt
+						dpkg -l | grep linux > /tmp/netext73/lista_zainstalowanych.txt
+						#walidacja
+						for SOFT in $(cat /tmp/netext73/lista.txt)
+						do
+							if [ "$(cat /tmp/netext73/lista_zainstalowanych.txt |grep $SOFT | awk '{print $1}'| head -n1)" = "ii" ] ; then
+								echo $SOFT >> /tmp/netext73/kasuj2.txt
+							fi
+						done
+						cat /tmp/netext73/kasuj2.txt | sort | uniq > /tmp/netext73/kasuj.txt
+						#proces kasowania kerneli
+						naglowek > instaluj.sh
+						usun_kernel_expert >> instaluj.sh
+					else
+						echo $a | sed 's/TRUE//g' | tr '|' '\n' | sed '/^$/d'| sort | uniq  > kasuj.txt
+						#proces kasowania kerneli
+						naglowek > instaluj.sh
+						usun_kernel >> instaluj.sh
+					fi
+
+					instalacja2
+				else
+					petla="nie"
+				fi
+			else
+				rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
+				petla="nie"
+			fi
+
+		else
+		      dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_BRAK_KERNELI"
+		      petla="nie"
+		fi
+	done
+fi

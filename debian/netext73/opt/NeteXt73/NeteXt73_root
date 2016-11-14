@@ -1,0 +1,69 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    _   _      _      __  ___   _ _____ _____
+#		   | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#		   |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   | |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   |_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#	            __ _ _ __ __ _ / _(_) ___ _____ __  _   _
+#	           / _` | '__/ _` | |_| |/ __|_  / '_ \| | | |
+#	          | (_| | | | (_| |  _| | (__ / /| | | | |_| |
+#	           \__, |_|  \__,_|_| |_|\___/___|_| |_|\__, |
+#	           |___/                                |___/
+#     _           _        _       _                   _                        _ _
+#    (_)_ __  ___| |_ __ _| | __ _| |_ ___  _ __      | | _____ _ __ _ __   ___| (_)
+#    | | '_ \/ __| __/ _` | |/ _` | __/ _ \| '__|     | |/ / _ \ '__| '_ \ / _ \ | |
+#    | | | | \__ \ |_ (_| | | (_| | |_ (_) | |        |   <  __/ |  | | | |  __/ | |
+#    |_|_| |_|___/\__\__,_|_|\__,_|\__\___/|_|        |_|\_\___|_|  |_| |_|\___|_|_|
+#        __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#   ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#  / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+# |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#  \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#start
+cd /opt/NeteXt73/
+source /opt/NeteXt73/procedury
+
+if [ "$1" = "kontakty" ]; then
+	KEY="$(echo $RANDOM)"
+
+	#zmienne losowe
+	for i in $(seq 0 6); do
+		res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
+	done
+
+	yad --plug=$KEY --tabnum=1 --text="$TEXT_O_PROGRAMIE" 1> ${res[0]} &
+	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty 1> ${res[1]} &
+	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog 1> ${res[2]} &
+	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE 1> ${res[3]} &
+	yad --plug=$KEY --tabnum=5 --form --field="$TEXT_UZYTKOWNIK:RO" "$USER" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> ${res[5]} &
+	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_BUG"   \
+	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
+	klawisz=$?
+	if [ "$klawisz" = "0" ]; then
+		#wycinanie błędów
+		if [ "$(cat ${res[5]} | cut -d '|' -f 4 )" != "" ]; then
+			export userek=$(cat /tmp/netext73/userek)
+			echo -e "$(cat ${res[5]} | cut -d '|' -f 3) \n $(cat ${res[5]} | cut -d '|' -f 5) \n $(cat ${res[5]} | cut -d '|' -f 4)"  | pastebinit_netext73 "$(cat ${res[5]} | cut -d "|" -f 2)" && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "\n$TEXT_WYSLANO_ZGLOSZENIE"
+		fi
+	fi
+	for i in $(seq 0 6); do
+		rm ${res[$i]} -f
+	done
+else
+	while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
+		if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
+			exit 0
+		fi
+	done
+fi
+sudo -K
+

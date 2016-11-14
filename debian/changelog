@@ -1,3 +1,9 @@
+netext73 (1.0.67) xenial; urgency=medium
+
+  * zmiany zależności
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 14 Nov 2016 21:04:44 +0100
+
 netext73 (1.0.66) xenial; urgency=medium
 
   * linkowanie gcc

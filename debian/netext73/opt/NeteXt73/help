@@ -1,0 +1,47 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    	   		 _   _      _      __  ___   _ _____ _____
+#					    | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#					    |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
+# /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
+#| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
+#
+#            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#      / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+#     |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#      \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#procedury
+
+source /opt/NeteXt73/procedury
+
+#########################################################################################################################################################################
+
+cd /tmp/netext73
+
+if [ "$1" = "paypal" ]; then
+#	please_wait &
+	sleep 4 && please_wait kill &
+	yad --center --html --browser --title="We will help you, you will help us. Thank You for Your donation. NeteXt Team." --window-icon="/opt/NeteXt73/ikony/paypal.png" --uri="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J6MV2T7WKPEAY" --width=$((860*$skala))  --height=$((600*$skala))
+#	please_wait kill
+elif [ "$1" = "kontakty" ]; then
+	if [ "$USER" = "root" ]; then
+		su $userek -c "bash /opt/NeteXt73/NeteXt73_root kontakty"
+	else
+		bash /opt/NeteXt73/NeteXt73_root kontakty
+	fi
+else
+	yad --center --html --browser --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/netext.png"  --uri="$adres_opisu" --width=$((950*$skala)) --height=$((600*$skala))
+fi

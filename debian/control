@@ -11,7 +11,7 @@ Vcs-Git: https://github.com/NetBit73/NeteXt73.git
 
 Package: netext73 
 Architecture: amd64  
-Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, ${dist:Depends}, 
+Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, 
   netext73-pakiety, 
   xterm, 
   htop, 
@@ -36,6 +36,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, ${dist:Depends},
   curl, 
   libisl13,  
   libatlas3-base, 
+  libgsl0ldbl | libgsl2, 
   software-properties-common 
 Replaces: netext73 
 Description: NeteXt'73 - optymalizator systemu

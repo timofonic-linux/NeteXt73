@@ -1,0 +1,175 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#
+#		    	   		 _   _      _      __  ___   _ _____ _____
+#					    | \ | | ___| |_ ___\ \/ / |_( )___  |___ /
+#					    |  \| |/ _ \ __/ _ \\  /| __|/   / /  |_ \
+#		   				| |\  |  __/ |_  __//  \| |_    / /  ___) |
+#		   				|_| \_|\___|\__\___/_/\_\\__|  /_/  |____/
+#
+#  __  ___ _______   ____ __  __  _   _ ___  __ _____ __  ___    ____   __ __ _____ ___ __ __ _  _
+# /__\| _,\_   _\ `v' /  V  |/  \| | | |_  |/  \_   _/__\| _ \ /' _| `v' /' _/_   _| __|  V  | || |
+#| \/ | v_/ | |  `. .'| \_/ | /\ | |_| |/ /| /\ || || \/ | v / `._`.`. .'`._`. | | | _|| \_/ | \/ |
+# \__/|_|   |_|   !_! |_| |_|_||_|___|_|___|_||_||_| \__/|_|_\ |___/ !_! |___/ |_| |___|_| |_|\__/
+#
+#            __  __  _     _____   _____      ___     _   _      _   ____  _ _  _____ ____
+#       ___  \ \/ / | |_  |___  | |___ /     ( _ )   | \ | | ___| |_| __ )(_) |____  |___ /
+#      / _ \  \  /  | __|    / /    |_ \     / _ \/\ |  \| |/ _ \ __|  _ \| | __| / /  |_ \
+#     |  __/  /  \  | |_    / /    ___) |   | (_>  < | |\  |  __/ |_| |_) | | |_ / /  ___) |
+#      \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
+#
+#########################################################################################################################################################################
+#procedury
+
+source /opt/NeteXt73/procedury
+
+#########################################################################################################################################################################
+#config
+cd /tmp/netext73
+
+#kasowanie starych configów
+rm ~/.netext73/https_link -f
+rm ~/.netext73/server_no -f
+
+if [ -e ~/.netext73/apm_status ]; then
+	apm_stat=$(cat ~/.netext73/apm_status | sed 's/.* //' | head -n 1)
+else
+	apm_stat=""
+fi
+if [ -e ~/.netext73/instalator_kerneli ]; then
+	ik=$(cat ~/.netext73/instalator_kerneli)
+else
+	ik=""
+fi
+
+if [ -e ~/.netext73/kernel_automat ]; then
+	if [ "$(cat ~/.netext73/kernel_automat)" = "TRUE" ]; then
+	      automatyczna_instalacja="TRUE"
+	else
+	      automatyczna_instalacja="FALSE"
+	fi
+else
+	automatyczna_instalacja="FALSE"
+fi
+
+
+if [ -e ~/.netext73/archiwum_deb ]; then
+	if [ "$(cat ~/.netext73/archiwum_deb)" = "TRUE" ]; then
+	      archiwum_deb="TRUE"
+	else
+	      archiwum_deb="FALSE"
+	fi
+else
+	archiwum_deb="FALSE"
+fi
+
+if [ -e ~/.netext73/HiDPI ] && [ "$(cat ~/.netext73/HiDPI)" = "TRUE" ]; then
+	HiDPI="TRUE"
+else
+	HiDPI="FALSE"
+fi
+if [ -e ~/.Xresources ] && [ "$(grep faceSize ~/.Xresources)" != "" ]; then
+	xterm_font="$(grep 'faceSize' ~/.Xresources | awk '{print $2}')"
+else
+	xterm_font="8"
+fi
+
+if [ -e ~/.netext73/notify_fix ] && [ "$(grep TRUE ~/.netext73/notify_fix)" != "" ];then
+	notify_fix="TRUE"
+else
+	notify_fix="FALSE"
+fi
+
+#gcc
+if [ "$(gcc --version | grep -i ext73)" != "" ];then
+	aktualny_gcc=$(gcc --version | head -n 1 | awk '{print $1"-"$3}' | sed 's/$/\text73/g')
+else
+	aktualny_gcc1=$(dpkg -l| grep gcc- | grep -v base | grep -v libgcc | grep $(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g') | awk '{print $2}')
+	aktualny_gcc2=$(gcc --version | head -n 1 | awk '{print $3}' | sed 's/)//g')
+	aktualny_gcc=$(echo $aktualny_gcc1"\t\t"$aktualny_gcc2)
+fi
+
+dpkg -l | grep gcc- | grep -v base | grep -v libgcc | awk '{print $2"\t\t"$3}' > lista_gcc1.txt
+ls /opt/ | grep gcc- | grep -v tar.xz | grep -v '_' | sed 's/$/\text73/g' >> lista_gcc1.txt
+cat lista_gcc1.txt | sed "s/$aktualny_gcc//" > lista_gcc2.txt
+echo "$aktualny_gcc" > lista_gcc1.txt
+cat  lista_gcc2.txt >> lista_gcc1.txt
+#usuwanie pustych linii
+sed -i '/^[ \t]*$/ d' lista_gcc1.txt
+cat lista_gcc1.txt | tr '\n' '!' > lista_gcc2.txt
+#usunięcie ostaniego znaku
+sed -i '$s/!$//' lista_gcc2.txt
+
+KEY="$(echo $RANDOM)"
+#zmienne losowe
+for i in $(seq 1 2); do
+	res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
+done
+
+yad --plug=$KEY --tabnum=1 --form --field="$TEXT_CONFIG7:CB" --field="$TEXT_CONFIG4" --field="$TEXT_CONFIG6:CB" --field="$TEXT_CONFIG9:RO" --field="$TEXT_CONFIG10:RO" --field="gcc --version:RO" --field="$TEXT_ZMIEN_NA:CB" --field="$TEXT_XTERM_SIZE:NUM" --field="$TEXT_CONFIG11:CHK" --field="$TEXT_CONFIG12:CHK" --field="HiDPI:CHK" --field="root notify fix:CHK" "$TEXT_NIE!$TEXT_TAK" "" "$lang1" "$apm_stat" "$ik" "$(gcc --version | head -n 1)" "$(cat lista_gcc2.txt)" "$xterm_font[!8..20[!1]]" "$automatyczna_instalacja" "$archiwum_deb" "$HiDPI" "$notify_fix" --button="$TEXT_CONFIG3:2" 1> ${res[1]} &
+yad --plug=$KEY --tabnum=2 --color --init-color=$kolor_textu 1> ${res[2]} &
+yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFIG2" --tab="$TEXT_CONFIG3" --window-icon="/opt/NeteXt73/ikony/config.png" --on-top --width=$((690*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):2" --button="$TEXT_POWROT:1"
+klawisz=$?
+if [ "$klawisz" = "0" ]; then
+	if [ "$(grep "$TEXT_TAK" ${res[1]})" != "" ]; then
+		rm ~/.netext73/* -f
+		yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --text="$TEXT_CONFIG8" --button="$TEXT_POWROT:1" --timeout=5
+	else
+		#kasowanie śmieci
+		sed -i '/.*yad.*/ d' ${res[1]}
+		sed -i '/^[ \t]*$/ d' ${res[1]}
+		sed -i '/.*yad.*/ d' ${res[2]}
+		sed -i '/^[ \t]*$/ d' ${res[2]}
+		if [ "$(cat ${res[1]} | grep '@' | cut -d "|" -f 2)" != "" ];then
+			cat ${res[1]} | grep '@' | cut -d "|" -f 2 > ~/.netext73/kernel_premium
+		fi
+		cat ${res[1]} | cut -d "|" -f 3 > ~/.netext73/jezyk
+		cat ${res[1]} | cut -d "|" -f 9 > ~/.netext73/kernel_automat
+		cat ${res[1]} | cut -d "|" -f 10 > ~/.netext73/archiwum_deb
+		cat ${res[1]} | cut -d "|" -f 11 > ~/.netext73/HiDPI
+		cat ${res[1]} | cut -d "|" -f 12 > ~/.netext73/notify_fix
+		cat ${res[2]} > ~/.netext73/kolor_textu
+		wersja=$(cat  ${res[1]} | cut -d "|" -f 7)
+		if [ "$aktualny_gcc" != "$wersja" ];then
+			naglowek > instaluj.sh
+			if [ "$(echo $wersja | grep ext73)" != "" ]; then
+				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
+				instaluj_gcc zmien >> instaluj.sh
+			else
+				export wersja=$(echo $wersja | cut -d '|' -f 2 | awk '{print $1}' | sed 's/gcc-//g')
+				instaluj_gcc zmien_stary >> instaluj.sh
+			fi
+			instalacja2
+			rm -f *.txt
+		fi
+
+		#zmiana wielkości liter xterm
+		if [ -e ~/.Xresources ] && [ "$(grep faceSize ~/.Xresources)" != "" ]; then
+			sed -i "s/faceSize:.*/faceSize: $(cat ${res[1]} | cut -d '|' -f 8)/" ~/.Xresources
+			xrdb -merge /home/$userek/.Xresources
+		else
+			echo "XTerm*faceName: DejaVu Sans Mono" >>  ~/.Xresources
+			echo "XTerm*faceSize: $(cat ${res[1]} | cut -d '|' -f 8)" >>  ~/.Xresources
+			xrdb -merge /home/$userek/.Xresources
+		fi
+
+		#kasowanie śmieci w configach
+		for i in $(ls -la ~/.netext73/ | grep -v drw | awk '{print $9}'); do
+			if [ -e ~/.netext73/$i ]; then
+				sed -i '/.*yad.*/ d' ~/.netext73/$i
+				sed -i '/Gtk-Message.*/ d' ~/.netext73/$i
+				sed -i '/^[ \t]*$/ d' ~/.netext73/$i
+			fi
+		done
+	fi
+elif [ "$klawisz" = "2" ]; then
+	rm -f /tmp/netext73/sumy/*
+	/opt/NeteXt73/./update start &
+fi
+for i in $(seq 1 2); do
+	rm res[$i] -f
+done
