@@ -1640,22 +1640,6 @@ if [ "$plik" != "" ]; then
 	fi
 fi
 
-#zależności
-if [ "$(lsb_release -a | grep -E "$wspierane_nr")" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-	if [ "$(dpkg -l | grep libgsl2 | grep 'ii')" = "" ]; then
-		naglowek > instaluj.sh
-		echo "sudo apt-get install libgsl2" >> instaluj.sh
-		echo "sudo rm -rf /usr/lib/libgsl.so.0" >> instaluj.sh
-		echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0" >> instaluj.sh
-		instalacja
-	fi
-else
-	if [ "$(dpkg -l | grep libgsl0ldbl | grep 'ii')" = "" ]; then
-		naglowek > instaluj.sh
-		echo "sudo apt-get install libgsl0ldbl" >> instaluj.sh
-		instalacja
-	fi
-fi	
 #naprawa Gtk-WARNING **: Theme file for default has no directories
 if [ -e ~/.gtkrc-2.0 ] && [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
 	sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0

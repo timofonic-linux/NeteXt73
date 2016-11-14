@@ -11,7 +11,7 @@ Vcs-Git: https://github.com/NetBit73/NeteXt73.git
 
 Package: netext73 
 Architecture: amd64  
-Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, 
+Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends}, ${dist:Depends}, 
   netext73-pakiety, 
   xterm, 
   htop, 
@@ -34,8 +34,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   gir1.2-gtksource-3.0,  
   yad, 
   curl, 
-  libisl13, 
-  libgsl2, 
+  libisl13,  
   libatlas3-base, 
   software-properties-common 
 Replaces: netext73 

@@ -1,3 +1,13 @@
 #!/usr/bin/make -f
+LSB_CS = $(shell lsb_release -cs)
+ifeq ($(LSB_CS),trusty)
+SUBSTVARS = -Vdist:Depends="libgsl0ldbl"
+else
+SUBSTVARS = -Vdist:Depends="libgsl2"
+endif
+
 %:
 	dh $@
+
+override_dh_gencontrol:
+	dh_gencontrol -- $(SUBSTVARS)
