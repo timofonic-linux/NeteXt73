@@ -1578,8 +1578,12 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "sudo ldconfig"
-	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo rm -rf /usr/lib/libgsl.so.0"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "if [ \"\$(lsb_release -a | grep -E \"\$wspierane_nr\")\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
+	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0"
+	echo "fi"
 elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc"
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc-ar /usr/bin/gcc-ar"
@@ -1588,7 +1592,11 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/c++ /usr/bin/c++"
 	echo "sudo ldconfig"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo rm -rf /usr/lib/libgsl.so.0"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "if [ \"\$(lsb_release -a | grep -E \"\$wspierane_nr\")\" != \"\" ] || [ \"\$(echo \$WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
+	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0"
+	echo "fi"
 elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc"
 	echo "sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar"
@@ -1631,6 +1639,22 @@ if [ "$plik" != "" ]; then
 	fi
 fi
 
+#zależności
+if [ "$(lsb_release -a | grep -E "$wspierane_nr")" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
+	if [ "$(dpkg -l | grep libgsl2 | grep 'ii')" = "" ]; then
+		naglowek > instaluj.sh
+		echo "sudo apt-get install libgsl2" >> instaluj.sh
+		echo "sudo rm -rf /usr/lib/libgsl.so.0" >> instaluj.sh
+		echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0" >> instaluj.sh
+		instalacja
+	fi
+else
+	if [ "$(dpkg -l | grep libgsl0ldbl | grep 'ii')" = "" ]; then
+		naglowek > instaluj.sh
+		echo "sudo apt-get install libgsl0ldbl" >> instaluj.sh
+		instalacja
+	fi
+fi	
 #naprawa Gtk-WARNING **: Theme file for default has no directories
 if [ -e ~/.gtkrc-2.0 ] && [ "$(grep gtk-fallback-icon-theme="default" ~/.gtkrc-2.0)" != "" ]; then
 	sed -i 's/gtk-fallback-icon-theme="default"/gtk-fallback-icon-theme="gnome"/' ~/.gtkrc-2.0

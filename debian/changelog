@@ -1,3 +1,9 @@
+netext73 (1.0.66) xenial; urgency=medium
+
+  * linkowanie gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 14 Nov 2016 13:15:27 +0100
+
 netext73 (1.0.65) xenial; urgency=medium
 
   * intel i amd standard zamiast atom i k8
