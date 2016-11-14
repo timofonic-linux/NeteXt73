@@ -1563,8 +1563,6 @@ kill_yad(){
 	kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
 }
 
-
-
 instaluj_gcc(){
 if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/"

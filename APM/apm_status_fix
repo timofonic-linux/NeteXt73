@@ -33,28 +33,13 @@ if [ "$(grep bfq /sys/block/sd*/queue/scheduler)" = "" ]; then
 fi
 #binutils i gcc
 if [ "$(ld -v | grep -i ubuntu)" != "" ] || [ "$(gcc --version | grep -i ext73)" = "" ]; then
-	tar -Jxf /opt/NeteXt73-pakiety/pakiety/$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/
-	tar -Jxf /opt/NeteXt73-pakiety/pakiety/$(ls /opt/NeteXt73-pakiety/pakiety | grep binutils) -C /opt/
-	ln -sf /opt/binutils-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld
-	ln -sf /opt/binutils-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin
-	ln -sf /opt/binutils-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd
-	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc
-	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar
-	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp
-	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++
-	ln -sf /opt/gcc-$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++
-	#dodatkowe linkowanie
-	wspierane_wersje="xenial|yakkety"
-	wspierane_nr="16.04|16.10"
-	WERSJA_UBUNTU="$(lsb_release -cs)"
-	rm -rf /usr/lib/libgsl.so.0
-	if [ "$(lsb_release -a | grep -E "$wspierane_nr")" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-		ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0
-	fi
-	ldconfig
-	rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10
-	ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10
-
+	#procedury
+	mkdir -p /tmp/netext73
+	cd /tmp/netext73
+	source /opt/NeteXt73/procedury
+	naglowek > instaluj.sh
+	instaluj_gcc instaluj_nowy >> instaluj.sh
+	bash instaluj.sh
 fi
 #TPC
 if [ -e /etc/sysctl.conf ]; then
@@ -92,6 +77,3 @@ else
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
 	fi
 fi
-
-
-

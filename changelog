@@ -3,6 +3,7 @@
 
 v1.0.66
 -	linkowanie gcc i zależności
+-	zmiana apm-fix
 v1.0.65
 -	usunięcie wsparcia dla kerneli atom i k8
 -	zastąpienie kerneli atom i k8 kerneliami standard dla Intela i AMD
