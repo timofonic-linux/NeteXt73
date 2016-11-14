@@ -157,7 +157,9 @@ if [ -e ~/.netext73/kolor_textu ]; then
 else
 	export kolor_textu="blue"
 fi
-export userek=$(cat /tmp/netext73/userek)
+if [ -e /tmp/netext73/userek ]; then
+	export userek=$(cat /tmp/netext73/userek)
+fi
 #adres katalogu download
 if [ -e ~/Pobrane ]; then
 	export download="/home/$userek/Pobrane"
