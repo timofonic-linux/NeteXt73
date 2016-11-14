@@ -6,8 +6,8 @@ else
 SUBSTVARS = -Vdist:Depends="libgsl2"
 endif
 
-%:
-	dh $@
-
 override_dh_gencontrol:
 	dh_gencontrol -- $(SUBSTVARS)
+
+%:
+	dh $@
