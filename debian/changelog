@@ -1,3 +1,9 @@
+netext73 (1.0.69) xenial; urgency=medium
+
+  * poprawka sortowania kerneli
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 25 Nov 2016 21:15:22 +0100
+
 netext73 (1.0.68) xenial; urgency=medium
 
   * zmiany w sekcji instalatora oprogramowania
