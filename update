@@ -149,7 +149,6 @@ if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	a4="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 else
-	#if [ "$kern1" = "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
 		kern="$TEXT_UPDATE4"
 		a4="FALSE"
