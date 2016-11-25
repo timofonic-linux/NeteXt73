@@ -355,9 +355,9 @@ if [ "$1" = "GPG" ]; then
 
 else
 	if [ "$(cat /etc/apt/sources.list | grep 'deb' | grep 'partner' | grep '#')" = "" ];then
-		menu="$a6!$a7!$MENU2!$a1!$TEXT_ZMIEN_WYDANIA"
+		menu="$a6!$a9!$a7!$MENU2!$a1!$TEXT_ZMIEN_WYDANIA"
 	else
-		menu="$a6!$a7!$MENU1!$a1!$TEXT_ZMIEN_WYDANIA"
+		menu="$a6!$a9!$a7!$MENU1!$a1!$TEXT_ZMIEN_WYDANIA"
 	fi
 	backup=$(yad --center --title="$nazwa_skryptu   " --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --text="<span color=\"$kolor_textu\"><b>$TEXT_BACKUP1A</b></span>" --form --field=" :CB" "$menu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	klawisz=$?; backup=$(echo $backup | cut -d "|" -f 1)
@@ -402,7 +402,7 @@ else
 			paste -d "@" 1.txt 0.txt | tr "\n" "@" > lista_repo.txt
 			grep TRUE lista_repo.txt | sed 's/TRUE@//g' > lista_przed.txt
 			IFS=@
-			instalka=$(yad --center --height=$((640*$skala)) --width=$((940*$skala)) --separator="@"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="$a9:2" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Repo - automat</b></span>\n$a6" \
+			instalka=$(yad --center --height=$((640*$skala)) --width=$((940*$skala)) --separator="@"  --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --text="<span color=\"$kolor_textu\"><b>Add Repo - automat</b></span>\n$a6" \
 			--column="$TEXT_ZAZNACZ"  --column="opis" --checklist --list $(cat lista_repo.txt))
 			klawisz="$?"
 			if [ "$klawisz" = "0" ]; then
@@ -534,36 +534,7 @@ else
 					echo "sudo apt-get install -f && sudo apt-get dist-upgrade -y" >> instaluj.sh
 				fi
 				instalacja
-			elif [ "$klawisz" = "2" ]; then
-			#PPA PURGE
-				lista_ppa
-				usunppa=$(yad --center --on-top --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_PPAPURGE</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ADD:3" --button="$TEXT_PURGE:0" --button="$TEXT_USUN:2" --button="$TEXT_ZAMKNIJ:1")
-				klawisz=$?
-				if [ "$klawisz" = "0" ]; then
-					naglowek > instaluj.sh
-					echo "sudo ppa-purge -y $(echo $usunppa | cut -d ' ' -f 1)" >> instaluj.sh
-					instalacja
-				elif [ "$klawisz" = "2" ]; then
-					naglowek > instaluj.sh
-					echo "sudo add-apt-repository --remove $(echo $usunppa | cut -d ' ' -f 1)" >> instaluj.sh
-					echo "for plik in /etc/apt/sources.list.d/* ; do" >> instaluj.sh
-					echo "if [ ! -s \$plik ] && [ -f \$plik ] && [ ! -L \$plik ]; then" >> instaluj.sh
-					echo "sudo rm \$plik -f" >> instaluj.sh
-					echo "fi" >> instaluj.sh
-					echo "done" >> instaluj.sh
-					instalacja
-				elif [ "$klawisz" = "3" ]; then
-					DODAJ_PPA=$(yad --center --on-top --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((350*$skala)) --entry --title="  $nazwa_skryptu" --text="$TEXT_ADD $TEXT_NP\n<span color=\"$kolor_textu\"><b>ppa:netext/netext73 </b></span>\n" --entry-label="PPA:"  --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
-					klawisz=$?
-					if [ "$klawisz" = "0" ]; then
-						naglowek > instaluj.sh
-						echo "sudo add-apt-repository $(echo $DODAJ_PPA | cut -d ' ' -f 1)" >> instaluj.sh
-						instalacja
-					fi
-				fi
-				rm *.txt *.sh -f
 			fi
-
 			rm *.txt instaluj.sh -f
 	#########################################################################################################################################################################
 	#instalator pakietów
@@ -676,6 +647,37 @@ else
 					dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_BACKUP6"
 				fi
 			fi
+
+	#########################################################################################################################################################################
+		#ppa purge
+		elif [ "$backup" = "$a9" ]; then
+					#PPA PURGE
+						lista_ppa
+						usunppa=$(yad --center --on-top --always-print-result --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --image="/opt/NeteXt73/ikony/backuprepo.png" --separator="" --list --height=600 --title=" $nazwa_skryptu" --search-column="1" --regex-search --text="<span color=\"$kolor_textu\"><b>$TEXT_PPAPURGE</b></span>" --column "PPA" --list $(cat lista.txt) --button="$TEXT_ADD:3" --button="$TEXT_PURGE:0" --button="$TEXT_USUN:2" --button="$TEXT_ZAMKNIJ:1")
+						klawisz=$?
+						if [ "$klawisz" = "0" ]; then
+							naglowek > instaluj.sh
+							echo "sudo ppa-purge -y $(echo $usunppa | cut -d ' ' -f 1)" >> instaluj.sh
+							instalacja
+						elif [ "$klawisz" = "2" ]; then
+							naglowek > instaluj.sh
+							echo "sudo add-apt-repository --remove $(echo $usunppa | cut -d ' ' -f 1)" >> instaluj.sh
+							echo "for plik in /etc/apt/sources.list.d/* ; do" >> instaluj.sh
+							echo "if [ ! -s \$plik ] && [ -f \$plik ] && [ ! -L \$plik ]; then" >> instaluj.sh
+							echo "sudo rm \$plik -f" >> instaluj.sh
+							echo "fi" >> instaluj.sh
+							echo "done" >> instaluj.sh
+							instalacja
+						elif [ "$klawisz" = "3" ]; then
+							DODAJ_PPA=$(yad --center --on-top --class="NeteXt73" --name="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((350*$skala)) --entry --title="  $nazwa_skryptu" --text="$TEXT_ADD $TEXT_NP\n<span color=\"$kolor_textu\"><b>ppa:netext/netext73 </b></span>\n" --entry-label="PPA:"  --button="$TEXT_ZAMKNIJ:1"  --button="gtk-ok:0")
+							klawisz=$?
+							if [ "$klawisz" = "0" ]; then
+								naglowek > instaluj.sh
+								echo "sudo add-apt-repository $(echo $DODAJ_PPA | cut -d ' ' -f 1)" >> instaluj.sh
+								instalacja
+							fi
+						fi
+						rm *.txt *.sh -f
 	#########################################################################################################################################################################
 		#zmień wydanie z/na
 		elif [ "$backup" = "$TEXT_ZMIEN_WYDANIA" ]; then

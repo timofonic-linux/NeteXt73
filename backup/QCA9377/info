@@ -1,0 +1,14 @@
+make file
+DEB_DIR_QCA9377 = QCA9377
+DEB_FILES_QCA9377 = $(wildcard $(DEB_DIR_QCA9377)/*)
+	 install_pakiety_QCA9377 
+	 
+	install_pakiety_QCA9377:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR_QCA9377)/
+	$(INSTALL) 0755 $(DEB_FILES_QCA9377) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR_QCA9377)
+	
+	
+postinst
+	mkdir -p /lib/firmware/ath10k/QCA9377/hw1.0
+	rm -f /lib/firmware/ath10k/QCA9377/hw1.0/*
+	cp -f /opt/NeteXt73-pakiety/QCA9377/* /lib/firmware/ath10k/QCA9377/hw1.0/
