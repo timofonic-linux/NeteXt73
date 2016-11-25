@@ -975,26 +975,20 @@ else
 		lista_kerneli_ftp="/tmp/netext73/sumy/kernel_standard.txt"
 	fi
 	dpkg -l |grep linux-image | awk '{print $2}' | grep $rodzaj | sed 's/linux-image-//g'  > 3.txt
-	cat $lista_kerneli_ftp | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' |sort -r -nk1 -nk2|sed 's/ /./'  > lista_kerneli.txt
+	cat $lista_kerneli_ftp | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' | sort -r -nk1 -nk2| sed 's/ /./'  > lista_kerneli.txt
 	for kernelek in $(cat lista_kerneli.txt ); do
 		kernel=$(cat $lista_kerneli_ftp | grep $kernelek)
-		echo $kernelek
 		echo "$kernel" >> 4.txt
 		for kernel1 in $(cat 3.txt ); do
 			if [ "$(echo $kernel | grep $(echo $kernel1 | sed "s/-$rodzaj.*//g"))" != "" ]; then
-				if [ "$(echo $kernel1 | grep pro )" != "" ] && [ "$(echo $rodzaj | grep pro)" = "" ]; then
-					echo "nic" > /dev/null
-					sed 4.txt -i -e "s/$kernel/$kernel nie/g"
-				else
-					sed 4.txt -i -e "s/$kernel/$kernel tak/g"
-				fi
+				sed 4.txt -i -e "s/$kernel/$kernel tak/g"
 			fi
 		done
 	done
-	cat 4.txt | awk '{print $2}' >5.txt; sed -i 's/^[ \t]*$/-/' 5.txt
-	cat 4.txt | awk '{print $1}' >6.txt #; sed -i 's/^[ \t]*$/-/' 5.txt
-	paste -d " " 6.txt 5.txt > 3.txt
-	#sort -r 4.txt > 3.txt;  
+	cat 4.txt | awk '{print $2}' > stan.txt
+	sed -i 's/^[ \t]*$/-/' stan.txt
+	cat 4.txt | awk '{print $1}' > lista.txt 
+	paste -d " " lista.txt stan.txt > 3.txt
 	echo $(sed -e '/^[^#]/s:^:FALSE :' 3.txt) > 1.txt
 	lista=$(sed  's/FALSE/TRUE/' 1.txt ); rm *.txt -f
 	a1="-"
@@ -1014,19 +1008,17 @@ fi
 sprawdz_kernel(){
 lista_kerneli update
 if [ "$(uname -r | grep ext )" != "" ];then
-	twoj_kernel="e X t 7 3 v$(uname -r| cut -d "-" -f 3)" #-$(uname -r | cut -d '-' -f 1)"
+	twoj_kernel="e X t 7 3 v$(uname -r| cut -d "-" -f 3)"
 else
 	twoj_kernel=$(uname -r)
 fi
 if [ "$kernel_premium" = "tak" ]; then
 	nowy_kernel=$(cat /tmp/netext73/sumy/kernel_premium.txt | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' |sort -r -nk1 -nk2|sed 's/ /./' | head -n 1 )
-	# sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 else
 	nowy_kernel=$(cat /tmp/netext73/sumy/kernel_standard.txt | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' |sort -r -nk1 -nk2|sed 's/ /./' | head -n 1 )
-#	 sort -r | head -n 1 | sed 's/.*v...._//' | sed 's/\///g')
 fi
-kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)" #-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
-kern2="$(echo $nowy_kernel | cut -d "-" -f 1 )" #-ext73-$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
+kern1="$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
+kern2="$(echo $nowy_kernel | cut -d "-" -f 1 )"
 }
 
 grub(){
