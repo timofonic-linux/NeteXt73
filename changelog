@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.70
+-	poprawka w module listownia kerneli
 v1.0.69
 -	poprawka w module update - poprawne rozpoznawianie najnowszej wersji
 -	poprawka w module kerneli - poprawne sortowanie

@@ -977,20 +977,22 @@ else
 	dpkg -l |grep linux-image | awk '{print $2}' | grep $rodzaj | sed 's/linux-image-//g'  > 3.txt
 	cat $lista_kerneli_ftp | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' | sort -r -nk1 -nk2| sed 's/ /./'  > lista_kerneli.txt
 	for kernelek in $(cat lista_kerneli.txt ); do
-		kernel=$(cat $lista_kerneli_ftp | grep $kernelek)
-		echo "$kernel" >> 4.txt
-		for kernel1 in $(cat 3.txt ); do
-			if [ "$(echo $kernel | grep $(echo $kernel1 | sed "s/-$rodzaj.*//g"))" != "" ]; then
-				sed 4.txt -i -e "s/$kernel/$kernel tak/g"
-			fi
-		done
+		kernel=$(cat $lista_kerneli_ftp | grep $kernelek | tail -n 1 )
+		if [ "$(grep $kernel 4.txt)" = "" ];then
+			echo "$kernel" >> 4.txt
+			for kernel1 in $(cat 3.txt ); do
+				if [ "$(echo $kernel | grep $(echo $kernel1 | sed "s/-$rodzaj.*//g"))" != "" ]; then
+					sed 4.txt -i -e "s/$kernel/$kernel tak/g"
+				fi
+			done
+		fi
 	done
 	cat 4.txt | awk '{print $2}' > stan.txt
 	sed -i 's/^[ \t]*$/-/' stan.txt
 	cat 4.txt | awk '{print $1}' > lista.txt 
 	paste -d " " lista.txt stan.txt > 3.txt
 	echo $(sed -e '/^[^#]/s:^:FALSE :' 3.txt) > 1.txt
-	lista=$(sed  's/FALSE/TRUE/' 1.txt ); rm *.txt -f
+	lista=$(sed  's/FALSE/TRUE/' 1.txt );# rm *.txt -f
 	a1="-"
 	blad=0
 	if [ "$(echo $lista)" = "TRUE" ]; then

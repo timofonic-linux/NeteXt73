@@ -1,3 +1,9 @@
+netext73 (1.0.70) xenial; urgency=medium
+
+  * poprawka w module listowania kerneli
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 26 Nov 2016 08:44:45 +0100
+
 netext73 (1.0.69) xenial; urgency=medium
 
   * poprawka sortowania kerneli
