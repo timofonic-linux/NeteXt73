@@ -191,13 +191,13 @@ baza=(
 	"linssid"
 
 	"ppa:oibaf/graphics-drivers"
-	"Najnowsze [testowe] otwarte sterowniki graficzne [Mesa]"
-	"The latest [testing] open graphics drivers [Mesa]"
+	"Najnowsze (testowe) otwarte sterowniki graficzne (Mesa)"
+	"The latest (testing) open graphics drivers (Mesa)"
 	"vainfo"
 
 	"ppa:joe-yasi/xorg-xenial"
-	"Najnowsze [stabilne] otwarte sterowniki graficzne [Mesa]"
-	"The latest [stable] open graphics drivers [Mesa]"
+	"Najnowsze (stabilne) otwarte sterowniki graficzne (Mesa)"
+	"The latest (stable) open graphics drivers (Mesa)"
 	"vainfo"
 
 	"ppa:leolik/leolik"
