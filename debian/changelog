@@ -1,3 +1,9 @@
+netext73 (1.0.72) xenial; urgency=medium
+
+  * dymek przy blokadzie update
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 29 Nov 2016 12:34:25 +0100
+
 netext73 (1.0.71) xenial; urgency=medium
 
   * poprawka repo mesa

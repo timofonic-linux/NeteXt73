@@ -901,7 +901,7 @@ echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 data_godzina(){
 	export godzina=$(date +\"%Y%m%d_%H%m%S\")
 }
-
+#lsof /var/lib/dpkg/lock
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
 data_godzina
@@ -910,7 +910,12 @@ if [ "$1" = "" ]; then
 else
 	tekst_instalatora="$1"
 fi
-xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
+	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
+	exit 1
+else
+	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+fi
 }
 
 #instalacja bez pytań
@@ -921,8 +926,12 @@ if [ "$1" = "" ]; then
 else
 	tekst_instalatora="$1"
 fi
-#x-terminal-emulator -e bash -c "bash instaluj.sh && rm instaluj.sh -f"
-xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
+	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
+	exit 1
+else
+	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+fi
 }
 
 #instalacja wciśnij enter
@@ -933,7 +942,12 @@ if [ "$1" = "" ]; then
 else
 	tekst_instalatora="$1"
 fi
-xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
+	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
+	exit 1
+else
+	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+fi
 }
 
 pobierz_liste_kerneli(){
@@ -1178,12 +1192,15 @@ echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.
 echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules"
 echo "sudo ldconfig"
 echo "fi"
-echo "if [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" != \"\" ] && [ \"$(grep 'pcie_port_pm=off' /etc/default/grub)\" = \"\" ]; then"
+echo "if [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" != '' ]; then"
+echo "if grep 'pcie_port_pm=off' /etc/default/grub; then"
 echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ pcie_port_pm=off\"/' /etc/default/grub"
 echo "sudo update-grub"
-echo "elif [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" = \"\" ] && [ \"$(grep 'pcie_port_pm=off' /etc/default/grub)\" != \"\" ]; then"
+echo "fi"
+echo "if ! grep 'pcie_port_pm=off' /etc/default/grub; then"
 echo "sudo sed -i 's/ pcie_port_pm=off//g' /etc/default/grub"
 echo "sudo update-grub"
+echo "fi"
 echo "fi"
 
 }
