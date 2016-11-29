@@ -38,8 +38,13 @@ mkdir -p /tmp/netext73/sumy
 
 if [ ! -e /tmp/netext73/userek ]; then
 	echo $USER > /tmp/netext73/userek
+	export userek=$(cat /tmp/netext73/userek)
+	if [ "$userek" = "root" ]; then
+		rm -rf /tmp/netext73
+		echo -e "Please run program without sudo.\nUruchom program bez sudo."
+		exit 1
+	fi
 fi
-export userek=$(cat /tmp/netext73/userek)
 
 if [ "$USER" = "root" ]; then
     sudo -K

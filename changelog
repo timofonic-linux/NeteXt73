@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.74
+-	zabezpieczenie przed poleceniem sudo root
 v1.0.73
 -	poprawka czyszczenia plików tymczasowych
 -	poprawki kodu
