@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.73
+-	poprawka czyszczenia plików tymczasowych
 v1.0.72
 -	informacja o procesie aktualizacji w tle
 -	zmiana warunków instalacji NV

@@ -901,7 +901,7 @@ echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 data_godzina(){
 	export godzina=$(date +\"%Y%m%d_%H%m%S\")
 }
-#lsof /var/lib/dpkg/lock
+
 #instalacja za chwile nastąpi wprowadzenie zmian
 instalacja(){
 data_godzina
@@ -911,8 +911,7 @@ else
 	tekst_instalatora="$1"
 fi
 if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
-	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
-	exit 1
+	proces_zablokowany
 else
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 fi
@@ -927,8 +926,7 @@ else
 	tekst_instalatora="$1"
 fi
 if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
-	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
-	exit 1
+	proces_zablokowany
 else
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
 fi
@@ -943,8 +941,7 @@ else
 	tekst_instalatora="$1"
 fi
 if [ "$(lsof /var/lib/dpkg/lock)" != "" ];then
-	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
-	exit 1
+	proces_zablokowany
 else
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
 fi
@@ -1006,7 +1003,7 @@ else
 	cat 4.txt | awk '{print $1}' > lista.txt 
 	paste -d " " lista.txt stan.txt > 3.txt
 	echo $(sed -e '/^[^#]/s:^:FALSE :' 3.txt) > 1.txt
-	lista=$(sed  's/FALSE/TRUE/' 1.txt );# rm *.txt -f
+	lista=$(sed  's/FALSE/TRUE/' 1.txt ); rm *.txt -f
 	a1="-"
 	blad=0
 	if [ "$(echo $lista)" = "TRUE" ]; then
@@ -1709,4 +1706,12 @@ while [ $petla = "tak" ]; do
 		petla="nie"
 	fi
 done
+}
+
+proces_zablokowany(){
+	#ostrzeżenie o aktywnym procesie instalacji
+	yad --center --on-top --info --title="$TEXT_UWAGA"  --window-icon="$warning1" --image="$warning1" --text="$TEXT_UPDATE_ZAJETY" --timeout 5 --no-buttons
+	#usuwanie plików tymczasowych poza sumami i nazwą usera
+	find /tmp/netext73/* | grep -v -E "sumy|userek" |xargs rm -rf
+	exit 1
 }
