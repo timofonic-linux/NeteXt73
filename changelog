@@ -4,6 +4,7 @@
 v1.0.72
 -	informacja o procesie aktualizacji w tle
 -	zmiana warunków instalacji NV
+-	nv update-initramfs -u -k dla aktualnego
 v1.0.71
 -	poprawka insalacji repo mesy
 v1.0.70
