@@ -138,7 +138,7 @@ if [ "$1" = "nvidia" ]; then
 			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ] && [ -e nvidia-optimus.tar.xz ] && [ "$(grep $(md5sum nvidia-optimus.tar.xz) $sumy_kontrolne)" != "" ]; then
 				rm -f index.html 2a.txt
 				tar -Jxf $ster.tar.xz
-				tar -Jxf -C nvidia-optimus.tar.xz /tmp/
+				tar -Jxf nvidia-optimus.tar.xz -C /tmp/
 				rm -f $ster.tar.xz nvidia-optimus.tar.xz
 				if [ -e $ster ]; then
 					cd $ster
