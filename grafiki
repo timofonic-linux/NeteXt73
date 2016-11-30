@@ -135,7 +135,7 @@ if [ "$1" = "nvidia" ]; then
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 			yad_wget $adres_sterownikow/$ster.tar.xz $adres_sterownikow/nvidia-optimus.tar.xz
-			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ] && [ -e nvidia-optimus.tar.xz] && [ "$(grep $(md5sum nvidia-optimus.tar.xz) $sumy_kontrolne)" != "" ]; then
+			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ] && [ -e nvidia-optimus.tar.xz ] && [ "$(grep $(md5sum nvidia-optimus.tar.xz) $sumy_kontrolne)" != "" ]; then
 				rm -f index.html 2a.txt
 				tar -Jxf $ster.tar.xz
 				tar -Jxf -C nvidia-optimus.tar.xz /tmp/

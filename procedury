@@ -1137,9 +1137,7 @@ echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.d
  
 nvidia_optimus(){
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
-echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y" libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1
-echo "mkdir -p /tmp/nvidia-optimus"
-#echo "tar -Jxf /opt/NeteXt73-pakiety/pakiety/nvidia-optimus.tar.xz -C /tmp/nvidia-optimus/"
+echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y"
 echo "sudo cp /tmp/nvidia-optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
 echo "sudo cp /tmp/nvidia-optimus/usr/lib/i386-linux-gnu/primus/libGL.so.1 /usr/lib/i386-linux-gnu/primus/libGL.so.1 -f"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-$wersja_nvidia.deb"
