@@ -139,7 +139,6 @@ if [ "$1" = "nvidia" ]; then
 				rm -f index.html 2a.txt
 				tar -Jxf $ster.tar.xz
 				tar -Jxf nvidia-optimus.tar.xz -C /tmp/
-				rm -f $ster.tar.xz nvidia-optimus.tar.xz
 				if [ -e $ster ]; then
 					cd $ster
 					export wersja_nvidia=$(echo $ster"_amd64" | sed 's/nvidia-//')
