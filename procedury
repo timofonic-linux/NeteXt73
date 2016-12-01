@@ -1116,10 +1116,10 @@ nvidia_naglowek(){
 echo "echo \"$TEXT_PROCEDURA_15\""
 echo "dpkg -l | grep nvidia  | awk '{print \$2}' > nv.txt"
 echo "dpkg -l | grep libcuda1| awk '{print \$2}' >> nv.txt"
+echo "if grep . nv.txt;then"
 }
 
 nvidia(){
-echo "if [ \"\$(cat nv.txt)\" != '' ];then"
 echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
 echo "fi"
 echo "sudo apt-get install lib32gcc1 libvdpau1 libpango-1.0-0 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4  libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1 -y"
@@ -1138,7 +1138,6 @@ echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.d
 }
  
 nvidia_optimus(){
-echo "if [ \"\$(cat nv.txt)\" != '' ];then"
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
 echo "fi"
 echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y"
@@ -1190,12 +1189,11 @@ echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.
 echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules"
 echo "sudo ldconfig"
 echo "fi"
-echo "if [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" != '' ]; then"
+echo "if uname -a | grep ext73 | grep -E '4.8|48|4.9|49'; then"
 echo "if ! grep 'pcie_port_pm=off' /etc/default/grub; then"
 echo "sudo sed -i '/GRUB_CMDLINE_LINUX=/ s/\"$/ pcie_port_pm=off\"/' /etc/default/grub"
 echo "fi"
-echo "fi"
-echo "if [ \"\$(uname -a | grep ext73 | grep -e 4.8 -e 48)\" = '' ]; then"
+echo "else"
 echo "if grep 'pcie_port_pm=off' /etc/default/grub; then"
 echo "sudo sed -i 's/ pcie_port_pm=off//g' /etc/default/grub"
 echo "fi"
