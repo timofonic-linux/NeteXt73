@@ -51,12 +51,12 @@ instalacja gcc
 }
 
 nv_radeon(){
-if [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+if lspci | grep -i GeForce | grep -i NVIDIA;then
 	a5="TRUE"
 else
 	a5="FALSE"
 fi
-if [ "$(lspci | grep VGA | awk '{print tolower($0)}' | grep radeon)" = "" ] || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ];then
+if ! lspci | grep VGA | awk '{print tolower($0)}' | grep radeon || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ];then
 	a6="FALSE"
 else
 	a6="TRUE"
@@ -124,7 +124,6 @@ fi
 stan_apm #sprawdzenie stanu instalacji
 twoj_apm=$(ls $katalog_apm | cut -d "_" -f 7 | head -n 1)
 if [ "$stan_apm" != "-" ]; then
-#if [ "$twoj_apm" = "$wersja_apm" ] || [ "$(grep '##' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ] ; then
 	apm="$TEXT_UPDATE4"
 	a3="FALSE"
 else
@@ -136,7 +135,7 @@ fi
 #kernele stable
 sprawdz_kernel
 
-if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
+if  ! grep . /tmp/netext73/sumy/stable.txt; then
 	stable="$TEXT_BRAK_DANYCH"
 	nr=""
 else
@@ -144,20 +143,20 @@ else
 	nr="$stable"
 fi
 #kernel zainstalowany
-if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
+if ! grep . /tmp/netext73/sumy/kernel*.txt; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 else
-	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
+	if dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2; then
 		kern="$TEXT_UPDATE4"
 		a4="FALSE"
 	else
-		kern="$TEXT_UPDATE5  v$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)-$(echo  $nowy_kernel | cut -d "-" -f 1 )"
+		kern="$TEXT_UPDATE5 v$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
 		a4="TRUE"
 		dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 	fi
-	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ] && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+	if dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2 && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 		kern="$TEXT_UPDATE9"
 		a4="FALSE"
 	fi
