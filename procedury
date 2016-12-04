@@ -99,7 +99,7 @@ case `lsb_release -cs` in
 	qiana|rebecca|rafaela|freya|rosa)
 		export WERSJA_UBUNTU="trusty"
 		export NR_WERSJA_UBUNTU="14.04" ;;
-	sarah)
+	sarah|serena)
 		export WERSJA_UBUNTU="xenial"
 		export NR_WERSJA_UBUNTU="16.04" ;;
 esac
