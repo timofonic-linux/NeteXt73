@@ -22,10 +22,7 @@
 #  \___| /_/\_\  \__|  /_/    |____/     \___/\/ |_| \_|\___|\__|____/|_|\__/_/  |____/
 #
 #########################################################################################################################################################################
-#procedury
-	mkdir -p /tmp/netext73
-	cd /tmp/netext73
-	source /opt/NeteXt73/procedury
+
 
 #wyłączenie bfq jak kernel go nie posiada
 if [ "$(grep bfq /sys/block/sd*/queue/scheduler)" = "" ]; then
@@ -37,9 +34,14 @@ if [ "$(grep bfq /sys/block/sd*/queue/scheduler)" = "" ]; then
 fi
 #binutils i gcc
 if [ "$(ld -v | grep -i ubuntu)" != "" ] || [ "$(gcc --version | grep -i ext73)" = "" ]; then
+#procedury
+	mkdir -p /tmp/netext73
+	cd /tmp/netext73
+	source /opt/NeteXt73/procedury
 	naglowek > instaluj.sh
 	instaluj_gcc instaluj_nowy >> instaluj.sh
 	bash instaluj.sh
+	rm -rf /tmp/netext73
 fi
 #TPC
 if [ -e /etc/sysctl.conf ]; then
@@ -80,6 +82,10 @@ fi
 
 #nvidia fix
 if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+	#procedury
+	mkdir -p /tmp/netext73
+	cd /tmp/netext73
+	source /opt/NeteXt73/procedury
 	if [ "$(lsb_release -a | grep -E "$wspierane_nr")" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
 		rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf
 		rm -f /etc/ld.so.conf.d/x86_64-linux-gnu_GL.conf
@@ -89,4 +95,5 @@ if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i Ge
 		ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.d/x86_64-linux-gnu_EGL.conf
 		ldconfig
 	fi
+	rm -rf /tmp/netext73
 fi
