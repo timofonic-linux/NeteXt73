@@ -92,9 +92,16 @@ export wersje_ubu="yakkety!xenial!trusty!unstable"
 export wspierane_wersje="xenial|yakkety"
 export wspierane_nr="16.04|16.10"
 
+
+if lsb_release -a | grep 'Lite'; then
+	#wsparcie dla Lite Linux
+	export WERSJA_UBUNTU="xenial"
+	export NR_WERSJA_UBUNTU="16.04"
+else
+	export WERSJA_UBUNTU="$(lsb_release -cs)"
+	export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
+fi
 #wsparcie mint
-export WERSJA_UBUNTU="$(lsb_release -cs)"
-export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
 case `lsb_release -cs` in
 	qiana|rebecca|rafaela|freya|rosa)
 		export WERSJA_UBUNTU="trusty"
