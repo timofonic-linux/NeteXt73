@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.80
+-	czyszczenie informacji przy odpaleniu z terminala
 v1.0.79
 -	wsparcie dla Lite Linux 3.2
 -	zmiany w okienku kernel standard

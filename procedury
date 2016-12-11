@@ -120,7 +120,7 @@ export adres_sterownikow="$adres_glowny/sterowniki/"
 export katalog2="2"
 export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
 export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
-@sprawdzanie platfromy
+#sprawdzanie platfromy
 if [ "$(cat /proc/cpuinfo | grep -i Intel)" != "" ]; then
 	export komputerek="INTEL"
 	if [ "$(cat /proc/cpuinfo | grep -i -e 'model name' -e 'intel' | grep -E 'i3|i5|i7' |head -n 1)" != "" ] ;then
@@ -988,8 +988,8 @@ if [ "$1" = "update" ]; then
 	#sprawdzanie połączenia z netem
 	if [ "$(cat /tmp/netext73/sumy/kernel_standard.txt)" = '' ] || [ "$(cat /tmp/netext73/sumy/kernel_premium.txt)" = '' ]; then
 		yad --center --on-top --info --title="$nazwa_skryptu   " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
-	exit 1
-fi
+		exit 1
+	fi
 else
 	#tu zmienić
 	echo $kern > ~/.netext73/instalator_kerneli #zapamiętanie wybranego kernela
@@ -1704,7 +1704,7 @@ fi
 
 #sprawdzanie wersji systemu
 if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "trusty|$wspierane_wersje")" = "" ] ; then
-      dymek  -i  $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
+      dymek  -i $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
 fi
 }
 

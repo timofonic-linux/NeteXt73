@@ -135,7 +135,7 @@ fi
 #kernele stable
 sprawdz_kernel
 
-if  ! grep . /tmp/netext73/sumy/stable.txt; then
+if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
 	stable="$TEXT_BRAK_DANYCH"
 	nr=""
 else
@@ -143,12 +143,12 @@ else
 	nr="$stable"
 fi
 #kernel zainstalowany
-if ! grep . /tmp/netext73/sumy/kernel*.txt; then
+if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 else
-	if dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2; then
+	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
 		kern="$TEXT_UPDATE4"
 		a4="FALSE"
 	else
@@ -156,7 +156,7 @@ else
 		a4="TRUE"
 		dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
 	fi
-	if dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2 && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
+	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ] && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 		kern="$TEXT_UPDATE9"
 		a4="FALSE"
 	fi
