@@ -72,18 +72,29 @@ else
 			wysokosc="170"
 		fi
 	else
-		pliki="/opt/NeteXt73/kernel"
+		if [ "$komputerek" = "AMD" ]; then
+			pliki="/opt/NeteXt73/kernel-amd"
+		else
+			pliki="/opt/NeteXt73/kernel-intel"
+		fi
 		ikona="linux.png"
 		if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 			menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
 		fi
-		szer="500"
+		szer="750"
 	fi
 	if [ "$kern" = "" ]; then
-		yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
-		 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
-		--title="$nazwa_skryptu " $menu_dodatkowe --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
-		klawisz=$?
+		if [ "$komputerek_intel" != "" ]; then
+			yad --center --text="$TEXT_PPA_1 <span color=\"$kolor_textu\"><b>$komputerek_intel</b></span>" --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
+			 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
+			--title="$nazwa_skryptu " $menu_dodatkowe --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
+			klawisz=$?
+		else
+			yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
+			 --image-on-top --item-width="$((220*$skala))" --read-dir="$pliki" --width="$(($szer*$skala))" --height="$wysokosc" \
+			--title="$nazwa_skryptu " $menu_dodatkowe --button="$TEXT_ZAMKNIJ:1" --single-click --timeout=15
+			klawisz=$?		
+		fi
 	fi
 fi
 

@@ -11,8 +11,10 @@ APM_DIR = APM
 APM_FILES = $(wildcard $(APM_DIR)/*)
 DESKTOPFILES_DIR = desktopfiles
 DESKTOPFILES_FILES=$(wildcard $(DESKTOPFILES_DIR)/*.desktop)
-GRAPHIC_KERNEL_DIR = kernel
-GRAPHIC_KERNEL_FILES = $(wildcard $(GRAPHIC_KERNEL_DIR)/*.desktop)
+GRAPHIC_KERNEL_AMD_DIR = kernel-amd
+GRAPHIC_KERNEL_AMD_FILES = $(wildcard $(GRAPHIC_KERNEL_AMD_DIR)/*.desktop)
+GRAPHIC_KERNEL_INTEL_DIR = kernel-intel
+GRAPHIC_KERNEL_INTEL_FILES = $(wildcard $(GRAPHIC_KERNEL_INTEL_DIR)/*.desktop)
 GRAPHIC_KERNEL_PREMIUM_DIR = kernel-premium
 GRAPHIC_KERNEL_PREMIUM_FILES = $(wildcard $(GRAPHIC_KERNEL_PREMIUM_DIR)/*.desktop)
 GRAPHIC_KERNEL_PREMIUM_AMD_DIR = kernel-premium-amd
@@ -31,7 +33,8 @@ nothing_to_make:
 	
 install: install_desktopfiles \
 	 install_desktopicons \
-	 install_desktopfiles_kernel \
+	 install_desktopfiles_kernel_amd \
+ 	 install_desktopfiles_kernel_intel \
 	 install_desktopfiles_kernel_premium \
 	 install_desktopfiles_kernel_premium_amd \
 	 install_contacts \
@@ -75,9 +78,13 @@ install_APM:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)/
 	$(INSTALL) 0755 $(APM_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)
 	
-install_desktopfiles_kernel:
-	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_DIR)/
-	$(INSTALL) 0755 $(GRAPHIC_KERNEL_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_DIR)
+install_desktopfiles_kernel_amd:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_AMD_DIR)/
+	$(INSTALL) 0755 $(GRAPHIC_KERNEL_AMD_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_AMD_DIR)
+
+install_desktopfiles_kernel_intel:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_INTEL_DIR)/
+	$(INSTALL) 0755 $(GRAPHIC_KERNEL_INTEL_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_INTEL_DIR)
 
 install_desktopfiles_kernel_premium:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_PREMIUM_DIR)/
@@ -86,6 +93,7 @@ install_desktopfiles_kernel_premium:
 install_desktopfiles_kernel_premium_amd:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_PREMIUM_AMD_DIR)/
 	$(INSTALL) 0755 $(GRAPHIC_KERNEL_PREMIUM_AMD_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_PREMIUM_AMD_DIR)
+
 install_contacts:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(CONTACTS_DIR)/
 	$(INSTALL) 0755 $(CONTACTS_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(CONTACTS_DIR)

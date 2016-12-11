@@ -1,6 +1,12 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.79
+-	wsparcie dla Lite Linux 3.2
+-	zmiany w okienku kernel standard
+-	dymek sukerujący wersję kernela dla Intela
+-	rozpoznawanie amd standard i intel standard - rozdzielenie okien
+-	zmiany w makefile
 v1.0.78
 -	wsparcie dla Mint 18.1 Serena
 -	poprawka apm_fix

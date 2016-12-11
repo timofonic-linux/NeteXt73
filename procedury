@@ -93,10 +93,10 @@ export wspierane_wersje="xenial|yakkety"
 export wspierane_nr="16.04|16.10"
 
 
-if lsb_release -a | grep 'Lite'; then
+if lsb_release -a | grep 'Linux Lite 3.2'; then
 	#wsparcie dla Lite Linux
-	export WERSJA_UBUNTU="xenial"
-	export NR_WERSJA_UBUNTU="16.04"
+	export WERSJA_UBUNTU="yakkety"
+	export NR_WERSJA_UBUNTU="16.10"
 else
 	export WERSJA_UBUNTU="$(lsb_release -cs)"
 	export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
@@ -120,9 +120,29 @@ export adres_sterownikow="$adres_glowny/sterowniki/"
 export katalog2="2"
 export sumy_kontrolne='/tmp/netext73/sumy/sumy_kontrolne.txt'
 export adres_sum_kontrolnych="https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt"
-
+@sprawdzanie platfromy
 if [ "$(cat /proc/cpuinfo | grep -i Intel)" != "" ]; then
 	export komputerek="INTEL"
+	if [ "$(cat /proc/cpuinfo | grep -i -e 'model name' -e 'intel' | grep -E 'i3|i5|i7' |head -n 1)" != "" ] ;then
+		rodzina="$(cat /proc/cpuinfo | grep -i -e 'model name' -e 'intel' | grep -E 'i3|i5|i7' |head -n 1)"
+		if [ "$(echo $rodzina | grep -E -o 'i3-2[0-9]{3}|i5-2[0-9]{3}|i7-2[0-9]{3}')" != "" ]; then
+			export komputerek_intel="Sandy Bridge"
+		elif [ "$(echo $rodzina | grep -E -o 'i3-3[0-9]{3}|i5-3[0-9]{3}|i7-3[0-9]{3}')" != "" ]; then
+			export komputerek_intel="Ivy Bridge"
+		elif [ "$(echo $rodzina | grep -E -o 'i3-4[0-9]{3}|i5-4[0-9]{3}|i7-4[0-9]{3}')" != "" ]; then
+			export komputerek_intel="Haswell"
+		elif [ "$(echo $rodzina | grep -E -o 'i3-5[0-9]{3}|i5-5[0-9]{3}|i7-5[0-9]{3}')" != "" ]; then
+			export komputerek_intel="BroadWell"
+		elif [ "$(echo $rodzina | grep -E -o 'i3-6[0-9]{3}|i5-6[0-9]{3}|i7-6[0-9]{3}')" != "" ]; then
+			export komputerek_intel="Skylake"
+		elif [ "$(echo $rodzina | grep -E -o 'i3-7[0-9]{3}|i5-7[0-9]{3}|i7-7[0-9]{3}')" != "" ]; then
+			export komputerek_intel="Skylake"
+		else
+			export komputerek_intel="Sandy Bridge"
+		fi
+	else
+		export komputerek_intel="Intel Standard"
+	fi
 elif [ "$(cat /proc/cpuinfo | grep -i AMD)" != "" ]; then
 	export komputerek="AMD"
 fi
