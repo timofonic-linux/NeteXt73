@@ -173,9 +173,6 @@ export TEXT_ROZDZIELCZOSC="Resolution"
 #########################################################################################################################################################################
 #tlumaczenia_kernele
 export TEXT_INSTLATOR1="<b>WARNING!</b> - Install the kernel by e X t 7 3,APM script, Microcode CPU and firmware for PC working properly."
-export TEXT_MENU_INSTALATOR3="Local"
-export TEXT_MENU_INSTALATOR4="Headers Only"
-export TEXT_MENU_INSTALATOR5="kernel-ppa"
 export TEXT_PPA_1="Select your version system, suggesting:"
 export TEXT_RODZAJ_SYSTEMU="OS version"
 export TEXT_LISTA_KERNELI="List of kernels for Ubuntu"
@@ -193,6 +190,9 @@ export TEXT_STRONA1="Enter the access code to the premium kernels. If you do not
 export TEXT_SUMA_KONTROLNA="Incorrect checksums. Download file again."
 export TEXT_K8="K8 - from Intel C2D, AMD K8"
 export TEXT_DEB1="Select the file linux-headers or linux-image, which do you want to install:"
+export TEXT_NAGLOWKI="Headers"
+export TEXT_LOKALNE="Local"
+export TEXT_PPA="kernel-ppa"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt

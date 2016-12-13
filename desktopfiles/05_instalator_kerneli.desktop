@@ -152,7 +152,7 @@ GenericName[vi]=Graphical installer \nkernels Standard by  e X t 7 3
 GenericName[zh_CN]=Graphical installer \nkernels Standard by  e X t 7 3
 GenericName[zh_TW]=Graphical installer \nkernels Standard by  e X t 7 3
 
-Exec=/opt/NeteXt73/./kernele
+Exec=/opt/NeteXt73/./NeteXt73_root standard
 Icon=/opt/NeteXt73/ikony/linux.png
 Terminal=false
 StartupNotify=true

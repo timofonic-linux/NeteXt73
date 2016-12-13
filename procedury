@@ -1715,7 +1715,7 @@ curl -0 -d title="$1" -d private=1 -d name=$(cat /tmp/netext73/userek) -d lang=b
 kill_process(){
 petla="tak"
 while [ $petla = "tak" ]; do
-	process=$(ps -u $USER | yad --center --list --title="$nazwa_skryptu" --window-icon="process-stop" --image="process-stop" --buttons-layout=center --column "$TEXT_SELECT_TO_KILL" --text="$TEXT_LISTA_PROCESOW $USER $TEXT_PROCESY" --width $((450*$skala)) --height $((450*$skala)) --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" --on-top )
+	process=$(ps -u $USER | yad --center --list --title="$nazwa_skryptu" --window-icon="process-stop" --image="process-stop" --column "$TEXT_SELECT_TO_KILL" --text="$TEXT_LISTA_PROCESOW $USER $TEXT_PROCESY" --width $((450*$skala)) --height $((450*$skala)) --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" --on-top )
 	ans=$(echo $?)
 	if test "$ans" -eq "0"; then
 		select=$(echo $process | cut -d" " -f1)

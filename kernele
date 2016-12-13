@@ -46,10 +46,6 @@ else
 	elif [ "$(echo $1 | grep -E $lista_kerneli_premium)" != "" ]; then
 		kern="$1"
 		export premium="tak"
-	elif [ "$1" = "naglowki" ]; then
-		kern="$TEXT_MENU_INSTALATOR4"
-	elif [ "$1" = "lokalne" ]; then
-		kern="$TEXT_MENU_INSTALATOR3"
 	fi
 	#szerokość i wysokość dla premium
 	szer="720"
@@ -71,18 +67,13 @@ else
 		else
 			wysokosc="170"
 		fi
-	else
-		if [ "$komputerek" = "AMD" ]; then
-			pliki="/opt/NeteXt73/kernel-amd"
-		else
-			pliki="/opt/NeteXt73/kernel-intel"
-		fi
-		ikona="linux.png"
-		if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
-			menu_dodatkowe="--button="$TEXT_MENU_INSTALATOR5:4""
-		fi
-		szer="750"
 	fi
+	if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
+		menu_dodatkowe="--button="$TEXT_LOKALNE:3" --button="$TEXT_NAGLOWKI:2" --button="$TEXT_PPA:4""
+	elif [ -e ~/.netext73/kernel_premium ];then
+		menu_dodatkowe="--button="$TEXT_LOKALNE:3" --button="$TEXT_NAGLOWKI:2""
+	fi
+	
 	if [ "$kern" = "" ]; then
 		if [ "$komputerek_intel" != "" ]; then
 			yad --center --text="$TEXT_PPA_1 <span color=\"$kolor_textu\"><b>$komputerek_intel</b></span>" --icons --class="NeteXt'73" --name="NeteXt'73" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/$ikona" \
@@ -99,12 +90,16 @@ else
 fi
 
 if [ "$klawisz" = "4" ]; then
-	kern="$TEXT_MENU_INSTALATOR5"
+	kern="$TEXT_PPA"
+elif [ "$klawisz" = "2" ]; then
+	kern="$TEXT_NAGLOWKI"
+elif [ "$klawisz" = "3" ]; then
+	kern="$TEXT_LOKALNE"
 fi
 
 rodzaj=$(echo $kern | cut -d " " -f 1 | awk '{print tolower($0)}')
 #lokalne
-if [ "$kern" = "$TEXT_MENU_INSTALATOR3" ]; then
+if [ "$kern" = "$TEXT_LOKALNE" ]; then
 	a=$(yad --center --on-top --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/headers/headers ext73 /' | sed 's/image/image ext73 /')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((750*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	if [ $? = 0 ]; then
 		if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
@@ -129,7 +124,7 @@ if [ "$kern" = "$TEXT_MENU_INSTALATOR3" ]; then
 		fi
 	fi
 #tylko nagłówki
-elif [ "$kern" = "$TEXT_MENU_INSTALATOR4" ]; then
+elif [ "$kern" = "$TEXT_NAGLOWKI" ]; then
 	a=$(yad --center --on-top --file-selection --filename="$download/" --title="$(echo $TEXT_DEB1 | sed 's/lub linux-image//' | sed 's/headers/headers ext73/')" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --width=$((750*$skala)) --height=$((450*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 	if [ $? = 0 ]; then
 	if [ "$(echo $a | grep 'linux-image' | grep 'ext' | grep '.deb')" != "" ]; then
@@ -149,7 +144,7 @@ elif [ "$kern" = "$TEXT_MENU_INSTALATOR4" ]; then
 	fi
 	fi
 #kernele PPA
-elif [ "$kern" = "$TEXT_MENU_INSTALATOR5" ]; then
+elif [ "$kern" = "$TEXT_PPA" ]; then
 	cd /tmp/netext73; rm *.html -f
 	strona="http://kernel.ubuntu.com/~kernel-ppa/mainline/"
 	WERSJA_DISTRO=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((420*$skala)) --window-icon="/opt/NeteXt73/ikony/linux.png" --text="$TEXT_PPA_1 <span color=\"$kolor_textu\">$WERSJA_UBUNTU</span>" --form --field="$TEXT_RODZAJ_SYSTEMU:CB"  "$wersje_ubu" --button="gtk-ok:0" --button="$TEXT_POWROT:1")

@@ -170,9 +170,6 @@ export TEXT_ROZDZIELCZOSC="Rozdzielczość"
 #########################################################################################################################################################################
 #tlumaczenia_kernele
 export TEXT_INSTLATOR1="<b>UWAGA !!</b> - do poprawnego działania komputera\nwymagana jest instalacja kernela oraz wszystkich skryptów e X t 7 3"
-export TEXT_MENU_INSTALATOR3="Lokalne"
-export TEXT_MENU_INSTALATOR4="Tylko nagłówki"
-export TEXT_MENU_INSTALATOR5="kernel-ppa"
 export TEXT_PPA_1="Wybierz posiadaną wersję systemu, sugeruję:"
 export TEXT_RODZAJ_SYSTEMU="Rodzaj systemu"
 export TEXT_LISTA_KERNELI="Lista kerneli dla Ubuntu"
@@ -189,6 +186,9 @@ export TEXT_INSTALOWAC_KERNEL7="Masz już zainstalowany ten kernel.\nPrzed ponow
 export TEXT_STRONA1="Podaj kod dostępu do kerneli Premium.\nJeżeli jeszcze nie masz skontaktuj się z: Tomasz e X t 7 3 Miś,mail:ext73@wp.pl" 
 export TEXT_K8="K8 - od Intel C2D, AMD K8"
 export TEXT_DEB1="Wskaż plik linux-headers lub linux-image, który chcesz zainstalować:"
+export TEXT_NAGLOWKI="Nagłówki"
+export TEXT_LOKALNE="Lokalne"
+export TEXT_PPA="kernel-ppa"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt
