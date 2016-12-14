@@ -34,7 +34,7 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 #testy
 if [ "$1" = "testy" ]; then
-	menu="BurnTest!$MENU01!$MENU02!$MENU03!$MENU04!$MENU_RKHUNTER"  #$MENU15!$MENU16" - wyłączone testy glmark2
+	menu="BurnTest!$MENU01!$MENU02!$MENU03!$MENU04!$MENU_RKHUNTER!$MENU_HDD"  #$MENU15!$MENU16" - wyłączone testy glmark2
 	ikonka="/opt/NeteXt73/ikony/testy.png"
 
 #inne skrypty
@@ -318,6 +318,43 @@ if [ $klawisz = 0 ]; then
 		if [ -e /var/log/rkhunter.log ]; then
 			yad --center --title="$nazwa_skryptu1 - rkhunter.log" --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --text-info --filename=/var/log/rkhunter.log --button="$TEXT_ZAMKNIJ:1"
 		fi
+	#tet HDD/SSD
+	elif [ "$skrypt" = "$MENU_HDD" ]; then
+		please_wait
+		lista_dyskow=$(lsblk | grep disk | awk '{print $1}' | sort | uniq)
+		KEY="$(echo $RANDOM)"
+		a=1
+		for i in $(echo $lista_dyskow); do
+			res[$a]=$(mktemp --tmpdir=/tmp/ netext73_$a.XXXXXXXX)
+			yad --plug=$KEY --tabnum=$a --list --column="Filesystem" --column="Size" --column="Used" --column="Free" --column="Used%" --column="Mounted on" $(df -h | grep /dev/$i) 1> ${res[$a]} &
+			a=$(( $a + 1 ))
+			tabulator=$(echo $tabulator --tab="$i")
+		done
+		for i in $(echo $lista_dyskow); do
+			if [ "$(cat /sys/block/$i/queue/rotational)" = "0" ]; then
+				res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
+				hdparm -t -T /dev/$i > /tmp/netext73/$i_$a.txt
+				yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
+				a=$(( $a + 1 ))
+				tabulator=$(echo $tabulator --tab="SpeedTestSSD:$i")
+			elif [ "$(cat /sys/block/$i/queue/rotational)" = "1" ]; then
+				res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
+				hdparm -t -T /dev/$i > /tmp/netext73/$i_$a.txt
+				yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
+				a=$(( $a + 1 ))
+				tabulator=$(echo $tabulator --tab="SpeedTestHDD:$i")
+				res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
+				smartctl -a /dev/$i | grep Load_Cycle_Count | awk '{print $2"   "$10}' > /tmp/netext73/$i_$a.txt
+				yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> $${res[$a]} &
+				a=$(( $a + 1 ))
+				tabulator=$(echo $tabulator --tab="LoadCycleCount:$i")
+			fi
+		done
+		please_wait kill
+		yad --notebook --key=$KEY --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="gtk-ok:0"
+		rm -f /tmp/netext73/*.txt 
+		rm -f /tmp/netext73/netext73_*
+
 	fi
 fi
 
