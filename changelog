@@ -3,6 +3,9 @@
 
 v1.0.83
 -	tester HDD/SSD
+-	speed test HDD/SSD
+-	BadSector TEST
+-	zmiana wyglądu okna testera HDD
 v1.0.82
 -	nowa ikona dla skylake
 -	dodanie ikony dla kabylake

@@ -92,6 +92,7 @@ export wersje_ubu="yakkety!xenial!trusty!unstable"
 export wspierane_wersje="xenial|yakkety"
 export wspierane_nr="16.04|16.10"
 
+export lista_dyskow=$(lsblk | grep disk | awk '{print $1}' | sort | uniq)
 
 if lsb_release -a | grep 'Linux Lite 3.2'; then
 	#wsparcie dla Lite Linux
@@ -969,7 +970,7 @@ else
 	else
 		tekst_instalatora="$1"
 	fi
-	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt"
+	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; read ent; echo 'tak' > /tmp/netext73/ok.txt"
 fi
 }
 

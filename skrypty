@@ -320,30 +320,45 @@ if [ $klawisz = 0 ]; then
 		fi
 	#test HDD/SSD
 	elif [ "$skrypt" = "$MENU_HDD" ]; then
-		lista_dyskow=$(lsblk | grep disk | awk '{print $1}' | sort | uniq)
 		KEY="$(echo $RANDOM)"
 		a=1
 		for i in $(echo $lista_dyskow); do
+			#size
 			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
 			yad --plug=$KEY --tabnum=$a --list --column="Filesystem" --column="Size" --column="Used" --column="Free" --column="Used%" --column="Mounted on" $(df -h | grep /dev/$i) 1> ${res[$a]} &
 			a=$(( $a + 1 ))
 			tabulator=$(echo $tabulator --tab="$i")
+			#smart info
 			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
 			smartctl -i /dev/$i > /tmp/netext73/$i_$a.txt
 			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
 			a=$(( $a + 1 ))
-			tabulator=$(echo $tabulator --tab="SmartMon:$i")
+			tabulator=$(echo $tabulator --tab="$i:SmartMon")
 			if [ "$(cat /sys/block/$i/queue/rotational)" = "1" ]; then
+				#cycle count
 				res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
 				smartctl -a /dev/$i | grep Load_Cycle_Count | awk '{print $2"   "$10}' > /tmp/netext73/$i_$a.txt
 				yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
 				a=$(( $a + 1 ))
-				tabulator=$(echo $tabulator --tab="LoadCycleCount:$i")
+				tabulator=$(echo $tabulator --tab="$i:LoadCycleCount")
 			fi
+			#health
+			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
+			smartctl -H /dev/$i > /tmp/netext73/$i_$a.txt
+			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
+			a=$(( $a + 1 ))
+			tabulator=$(echo $tabulator --tab="$i:Health")
+			#error
+			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
+			smartctl -l error /dev/$i > /tmp/netext73/$i_$a.txt
+			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
+			a=$(( $a + 1 ))
+			tabulator=$(echo $tabulator --tab="$i:Error")
+			
 		done
-		yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="gtk-ok:0" --button="SpeedTest:1"
+		yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="BadSectorsTest:3" --button="SpeedTest:2" --button="$TEXT_ZAMKNIJ:1" 
 		klawisz=$?
-		if [ "$klawisz" = "1" ];then
+		if [ "$klawisz" = "2" ];then
 			rm -f /tmp/netext73/*.txt 
 			rm -f /tmp/netext73/netext73_*
 			please_wait
@@ -369,6 +384,14 @@ if [ $klawisz = 0 ]; then
 			done
 			please_wait kill
 			yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="gtk-ok:0"
+		elif [ "$klawisz" = "3" ];then
+			if [ "$(dpkg -l | grep -e smartmontools | grep ii)" = "" ]; then
+				xterm  -T "smartmontools" -e bash -c "sudo apt-get install smartmontools"
+			fi
+			
+			naglowek > instaluj.sh
+			echo "for i in \$(df -h | awk '{print \$1}' | grep /dev/ | sort); do sudo badblocks -v \$i; done" >> instaluj.sh
+			instalacja3 BadBlockTest
 		fi
 		rm -f /tmp/netext73/*.txt 
 		rm -f /tmp/netext73/netext73_*
