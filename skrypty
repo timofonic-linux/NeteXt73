@@ -335,29 +335,39 @@ if [ $klawisz = 0 ]; then
 			#smart info
 			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
 			smartctl -i /dev/$i > /tmp/netext73/$i_$a.txt
+			smartctl -H /dev/$i >> /tmp/netext73/$i_$a.txt
+			smartctl -l error /dev/$i >> /tmp/netext73/$i_$a.txt
+			sed -i '/smartctl/ d' /tmp/netext73/$i_$a.txt
+			sed -i '/Copyright/ d' /tmp/netext73/$i_$a.txt
+			sed -i '/===/ d' /tmp/netext73/$i_$a.txt
+			sed -i '/^[ \t]*$/ d' /tmp/netext73/$i_$a.txt
 			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
 			a=$(( $a + 1 ))
-			tabulator=$(echo $tabulator --tab="$i:SmartMon")
-			if [ "$(cat /sys/block/$i/queue/rotational)" = "1" ]; then
-				#cycle count
-				res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
-				smartctl -a /dev/$i | grep Load_Cycle_Count | awk '{print $2"   "$10}' > /tmp/netext73/$i_$a.txt
-				yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
-				a=$(( $a + 1 ))
-				tabulator=$(echo $tabulator --tab="$i:LoadCycleCount")
-			fi
-			#health
+			tabulator=$(echo $tabulator --tab="$i:Smart-Info")
+			#SMART info
 			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
-			smartctl -H /dev/$i > /tmp/netext73/$i_$a.txt
+			smartctl -A /dev/$i | grep -v '<==' | \
+			  awk -F ' ' '$2 ~ /Power_Cycle_Count|Start_Stop_Count|Load_Cycle_Count|Reallocated_Sector_Ct/ \
+								{ printf "    %3d %-25s = %8d \n", $1, $2, $10 } ; \
+						  $2 ~ /Used_Rsvd_Blk_Cnt_Chip|Used_Rsvd_Blk_Cnt_Tot|Unused_Rsvd_Blk_Cnt_Tot/ \
+								{ printf "    %3d %-25s = %8d \n", $1, $2, $10 } ; \
+						  $2 ~ /Power_On_Hours/ \
+								{ printf "    %3d %-25s = %8d %s\n", $1, $2, $10, "[h]" } ; \
+						  $2 ~ /Temperature_Celsius/ \
+								{ printf "    %3d %-25s = %8d %s %s %s %s\n", $1, $2, $10, $11, $12, $13, "[°C]" } ; \
+						  $2 ~ /Airflow_Temperature_Cel/ \
+								{ printf "    %3d %-25s = %8d %s\n", $1, $2, $10, "[°C]" } ; \
+						  $2 ~ /Host_Writes/ \
+								{ printf "    %3d %-25s = %8.3f %s\n", $1, $2, $10 / 32768.0, "[TB]" } ; \
+						  $2 ~ /Total_LBAs_Written/ \
+								{ printf "    %3d %-25s = %8.3f %s\n", $1, $2, $10 / 2147483648.0, "[TB]" } ; \
+						  $2 ~ /NAND_Writes_1GiB/ \
+								{ printf "    %3d %-25s = %8d %s\n", $1, $2, $10, "[GB]" } ; \
+						  $2 ~ /Available_Reservd_Space|Media_Wearout_Indicator|Wear_Leveling_Count/ \
+								{ printf "    %3d %-25s = %8d %s\n", $1, $2, $4, "[%]" }' > /tmp/netext73/$i_$a.txt
 			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
 			a=$(( $a + 1 ))
-			tabulator=$(echo $tabulator --tab="$i:Health")
-			#error
-			res[$a]=$(mktemp --tmpdir=/tmp/netext73 netext73_$a.XXXXXXXX)
-			smartctl -l error /dev/$i > /tmp/netext73/$i_$a.txt
-			yad --plug=$KEY --tabnum=$a --text-info --filename=/tmp/netext73/$i_$a.txt 1> ${res[$a]} &
-			a=$(( $a + 1 ))
-			tabulator=$(echo $tabulator --tab="$i:Error")
+			tabulator=$(echo $tabulator --tab="$i:Smart-Attributes")
 		done
 		yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top  $klawisz_trim --button="BadSectorsTest:3" --button="SpeedTest:2" --button="$TEXT_ZAMKNIJ:1" 
 		klawisz=$?
@@ -387,7 +397,7 @@ if [ $klawisz = 0 ]; then
 				fi
 			done
 			please_wait kill
-			yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="gtk-ok:0"
+			yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="$TEXT_ZAMKNIJ:1"
 		elif [ "$klawisz" = "3" ];then
 			if [ "$(dpkg -l | grep -e smartmontools | grep ii)" = "" ]; then
 				xterm  -T "smartmontools" -e bash -c "sudo apt-get install smartmontools"
