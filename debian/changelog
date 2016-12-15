@@ -1,3 +1,9 @@
+netext73 (1.0.84) xenial; urgency=medium
+
+  * HDD monitor
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 15 Dec 2016 13:01:37 +0100
+
 netext73 (1.0.83) xenial; urgency=medium
 
   * tester SSD/HDD
