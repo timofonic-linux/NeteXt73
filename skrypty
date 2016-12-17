@@ -323,7 +323,7 @@ if [ $klawisz = 0 ]; then
 		KEY="$(echo $RANDOM)"
 		a=1
 		klawisz_trim=""
-		if [ "$(cat /sys/block/*/queue/rotational | grep 1)" != "" ];then
+		if [ "$(hdparm -I /dev/sd* | grep 'TRIM supported')" != "" ];then
 			klawisz_trim="--button="Trim:4""
 		fi
 		for i in $(echo $lista_dyskow); do
@@ -369,7 +369,7 @@ if [ $klawisz = 0 ]; then
 			a=$(( $a + 1 ))
 			tabulator=$(echo $tabulator --tab="$i:Smart-Attributes")
 		done
-		yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top  $klawisz_trim --button="BadSectorsTest:3" --button="SpeedTest:2" --button="$TEXT_ZAMKNIJ:1" 
+		yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top $klawisz_trim --button="BadSectorsTest:3" --button="SpeedTest:2" --button="$TEXT_ZAMKNIJ:1" 
 		klawisz=$?
 		if [ "$klawisz" = "2" ];then
 			rm -f /tmp/netext73/*.txt 

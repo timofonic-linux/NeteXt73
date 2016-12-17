@@ -3,6 +3,7 @@
 
 v1.0.85
 -	przebudowa wyników dla testów HDD/SSD
+-	klawisz trim gdy Trim supported
 v1.0.84
 -	HDD monitor
 -	trim
