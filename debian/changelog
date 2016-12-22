@@ -1,3 +1,9 @@
+netext73 (1.0.86) xenial; urgency=medium
+
+  * drobne poprawki
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 22 Dec 2016 13:39:10 +0100
+
 netext73 (1.0.85) xenial; urgency=medium
 
   * przebudowa danych dla testów HDD/SSD

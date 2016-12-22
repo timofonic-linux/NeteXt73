@@ -232,7 +232,9 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "NeteXt73 i kernel" > system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				echo -e "\n$TEXT_LOGI12" >> system$losowa.log
-				echo -e "$(lsb_release -a)" >> system$losowa.log
+				echo -e "$(lsb_release -i)" >> system$losowa.log
+				echo -e "$(lsb_release -d)" >> system$losowa.log
+				echo -e "$(lsb_release -cr)" >> system$losowa.log
 				echo -e "$(uname -a)" >> system$losowa.log
 				echo -e "\n$nazwa_skryptu"  >> system$losowa.log
 				echo -e "\n$TEXT_LOGI1\n$(dpkg -l | grep 'linux-image*'| grep -v -E 'linux-image-extra*|linux-image-generic' | sed -e 's/linux-image-//g' | awk '{print $2}'| sort -r | column -n)" >> system$losowa.log
