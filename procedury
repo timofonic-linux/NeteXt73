@@ -1124,22 +1124,6 @@ elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 fi
 }
 
-radeon(){
-echo "echo \"$TEXT_PROCEDURA_14\""
-echo "sudo apt-get install lib32gcc1 libc6-i386"
-echo "sudo apt-get install libva-drm1 libva-wayland1 libva-x11-1"
-echo "sudo dpkg -P fglrx fglrx-amdcccle fglrx-core xvba-va-driver"
-echo "/usr/bin/yes | sudo dpkg -i *.deb"
-echo "sudo apt-get install fglrx-pxpress vainfo -y"
-echo "sudo apt-get install vdpau-va-driver -y"
-echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)\" = \"TRUE\" ]; then"
-echo "sudo cp *.deb /var/cache/apt/archives/ -f"
-echo "fi"
-echo "sudo apt-get install -f"
-echo "rm *.deb -f"
-}
-
-
 nvidia_naglowek(){
 echo "echo \"$TEXT_PROCEDURA_15\""
 echo "dpkg -l | grep nvidia  | awk '{print \$2}' > nv.txt"
