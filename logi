@@ -105,22 +105,21 @@ while [ $petla_duza = "tak" ]; do
 				for i in $(seq 4 16); do
 					res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 				done
-				yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep fglrx_ ) --column "$TEXT_ZNITY1" --column "catalist" 1> ${res[4]} &
-				yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[5]} &
-				yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep amdstandard ) --column "$TEXT_ZNITY1" --column "kernel amd standatd" 1> ${res[6]} &
-				yad --plug=$KEY1 --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep intelstandard ) --column "$TEXT_ZNITY1" --column "kernel intel standard" 1> ${res[7]} &
-				yad --plug=$KEY1 --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> ${res[8]} &
-				yad --plug=$KEY1 --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> ${res[9]} &
-				yad --plug=$KEY1 --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> ${res[10]} &
-				yad --plug=$KEY1 --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> ${res[11]} &
-				yad --plug=$KEY1 --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "silvermont") --column "$TEXT_ZNITY1" --column "kernel silvermont" 1> ${res[12]} &
-				yad --plug=$KEY1 --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> ${res[13]} &
-				yad --plug=$KEY1 --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> ${res[14]} &
-				yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> ${res[15]} &
-				yad --plug=$KEY1 --tabnum=13 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernle skylake" 1> ${res[16]} &
+				yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[4]} &
+				yad --plug=$KEY1 --tabnum=2 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep amdstandard ) --column "$TEXT_ZNITY1" --column "kernel amd standatd" 1> ${res[5]} &
+				yad --plug=$KEY1 --tabnum=3 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep intelstandard ) --column "$TEXT_ZNITY1" --column "kernel intel standard" 1> ${res[6]} &
+				yad --plug=$KEY1 --tabnum=4 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "sandy") --column "$TEXT_ZNITY1" --column "kernel sandy" 1> ${res[7]} &
+				yad --plug=$KEY1 --tabnum=5 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "ivy") --column "$TEXT_ZNITY1" --column "kernel ivy" 1> ${res[8]} &
+				yad --plug=$KEY1 --tabnum=6 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "haswell" ) --column "$TEXT_ZNITY1" --column "kernel haswell" 1> ${res[9]} &
+				yad --plug=$KEY1 --tabnum=7 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "broadwell") --column "$TEXT_ZNITY1" --column "kernel broadwell" 1> ${res[10]} &
+				yad --plug=$KEY1 --tabnum=8 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep -E "silvermont") --column "$TEXT_ZNITY1" --column "kernel silvermont" 1> ${res[11]} &
+				yad --plug=$KEY1 --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> ${res[12]} &
+				yad --plug=$KEY1 --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> ${res[13]} &
+				yad --plug=$KEY1 --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> ${res[14]} &
+				yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernle skylake" 1> ${res[15]} &
 
 				yad --notebook --key=$KEY1 --tab-pos="left" --center --title="$nazwa_skryptu1 " \
-				  --tab="catalyst" --tab="nvidia" --tab="amd standard" --tab="intel standard" \
+				  --tab="nvidia" --tab="amd standard" --tab="intel standard" \
 				  --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
 				  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" \
 				  --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"

@@ -41,14 +41,14 @@ instaluj_NV(){
 	instalacja2
 }
 
-instaluj_RADEON_mesa_13.0(){
+instaluj_mesa_13.0(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
 	instalacja2
 }
 
-instaluj_RADEON_mesa_13.1(){
+instaluj_mesa_13.1(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
@@ -61,13 +61,13 @@ if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
 elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
 	lista="mesa 13.1"
 fi
-ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/radeon.png" --image="/opt/NeteXt73/ikony/radeon.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Radeon</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 	if [ "$ster" = "mesa 13.0" ]; then
-		instaluj_RADEON_mesa_13.0
+		instaluj_mesa_13.0
 	elif [ "$ster" = "mesa 13.1" ]; then
-		instaluj_RADEON_mesa_13.1
+		instaluj_mesa_13.1
 	fi
 fi
 
@@ -171,7 +171,7 @@ if [ "$1" = "nvidia" ]; then
 			done
 		fi
 	fi
-elif [ "$1" = "radeon" ]; then
+elif [ "$1" = "mesa3d" ]; then
 	if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else

@@ -1,3 +1,9 @@
+netext73 (1.0.89) xenial; urgency=medium
+
+  * reaeon->mesa3d
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 01 Jan 2017 19:09:59 +0100
+
 netext73 (1.0.88) xenial; urgency=medium
 
   * koniec wsparcia dla 14.04

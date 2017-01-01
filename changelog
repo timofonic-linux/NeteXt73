@@ -1,6 +1,10 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.89
+-	zastąpnienie sterowników radeona mesą 3D
+-	usunięcie z logów radeona
+-	poprawki kodu i tłumaczeń
 v1.0.88
 -	koniec wsparcia redeon dla 14.04
 -	poprawka tłumaczeń
