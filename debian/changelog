@@ -1,3 +1,9 @@
+netext73 (1.0.90) xenial; urgency=medium
+
+  * naprawa pierwszej instlacji kerneli standard
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 03 Jan 2017 13:34:48 +0100
+
 netext73 (1.0.89) xenial; urgency=medium
 
   * reaeon->mesa3d

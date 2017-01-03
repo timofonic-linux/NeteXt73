@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.90
+-	poprawka dla instalacji kerneli standard - pierwsza instalacja
 v1.0.89
 -	zastąpnienie sterowników radeona mesą 3D
 -	usunięcie z logów radeona
