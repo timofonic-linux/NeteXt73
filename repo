@@ -215,6 +215,11 @@ baza=(
 	"owncloud-client"
 	"owncloud-client"
 
+	"deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /"
+	"owncloud-server"
+	"owncloud-server"
+	"owncloud"
+	
 	"ppa:pinta-maintainers/pinta-stable"
 	"Pinta program graficzny wzorowany na Paint.NET."
 	"Pinta is a free, open source drawing/editing program modeled after Paint.NET."
@@ -229,6 +234,7 @@ baza=(
 	"gradio"
 	"gradio browser"
 	"gradio"
+	
 	"ppa:hydr0g3n/qbittorrent-stable"
 	"qBittorrent - Codziennie wersje stabilnej gałęzi klienta BitTorrent - qBittorrent"
 	"qBittorrent - daily builds for the stable branch of qBittorrent BitTorrent client"
@@ -437,7 +443,10 @@ else
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
 						      echo "sudo sed -i '/download.opensuse.org\/repositories\/isv:\/ownCloud/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
-						      echo " sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> instaluj.sh
+						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> instaluj.sh
+						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
+						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
+						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud.list"  >> instaluj.sh
 						      echo "sudo apt-get purge -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "deb \[arch=amd64\] http://dl.google.com/linux/chrome/deb/ stable main" ]; then
 						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list"  >> instaluj.sh
@@ -458,25 +467,30 @@ else
 					elif [ "${r[$i]}" = "FALSE" ] && [ "${z[$i]}" = "TRUE" ]; then
 					# "instalujemy"
 						if [ "${repo[$i]}" = "ppa:i-nex-development-team/daily" ]; then
-						      echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-						      echo "sudo add-apt-repository -y ppa:nemh/gambas3" >> instaluj.sh
-						      echo "sudo apt-get install -y  ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
+						    echo "sudo add-apt-repository -y ppa:nemh/gambas3" >> instaluj.sh
+						    echo "sudo apt-get install -y  ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "deb http://repository.spotify.com stable non-free" ]; then
-						      echo "sudo add-apt-repository -y 'deb http://repository.spotify.com stable non-free'" >> instaluj.sh
-						      echo "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886"  >> instaluj.sh
-						      echo "wget https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
-						      echo "sudo dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
-						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo add-apt-repository -y 'deb http://repository.spotify.com stable non-free'" >> instaluj.sh
+						    echo "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886"  >> instaluj.sh
+						    echo "wget https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
+						    echo "sudo dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
+						    echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:pipelight/stable" ]; then
-						      echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-						      echo "sudo apt-get install --install-recommends pipelight-multi" >> instaluj.txt
-						      echo "sudo pipelight-plugin --update" >> instaluj.txt
-						      echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
+						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
+						    echo "sudo apt-get install --install-recommends pipelight-multi" >> instaluj.txt
+						    echo "sudo pipelight-plugin --update" >> instaluj.txt
+						    echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
 						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						      echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
-						      echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
-						      echo "sudo apt-key add - < Release.key" >> instaluj.sh
-						      echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
+						    echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
+						    echo "sudo apt-key add - < Release.key" >> instaluj.sh
+						    echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
+						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
+							echo "wget -nv https://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
+							echo "sudo apt-key add - < Release.key" >> instaluj.sh
+							echo "sh -c \"echo 'deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /' > /etc/apt/sources.list.d/owncloud.list\"" >> instaluj.sh
+							echo "sudo apt-get install -y ${paczka[$i]}" >> instaluj.txt
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
 								echo "slot-allocation = dynamic" > ~/.notify-osd
