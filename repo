@@ -542,7 +542,7 @@ else
 				done
 
 
-				if [ "$(grep 'sudo' instaluj.sh)" != "" ]; then
+				if [ "$(grep 'sudo' instaluj.sh)" != "" ] || [ "$(cat instaluj.txt)" != "" ]; then
 					echo "sudo apt-get update" >> instaluj.sh
 					cat instaluj.txt >> instaluj.sh
 					echo "sudo apt-get install -f && sudo apt-get dist-upgrade -y" >> instaluj.sh
