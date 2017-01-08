@@ -38,7 +38,6 @@ install: install_desktopfiles \
 	 install_launcher \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
-	 install_file_NeteXt73_root \
 	 install_file_apm \
 	 install_file_changelog \
 	 install_file_config \
@@ -108,8 +107,6 @@ install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73:	
 	$(INSTALL) 0755 NeteXt73 $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
-install_file_NeteXt73_root:	
-	$(INSTALL) 0755 NeteXt73_root $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_apm:	
 	$(INSTALL) 0755 apm $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/
 install_file_changelog:	

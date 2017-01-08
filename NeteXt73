@@ -56,7 +56,7 @@ if [ ! -e /tmp/netext73/userek ]; then
 		sudo -K
 		exit 1
 	else
-		cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
+		cd /opt/NeteXt73 && NeteXt73_root ./NeteXt73
 		exit 0
 	fi
 fi

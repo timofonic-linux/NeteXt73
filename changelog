@@ -1,6 +1,12 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.94
+-	zmiana sposobu uruchamiania programu
+-	przyspieszenie listowania kerneli
+-	zmiana wywoływania okna o NeteXt'73
+-	drobne poprawki kodu
+-	zastąpienie pliku NeteXt73_root procedurą o tej samej nazwie
 v1.0.93
 -	poprawka sprawdzania czy jest zasilacz
 -	poprawka dla ponownego uruchamiania programu
