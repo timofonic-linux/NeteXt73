@@ -1,3 +1,9 @@
+netext73 (1.0.95) xenial; urgency=medium
+
+  * usystematyzowanie zawartości okien
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 08 Jan 2017 22:42:11 +0100
+
 netext73 (1.0.94) xenial; urgency=medium
 
   * zastąpienie pliku NeteXt73_root procedurą

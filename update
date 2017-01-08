@@ -132,17 +132,10 @@ else
 	TEXT_DYMKA="$TEXT_DYMKA\nAPM - $TEXT_UPDATE5a"
 fi
 
-#kernele stable
+
+#kernel zainstalowany
 sprawdz_kernel
 
-if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
-	stable="$TEXT_BRAK_DANYCH"
-	nr=""
-else
-	stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')"
-	nr="$stable"
-fi
-#kernel zainstalowany
 if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
@@ -196,22 +189,20 @@ fi
 
 if [ "$1" != "start" ]; then
 	if [ "$(echo $a1$a2$a3$a4$a7 | grep 'TRUE')" != "" ];then
-		menu="$TEXT_UPDATE8!$TEXT_UPDATE2"
+		menu="$TEXT_UPDATE8!$TEXT_UPDATE7!$TEXT_UPDATE2"
 	else
-		menu="$TEXT_UPDATE2!$TEXT_UPDATE8"
+		menu="$TEXT_UPDATE2!$TEXT_UPDATE7!$TEXT_UPDATE8"
 	fi
 
 	a=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((680*$skala)) --window-icon="/opt/NeteXt73/ikony/update.png" --image="/opt/NeteXt73/ikony/update.png" --form \
 	--field="Firmware/microcode:RO" "$firm" \
 	--field="Kernel $twoj_kernel:RO" "$kern" \
 	--field="APM $twoj_apm:RO" "$apm" \
-	--field="$TEXT_STABLE:RO" "$stable" \
 	--field="gcc -version:RO" "$(gcc --version | head -n 1)" \
 	--field="$TEXT_UPDATE1:CB" "$menu" \
-	--button="Changelog $nr:3" \
-	--button="$TEXT_UPDATE7:2" \
-	--button="gtk-ok:0" --button="$TEXT_POWROT:1")
-	klawisz=$?; a=$(echo $a | cut -d "|" -f 6)
+	--button="gtk-ok:0" \
+	--button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):3" --button="$TEXT_ZAMKNIJ:1")
+	klawisz=$?; a=$(echo $a | cut -d "|" -f 5)
 
 	if [ $klawisz = "0" ]; then
 		if [ "$a" = "$TEXT_UPDATE2" ]; then
@@ -222,22 +213,17 @@ if [ "$1" != "start" ]; then
 			fi
 		elif [ "$a" = "$TEXT_UPDATE8" ]; then
 			aktualizuj_calosc
+		elif [ "$a" = "$TEXT_UPDATE7" ]; then
+			a1="TRUE"
+			a2="TRUE"
+			a3="TRUE"
+			a4="TRUE"
+			a7="TRUE"
+			aktualizuj_calosc
 		fi
-	elif [ $klawisz = "2" ]; then
-		a1="TRUE"
-		a2="TRUE"
-		a3="TRUE"
-		a4="TRUE"
-		a7="TRUE"
-		aktualizuj_calosc
-	elif [ $klawisz = "3" ]; then  #lista zmian
-	    if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
-		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
-			yad --center --on-top --title="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --width=$((950*$skala)) --height=$((600*$skala)) --browser
-		else
-			yad --center --on-top --title="https://www.kernel.org" --window-icon="/opt/NeteXt73/ikony/linux-premium.png" --html --uri="https://www.kernel.org" --width=$((950*$skala))  --height=$((600*$skala)) --browser
-		fi
-	    fi
+	elif [ "$klawisz" = "3" ]; then
+		rm -f /tmp/netext73/sumy/*
+		/opt/NeteXt73/./update start &
 	fi
 fi
 usun

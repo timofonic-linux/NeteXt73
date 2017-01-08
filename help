@@ -42,13 +42,27 @@ elif [ "$1" = "kontakty" ]; then
 	for i in $(seq 0 6); do
 		res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 	done
-
+	if  [ "$(cat /tmp/netext73/sumy/stable.txt)" = "" ]; then
+		stable="$TEXT_BRAK_DANYCH"
+		nr=""
+	else
+		stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')"
+		nr="$stable"
+	fi
 	yad --plug=$KEY --tabnum=1 --text="$TEXT_O_PROGRAMIE" 1> ${res[0]} &
 	yad --plug=$KEY --tabnum=2 --icons --image-on-top --single-click --item-width=$((330*$skala)) --read-dir=/opt/NeteXt73/kontakty 1> ${res[1]} &
-	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/changelog 1> ${res[2]} &
-	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/LICENSE 1> ${res[3]} &
-	yad --plug=$KEY --tabnum=5 --form --field="$TEXT_UZYTKOWNIK:RO" "$USER" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> ${res[5]} &
-	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_CHANGELOG" --tab="$TEXT_LICENCJA" --tab="$TEXT_BUG"   \
+	yad --plug=$KEY --tabnum=3 --text-info --filename=/opt/NeteXt73/LICENSE 1> ${res[2]} &
+	yad --plug=$KEY --tabnum=4 --text-info --filename=/opt/NeteXt73/changelog 1> ${res[3]} &
+	if [ "$stable" != "$TEXT_BRAK_DANYCH" ]; then
+		if [[ $nr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]];then
+			yad --plug=$KEY --tabnum=5 --html --uri="https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable" --browser 1> ${res[4]} &
+		else
+			yad --plug=$KEY --tabnum=5 --html --uri="https://www.kernel.org" --browse 1> ${res[4]} &
+		fi
+	fi
+	yad --plug=$KEY --tabnum=6 --form --field="$TEXT_UZYTKOWNIK:RO" "$userek@$(hostname)" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> ${res[5]} &
+	
+	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_LICENCJA" --tab="$TEXT_CHANGELOG" --tab="Changelog $stable" --tab="$TEXT_BUG"  \
 	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then

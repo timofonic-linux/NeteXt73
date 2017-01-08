@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.95
+-	przeniesienie pobierania sum kontrolnych z configu do aktualizatora
+-	przeniesienie changeloga kerneli z aktualizatora do informacji o NeteXt
+-	poprawki literówek
+
 v1.0.94
 -	zmiana sposobu uruchamiania programu
 -	przyspieszenie listowania kerneli
@@ -8,7 +13,7 @@ v1.0.94
 -	drobne poprawki kodu
 -	zastąpienie pliku NeteXt73_root procedurą o tej samej nazwie
 -	zmiana sposobu zamykania skryptu czekaj.py
--	popawki w kodzie czekaj.py - dostosowanie do gtk 3.0
+-	poprawki w kodzie czekaj.py - dostosowanie do gtk 3.0
 v1.0.93
 -	poprawka sprawdzania czy jest zasilacz
 -	poprawka dla ponownego uruchamiania programu
@@ -16,7 +21,7 @@ v1.0.93
 -	poprawka dla uruchamiania listy kerneli standard
 v1.0.92
 -	pojedynczy dymek dla możliwych aktualizacji
--	pobieranie inforamcji o możliwych aktualizacja przed startem programu
+-	pobieranie informacji o możliwych aktualizacja przed startem programu
 -	pobieranie sum kontrolnych przed startem programu
 -	zmiana kolejności instalacji aktualizacji
 v1.0.91
@@ -25,7 +30,7 @@ v1.0.91
 v1.0.90
 -	poprawka dla instalacji kerneli standard - pierwsza instalacja
 v1.0.89
--	zastąpnienie sterowników radeona mesą 3D
+-	zastąpienie sterowników radeona mesą 3D
 -	usunięcie z logów radeona
 -	poprawki kodu i tłumaczeń
 v1.0.88
@@ -63,7 +68,7 @@ v1.0.80
 v1.0.79
 -	wsparcie dla Lite Linux 3.2
 -	zmiany w okienku kernel standard
--	dymek sukerujący wersję kernela dla Intela
+-	dymek sugerujący wersję kernela dla Intela
 -	rozpoznawanie amd standard i intel standard - rozdzielenie okien
 -	zmiany w makefile
 v1.0.78
@@ -86,11 +91,11 @@ v1.0.72
 -	zmiana warunków instalacji NV
 -	nv update-initramfs -u -k dla aktualnego
 v1.0.71
--	poprawka insalacji repo mesy
+-	poprawka instalacji repo mesy
 v1.0.70
--	poprawka w module listownia kerneli
+-	poprawka w module listowania kerneli
 v1.0.69
--	poprawka w module update - poprawne rozpoznawianie najnowszej wersji
+-	poprawka w module update - poprawne rozpoznawanie najnowszej wersji
 -	poprawka w module kerneli - poprawne sortowanie
 v1.0.68
 -	zmiany w sekcji instalatora oprogramowania
@@ -104,7 +109,7 @@ v1.0.66
 -	zmiany zależności
 v1.0.65
 -	usunięcie wsparcia dla kerneli atom i k8
--	zastąpienie kerneli atom i k8 kerneliami standard dla Intela i AMD
+-	zastąpienie kerneli atom i k8 kernelami standard dla Intela i AMD
 v1.0.64
 -	zmiana w instalatorze NV dla optimusa - nowy wpis w grub
 v1.0.63
@@ -129,7 +134,7 @@ v1.0.56
 -	przywrócenie zależności libisl13
 v1.0.55
 -	czyszczenie kodu
--	popraka dla przełączania gcc
+-	poprawka dla przełączania gcc
 v1.0.54
 -	zmiana warunków podwójnego uruchomienia
 v1.0.53
@@ -148,7 +153,7 @@ v1.0.48
 v1.0.47
 -	zmiana repozytorium owncloud
 v1.0.46
--	poprawki dotyczące gcc 
+-	poprawki dotyczące gcc
 -	linkowanie steam
 v1.0.45
 -	informacja o problemie z rozpakowaniem - instalator nvidia
@@ -181,7 +186,7 @@ v1.0.35
 v1.0.34
 -	poprawki APM dla stacjonarnych komputerów - wymagana reinstalacja APM
 v1.0.33
--	naprawa apm_status_fix - wymaga reinstlacji APM
+-	naprawa apm_status_fix - wymaga reinstalacji APM
 v1.0.32
 -	wyłączenie wsparcia dla Wily
 -	gradio ppa
@@ -251,15 +256,15 @@ v1.0.12
 -	modyfikacja deinstalatora kerneli
 v1.0.11
 -	brak nadpisywania gcc przy instalacji ręcznej
--	warunek dla 16.04 dotyczący /etc/init/mounted-proc.conf 
+-	warunek dla 16.04 dotyczący /etc/init/mounted-proc.conf
 v1.0.10
 -	GRUB iommu on/off
 -	wyłączenie iommu podczas instalacji kernela
 -	warunek iommu tylko dla intela
 -	kernele premium pokazywane zależnie od zainstalowanego procesora
 -	przestawienie katalogu pobrane w trybie root na katalog usera
--	naprawa błedu (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
--	poprawka poberania brakujących kluczy gpg
+-	naprawa błędu (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
+-	poprawka pobierania brakujących kluczy gpg
 v1.0.09
 -	poprawki instalatora APM dla systemów z systemd
 -	zmiana włączania/wyłączania ondemand
@@ -401,7 +406,7 @@ v0.9.79
 v0.9.78
 -	instalator NV dla xenial
 v0.9.77
--	zmiana zależności usunięcie lsb_release 
+-	zmiana zależności usunięcie lsb_release
 v0.9.76
 -	zmiana sposobu sprawdzania aktualizacji
 -	czyszczenie kodu
@@ -513,7 +518,7 @@ v0.9.26
 v0.9.25
 -	poprawka listowania kluczy GPG w module ich usuwania
 -	zmiany w obrębie modułu kluczy GPG
--	automatyczne zamykanie okna xterm po 5sec 
+-	automatyczne zamykanie okna xterm po 5sec
 v0.9.24
 -	wyłączenie skylake do czasu wydania nowego gcc
 -	naprawa klawisza ppa
@@ -527,7 +532,7 @@ v0.9.22
 v0.9.21
 -	zmiana wielkości okna z hasłem
 -	poprawka wykrywania stanu baterii
--	naprawa wykrywania jednostki pojemności 
+-	naprawa wykrywania jednostki pojemności
 -	zmiana klawisza z ok na zamknij w module baterii
 -	zmiana szerokości okna monitora CPU
 -	zmiana okna o programie
@@ -681,11 +686,11 @@ v0.8.67
 -	dodanie możliwości wyłączenia sterowania jasnością
 -	wyłączenie na starcie zarządzania jasnością
 v0.8.66
--	zmiana w instalatorze APM 
+-	zmiana w instalatorze APM
 -	dodanie kontroli jasności
 v0.8.65
 -	ujednolicenie APM do wersji 5.0
--	poprawka APM fix 
+-	poprawka APM fix
 v0.8.64
 -	YAD 0.28.1
 v0.8.63
@@ -910,7 +915,7 @@ v0.7.88
 v0.7.87
 -	update - otwieranie okna premium zamiast std, gdy mamy adres
 v0.7.86
--	skrypt do aktualizacji 
+-	skrypt do aktualizacji
 v0.7.85
 -	przywrócenie wykonania initramfs po instalacji kernela
 -	modyfikacja modułu logów, możliwe wysyłanie pojedynczych logów na serwer
@@ -1007,7 +1012,7 @@ v0.7.60
 -	wprowadzenie yad_wget opartego na multiprogresie
 -	dostosowanie pobierania kerneli do yad_wget
 -	dostosowanie pobierania sterowników nvidia do yad_wget
--	dostosowanie pobierania sterowników radeon do 
+-	dostosowanie pobierania sterowników radeon do
 -	poprawki w pobieraniu kerneli z ppamainline
 -	zmiany ikon
 -	dostosowanie sprawdzania sum kontrolnych do nowego sposobu pobierania sterowników\
@@ -1105,7 +1110,7 @@ v0.7.36
 v0.7.35
 -	przeniesienie restartu do dolnej belki
 -	przeniesienie dodawania i usuwania konta gościa do skryptów
--	podział kerneli na wersje standard i premium 
+-	podział kerneli na wersje standard i premium
 -	uzupełnienie zależności
 v0.7.34
 -	wymuszenie hasła dla opcji restart
@@ -1254,7 +1259,7 @@ v0.6.90
 v0.6.89
 - 	zmiany w sekcji GRUB - dotyczy GPU AMD Radeon - otwarte sterowniki. Tylko dla kernela w wersji 26.0, bazującego na 3.11 lub nowszego.
 v0.6.88
--	dodanie modułu skryptów, a w nim: dodawanie i usuwanie repozytorium partnerów, czyszczenie konfigów po deinstalacjach, zabijanie procesów zombie	
+-	dodanie modułu skryptów, a w nim: dodawanie i usuwanie repozytorium partnerów, czyszczenie konfigów po deinstalacjach, zabijanie procesów zombie
 v0.6.86-87
 -	duże zmiany w instalatorze APM, wyłącznie zarządzania pamięcią z poziomu CRON, dodany moduł testu baterii
 v0.6.84-85
@@ -1292,7 +1297,7 @@ v0.6.64
 v0.6.62-63
 - 	instalator kerneli zapamiętuje ostatnio używany rodzaj kerneli i używa go następnym razem jako domyślny
 v0.6.60-61
--	weryfikowanie rodzaju posiadanej karty graficznej przed uruchomieniem instalatora sterowników Nvidia i Radeon	
+-	weryfikowanie rodzaju posiadanej karty graficznej przed uruchomieniem instalatora sterowników Nvidia i Radeon
 v0.6.59
 -	poprawki w sekcji update, zmiana wyglądu okna, znikną klawisz cancel, dodatkowy warunek sprawdzający czy nie przerwaliśmy pobierania danych z serwera
 v0.6.58
@@ -1308,7 +1313,7 @@ v0.6.51
 v0.6.49-50
 -	w sekcji deinstalator doszła możliwość usunięcia skryptu NeteXt'73 z systemu :(
 v0.6.48
--	
+-
 v0.6.47
 -	zmiana w sekcji update, doszły klawisze dzięki, którym można uruchomić instalatory
 -	zmiany w sekcji update oraz reboot
@@ -1339,7 +1344,7 @@ v0.6.23
 -	instalowanie zależności, aby działała sekcja monitor
 	modyfikacja modułu instalator kerneli, doszła możliwość instalacji kerneli saucy z ppa
 v0.6.22
--	kolejne poprawki w sekcji update	
+-	kolejne poprawki w sekcji update
 v0.6.20
 -	zmiany w sekcji nvidia i radeon, automatycznie wybrany najnowszy sterownik, wystarczy enter, widok - rozwijana lista
 -	poprawki w sekcji microcode
