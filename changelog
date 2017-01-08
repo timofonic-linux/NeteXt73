@@ -5,6 +5,7 @@ v1.0.95
 -	przeniesienie pobierania sum kontrolnych z configu do aktualizatora
 -	przeniesienie changeloga kerneli z aktualizatora do informacji o NeteXt
 -	poprawki literówek
+-	przyspieszenie ładowania okna o NeteXt73
 
 v1.0.94
 -	zmiana sposobu uruchamiania programu

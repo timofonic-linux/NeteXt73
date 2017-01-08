@@ -1663,7 +1663,9 @@ sumy(){
 #pobranie sum kontrolnych
 cd /tmp
 #wydanie stable
-wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null 
+wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null
+stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')"
+wget https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable  -O /tmp/netext73/sumy/ChangeLog-$stable  2> /dev/null
 #Sumy kontrolne
 wget $adres_sum_kontrolnych --no-check-certificate 2> /dev/null
 openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
