@@ -240,7 +240,7 @@ fi
 }
 
 wersja(){
-dymek -i "/opt/NeteXt73/ikony/netext.png" "$nazwa_skryptu" "$TEXT_INFO1"
+dymek -i "/opt/NeteXt73/ikony/netext.png" " " "$nazwa_skryptu" #"$TEXT_INFO1"
 }
 
 naglowek(){
@@ -975,7 +975,7 @@ fi
 }
 
 pobierz_liste_kerneli(){
-wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "\n$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' ') - $TEXT_POBIERANIE_GOTOWE\n"
+wget $adres_glowny/dostepne_kernele.tar.gz 2> /dev/null && dymek -i $ikona_info1 " " "$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' ') - $TEXT_POBIERANIE_GOTOWE"
 tar -xzf dostepne_kernele.tar.gz -C /tmp/netext73/sumy/
 rm -f dostepne_kernele.tar.gz
 }

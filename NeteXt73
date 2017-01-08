@@ -38,6 +38,7 @@ fi
 if [ "$USER" != "root" ];then
 	rm -rf /tmp/netext73/sumy/*
 	mkdir -p /tmp/netext73/sumy
+	wersja &
 	zaleznosci &
 	/opt/NeteXt73/./update start &
 fi
