@@ -77,13 +77,6 @@ konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/op
 		if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
 			/opt/NeteXt73/./apm
 		fi
-		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
-			if [ "$kernel_premium" = "tak" ]; then
-				/opt/NeteXt73/./kernele premium
-			else
-				/opt/NeteXt73/./NeteXt73_root standard
-			fi
-		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
 			/opt/NeteXt73/./grafiki nvidia
 		fi
@@ -92,6 +85,13 @@ konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/op
 		fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ]; then
 			instalacja_gcc
+		fi
+		if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
+			if [ "$kernel_premium" = "tak" ]; then
+				/opt/NeteXt73/./kernele premium
+			else
+				/opt/NeteXt73/./NeteXt73_root standard
+			fi
 		fi
 
 	fi
@@ -106,7 +106,7 @@ twoj_firmware=$(dpkg -l | grep linux-firmware | awk '{print $3}' | head -n 1 | s
 if [ "$stan_microcode" = "-" ]; then
 	firm=$TEXT_UPDATE5a
 	a1="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "Firmware - $TEXT_UPDATE5a"
+	TEXT_DYMKA="\nFirmware - $TEXT_UPDATE5a"
 else
 	firm=v$twoj_firmware
 	a1="FALSE"
@@ -115,7 +115,7 @@ fi
 #GRUB
 if [ "$(grep 'acpi_osi=' /etc/default/grub)" = "" ] || [ "$(grep '915.lvds_downclock=1' /etc/default/grub)" != "" ] || [ "$(grep 'i915.semaphores=1' /etc/default/grub)" != "" ] ; then
 	a2="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "GRUB - $TEXT_UPDATE5a"
+	TEXT_DYMKA="$TEXT_DYMKA\nGRUB - $TEXT_UPDATE5a"
 else
 	a2="FALSE"
 fi
@@ -129,7 +129,7 @@ if [ "$stan_apm" != "-" ]; then
 else
 	apm="$TEXT_UPDATE5 $wersja_apm"
 	a3="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "APM - $TEXT_UPDATE5a"
+	TEXT_DYMKA="$TEXT_DYMKA\nAPM - $TEXT_UPDATE5a"
 fi
 
 #kernele stable
@@ -146,7 +146,7 @@ fi
 if [ "$(cat /tmp/netext73/sumy/kernel*.txt)" = "" ]; then
 	kern=$TEXT_BRAK_DANYCH
 	a4="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
+	TEXT_DYMKA="$TEXT_DYMKA\nKERNEL - $TEXT_UPDATE5a"
 else
 	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ]; then
 		kern="$TEXT_UPDATE4"
@@ -154,7 +154,7 @@ else
 	else
 		kern="$TEXT_UPDATE5 v$(echo $nowy_kernel | sed 's/_testowy.*//g' | sed 's/_stabilny.*//g' | cut -d "-" -f 3)"
 		a4="TRUE"
-		dymek -i $ikona_info1 "$TEXT_UWAGA" "Kernel - $TEXT_UPDATE5a"
+		TEXT_DYMKA="$TEXT_DYMKA\nKERNEL - $TEXT_UPDATE5a"
 	fi
 	if [ "$(dpkg -l |grep linux-image | awk '{print $2}' | sed 's/linux-image-//g' | grep $kern2)" != "" ] && [ "$kern1" != "$(echo $twoj_kernel | sed 's/.*v//')" ]; then
 		kern="$TEXT_UPDATE9"
@@ -171,9 +171,13 @@ if [ "$twoj_gcc" = "$dostepny_gcc" ];then
 else
 	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
 	a7="TRUE"
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "GCC - $TEXT_UPDATE5a"
+	TEXT_DYMKA="$TEXT_DYMKA\nGCC - $TEXT_UPDATE5a"
 fi
 
+#dymek możliwych aktualizacji
+if [ "$TEXT_DYMKA" != "" ]; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_DYMKA"
+fi
 if [ "$1" = "first" ]; then
 	if [ ! -e ~/.netext73/opis_programu ]; then
 		/opt/NeteXt73/./help & #odpalenie strony z opisem

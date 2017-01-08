@@ -24,38 +24,42 @@
 #
 #########################################################################################################################################################################
 #procedury
-
 source /opt/NeteXt73/procedury
+
+#########################################################################################################################################################################
+
 #zapobieganie dwukrotnemu uruchomieniu
 if [ "$(pgrep NeteXt73 | wc -l )" -gt "4" ]; then
 	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
 	exit 1
 fi
-rm -rf /tmp/netext73/sumy/*
-mkdir -p /tmp/netext73/sumy
 
-#########################################################################################################################################################################
+#pobieranie sum kontrolnych i informacji o aktualizacjach
+if [ "$USER" != "root" ];then
+	rm -rf /tmp/netext73/sumy/*
+	mkdir -p /tmp/netext73/sumy
+	zaleznosci &
+	/opt/NeteXt73/./update start &
+fi
 
+#zapobieganie uruchomieniu programu z poziomu roota
 if [ ! -e /tmp/netext73/userek ]; then
+	if [ ! -e /tmp/netext73 ]; then
+		mkdir -p /tmp/netext73
+	fi
 	echo $USER > /tmp/netext73/userek
 	export userek=$(cat /tmp/netext73/userek)
 	if [ "$userek" = "root" ]; then
 		rm -rf /tmp/netext73
 		echo -e "Please run program without sudo.\nUruchom program bez sudo."
+		sudo -K
 		exit 1
+	else
+		cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
+		exit 0
 	fi
 fi
-
-if [ "$USER" = "root" ]; then
-    sudo -K
-else
-    cd /opt/NeteXt73 && ./NeteXt73_root ./NeteXt73
-    exit 0
-fi
-	#sumy &
-	zaleznosci &
-	/opt/NeteXt73/./update start &
-
+	
 if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
 else
@@ -78,6 +82,3 @@ elif  [ "$klawisz" = "3" ] ; then
 	~/.netext73/vsftpd/./vsftpd
 fi
 
-if [ $USER = "root" ] && [ -e /home/root ]; then
-	sudo rm -rf /home/root
-fi

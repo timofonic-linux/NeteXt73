@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.92
+-	pojedynczy dymek dla możliwych aktualizacji
+-	pobieranie inforamcji o możliwych aktualizacja przed startem programu
+-	pobieranie sum kontrolnych przed startem programu
+-	zmiana kolejności instalacji aktualizacji
 v1.0.91
 -	najnowsze logi z instalacji na górze
 -	repozytorium owncloud-server
