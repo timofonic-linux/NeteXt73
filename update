@@ -90,7 +90,7 @@ konfiguracja=$(yad --center --title="$nazwa_skryptu" --on-top --window-icon="/op
 			if [ "$kernel_premium" = "tak" ]; then
 				/opt/NeteXt73/./kernele premium
 			else
-				/opt/NeteXt73/./NeteXt73_root standard
+				/opt/NeteXt73/./kernele standard
 			fi
 		fi
 

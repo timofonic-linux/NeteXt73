@@ -1,6 +1,11 @@
 ﻿NeteXt'73 Changelog
 -------------------------------------
 
+v1.0.93
+-	poprawka sprawdzania czy jest zasilacz
+-	poprawka dla ponownego uruchamiania programu
+-	poprawka listowania kerneli
+-	poprawka dla uruchamiania listy kerneli standard
 v1.0.92
 -	pojedynczy dymek dla możliwych aktualizacji
 -	pobieranie inforamcji o możliwych aktualizacja przed startem programu

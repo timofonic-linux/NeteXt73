@@ -386,7 +386,7 @@ elif [ "$apmik" = "nowy" ]; then
 	sudo sed -i 's/\/usr\/lib\/pm-utils\/power.d\/95hdparm-apm resume/echo 1 > \/dev\/null/g' /lib/systemd/system-sleep/hdparm
 
 	#udev jeżeli notebook
-	if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
+	if [ "$(ls /sys/class/power_supply/)" != "" ]; then
 		sudo cp /tmp/apm-ext73/50-udev-apm-ext73.rules /etc/udev/rules.d/
 		sudo chown root:root /etc/udev/rules.d/*
 		katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
@@ -705,7 +705,7 @@ elif [ "$apmik" = "nowy" ]; then
 	if [ -e /etc/apm-ext73/ ] && [ "$(ls /etc/apm-ext73/ | wc -l)" != "11" ] || [ "$twoj_apm" != "$wersja_apm" ] ; then
 		stan_apm="-"
 	else
-		if [ "$(ls /sys/class/power_supply/*)" != "" ]; then
+		if [ "$(ls /sys/class/power_supply/)" != "" ]; then
 			katalog="/etc/udev/rules.d/50-udev-apm-ext73.rules"
 		else
 			#desktop
@@ -1014,6 +1014,7 @@ else
 	fi
 	dpkg -l |grep linux-image | awk '{print $2}' | grep $rodzaj | sed 's/linux-image-//g'  > 3.txt
 	cat $lista_kerneli_ftp | cut -d '_' -f 1 | sed 's/v//g' | awk -F. '{print $1,$2}' | sort -r -nk1 -nk2| sed 's/ /./'  > lista_kerneli.txt
+	touch 4.txt
 	for kernelek in $(cat lista_kerneli.txt ); do
 		kernel=$(cat $lista_kerneli_ftp | grep $kernelek | tail -n 1 )
 		if [ "$(grep $kernel 4.txt)" = "" ];then

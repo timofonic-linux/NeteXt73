@@ -1,3 +1,9 @@
+netext73 (1.0.93) xenial; urgency=medium
+
+  * poprawki listowania
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 08 Jan 2017 17:10:20 +0100
+
 netext73 (1.0.92) xenial; urgency=medium
 
   * zmiana sposobu uruchamiania aplikacji
