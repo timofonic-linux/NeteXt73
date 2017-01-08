@@ -7,6 +7,8 @@ v1.0.94
 -	zmiana wywoływania okna o NeteXt'73
 -	drobne poprawki kodu
 -	zastąpienie pliku NeteXt73_root procedurą o tej samej nazwie
+-	zmiana sposobu zamykania skryptu czekaj.py
+-	popawki w kodzie czekaj.py - dostosowanie do gtk 3.0
 v1.0.93
 -	poprawka sprawdzania czy jest zasilacz
 -	poprawka dla ponownego uruchamiania programu
