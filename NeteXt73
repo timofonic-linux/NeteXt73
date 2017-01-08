@@ -79,7 +79,6 @@ elif  [ "$klawisz" = "3" ] ; then
 	chmod a+x ~/.netext73/vsftpd/vsftpd
 	~/.netext73/vsftpd/./vsftpd
 else
-#elif [ "$klawisz" = "1" ]; then
 	sudo -K
 	rm -rf /tmp/netext73
 	exit 0

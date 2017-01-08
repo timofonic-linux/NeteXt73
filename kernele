@@ -46,8 +46,6 @@ else
 		elif [ "$komputerek" = "AMD" ]; then
 			kern="amdstandard"
 		fi
-	#if [ "$(echo $1 | grep -E $lista_kerneli_standard)" != "" ]; then
-		#kern="$1"
 		export premium="nie"
 	elif [ "$(echo $1 | grep -E $lista_kerneli_premium)" != "" ]; then
 		kern="$1"
