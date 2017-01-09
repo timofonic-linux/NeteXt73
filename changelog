@@ -1,6 +1,7 @@
 ﻿NeteXt'73 Changelog
--------------------------------------
 
+v1.0.96
+-	poprawka nazw okien usuwania kerneli
 v1.0.95
 -	przeniesienie pobierania sum kontrolnych z configu do aktualizatora
 -	przeniesienie changeloga kerneli z aktualizatora do informacji o NeteXt
