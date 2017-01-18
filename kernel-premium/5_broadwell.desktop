@@ -151,7 +151,6 @@ GenericName[ur_PK]=Broadwell
 GenericName[vi]=Broadwell
 GenericName[zh_CN]=Broadwell
 GenericName[zh_TW]=Broadwell
-
 Exec=/opt/NeteXt73/./kernele broadwell
 Icon=/opt/NeteXt73/ikony/broadwell.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

@@ -151,7 +151,6 @@ GenericName[ur_PK]=PPA repository\n and software
 GenericName[vi]=PPA repository\n and software
 GenericName[zh_CN]=PPA repository\n and software
 GenericName[zh_TW]=PPA repository\n and software
-
 Exec=/opt/NeteXt73/./repo
 Icon=/opt/NeteXt73/ikony/backuprepo.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

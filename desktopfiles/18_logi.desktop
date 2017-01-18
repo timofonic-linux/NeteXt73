@@ -151,7 +151,6 @@ GenericName[ur_PK]=Generating a logs
 GenericName[vi]=Generating a logs
 GenericName[zh_CN]=Generating a logs
 GenericName[zh_TW]=Generating a logs
-
 Exec=/opt/NeteXt73/./logi
 Icon=/opt/NeteXt73/ikony/logi.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

@@ -151,7 +151,6 @@ GenericName[ur_PK]=Graphical installer \nopen source drivers Mesa3D
 GenericName[vi]=Graphical installer \nopen source drivers Mesa3D
 GenericName[zh_CN]=Graphical installer \nopen source drivers Mesa3D
 GenericName[zh_TW]=Graphical installer \nopen source drivers Mesa3D
-
 Exec=/opt/NeteXt73/./grafiki mesa3d
 Icon=/opt/NeteXt73/ikony/mesa3d.png
 Terminal=false
@@ -160,5 +159,4 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:
 Name[pl_PL.UTF-8]=Otwarte sterowniki Mesa3D

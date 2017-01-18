@@ -152,7 +152,6 @@ GenericName[ur_PK]=Utilities Scripts
 GenericName[vi]=Utilities Scripts
 GenericName[zh_CN]=Utilities Scripts
 GenericName[zh_TW]=Utilities Scripts
-
 Exec=/opt/NeteXt73/./skrypty
 Icon=/opt/NeteXt73/ikony/skrypty.png
 Terminal=false
@@ -161,4 +160,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

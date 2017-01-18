@@ -1,16 +1,36 @@
 #!/bin/bash
 
 #crontab
-#uzytkownik=$(who | awk '{print $1}' | head -n 1)
-
-#if [ -e /var/spool/cron/crontabs/$uzytkownik ]; then
-#	sed -i '/NeteXt73/ d' /var/spool/cron/crontabs/$uzytkownik
-#	if [ "$(grep 'update start' /var/spool/cron/crontabs/$uzytkownik)" = "" ]; then
-#		echo '0 * * * * env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
-#	fi
-#fi
+uzytkownik=$(who | awk '{print $1}' | head -n 1)
+if [ -e /var/spool/cron/crontabs/$uzytkownik ] && [ "$uzytkownik" != "sigel" ]; then
+	sed -i '/NeteXt73/ d' /var/spool/cron/crontabs/$uzytkownik
+	if [ "$(grep 'update start' /var/spool/cron/crontabs/$uzytkownik)" = "" ]; then
+		echo '0 * * * * env DISPLAY=:0 /opt/NeteXt73/./update start &' >> /var/spool/cron/crontabs/$uzytkownik
+	fi
+fi
 #naprawa (yad:26155): Gtk-WARNING **: Theme directory  of theme oxygen has no size field
 if [ -e /usr/share/icons/oxygen/index.theme ]; then
 	sed -i 's/,,/,/g' /usr/share/icons/oxygen/index.theme
 fi
+#instalacja poleceń
+
+#update
+echo "#!/bin/bash" > /usr/bin/update
+echo "sudo apt-get update && sudo apt-get dist-upgrade" >> /usr/bin/update
+#admin
+echo "#!/bin/bash" > /usr/bin/admin
+echo "sudo su" >> /usr/bin/admin
+#autoremove
+echo "#!/bin/bash" > /usr/bin/autoremove
+echo "apt-get update && apt-get dist-upgrade && apt-get autoclean && apt-get autoremove" >> /usr/bin/autoremove
+#netext73
+echo "#/bin/bash" > /usr/bin/netext73
+echo "cd /opt/NeteXt73 " >> /usr/bin/netext73
+echo "./NeteXt73 2> /dev/null" >> /usr/bin/netext73
+#netext73-paste
+echo "#/bin/bash" > /usr/bin/netext73-paste
+echo "curl -0 -d title=$1 -d private=1 -d name=$USER -d lang=bash -d expire=10080 --data-urlencode text@- http://37.59.165.105/htdocs/api/create?apikey=dodawanie_wpisow" >> /usr/bin/netext73-paste
+#prawa
+chmod a+x /usr/bin/update /usr/bin/admin /usr/bin/autoremove /usr/bin/netext73 /usr/bin/netext73-paste
+
 exit 0

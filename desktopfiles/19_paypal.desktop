@@ -151,7 +151,6 @@ GenericName[ur_PK]=We will help you, you will help us
 GenericName[vi]=We will help you, you will help us
 GenericName[zh_CN]=We will help you, you will help us
 GenericName[zh_TW]=We will help you, you will help us
-
 Exec=/opt/NeteXt73/./help paypal
 Icon=/opt/NeteXt73/ikony/paypal.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

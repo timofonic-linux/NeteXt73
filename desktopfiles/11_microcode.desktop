@@ -151,7 +151,6 @@ GenericName[ur_PK]=Microcode & firmware installer
 GenericName[vi]=Microcode & firmware installer
 GenericName[zh_CN]=Microcode & firmware installer
 GenericName[zh_TW]=Microcode & firmware installer
-
 Exec=/opt/NeteXt73/./microcode
 Icon=/opt/NeteXt73/ikony/microcode.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

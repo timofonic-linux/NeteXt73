@@ -151,7 +151,6 @@ GenericName[ur_PK]=Haswell
 GenericName[vi]=Haswell
 GenericName[zh_CN]=Haswell
 GenericName[zh_TW]=Haswell
-
 Exec=/opt/NeteXt73/./kernele haswell
 Icon=/opt/NeteXt73/ikony/haswell.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

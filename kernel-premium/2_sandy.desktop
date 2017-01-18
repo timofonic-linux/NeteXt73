@@ -151,7 +151,6 @@ GenericName[ur_PK]=Sandy Bridge
 GenericName[vi]=Sandy Bridge
 GenericName[zh_CN]=Sandy Bridge
 GenericName[zh_TW]=Sandy Bridge
-
 Exec=/opt/NeteXt73/./kernele sandybridge
 Icon=/opt/NeteXt73/ikony/sandy.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

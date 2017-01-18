@@ -151,7 +151,6 @@ GenericName[ur_PK]=APM - power management and performance
 GenericName[vi]=APM - power management and performance
 GenericName[zh_CN]=APM - power management and performance
 GenericName[zh_TW]=APM - power management and performance
-
 Exec=/opt/NeteXt73/./apm
 Icon=/opt/NeteXt73/ikony/apm.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

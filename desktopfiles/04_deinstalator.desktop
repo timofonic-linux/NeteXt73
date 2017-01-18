@@ -151,7 +151,6 @@ GenericName[ur_PK]=Uninstaller
 GenericName[vi]=Uninstaller
 GenericName[zh_CN]=Uninstaller
 GenericName[zh_TW]=Uninstaller
-
 Exec=/opt/NeteXt73/./deinstalator
 Icon=/opt/NeteXt73/ikony/delete.png
 Terminal=false
@@ -160,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

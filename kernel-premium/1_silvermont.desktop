@@ -83,7 +83,6 @@ Comment[nl]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pe
 Comment[nn]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pentium branded processors used in systems on a chip (SoCs) made by Intel.\nSoC families like: BayTrail, Braswell or Avoton. Here is an example of eg. Intel Celeron N3150
 Comment[pa]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pentium branded processors used in systems on a chip (SoCs) made by Intel.\nSoC families like: BayTrail, Braswell or Avoton. Here is an example of eg. Intel Celeron N3150
 Comment[pl]=Silvermont to mikroarchitektury procesorów Atom o niskim poborze mocy, Celeron i Pentium stosowanych w system-on-a-chip\n(SoC) wykonanych przez firmę Intel. SoC z rodziny takiej jak: BayTrail, Braswell lub Avoton. Tu przykładem jest np. Procesor Intel Celeron N3150 
-
 Comment[pt]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pentium branded processors used in systems on a chip (SoCs) made by Intel.\nSoC families like: BayTrail, Braswell or Avoton. Here is an example of eg. Intel Celeron N3150
 Comment[pt_BR]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pentium branded processors used in systems on a chip (SoCs) made by Intel.\nSoC families like: BayTrail, Braswell or Avoton. Here is an example of eg. Intel Celeron N3150
 Comment[ro]=Silvermont is a microarchitecture for low-power Atom, Celeron and Pentium branded processors used in systems on a chip (SoCs) made by Intel.\nSoC families like: BayTrail, Braswell or Avoton. Here is an example of eg. Intel Celeron N3150
@@ -152,7 +151,6 @@ GenericName[ur_PK]=Silvermont
 GenericName[vi]=Silvermont
 GenericName[zh_CN]=Silvermont
 GenericName[zh_TW]=Silvermont
-
 Exec=/opt/NeteXt73/./kernele silvermont
 Icon=/opt/NeteXt73/ikony/atom_nowy.png
 Terminal=false
@@ -161,5 +159,4 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:
 Name[pl_PL.UTF-8]=Silvermont

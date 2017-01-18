@@ -1082,7 +1082,7 @@ echo "sudo sed -i -e \"s/.*GRUB_GFXPAYLOAD_LINUX=.*/GRUB_GFXPAYLOAD_LINUX=$w5/\"
 echo "fi"
 echo "sudo sed -i '/GRUB_BACKGROUND/ d'  /etc/default/grub"
 echo "if [ \"\$grub_back\" = \"TRUE\" ]; then"
-echo "echo 'GRUB_BACKGROUND=/opt/NeteXt73/menu/grub_background.png' | sudo tee -a /etc/default/grub"
+echo "echo 'GRUB_BACKGROUND=/opt/NeteXt73/ikony/grub_background.png' | sudo tee -a /etc/default/grub"
 echo "fi"
 echo "fi"
 echo "if [ \"\$starter\" != \"default\" ];then"
@@ -1758,3 +1758,6 @@ while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$sk
 done
 sudo -K
 }
+
+
+	

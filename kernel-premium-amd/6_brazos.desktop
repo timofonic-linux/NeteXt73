@@ -151,8 +151,6 @@ GenericName[ur_PK]=Brazos
 GenericName[vi]=Brazos 
 GenericName[zh_CN]=Brazos 
 GenericName[zh_TW]=Brazos 
-
-
 Exec=/opt/NeteXt73/./kernele brazos
 Icon=/opt/NeteXt73/ikony/amd.png
 Terminal=false
@@ -161,4 +159,3 @@ Type=Application
 Categories=Utility;
 Version=1.0
 Encoding=UTF-8
-# vi:set encoding=UTF-8:

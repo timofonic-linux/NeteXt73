@@ -2,7 +2,6 @@
 PROG_NAME = NeteXt73
 OPT_DIR = /opt
 PREFIX = /usr
-BINDIR = /bin
 datarootdir = $(PREFIX)/share
 MOVE_COMMAND = mv
 MKDIR = mkdir
@@ -35,7 +34,6 @@ install: install_desktopfiles \
 	 install_menu \
 	 install_translations_files \
 	 install_APM \
-	 install_launcher \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
 	 install_file_apm \
@@ -85,24 +83,14 @@ install_contacts:
 	
 install_menu:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(MENU_DIR)/
-	$(MKDIR) -p ${DESTDIR}${datarootdir}/pixmaps
 	$(MKDIR) -p $(DESTDIR)$(datarootdir)/applications/
 	$(INSTALL) 0755 $(MENU_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(MENU_DIR)
-	$(INSTALL) 0644 $(MENU_DIR)/NeteXt73.png $(DESTDIR)$(datarootdir)/pixmaps
 	$(INSTALL) 0755 $(MENU_DIR)/NeteXt73.desktop $(DESTDIR)$(datarootdir)/applications
 	
 install_translations_files:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(TRANSLATIONS_DIR)/
 	$(INSTALL) 0755 $(TRANSLATIONS_DIR)/* $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(TRANSLATIONS_DIR)
-	
-install_launcher:
-	$(MKDIR) -p $(DESTDIR)$(PREFIX)$(BINDIR)
-	$(INSTALL) 0755 $(MENU_DIR)/netext73 $(DESTDIR)$(PREFIX)$(BINDIR)
-	$(INSTALL) 0755 $(MENU_DIR)/netext73-paste $(DESTDIR)$(PREFIX)$(BINDIR)
-	$(INSTALL) 0755 $(MENU_DIR)/admin $(DESTDIR)$(PREFIX)$(BINDIR)
-	$(INSTALL) 0755 $(MENU_DIR)/update $(DESTDIR)$(PREFIX)$(BINDIR)
-	$(INSTALL) 0755 $(MENU_DIR)/autoremove $(DESTDIR)$(PREFIX)$(BINDIR)
-	
+		
 install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73:	
