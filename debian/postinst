@@ -33,6 +33,6 @@ echo "curl -0 -d title=$1 -d private=1 -d name=$USER -d lang=bash -d expire=1008
 #prawa
 chmod a+x /usr/bin/update /usr/bin/admin /usr/bin/autoremove /usr/bin/netext73 /usr/bin/netext73-paste
 #dodanie do menu
-desktop-file-install /opt/NeteXt73/menu/NeteXt73.desktop
+desktop-file-install /opt/NeteXt73/NeteXt73.desktop
 
 exit 0
