@@ -3,6 +3,8 @@
 v1.0.98
 -	przywrócenie corna
 -	drobne poprawki
+-	desktop-file-utlis w zależnościach
+-	dodawanie aktywatora za pomocą desktop-file-install
 -	zmiany w plikach instalacyjnych
 v1.0.97
 -	usunięcie dodawania crona
