@@ -18,8 +18,6 @@ GRAPHIC_BASE_DIR = ikony
 GRAPHIC_BASE_FILES = $(wildcard $(GRAPHIC_BASE_DIR)/*.png)
 CONTACTS_DIR = kontakty
 CONTACTS_FILES = $(wildcard $(CONTACTS_DIR)/*.desktop)
-MENU_DIR = menu
-MENU_FILES = $(wildcard $(MENU_DIR)/*)
 TRANSLATIONS_DIR = tlumaczenia
 make: nothing_to_make
 nothing_to_make:
@@ -31,11 +29,12 @@ install: install_desktopfiles \
 	 install_desktopfiles_kernel_premium \
 	 install_desktopfiles_kernel_premium_amd \
 	 install_contacts \
-	 install_menu \
 	 install_translations_files \
 	 install_APM \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
+	 install_file_NeteXt73.desktop \
+	 install_file_rkhunter.tar.gz \
 	 install_file_apm \
 	 install_file_changelog \
 	 install_file_config \
@@ -81,10 +80,6 @@ install_contacts:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(CONTACTS_DIR)/
 	$(INSTALL) 0755 $(CONTACTS_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(CONTACTS_DIR)
 	
-install_menu:
-	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(MENU_DIR)/
-	$(INSTALL) 0755 $(MENU_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(MENU_DIR)
-	
 install_translations_files:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(TRANSLATIONS_DIR)/
 	$(INSTALL) 0755 $(TRANSLATIONS_DIR)/* $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(TRANSLATIONS_DIR)
@@ -93,6 +88,10 @@ install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73:	
 	$(INSTALL) 0755 NeteXt73 $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
+install_file_NeteXt73.desktop:	
+	$(INSTALL) 0755 NeteXt73.desktop $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
+install_file_rkhunter.tar.gz:
+	$(INSTALL) 0755 rkhunter.tar.gz $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_apm:	
 	$(INSTALL) 0755 apm $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/
 install_file_changelog:	
