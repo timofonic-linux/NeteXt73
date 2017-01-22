@@ -147,7 +147,9 @@ while [ $petla_duza = "tak" ]; do
 				fi
 				#procesor i wifi
 				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI2</b></span>" >> system$losowa.log
-				echo -e "$(grep 'model name' /proc/cpuinfo | head -n1 | sed -e 's/model name'[[:space:]]:'//g' | sed -e 's/ //')" >>system$losowa.log
+				echo -e "$(grep 'model name' /proc/cpuinfo | head -n1 | sed -e 's/model name'[[:space:]]:'//g' | sed -e 's/ //')" >> system$losowa.log
+				echo -e "$(cpuid_tool --all | grep 'code name' | sed 's/.*`//g' | sed "s/'//g")" >> system$losowa.log
+
 				if [ "$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')" = "" ]; then
 					wifi="no wifi"
 				else
@@ -238,7 +240,7 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "\n$nazwa_skryptu"  >> system$losowa.log
 				echo -e "\n$TEXT_LOGI1\n$(dpkg -l | grep 'linux-image*'| grep -v -E 'linux-image-extra*|linux-image-generic' | sed -e 's/linux-image-//g' | awk '{print $2}'| sort -r | column -n)" >> system$losowa.log
 				#cpu info
-				echo -e "##############################################################################################" >> system$losowa.log
+				echo -e "\n##############################################################################################" >> system$losowa.log
 				echo -e "$(cpuid_tool --all | sed 's/`//g' | sed "s/'//g")" >> system$losowa.log
 				echo -e "\n\nKonfiguracja netext73" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
