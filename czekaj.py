@@ -11,7 +11,7 @@ class ProgressBarWindow(Gtk.Window):
         sefl.set_default_size(450, 45)
         sefl.set_border_width(5)
         sefl.set_position(Gtk.WindowPosition.CENTER)
-	sefl.set_icon_from_file('/opt/NeteXt73/menu/NeteXt73.png')
+	sefl.set_icon_from_file('/opt/NeteXt73/ikony/netext.png')
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         sefl.add(vbox)

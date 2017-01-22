@@ -1,5 +1,9 @@
 ﻿NeteXt'73 Changelog
 
+v1.0.99
+-	nowe zależności cpuidtool
+-	poprawka dla modułu please_wait
+-	nowy log dotyczący procesora na podstawie cpuidtool
 v1.0.98
 -	przywrócenie corna
 -	drobne poprawki

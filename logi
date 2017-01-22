@@ -237,6 +237,9 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "$(uname -a)" >> system$losowa.log
 				echo -e "\n$nazwa_skryptu"  >> system$losowa.log
 				echo -e "\n$TEXT_LOGI1\n$(dpkg -l | grep 'linux-image*'| grep -v -E 'linux-image-extra*|linux-image-generic' | sed -e 's/linux-image-//g' | awk '{print $2}'| sort -r | column -n)" >> system$losowa.log
+				#cpu info
+				echo -e "##############################################################################################" >> system$losowa.log
+				echo -e "$(cpuid_tool --all | sed 's/`//g' | sed "s/'//g")" >> system$losowa.log
 				echo -e "\n\nKonfiguracja netext73" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				#katalogi
