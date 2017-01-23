@@ -123,6 +123,8 @@ if [ "$kern" = "$TEXT_LOKALNE" ]; then
 			#sprawdz_gcc >> instaluj.sh
 			instaluj_kernel >> instaluj.sh
 			instalacja2
+			#zgoda na wysyłanie raportów
+			zgada_na_raport
 			cd /tmp/netext73; rm -rf kernel
 			restart
 		fi
@@ -210,6 +212,8 @@ elif [ "$kern" != "" ] && [ "$blad" != "1" ]; then
 							#sprawdz_gcc >> instaluj.sh
 							instaluj_kernel >> instaluj.sh
 							instalacja2
+							#zgoda na wysyłanie raportów
+							zgada_na_raport
 							#wywalenie plików po instalacji
 							wywal_pobrane_pliki_kernela
 							restart

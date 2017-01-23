@@ -5,6 +5,7 @@ v1.1.00
 -	zapamiętywanie wyboru usera
 -	możliwość zmiany ustawień w configu
 -	mesa 13=>17, 13.1=>17.1
+-	poprawka zapobiegająca uruchomienie programu bez podania hasła
 v1.0.99
 -	nowe zależności cpuidtool
 -	poprawka dla modułu please_wait

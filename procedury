@@ -270,23 +270,27 @@ echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 #wyłączenie LPT
 echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
-echo "if [ -e ~/.netext73/zgoda ] && [ \"\$(grep TRUE ~/.netext73/zgoda)\" != '' ]; then"
-echo "ls *.deb > raport.txt"
-echo "cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt"
-echo "cat raport.txt  | netext73-paste raport; rm -f raport.txt"
-echo "elif [ -e ~/.netext73/zgoda ] && [ \"\$(grep FALSE ~/.netext73/zgoda)\" != '' ]; then"
-echo "echo 1 > /dev/null"
-echo "else"
-echo "read -p \"$TEXT_ZGODA\" -n 1 -r"
-echo "if [[ \$REPLY =~ ^[YyTt]\$ ]];then"
-echo "echo 'TRUE' > ~/.netext73/zgoda"
-echo "ls *.deb > raport.txt"
-echo "cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt"
-echo "cat raport.txt  | netext73-paste raport; rm -f raport.txt"
-echo "else"
-echo "echo 'FALSE' > ~/.netext73/zgoda"
-echo "fi"
-echo "fi"
+}
+
+#zgoda na wysyłanie raportów
+send_raport(){
+	ls *.deb > raport.txt
+	cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt
+	cat raport.txt  | netext73-paste raport; rm -f raport.txt
+}
+zgada_na_raport(){
+if [ -e ~/.netext73/zgoda ] && [ "$(grep TRUE ~/.netext73/zgoda)" != '' ]; then
+	send_raport
+elif [ -e ~/.netext73/zgoda ] && [ "$(grep FALSE ~/.netext73/zgoda)" != '' ]; then
+	echo 1 > /dev/null
+else
+	if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --height=$((180*$skala)) --width=$((290*$skala)) --text="$TEXT_ZGODA" ; then
+		echo 'TRUE' > ~/.netext73/zgoda
+		send_raport
+	else
+		echo 'FALSE' > ~/.netext73/zgoda
+	fi
+fi
 }
 
 stan_firmware(){
@@ -1770,9 +1774,12 @@ proces_zablokowany(){
 NeteXt73_root(){
 while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
 	if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
+		rm -rf /tmp/netext73
+		sudo -K
 		exit 0
 	fi
 done
+rm -rf /tmp/netext73
 sudo -K
 }
 
