@@ -373,6 +373,7 @@ export TEXT_POBIERANIE_GOTOWE="Download completed."
 export TEXT_SUMY_KONTROLNE="checksums"
 export TEXT_SERVER_ERROR="Error retrieving data from the server"
 export TEXT_ROZPAKOWANIE_ERROR="Decompressing error"
+export TEXT_ZGODA="In order to even better optimize the kernel, do you agree to send information of your processor Y/N ?"
 
 #########################################################################################################################################################################
 

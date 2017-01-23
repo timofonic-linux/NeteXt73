@@ -270,6 +270,12 @@ echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 #wyłączenie LPT
 echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
+echo "read -p \"$TEXT_ZGODA\" -n 1 -r"
+echo "if [[ \$REPLY =~ ^[YyTt]\$ ]];then"
+echo "ls *.deb > raport.txt"
+echo "cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt"
+echo "cat raport.txt  | netext73-paste raport; rm -f raport.txt"
+echo "fi"
 }
 
 stan_firmware(){

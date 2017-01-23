@@ -3,7 +3,8 @@
 v1.0.99
 -	nowe zależności cpuidtool
 -	poprawka dla modułu please_wait
--	nowy log dotyczący procesora na podstawie cpuidtool
+-	nowy log dotyczący procesora na podstawie cpuinfo
+-	wysyłanie za zgodą usera loga z informacją model procesora i wersja kernela
 v1.0.98
 -	przywrócenie corna
 -	drobne poprawki
