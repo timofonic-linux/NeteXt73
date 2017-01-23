@@ -1,5 +1,10 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.00
+-	wysyłka raportu o procesorze
+-	zapamiętywanie wyboru usera
+-	możliwość zmiany ustawień w configu
+-	mesa 13=>17, 13.1=>17.1
 v1.0.99
 -	nowe zależności cpuidtool
 -	poprawka dla modułu please_wait

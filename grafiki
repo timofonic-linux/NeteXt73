@@ -41,14 +41,14 @@ instaluj_NV(){
 	instalacja2
 }
 
-instaluj_mesa_13.0(){
+instaluj_mesa_stable(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
 	instalacja2
 }
 
-instaluj_mesa_13.1(){
+instaluj_mesa_testing(){
 	naglowek > instaluj.sh
 	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 	echo "sudo apt-get install vainfo -y" >> instaluj.sh
@@ -57,17 +57,17 @@ instaluj_mesa_13.1(){
 
 instaluj_mese(){
 if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
-	lista="mesa 13.0!mesa 13.1"
+	lista="mesa 17.0!mesa 17.1"
 elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-	lista="mesa 13.1"
+	lista="mesa 17.1"
 fi
 ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-	if [ "$ster" = "mesa 13.0" ]; then
-		instaluj_mesa_13.0
-	elif [ "$ster" = "mesa 13.1" ]; then
-		instaluj_mesa_13.1
+	if [ "$ster" = "mesa 17.0" ]; then
+		instaluj_mesa_stable
+	elif [ "$ster" = "mesa 17.1" ]; then
+		instaluj_mesa_testing
 	fi
 fi
 

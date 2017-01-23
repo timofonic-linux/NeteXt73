@@ -1,3 +1,9 @@
+netext73 (1.1.00) xenial; urgency=medium
+
+  * raport cpu + kernel
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 23 Jan 2017 16:09:18 +0100
+
 netext73 (1.0.99) xenial; urgency=medium
 
   * cpuidtool
