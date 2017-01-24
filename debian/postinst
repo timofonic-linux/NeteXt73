@@ -29,11 +29,11 @@ echo "cd /opt/NeteXt73 " >> /usr/bin/netext73
 echo "./NeteXt73 2> /dev/null" >> /usr/bin/netext73
 #netext73-paste
 echo "#/bin/bash" > /usr/bin/netext73-paste
-echo "if [  -e /tmp/netext73/userek ]; then"
-echo "export userek=\$(cat /tmp/netext73/userek)"
-echo "else"
-echo "export userek=\$USER"
-echo "fi"
+echo "if [  -e /tmp/netext73/userek ]; then" >> /usr/bin/netext73-paste
+echo "export userek=\$(cat /tmp/netext73/userek)" >> /usr/bin/netext73-paste
+echo "else" >> /usr/bin/netext73-paste
+echo "export userek=\$USER" >> /usr/bin/netext73-paste
+echo "fi" >> /usr/bin/netext73-paste
 echo "curl -0 -d title=\$1 -d private=1 -d name=\$userek -d lang=bash -d expire=10080 --data-urlencode text@- http://37.59.165.105/htdocs/api/create?apikey=dodawanie_wpisow" >> /usr/bin/netext73-paste
 #prawa
 chmod a+x /usr/bin/update /usr/bin/admin /usr/bin/autoremove /usr/bin/netext73 /usr/bin/netext73-paste
