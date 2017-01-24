@@ -276,7 +276,7 @@ echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
 send_raport(){
 	ls *.deb > raport.txt
 	cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt
-	cat raport.txt  | netext73-paste raport; rm -f raport.txt
+	cat raport.txt | netext73-paste raport; rm -f raport.txt
 }
 zgada_na_raport(){
 if [ -e ~/.netext73/zgoda ] && [ "$(grep TRUE ~/.netext73/zgoda)" != '' ]; then
