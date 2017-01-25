@@ -6,6 +6,7 @@ v1.1.00
 -	możliwość zmiany ustawień w configu
 -	mesa 13=>17, 13.1=>17.1
 -	poprawka zapobiegająca uruchomienie programu bez podania hasła
+-	wine 2.0 w instlatorze
 v1.0.99
 -	nowe zależności cpuidtool
 -	poprawka dla modułu please_wait

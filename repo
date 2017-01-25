@@ -56,7 +56,7 @@ while read linia; do
 done < lista_ppa.txt
 }
 sofcik(){
-	echo "audacity avidemux clementine compizconfig-settings-manager digikam dropbox ffmulticonverter gimp google-chrome-stable grsync guake gufw homebank htop i-nex kadu kget kodi kubuntu-restricted-extras language-pack-gnome-pl libnss3-tools libreoffice-gtk libreoffice-kde libreoffice-style-sifr lubuntu-restricted-extras mc network-manager-openvpn openssh-client openssl oracle-java8-installer pidgin plasma plasma-scriptengines plasma-widget-homerun-kicker plasma-widget-yawp ppa-purge radiotray saidar showfoto shutter spotify-client synaptic tomahawk ubuntu-restricted-extras ufw-kde unetbootin unity-tweak-tool vlc wakeonlan widget-yawp wine1.7 wmctrl x2goclient x2goserver xubuntu-restricted-extras yakuake youtube-dl" > ~/.netext73/soft
+	echo "audacity avidemux clementine compizconfig-settings-manager digikam dropbox ffmulticonverter gimp google-chrome-stable grsync guake gufw homebank htop i-nex kadu kget kodi kubuntu-restricted-extras language-pack-gnome-pl libnss3-tools libreoffice-gtk libreoffice-kde libreoffice-style-sifr lubuntu-restricted-extras mc network-manager-openvpn openssh-client openssl oracle-java8-installer pidgin plasma plasma-scriptengines plasma-widget-homerun-kicker plasma-widget-yawp ppa-purge radiotray saidar showfoto shutter spotify-client synaptic tomahawk ubuntu-restricted-extras ufw-kde unetbootin unity-tweak-tool vlc wakeonlan widget-yawp wmctrl x2goclient x2goserver xubuntu-restricted-extras yakuake youtube-dl" > ~/.netext73/soft
 }
 
 baza=(
@@ -280,10 +280,10 @@ baza=(
 	"VLC - is a free and open, cross-platform media player"
 	"vlc"
 
-	"ppa:ubuntu-wine/ppa"
-	"WINE - Uruchamianie aplikacji Windows na Linuksie"
-	"WINE - running Windows applications on Linux"
-	"wine"
+	"ppa:wine/wine-builds"
+	"WINE 2.0 - Uruchamianie aplikacji Windows na Linuksie"
+	"WINE 2.0 - running Windows applications on Linux"
+	"wine-staging"
 
 	"ppa:x2go/stable"
 	"X2Go - klient zdalnego dostępu"
