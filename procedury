@@ -278,7 +278,7 @@ send_raport(){
 	cat /proc/cpuinfo | grep -E 'model name|flags' | head -n 2 >> raport.txt
 	cat raport.txt | netext73-paste raport; rm -f raport.txt
 }
-zgada_na_raport(){
+zgoda_na_raport(){
 if [ -e ~/.netext73/zgoda ] && [ "$(grep TRUE ~/.netext73/zgoda)" != '' ]; then
 	send_raport
 elif [ -e ~/.netext73/zgoda ] && [ "$(grep FALSE ~/.netext73/zgoda)" != '' ]; then
@@ -1141,7 +1141,8 @@ fi
 
 wywal_pobrane_pliki_kernela(){
 if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
-	yad --center --on-top --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
+	#dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_KERNEL2"
+	#yad --center --on-top --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0"  --timeout=15 --text="$TEXT_KERNEL2"
 	rm -rf $PWD
 elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_INFO2<br>/tmp/netext73/$a"
@@ -1274,7 +1275,11 @@ echo "sudo update-grub"
 }
 
 restart(){
-yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
+if [ "$1" = "kernel" ]; then
+	yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_KERNEL2\n\n$TEXT_RESTART"	
+else
+	yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_RESTART"
+fi
 	if [ $? = 0 ]; then
 		reboot
 	fi

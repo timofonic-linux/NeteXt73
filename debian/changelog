@@ -1,3 +1,9 @@
+netext73 (1.1.01) xenial; urgency=medium
+
+  * wyłączenie pytań przy instalacji kernela
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 28 Jan 2017 15:47:50 +0100
+
 netext73 (1.1.00) xenial; urgency=medium
 
   * raport cpu + kernel
