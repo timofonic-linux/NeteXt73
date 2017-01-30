@@ -180,7 +180,6 @@ export TEXT_INSTALOWAC_KERNEL="został pobrany. \n\nJeżeli chcesz go zainstalow
 export TEST_INSTALOWAC_KERNEL2="Program zapamiętał polecenie instalacyjne, możesz je wkleić w terminalu skrótem klawiszy:\n\nSHIFT+INSERT lub CTRL+SHIFT+V\n"
 export TEST_INSTALOWAC_KERNEL3="Za chwilę nastąpi proces instalacji kernela"
 export TEST_INSTALOWAC_KERNEL4="na podstawie pobranych plików:"
-export TEST_INSTALOWAC_KERNEL5="Program zapamiętał ścieżkę do pobranych plików, możesz je wkleić w terminalu skrótem klawiszy:\n\nSHIFT+INSERT lub CTRL+SHIFT+V\n"
 export TEXT_INSTALOWAC_KERNEL6="Nie pobrały się pliki instalacyjne, spróbuj jeszcze raz."
 export TEXT_INSTALOWAC_KERNEL7="Masz już zainstalowany ten kernel.\nPrzed ponowną instalacją musisz go usunąć."
 export TEXT_STRONA1="Podaj kod dostępu do kerneli Premium.\nJeżeli jeszcze nie masz skontaktuj się z: Tomasz e X t 7 3 Miś,mail:ext73@wp.pl" 

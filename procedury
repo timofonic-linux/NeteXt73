@@ -249,6 +249,7 @@ echo '#!/bin/bash'
 
 instaluj_kernel(){
 echo "echo \"$TEXT_PROCEDURA_1\""
+echo "echo -e \"\$TEST_INSTALOWAC_KERNEL3 \$rodzaj \$TEST_INSTALOWAC_KERNEL4\n\n\$(ls *.deb)\""
 #warunek dla > 16.04
 echo "if [ -e /etc/init/mounted-proc.conf ]; then"
 echo "sudo sed -i 's+^start on mounted MOUNTPOINT=/proc TYPE=proc+start on mounted MOUNTPOINT=/var+' /etc/init/mounted-proc.conf"
