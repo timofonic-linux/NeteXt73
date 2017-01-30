@@ -41,37 +41,7 @@ instaluj_NV(){
 	instalacja2
 }
 
-instaluj_mesa_stable(){
-	naglowek > instaluj.sh
-	echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
-	echo "sudo apt-get install vainfo -y" >> instaluj.sh
-	instalacja2
-}
 
-instaluj_mesa_testing(){
-	naglowek > instaluj.sh
-	echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
-	echo "sudo apt-get install vainfo -y" >> instaluj.sh
-	instalacja2
-}
-
-instaluj_mese(){
-if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
-	lista="mesa 17.0!mesa 17.1"
-elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-	lista="mesa 17.1"
-fi
-ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
-klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
-if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-	if [ "$ster" = "mesa 17.0" ]; then
-		instaluj_mesa_stable
-	elif [ "$ster" = "mesa 17.1" ]; then
-		instaluj_mesa_testing
-	fi
-fi
-
-}
 #########################################################################################################################################################################
 #instalator sterowników do grafik Nvidia
 cd /tmp/netext73
@@ -175,7 +145,26 @@ elif [ "$1" = "mesa3d" ]; then
 	if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
-		instaluj_mese
+		if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
+			lista="mesa 17.0!mesa 17.1"
+		elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
+			lista="mesa 17.1"
+		fi
+		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
+		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
+		naglowek > instaluj.sh
+		if [ "$ster" = "mesa 17.0" ]; then
+			echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
+			echo "sudo apt-get update" >> instaluj.sh
+			echo "sudo apt-get install vainfo -y" >> instaluj.sh
+		elif [ "$ster" = "mesa 17.1" ]; then
+			echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
+			echo "sudo apt-get update" >> instaluj.sh
+			echo "sudo apt-get install vainfo -y" >> instaluj.sh
+		fi
+		instalacja2
+		fi
 	fi
 fi
 usun
