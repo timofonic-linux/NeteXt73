@@ -169,7 +169,7 @@ elif [ "$1" = "mesa3d" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
 			fi
-			instalacja2
+			instalacja
 		fi
 	fi
 fi
