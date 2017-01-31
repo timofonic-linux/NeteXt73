@@ -158,10 +158,12 @@ elif [ "$1" = "mesa3d" ]; then
 			echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 			echo "sudo apt-get update" >> instaluj.sh
 			echo "sudo apt-get install vainfo -y" >> instaluj.sh
+			echo "sudo apt-get upgrade -y" >> instaluj.sh
 		elif [ "$ster" = "mesa 17.1" ]; then
 			echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 			echo "sudo apt-get update" >> instaluj.sh
 			echo "sudo apt-get install vainfo -y" >> instaluj.sh
+			echo "sudo apt-get upgrade -y" >> instaluj.sh
 		fi
 		instalacja2
 		fi
