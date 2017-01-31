@@ -146,24 +146,22 @@ elif [ "$1" = "mesa3d" ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
 		if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
-			lista="mesa 17.0!mesa 17.1"
+			lista="mesa 17.0 stable!mesa 17.1 testing"
 		elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-			lista="mesa 17.1"
+			lista="mesa 17.1 testing"
 		fi
-		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>\n\nInstalled: $(glxinfo | grep "OpenGL" | grep "Mesa")" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
 		naglowek > instaluj.sh
-		if [ "$ster" = "mesa 17.0" ]; then
+		if [ "$ster" = "mesa 17.0 stable" ]; then
 			echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
-			echo "sudo apt-get autoremove"  >> instaluj.sh
 			echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 			echo "sudo apt-get update" >> instaluj.sh
 			echo "sudo apt-get install vainfo -y" >> instaluj.sh
 			echo "sudo apt-get upgrade -y" >> instaluj.sh
-		elif [ "$ster" = "mesa 17.1" ]; then
+		elif [ "$ster" = "mesa 17.1 testing" ]; then
 			echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
-			echo "sudo apt-get autoremove"  >> instaluj.sh
 			echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 			echo "sudo apt-get update" >> instaluj.sh
 			echo "sudo apt-get install vainfo -y" >> instaluj.sh
