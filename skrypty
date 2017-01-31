@@ -400,7 +400,7 @@ if [ $klawisz = 0 ]; then
 			yad --notebook --key=$KEY --image=drive-harddisk --center --tab-pos="left" --title="$nazwa_skryptu1 " $tabulator --width=$((860*$skala)) --height=$((500*$skala)) --on-top --button="$TEXT_ZAMKNIJ:1"
 		elif [ "$klawisz" = "3" ];then
 			if [ "$(dpkg -l | grep -e smartmontools | grep ii)" = "" ]; then
-				xterm  -T "smartmontools" -e bash -c "sudo apt-get install smartmontools"
+				xterm  -T "smartmontools" -e bash -c "sudo apt install smartmontools"
 			fi
 			
 			naglowek > instaluj.sh

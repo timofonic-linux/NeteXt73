@@ -2,6 +2,7 @@
 
 v1.1.02
 -	naprawa instalatora mesy 3d
+-	zmiana apt-get na apt
 v1.1.01
 -	wyłączenie pytań przy instalacji kernela
 -	zmiana okien po instalacji kernela

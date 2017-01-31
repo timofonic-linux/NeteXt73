@@ -13,7 +13,7 @@ I N S T A L A C J A :
 
     sudo add-apt-repository ppa:netext/netext73
 
-    sudo apt-get update && sudo apt-get install netext73
+    sudo apt update && sudo apt install netext73
 
 Pozdrawiam
 
@@ -31,7 +31,7 @@ I N S T A L A T I O N :
 
     sudo add-apt-repository ppa:netext/netext73
 
-    sudo apt-get update && sudo apt-get install netext73
+    sudo apt update && sudo apt install netext73
 
 Greetings
 

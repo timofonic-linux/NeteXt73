@@ -260,7 +260,7 @@ echo "if [ -e ~/.netext73/archiwum_deb ] && [ \"\$(cat ~/.netext73/archiwum_deb)
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
 echo "fi"
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
-echo "sudo apt-get purge broadcom-sta* bcmwl-kernel-source* -y"
+echo "sudo apt purge broadcom-sta* bcmwl-kernel-source* -y"
 echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep broadcom-sta-dkms)"
 echo "fi"
 #wpis iommu
@@ -321,15 +321,15 @@ echo "echo \"$TEXT_PROCEDURA_2\""  >> instaluj.sh
 if [ "$(dpkg -l | grep linux-firmware-nonfree | grep ii )" = "" ] && [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
       yad --center --on-top --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="gtk-ok:0" --button="$TEXT_POWROT:1" --text="$TEXT_PROCEDURA_4"
       if [ $? = 0 ]; then
-			echo "sudo apt-get install linux-firmware-nonfree -y"  >> instaluj.sh
+			echo "sudo apt install linux-firmware-nonfree -y"  >> instaluj.sh
       fi
 fi
-echo "sudo apt-get install linux-firmware"  >> instaluj.sh
+echo "sudo apt install linux-firmware"  >> instaluj.sh
 if [ "$komputerek" = "INTEL" ]; then
-	echo "sudo apt-get install iucode-tool"  >> instaluj.sh
-	echo "sudo apt-get install intel-microcode"  >> instaluj.sh
+	echo "sudo apt install iucode-tool"  >> instaluj.sh
+	echo "sudo apt install intel-microcode"  >> instaluj.sh
 else
-	echo "sudo apt-get install amd64-microcode"  >> instaluj.sh
+	echo "sudo apt install amd64-microcode"  >> instaluj.sh
 fi
 instalacja
 }
@@ -337,7 +337,7 @@ instalacja
 microcode_usun(){
 echo "echo \"$TEXT_PROCEDURA_3\""
 echo "/usr/bin/yes | sudo dpkg -r linux-firmware-nonfree"
-echo "if [ \"\$komputerek\" = \"INTEL\" ]; then sudo apt-get purge intel-microcode -y; fi"
+echo "if [ \"\$komputerek\" = \"INTEL\" ]; then sudo apt purge intel-microcode -y; fi"
 echo "sudo rm /lib/firmware/* -rf"
 }
 
@@ -933,7 +933,7 @@ usun_kernel(){
 echo "echo \"$TEXT_KERNEL1\""
 echo "$(for i in $(cat kasuj.txt); do dpkg -l | grep $i | awk '{print $2}' >> kasuj2.txt; done)"
 echo "echo \"$(cat /tmp/netext73/kasuj2.txt)\""
-echo "sudo apt-get purge $(cat /tmp/netext73/kasuj2.txt  | tr '\n' ' ')"
+echo "sudo apt purge $(cat /tmp/netext73/kasuj2.txt  | tr '\n' ' ')"
 echo "sudo update-grub"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
@@ -941,7 +941,7 @@ echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 usun_kernel_expert(){
 echo "echo \"$TEXT_KERNEL1\""
 echo "echo \"$(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' )\""
-echo "sudo apt-get remove $(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' | tr '\n' ' ')"
+echo "sudo apt remove $(cat /tmp/netext73/kasuj.txt | sed 's/TRUE//g' | tr '\n' ' ')"
 echo "sudo update-grub"
 echo "rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f"
 }
@@ -1160,11 +1160,11 @@ echo "if grep . nv.txt;then"
 nvidia(){
 echo "sudo dpkg -r \$(cat nv.txt | tr '\\n' ' ')"
 echo "fi"
-echo "sudo apt-get install lib32gcc1 libvdpau1 libpango-1.0-0 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4  libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1 -y"
+echo "sudo apt install lib32gcc1 libvdpau1 libpango-1.0-0 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4  libpangocairo-1.0-0 libpangoft2-1.0-0 libx11-6 libxnvctrl0 libxxf86vm1 -y"
 echo "if [ \"\$(dpkg -l | grep bumblebee)\" = \"\" ];then"
-echo "sudo apt-get install nvidia-prime"
+echo "sudo apt install nvidia-prime"
 echo "fi"
-echo "sudo apt-get -f install pkg-config screen-resolution-extra -y"
+echo "sudo apt -f install pkg-config screen-resolution-extra -y"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i libcuda1-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-opencl-icd-$wersja_nvidia.deb"
@@ -1178,7 +1178,7 @@ echo "/usr/bin/yes | sudo dpkg -i --force-all nvidia-libopencl1-$wersja_nvidia.d
 nvidia_optimus(){
 echo "sudo dpkg -P \$(cat nv.txt | tr '\\n' ' ')"
 echo "fi"
-echo "sudo apt-get install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y"
+echo "sudo apt install lib32gcc1 bumblebee primus primus-libs primus-libs:i386 primus-libs-ia32:i386 x11-common make sed dkms linux-libc-dev libc6-dev patch acpid libc6-i386 passwd adduser pkg-config screen-resolution-extra libvdpau1 libatk1.0-0 libc6 libcairo-gobject2 libcairo2 libfontconfig1 libfreetype6 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libgtk2.0-0 libjansson4 libpango-1.0-0 -y"
 echo "sudo cp /tmp/nvidia-optimus/usr/lib/x86_64-linux-gnu/primus/libGL.so.1 /usr/lib/x86_64-linux-gnu/primus/libGL.so.1 -f"
 echo "sudo cp /tmp/nvidia-optimus/usr/lib/i386-linux-gnu/primus/libGL.so.1 /usr/lib/i386-linux-gnu/primus/libGL.so.1 -f"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-$wersja_nvidia.deb"
@@ -1295,7 +1295,7 @@ xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze';
 }
 
 klucze(){
-echo "sudo apt-get update 2> /tmp/netext73/updateresults"
+echo "sudo apt update 2> /tmp/netext73/updateresults"
 echo "MISSINGKEYS=\$(cat /tmp/netext73/updateresults)"
 echo "if [[ \$MISSINGKEYS ]]; then"
 echo "echo 'Trying to import all the missing keys'"
@@ -1308,11 +1308,11 @@ echo "	let n=n+1"
 echo "done < /tmp/netext73/updateresults"
 echo "fi"
 echo "rm -f /tmp/netext73/updateresults"
-echo "sudo apt-get update"
+echo "sudo apt update"
 }
 
 napraw_klucze(){
-echo "echo -e \"$a4\\n\"; sudo apt-get clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt-get update; sudo rm -rf /tmp/netext73/lists"
+echo "echo -e \"$a4\\n\"; sudo apt clean; sudo mv /var/lib/apt/lists /tmp/netext73; sudo mkdir /var/lib/apt/lists; sudo apt update; sudo rm -rf /tmp/netext73/lists"
 }
 
 stan_baterii(){
@@ -1404,7 +1404,7 @@ done | yad --center --on-top --multi-progress  --title=" $nazwa_skryptu" --bar="
 }
 
 ipv6_off(){
-echo "sudo apt-get autoremove miredo -y && dpkg -l | awk '/^rc/{ print \$2}' | sudo xargs dpkg --purge"
+echo "sudo apt autoremove miredo -y && dpkg -l | awk '/^rc/{ print \$2}' | sudo xargs dpkg --purge"
 echo "echo \"#disable ipv6\" | sudo tee -a /etc/sysctl.conf"
 echo "echo \"net.ipv6.conf.all.disable_ipv6 = 1\" | sudo tee -a /etc/sysctl.conf"
 echo "echo \"net.ipv6.conf.default.disable_ipv6 = 1\" | sudo tee -a /etc/sysctl.conf"
@@ -1413,7 +1413,7 @@ echo "sudo sysctl -p"
 }
 
 ipv6_on(){
-echo "sudo apt-get install miredo -y"
+echo "sudo apt install miredo -y"
 echo "sudo sed -i '/#disable ipv6/d' /etc/sysctl.conf"
 echo "sudo sed -i '/net.ipv6.conf.all.disable_ipv6 = 1/d' /etc/sysctl.conf"
 echo "sudo sed -i '/net.ipv6.conf.default.disable_ipv6 = 1/d' /etc/sysctl.conf"
@@ -1715,7 +1715,7 @@ done
 if [ "$plik" != "" ]; then
 	if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
 		naglowek > instaluj.sh
-		echo "sudo apt-get purge $plik" >> instaluj.sh
+		echo "sudo apt purge $plik" >> instaluj.sh
 		instalacja
 	fi
 fi

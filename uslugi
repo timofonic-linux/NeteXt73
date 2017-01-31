@@ -130,7 +130,7 @@ while [ $petla_duza = "tak" ]; do
 
 				#sprawdzenie zależności
 				if [ "$(which rcconf)" = "" ]; then
-					xterm  -T "rcconf" -e bash -c "sudo apt-get install rcconf -y"
+					xterm  -T "rcconf" -e bash -c "sudo apt install rcconf -y"
 				fi
 				sudo rcconf --list | sort > sysv.txt
 				cat sysv.txt | awk '{print $1}' > nazwy_uslug.txt #nazwa usługi
