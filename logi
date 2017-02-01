@@ -122,7 +122,7 @@ while [ $petla_duza = "tak" ]; do
 				  --tab="nvidia" --tab="amd standard" --tab="intel standard" \
 				  --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
 				  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" \
-				  --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
+				  --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
 
 				rm /tmp/netext73/sumy/pliki.txt -f
 				for i in $(seq 4 16); do

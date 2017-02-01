@@ -152,7 +152,7 @@ if [ $klawisz = 0 ]; then
 		}
 
 		wynik_testu(){
-			yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --form \
+			yad --center --title="$nazwa_skryptu" --width=$((610*$skala)) --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image="/opt/NeteXt73/ikony/NeteXt73.png" --button="gtk-ok:0" --form \
 			--field="uname -r:RO" "$(grep "uname" $1 | cut -d " " -f 2 )" \
 			--field="$(grep "$a0" $1 | sed 's/Doing //'):RO" "YES" \
 			--field="$a1:RO" "$(grep "$a1" $1 | sed 's/.*: *//')" \
@@ -249,7 +249,7 @@ if [ $klawisz = 0 ]; then
 			cat $1 | tr -d "\015" | grep '\[' | sed 's/.*FrameTime://g' | sed 's/ //g' |awk '{print $1}' > kolumna3.txt
 			paste -d " " kolumna1.txt kolumna2.txt kolumna3.txt > kolumny.txt
 			wynik="$(grep "glmark2 Score:" $1 | sed "s/glmark2 Score:[[:space:]]*//g" | sed "s/[[:space:]]//g")"
-			yad --center --title="$nazwa_skryptu" --text="glmark2 score: $wynik" --width=$((880*$skala)) --height=$((780*$skala)) --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --list $(cat kolumny.txt) \
+			yad --center --title="$nazwa_skryptu" --text="glmark2 score: $wynik" --width=$((880*$skala)) --height=$((780*$skala)) --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image="/opt/NeteXt73/ikony/NeteXt73.png" --button="gtk-ok:0" --list $(cat kolumny.txt) \
 			--column="Name" --column="FPS:" --column="FrameTime:"
 				rm *.txt -f
 		}

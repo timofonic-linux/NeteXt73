@@ -152,7 +152,7 @@ if [ "$(uname -m)" = "x86_64" ]; then
 	bit="64bit"
 	bit2="amd64"
 else
-	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/netext.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_STEROWNIKI1"
+	yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/NeteXt73.png" --button="gtk-ok:0" --title="$nazwa_skryptu"  --text="$TEXT_STEROWNIKI1"
 	exit 1
 fi
 
@@ -240,7 +240,7 @@ fi
 }
 
 wersja(){
-dymek -i "/opt/NeteXt73/ikony/netext.png" " " "$nazwa_skryptu" #"$TEXT_INFO1"
+dymek -i "/opt/NeteXt73/ikony/NeteXt73.png" " " "$nazwa_skryptu" #"$TEXT_INFO1"
 }
 
 naglowek(){
@@ -1727,7 +1727,7 @@ fi
 
 #odpalanie strony domowej 
 if [ ! -e ~/.netext73/strona_domowa ]; then
-	yad --center --title="http://www.netext73.pl/p/netext73-poczatek.html" --window-icon="/opt/NeteXt73/ikony/netext.png" --html --uri="http://www.netext73.pl/p/netext73-poczatek.html" --width=$((950*$skala))  --height=$((600*$skala)) --browser
+	yad --center --title="http://www.netext73.pl/p/netext73-poczatek.html" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --html --uri="http://www.netext73.pl/p/netext73-poczatek.html" --width=$((950*$skala))  --height=$((600*$skala)) --browser
 	echo "TRUE" > ~/.netext73/strona_domowa
 fi
 #życzenia świąteczne
@@ -1778,7 +1778,7 @@ proces_zablokowany(){
 }
 
 NeteXt73_root(){
-while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/netext.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
+while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S $1; do
 	if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
 		rm -rf /tmp/netext73
 		sudo -K

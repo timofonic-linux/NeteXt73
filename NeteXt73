@@ -71,7 +71,7 @@ if [ "$skala" = "2" ];then
 else
 	wysokosc="680"
 fi
-yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --window-icon="/opt/NeteXt73/ikony/netext.png" --image-on-top --item-width="$((200*$skala))" --read-dir="/opt/NeteXt73/desktopfiles" --width="$((870*$skala))" --height="$wysokosc" --title="- $nazwa_skryptu -" $klawisze_aktywne
+yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image-on-top --item-width="$((200*$skala))" --read-dir="/opt/NeteXt73/desktopfiles" --width="$((870*$skala))" --height="$wysokosc" --title="- $nazwa_skryptu -" $klawisze_aktywne
 klawisz=$?
 if [ "$klawisz" = "2" ]; then
 	restart

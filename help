@@ -64,7 +64,7 @@ elif [ "$1" = "kontakty" ]; then
 	yad --plug=$KEY --tabnum=6 --form --field="$TEXT_UZYTKOWNIK:RO" "$userek@$(hostname)" --field="$TEXT_CEL_KONTAKTU:CB" "$TEXT_CELE_KONTAKTU"  --field="e-mail" "$EMAIL" --field="$TEXT_TRESC_ZGLOSZENIA:TXT" --field="$TEXT_OCZEKUJE_ODPOWIEDZI:CHK" "$ODP" 1> ${res[5]} &
 	
 	yad --notebook --center --key=$KEY --tab-pos="left" --tab="$TEXT_O" --tab="$TEXT_KONTAKT_Z_AUTORAMI" --tab="$TEXT_LICENCJA" --tab="$TEXT_CHANGELOG" --tab="Changelog $stable" --tab="$TEXT_BUG"  \
-	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/netext.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
+	--title="$nazwa_skryptu1 " --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --on-top --width=$((860*$skala)) --height=$((500*$skala)) --button="$TEXT_WYSLIJ_ZGLOSZENIE:0" --button="$TEXT_ZAMKNIJ:1"
 	klawisz=$?
 	if [ "$klawisz" = "0" ]; then
 		#wycinanie błędów
@@ -77,5 +77,5 @@ elif [ "$1" = "kontakty" ]; then
 		rm ${res[$i]} -f
 	done
 else
-	yad --center --html --browser --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/netext.png"  --uri="$adres_opisu" --width=$((950*$skala)) --height=$((600*$skala))
+	yad --center --html --browser --title="$adres_opisu" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png"  --uri="$adres_opisu" --width=$((950*$skala)) --height=$((600*$skala))
 fi
