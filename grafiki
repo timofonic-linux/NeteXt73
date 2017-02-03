@@ -159,12 +159,12 @@ elif [ "$1" = "mesa3d" ]; then
 				echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
 				echo "sudo apt update" >> instaluj.sh
 				echo "sudo apt install vainfo -y" >> instaluj.sh
-				echo "sudo apt upgrade -y" >> instaluj.sh
+				echo "sudo apt dist-upgrade -y" >> instaluj.sh
 			elif [ "$(echo $ster | grep testing)" != "" ]; then
 				echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
 				echo "sudo apt update" >> instaluj.sh
 				echo "sudo apt install vainfo -y" >> instaluj.sh
-				echo "sudo apt upgrade -y" >> instaluj.sh
+				echo "sudo apt dist-upgrade -y" >> instaluj.sh
 			elif [ "$(echo $ster | grep remove)" != "" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
