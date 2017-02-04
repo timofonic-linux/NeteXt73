@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.03
+-	uprawnienie do katalogu config
 v1.1.02
 -	naprawa instalatora mesy 3d
 -	zmiana apt-get na apt

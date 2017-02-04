@@ -1,3 +1,9 @@
+netext73 (1.1.03) xenial; urgency=medium
+
+  * uprawnienia do katalogu config
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 04 Feb 2017 13:35:51 +0100
+
 netext73 (1.1.02) xenial; urgency=medium
 
   * naprawa instalatora mesy 3d
