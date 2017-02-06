@@ -22,7 +22,7 @@ echo "#!/bin/bash" > /usr/bin/admin
 echo "sudo su" >> /usr/bin/admin
 #autoremove
 echo "#!/bin/bash" > /usr/bin/autoremove
-echo "apt update && apt dist-upgrade && apt autoclean && apt autoremove" >> /usr/bin/autoremove
+echo "apt update && apt dist-upgrade && apt autoremove" >> /usr/bin/autoremove
 #netext73
 echo "#/bin/bash" > /usr/bin/netext73
 echo "cd /opt/NeteXt73 " >> /usr/bin/netext73
