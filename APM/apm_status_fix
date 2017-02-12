@@ -103,5 +103,6 @@ fi
 if [ "$(glxinfo | grep AMD)" != "" ]; then
 	if [ "$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub | grep 'cma=0')" = "" ]; then
 		sed -i '/GRUB_CMDLINE_LINUX=/ s/"$/ cma=0"/' /etc/default/grub
+		update-grub
 	fi
 fi
