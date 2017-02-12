@@ -38,8 +38,15 @@ echo "curl -0 -d title=\$1 -d private=1 -d name=\$userek -d lang=bash -d expire=
 #prawa
 chmod a+x /usr/bin/update /usr/bin/admin /usr/bin/autoremove /usr/bin/netext73 /usr/bin/netext73-paste
 #dodanie do menu
-
 cp /opt/NeteXt73/ikony/NeteXt73.png /usr/share/pixmaps/ -f
 desktop-file-install /opt/NeteXt73/NeteXt73.desktop
+#RADEON fix
+f [ "$(glxinfo | grep AMD)" != "" ]; then
+	if [ "$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub | grep 'cma=0')" = "" ]; then
+		sed -i '/GRUB_CMDLINE_LINUX=/ s/"$/ cma=0"/' /etc/default/grub
+		update-grub
+	fi
+fi
+
 
 exit 0
