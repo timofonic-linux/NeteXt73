@@ -41,7 +41,7 @@ chmod a+x /usr/bin/update /usr/bin/admin /usr/bin/autoremove /usr/bin/netext73 /
 cp /opt/NeteXt73/ikony/NeteXt73.png /usr/share/pixmaps/ -f
 desktop-file-install /opt/NeteXt73/NeteXt73.desktop
 #RADEON fix
-if [ "$(glxinfo | grep AMD)" != "" ]; then
+if [ "$(glxinfo | grep OpenGL | grep AMD)" != "" ]; then
 	if [ "$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub | grep 'cma=0')" = "" ]; then
 		sed -i '/GRUB_CMDLINE_LINUX=/ s/"$/ cma=0"/' /etc/default/grub
 		update-grub
