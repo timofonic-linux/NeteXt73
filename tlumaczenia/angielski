@@ -48,6 +48,7 @@ export TEXT_STEROWANIE_JASNOSCIA="Backlight brightness control"
 export TEXT_JASNOSC_NA_BATT="Backlight on the battery"
 export TEXT_JASNOSC_NA_AC="Backlight on the AC"
 export TEXT_SAMSUNG="Samsung laptop - backlight"
+export TEXT_CPU_MAX_FREQ="CPU Maximum Frequency MHz"
 
 #########################################################################################################################################################################
 #tlumaczenia_backuprepo

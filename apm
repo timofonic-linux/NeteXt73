@@ -138,7 +138,7 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_FIX8:CHK" "$vsync_on" \
 		--field="$TEXT_HIBERNACJA:CHK" "$hibernacja_menu" \
 		--field="$TEXT_SAMSUNG:CHK" "$stan_samsung" \
-		--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1" )
+		--button="gtk-ok:0" --button="CPU-FREQ:2" --button="$TEXT_ZAMKNIJ:1" )
 		klawisz=$?
 		if [ $klawisz = 0 ]; then
 			a=$(echo $aa | cut -d "|" -f 3)
@@ -190,7 +190,30 @@ while [ $petla_duza = "tak" ]; do
 					zmiany_w_APM
 				fi
 			fi
-
+		elif [ $klawisz = 2 ]; then
+			petla_duza="tak"
+			while [ $petla_duza = "tak" ]; do
+				cpu_min=$(( $(cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_min_freq | head -n 1) /1000 ))
+				cpu_max=$(( $(cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq | head -n 1) / 1000 ))
+				cpu_current=$(( $(cat  /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | head -n 1) / 1000 ))
+				aa=$(yad --scale --text="$TEXT_CPU_MAX_FREQ \n" \
+				--title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" \
+				--value=$cpu_current --min-value=$cpu_min --max-value=$cpu_max --mark="$cpu_min"Mhz:$cpu_min --mark="$cpu_max"MHz:$cpu_max --mark=$(($(($cpu_min+$cpu_max))/2))MHz:$(($((cpu_min+$cpu_max))/2)) \
+				--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
+				klawisz=$?
+				if [ $klawisz = 0 ]; then
+						wartosc=$(echo $aa | cut -d "|" -f 1)
+						if [ "$wartosc" = "$cpu_current" ]; then
+							opusc_petle
+						else
+							for i in $(ls /sys/devices/system/cpu/ | grep cpu[0-9]); do
+								echo $(( $wartosc * 1000 )) > /sys/devices/system/cpu/$i/cpufreq/scaling_max_freq
+							done
+						fi
+				else
+					opusc_petle
+				fi
+			done
 		fi
 	fi
 	if [ -z "$aa" ]; then

@@ -1713,7 +1713,7 @@ if [ "$(dpkg -l | awk '{print $2}' | grep $i -x)" != "" ];then
 fi
 done
 if [ "$plik" != "" ]; then
-	if yad --center --question --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
+	if yad --center --question --on-top --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
 		naglowek > instaluj.sh
 		echo "sudo apt purge $plik" >> instaluj.sh
 		instalacja
