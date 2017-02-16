@@ -152,7 +152,12 @@ baza=(
 
 	"ppa:team-xbmc/ppa"
 	"KODI stabilne wydane"
-	"KODI XBMC Stable PPA"
+	"KODI Stable PPA"
+	"kodi"
+	
+	"ppa:team-xbmc/kodi-old"
+	"KODI stabilne dla starszych maszyn"
+	"KODI Stable OLD"
 	"kodi"
 
 	"ppa:mehanik/ksuperkey"

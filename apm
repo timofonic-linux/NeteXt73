@@ -196,7 +196,7 @@ while [ $petla_duza = "tak" ]; do
 				cpu_min=$(( $(cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_min_freq | head -n 1) /1000 ))
 				cpu_max=$(( $(cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq | head -n 1) / 1000 ))
 				cpu_current=$(( $(cat  /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | head -n 1) / 1000 ))
-				aa=$(yad --scale --text="$TEXT_CPU_MAX_FREQ \n" \
+				aa=$(yad --scale --text="$TEXT_CPU_MAX_FREQ \n" --center --on-top \
 				--title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" \
 				--value=$cpu_current --min-value=$cpu_min --max-value=$cpu_max --mark="$cpu_min"Mhz:$cpu_min --mark="$cpu_max"MHz:$cpu_max --mark=$(($(($cpu_min+$cpu_max))/2))MHz:$(($((cpu_min+$cpu_max))/2)) \
 				--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
