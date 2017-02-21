@@ -130,6 +130,14 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 			else
 				zswap_compressor="lz4@lzo@deflate"
 			fi
+			
+			#NvidiaGPU
+			if [ "$(echo $wpis_grub | grep 'pcie_port_pm=off')" != "" ]; then
+				nvidiagpu="TRUE"
+			else
+				nvidiagpu="FALSE"
+			fi
+			
 			#grub 2 lista
 			if [ "$(dpkg -l | grep grub2-common | awk '{print $1}')" = "ii" ] && [ "$(grep menuentry /boot/grub/grub.cfg | grep class | sed '/reco/ d' | sed '/simple/ d' | cut -d "'" -f 2 | grep buntu)" != "" ];then 
 				startowy=$(echo -e "default@"$(grep menuentry /boot/grub/grub.cfg | grep class | sed '/reco/ d' | sed '/simple/ d' | cut -d "'" -f 2 | tr '\n' '@' | sed '$s/.$//')) #lista kerneli/systemów
@@ -168,6 +176,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				--field="$TEXT_BOOT_START:CB" \
 				--field="blk-mq on/off:CHK" \
 				--field="iommu GFX on/off:CHK" \
+				--field="Nvidia GPU on/off:CHK" \
 				"$wpis_grub" \
 				"$menu1" \
 				"$menu2" \
@@ -179,7 +188,8 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				"$zswap_compressor" \
 				"$startowy" \
 				"$blk_mq" \
-				"$iommu" )
+				"$iommu" \
+				"$nvidiagpu" )
 			else
 				menu_rozdz=$(echo $menu_rozdzielczosci | sed "s/$aktualna//" | sed 's/@@/@/')
 				menu5=$(echo "$aktualna$menu_rozdz" | sed 's/@@/@/')
@@ -195,6 +205,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				--field="$TEXT_BOOT_START:CB" \
 				--field="blk-mq on/off:CHK" \
 				--field="iommu GFX on/off:CHK" \
+				--field="Nvidia GPU on/off:CHK" \
 				"$wpis_grub" \
 				"$menu1" \
 				"$menu2" \
@@ -207,7 +218,8 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				"$zswap_compressor" \
 				"$startowy" \
 				"$blk_mq" \
-				"$iommu" )
+				"$iommu" \
+				"$nvidiagpu" )
 			fi
 			if [ $? = 0 ]; then
 				w0=$(echo $acpi_wpis  | cut -d "|" -f 2)				#acpi Linux/Windows pcie_aspm=force
@@ -221,6 +233,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				export starter=$(echo $acpi_wpis  | cut -d "|" -f 10 )		#bootowalne iso
 				export blk_mq=$(echo $acpi_wpis  | cut -d "|" -f 11 )		#blk_mq
 				export iommu=$(echo $acpi_wpis  | cut -d "|" -f 12 )		#iommu
+				export nvgpu=$(echo $acpi_wpis  | cut -d "|" -f 13 )		#nvidiagpu
 				if [ "$menu5" != "" ];then
 					export w5=$(echo $acpi_wpis  | cut -d "|" -f 7)			#rozdzielczość Plymouth
 					export grub_back=$(echo $acpi_wpis  | cut -d "|" -f 8)
@@ -229,6 +242,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 					export starter=$(echo $acpi_wpis  | cut -d "|" -f 11 )		#bootowalne iso
 					export blk_mq=$(echo $acpi_wpis  | cut -d "|" -f 12 )		#blk_mq
 					export iommu=$(echo $acpi_wpis  | cut -d "|" -f 13 )		#iommu
+					export nvgpu=$(echo $acpi_wpis  | cut -d "|" -f 14 )		#nvidiagpu
 				fi
 				#znalezienie wpisu grub na podstawie wytycznych usera
 				if [ "$starter" != "default" ]; then
@@ -273,12 +287,17 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				else
 					w8=" intel_iommu=igfx_off"
 				fi
+				if [ "$nvgpu" = "TRUE" ];then
+					w9=" pcie_port_pm=off"
+				else
+					w9=""
+				fi
 				echo " video=DP-2:d i915.enable_psr=0" | xclip -selection clipboard
 				if [ "$w5" != "" ];then
-					wpis_grub=$(yad --center --on-top --height=$((240*$skala)) --width=$((600*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/grub.png" --form --field="$TEXT_GRUB22:TXT" "$w0$w1$w2$w6$w7$w8" --field="$TEXT_ROZDZIELCZOSC GRUB:RO" --field="$TEXT_ROZDZIELCZOSC Plymouth:RO" --field="$TEXT_BOOT_START:RO" "$w4" "$w5" "$starter")
+					wpis_grub=$(yad --center --on-top --height=$((240*$skala)) --width=$((600*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/grub.png" --form --field="$TEXT_GRUB22:TXT" "$w0$w1$w2$w6$w7$w8$w9" --field="$TEXT_ROZDZIELCZOSC GRUB:RO" --field="$TEXT_ROZDZIELCZOSC Plymouth:RO" --field="$TEXT_BOOT_START:RO" "$w4" "$w5" "$starter")
 					wpis_grub=$(echo $wpis_grub | cut -d "|" -f 1)
 				else
-					wpis_grub=$(yad --center --on-top --height=$((240*$skala)) --width=$((600*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/grub.png" --form --field="$TEXT_GRUB22:TXT" "$w0$w1$w2$w6$w7$w8" --field="$TEXT_ROZDZIELCZOSC GRUB:RO" --field="$TEXT_BOOT_START:RO" "$w4" "$starter")
+					wpis_grub=$(yad --center --on-top --height=$((240*$skala)) --width=$((600*$skala)) --button="gtk-ok:0" --button="$TEXT_POWROT:1" --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/grub.png" --form --field="$TEXT_GRUB22:TXT" "$w0$w1$w2$w6$w7$w8$w9" --field="$TEXT_ROZDZIELCZOSC GRUB:RO" --field="$TEXT_BOOT_START:RO" "$w4" "$starter")
 					wpis_grub=$(echo $wpis_grub | cut -d "|" -f 1)
 				fi
 				if [ "$wpis_grub" != "" ];then

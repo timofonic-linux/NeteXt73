@@ -1,5 +1,8 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.05
+-	kręciołek przy trim
+-	grub - nvidia GPU check
 v1.1.04
 -	radeon fix w grub
 -	cpu max freq

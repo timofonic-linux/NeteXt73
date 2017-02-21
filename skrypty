@@ -408,8 +408,17 @@ if [ $klawisz = 0 ]; then
 			instalacja3 BadBlockTest
 		elif [ "$klawisz" = "4" ];then
 			naglowek > instaluj.sh
+			echo "sudo fstrim -v / &" >> instaluj.sh
 			echo "echo 'Work in progress'" >> instaluj.sh
-			echo "sudo fstrim -v /" >> instaluj.sh
+			echo "pid=\$! # Process Id of the previous running command" >> instaluj.sh
+			echo "spin='-\|/'" >> instaluj.sh
+			echo "i=0" >> instaluj.sh
+			echo "while kill -0 \$pid 2>/dev/null" >> instaluj.sh
+			echo "do" >> instaluj.sh
+			echo "i=\$(( (i+1) %4 ))" >> instaluj.sh
+			echo "printf \"\r\${spin:\$i:1}\"" >> instaluj.sh
+			echo "sleep .1" >> instaluj.sh
+			echo "done" >> instaluj.sh
 			instalacja3 Trim
 		fi
 		rm -f /tmp/netext73/*.txt 
