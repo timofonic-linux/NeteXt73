@@ -164,7 +164,7 @@ else
 	export katalog_apm="/etc/pm/power.d/advanced_power_management_by_ext73_*"
 
 fi
-export wersja_apm=$(ls /opt/NeteXt73/APM/advanced_power_management_by_ext73_* | cut -d '_' -f 6 | tail -n 1 | sed 's/.tar.gz//')
+export wersja_apm=$(ls /opt/NeteXt73/APM/advanced_power_management_by_ext73_* | cut -d '_' -f 6 | tail -n 1 | sed 's/.tar.xz//')
 
 #premium
 if [ -e ~/.netext73/kernel_premium ]; then
@@ -364,7 +364,7 @@ sudo mkdir -p /etc/apm-ext73
 sudo rm -f /etc/apm-ext73/*
 mkdir /tmp/apm-ext73 -p
 rm /tmp/apm-ext73/* -f
-tar -xvzf /opt/NeteXt73/APM/advanced_power_management_by_ext73_$wersja_apm.tar.gz -C /tmp/apm-ext73/
+tar -Jxf /opt/NeteXt73/APM/advanced_power_management_by_ext73_$wersja_apm.tar.xz -C /tmp/apm-ext73/
 if [ "$apmik" = "stary" ]; then
 	#przegrywanie plików APM
 	sudo cp /tmp/apm-ext73/advanced_power_management* /etc/pm/power.d/
@@ -598,6 +598,14 @@ if [ "$(cat ~/.netext73/apm_status | grep jasnosc | grep TRUE)" != "" ] && [ "$(
 else
 		sudo sed -i 's/.*SUBSYSTEM/#SUBSYSTEM/g' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
 fi
+#echo 128000 > /proc/sys/vm/min_free_kbytes
+if [ "$(cat ~/.netext73/apm_status | grep min_free_kbytes | grep TRUE)" != "" ]; then
+		sudo sed -i 's/.*min_free_kbytes/      echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
+		echo 128000 > /proc/sys/vm/min_free_kbytes
+else
+		sudo sed -i 's/.*min_free_kbytes/      #echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
+		echo 65000 > /proc/sys/vm/min_free_kbytes
+fi
 }
 
 apm_zmiana(){
@@ -704,6 +712,16 @@ else
 	sudo modprobe samsung_laptop
 	sudo sed -i 's/.*rmmod samsung_laptop/        # \/sbin\/rmmod samsung_laptop/g' $katalog_apm
 fi
+
+#echo 128000 > /proc/sys/vm/min_free_kbytes
+if [ "$stan_min_free_kbytes" = "TRUE" ]; then
+		sudo sed -i 's/.*min_free_kbytes/      echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
+		echo 128000 > /proc/sys/vm/min_free_kbytes
+else
+		sudo sed -i 's/.*min_free_kbytes/      #echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
+		echo 65000 > /proc/sys/vm/min_free_kbytes
+fi
+
 }
 
 stan_apm(){
@@ -840,6 +858,13 @@ stan_apm_config(){
 	else
 		export stan_samsung="TRUE"
 	fi
+	
+	#echo 128000 > /proc/sys/vm/min_free_kbytes
+	if [ "$(cat $katalog_apm | grep -e "#.*min_free_kbytes")" != "" ]; then
+		export stan_min_free_kbytes="FALSE"
+	else
+		export stan_min_free_kbytes="TRUE"
+	fi
 	#jasność
 	katalog_jasnosc=$(ls /sys/class/backlight | head -n 1)
 	if [ "$katalog_jasnosc" != "" ] && [ -e /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules ] && [ "$(grep '#SUBSYSTEM' /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules)" = "" ]; then
@@ -861,6 +886,7 @@ stan_apm_config(){
 	export hibernacja_menu_przed=$hibernacja_menu
 	export vsync_on_przed=$vsync_on
 	export stan_samsung_przed=$stan_samsung
+	export stan_min_free_kbytes_przed=$stan_min_free_kbytes
 
 	#wysłanie danych do configu
 	if [ "$1" = "czeki" ]; then
@@ -883,6 +909,7 @@ stan_apm_config(){
 		echo "vsync_on 		$vsync_on" >> ~/.netext73/apm_status
 		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
 		echo "stan_samsung 	$stan_samsung" >> ~/.netext73/apm_status
+		echo "stan_min_free_kbytes $stan_min_free_kbytes"  >> ~/.netext73/apm_status
 	fi
 }
 

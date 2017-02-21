@@ -3,6 +3,7 @@
 v1.1.05
 -	kręciołek przy trim
 -	grub - nvidia GPU check
+-	zmiana kompresji plików APM
 v1.1.04
 -	radeon fix w grub
 -	cpu max freq
