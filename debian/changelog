@@ -1,3 +1,9 @@
+netext73 (1.1.06) xenial; urgency=medium
+
+  * APM 5.4
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 22 Feb 2017 20:02:56 +0100
+
 netext73 (1.1.05) xenial; urgency=medium
 
   * grub Nvidia GPU check
