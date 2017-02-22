@@ -176,7 +176,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				--field="$TEXT_BOOT_START:CB" \
 				--field="blk-mq on/off:CHK" \
 				--field="iommu GFX on/off:CHK" \
-				--field="Nvidia GPU on/off:CHK" \
+				--field="Nvidia GPU kernel fix on/off:CHK" \
 				"$wpis_grub" \
 				"$menu1" \
 				"$menu2" \
@@ -205,7 +205,7 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 				--field="$TEXT_BOOT_START:CB" \
 				--field="blk-mq on/off:CHK" \
 				--field="iommu GFX on/off:CHK" \
-				--field="Nvidia GPU on/off:CHK" \
+				--field="Nvidia GPU kernel fix on/off:CHK" \
 				"$wpis_grub" \
 				"$menu1" \
 				"$menu2" \
