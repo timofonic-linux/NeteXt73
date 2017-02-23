@@ -66,12 +66,10 @@ if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73
 	if [ -e /home/*/.local/share/Steam/ ]; then
 	    rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 
 	    rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
-		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6.0.22 /usr/lib/x86_64-linux-gnu/ 
 	    cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6.0.22 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 	    cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
-		
+		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 	fi
 else
 	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 -f
