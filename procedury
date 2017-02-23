@@ -604,7 +604,7 @@ if [ "$(cat ~/.netext73/apm_status | grep min_free_kbytes | grep TRUE)" != "" ];
 		echo 128000 > /proc/sys/vm/min_free_kbytes
 else
 		sudo sed -i 's/.*min_free_kbytes/      #echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
-		echo 65000 > /proc/sys/vm/min_free_kbytes
+		echo 67584 > /proc/sys/vm/min_free_kbytes
 fi
 }
 
@@ -719,7 +719,7 @@ if [ "$stan_min_free_kbytes" = "TRUE" ]; then
 		echo 128000 > /proc/sys/vm/min_free_kbytes
 else
 		sudo sed -i 's/.*min_free_kbytes/      #echo 128000 > \/proc\/sys\/vm\/min_free_kbytes/g' $katalog_apm
-		echo 65000 > /proc/sys/vm/min_free_kbytes
+		echo 67584 > /proc/sys/vm/min_free_kbytes
 fi
 
 }
