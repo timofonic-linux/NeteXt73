@@ -478,7 +478,7 @@ fi
 #profil apm
 if [ -e ~/.netext73/apm_status ]; then
 	aktualny="$(cat ~/.netext73/apm_status | head -n 1)"
-	if [ "$aktualny" = "intel-performance" ] || [ "$aktualny" = "intel-powersave" ] || [ "$aktualny" = "conservative-conservative" ] || [ "$aktualny" = "ondemand-ondemand" ] || [ "$aktualny" = "performance-conservative" ] || [ "$aktualny" = "performance-ondemand)" ];then
+	if [ "$aktualny" = "intel-performance" ] || [ "$aktualny" = "intel-powersave" ] || [ "$aktualny" = "conservative-conservative" ] || [ "$aktualny" = "ondemand-ondemand" ] || [ "$aktualny" = "performance-conservative" ] || [ "$aktualny" = "performance-ondemand" ];then
 		if [ "$apmik" = "stary" ]; then
 			sudo chmod a-x /etc/pm/power.d/*
 			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_$aktualny*
@@ -486,12 +486,12 @@ if [ -e ~/.netext73/apm_status ]; then
 		elif [ "$apmik" = "nowy" ]; then
 			katalog1="/etc/udev/rules.d/50-udev-apm-ext73.rules"
 			katalog2="/etc/rc.local"
-			sudo sed -i "s/conservative-conservative/$aktualny/g" $katalog1 $katalog2
-			sudo sed -i "s/ondemand-ondemand/$aktualny/g" $katalog1 $katalog2
-			sudo sed -i "s/intel-performance/$aktualny/g" $katalog1 $katalog2
-			sudo sed -i "s/intel-powersave/$aktualny/g" $katalog1 $katalog2
-			sudo sed -i "s/performance-conservative/$aktualny/g" $katalog1 $katalog2
-			sudo sed -i "s/performance-ondemand/$aktualny/g" $katalog1 $katalog2
+			sudo sed -i "s/conservative-conservative_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+			sudo sed -i "s/ondemand-ondemand_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+			sudo sed -i "s/intel-performance_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+			sudo sed -i "s/intel-powersave_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+			sudo sed -i "s/performance-conservative_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+			sudo sed -i "s/performance-ondemand_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
 		fi
 	fi
 fi
