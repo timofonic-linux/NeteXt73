@@ -1,3 +1,9 @@
+netext73 (1.1.07) xenial; urgency=medium
+
+  * uproszczenie kodu zmiany ustawień APM
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 01 Mar 2017 11:01:37 +0100
+
 netext73 (1.1.06) xenial; urgency=medium
 
   * APM 5.4
