@@ -568,10 +568,10 @@ if [ "$apmik" = "nowy" ]; then
 fi
 #zmiana vsync
 if [ "$vsync_on" = "FALSE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep vsync | grep FALSE)" != "" ]; }; then
-	sudo cp /opt/NeteXt73/APM/drirc /home/$(cat /tmp/netext73/userek)/.drirc -f
-	sudo chown $(cat /tmp/netext73/userek):$(cat /tmp/netext73/userek) /home/$(cat /tmp/netext73/userek)/.drirc
+	sudo cp /opt/NeteXt73/APM/drirc ~/.drirc -f
+	sudo chown $userek:$userek ~/.drirc
 elif [ "$vsync_on" = "TRUE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep vsync | grep TRUE)" != "" ]; }; then
-	sudo rm -f /home/$(cat /tmp/netext73/userek)/.drirc
+	sudo rm -f ~/.drirc
 fi
 #samsung_laptop
 if [ "$stan_samsung" = "TRUE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep stan_samsung | grep TRUE)" != "" ]; }; then
