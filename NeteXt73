@@ -29,7 +29,7 @@ source /opt/NeteXt73/procedury
 #########################################################################################################################################################################
 
 #zapobieganie dwukrotnemu uruchomieniu
-if [ "$(pgrep NeteXt73 | wc -l )" -gt "4" ]; then
+if [ "$(pgrep NeteXt73 | wc -l )" -gt "4" ] || [ "$(ps -aux | grep NeteXt73 | grep Root-mode)" != '' ]; then
 	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
 	exit 1
 fi

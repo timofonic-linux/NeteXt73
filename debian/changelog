@@ -1,3 +1,9 @@
+netext73 (1.1.08) xenial; urgency=medium
+
+  * zapobieganie podwójnemu odpaleniu programu
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 06 Mar 2017 19:57:38 +0100
+
 netext73 (1.1.07) xenial; urgency=medium
 
   * uproszczenie kodu zmiany ustawień APM

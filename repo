@@ -100,6 +100,11 @@ baza=(
 	"Firefox Beta - the official repository of Firefox Beta"
 	"firefox"
 
+	"ppa:nathan-renniewaldock/flux"
+	"f.lux"
+	"f.lux"
+	"fluxgui"
+	
 	"ppa:otto-kesselgulasch/gimp"
 	"GIMP - pakiet graficzny"
 	"GIMP - graphics package"
