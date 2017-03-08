@@ -2,6 +2,7 @@
 
 v1.1.08
 - 	zapobieganie podwójnemu odaleniu programu
+-	update-grub -> autoremove
 v1.1.07
 -	uproszczenie kodu zarządzania APM
 v1.1.06
