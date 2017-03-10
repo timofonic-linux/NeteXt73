@@ -79,7 +79,7 @@ export wersja_apm4="advanced_power_management_by_ext73_intel-powersave"
 export wersja_apm5="advanced_power_management_by_ext73_performance-conservative"
 export wersja_apm6="advanced_power_management_by_ext73_performance-ondemand"
 #lista kerneli premium i standard
-export lista_kerneli_premium="silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver"
+export lista_kerneli_premium="silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver|ryzen"
 export lista_kerneli_standard="intelstandard|amdstandard"
 #nazwy ikon do dymków
 export error1="dialog-error"

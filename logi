@@ -102,7 +102,7 @@ while [ $petla_duza = "tak" ]; do
 			cat /tmp/netext73/sumy/pliki.txt | sort -r | uniq > /tmp/netext73/sumy/pakiety.txt
 			rm -f /tmp/netext73/sumy/pliki.txt /tmp/netext73/sumy/wydane.txt /tmp/netext73/sumy/lista.txt
 			KEY1="$(echo $RANDOM)"
-				for i in $(seq 4 16); do
+				for i in $(seq 4 17); do
 					res[i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 				done
 				yad --plug=$KEY1 --tabnum=1 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt  | grep nvidia | grep -v -E "nvidia-optimus|nvidia-settings.*|libnvidia-") --column "$TEXT_ZNITY1" --column "nvidia" 1> ${res[4]} &
@@ -116,12 +116,12 @@ while [ $petla_duza = "tak" ]; do
 				yad --plug=$KEY1 --tabnum=9 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "brazos"  ) --column "$TEXT_ZNITY1" --column "kernel brazos" 1> ${res[12]} &
 				yad --plug=$KEY1 --tabnum=10 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "bulldozer" ) --column "$TEXT_ZNITY1" --column "kernel bulldozer" 1> ${res[13]} &
 				yad --plug=$KEY1 --tabnum=11 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "piledriver" ) --column "$TEXT_ZNITY1" --column "kernel piledriver" 1> ${res[14]} &
-				yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernle skylake" 1> ${res[15]} &
-
+				yad --plug=$KEY1 --tabnum=12 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "skylake" ) --column "$TEXT_ZNITY1" --column  "kernel skylake" 1> ${res[15]} &
+				yad --plug=$KEY1 --tabnum=13 --checklist --list $(cat /tmp/netext73/sumy/pakiety.txt | grep -E "ryzen" ) --column "$TEXT_ZNITY1" --column  "kernel ryzen" 1> ${res[16]} &
 				yad --notebook --key=$KEY1 --tab-pos="left" --center --title="$nazwa_skryptu1 " \
 				  --tab="nvidia" --tab="amd standard" --tab="intel standard" \
 				  --tab="sandy" --tab="ivy" --tab="haswell" --tab="broadwell" --tab="silvermont" \
-				  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" \
+				  --tab="brazos" --tab="buldozer" --tab="piledriver" --tab="skylake" --tab="ryzen" \
 				  --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --on-top --width=$((860*$skala)) --height=$((390*$skala)) --button="$TEXT_ZAMKNIJ:1"
 
 				rm /tmp/netext73/sumy/pliki.txt -f

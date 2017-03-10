@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.09
+-	przygotowanie programu pod obsługę procesora RYZEN
 v1.1.08
 - 	zapobieganie podwójnemu odaleniu programu
 -	update-grub -> autoremove
