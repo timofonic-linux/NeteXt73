@@ -57,7 +57,7 @@ if [ "$1" = "nvidia" ]; then
 	katalog_pulpit="/home/$userek/$(grep XDG_DESKTOP_DIR /home/$userek/.config/user-dirs.dirs | cut -d '/' -f 2 | cut -d '"' -f 1)"
 
 	#sprawdzanie Optimusa
-	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && { [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ] || [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ] };then
 		if [ "$(ls $katalog_pulpit/ | grep \.desktop)" = "" ]; then
 			menu="--button="gtk-ok:0" --button="$TEXT_POWROT:1" --button="primus-menu-start:2""
 		else
