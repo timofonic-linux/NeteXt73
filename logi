@@ -192,7 +192,7 @@ while [ $petla_duza = "tak" ]; do
 						echo -e "Nvidia Optimus - <b>$TEXT_NOT_INSTALLED</b>" >> system$losowa.log
 					fi
 				fi
-				if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+				if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && { [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ] || [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ]; };then
 					porcik=$(lspci | egrep 'VGA|3D' | grep -i 'nvidia' | awk '{print $1}')
 					if [ "$(cat /proc/acpi/bbswitch | grep $porcik | grep -i on)" != "" ]; then
 						echo -e "Nvidia Optimus - <b>ON</b>" >> system$losowa.log
