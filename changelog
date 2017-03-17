@@ -3,6 +3,8 @@
 v1.1.10
 -	usuwanie pustych enterów przy modyfikacji grub
 -	wsparcie dla quadro
+-	poprawki w logach dla qudro optimus
+-	poprawki instalatora NV dla kerneli 50.x@4.10.x
 v1.1.09
 -	przygotowanie programu pod obsługę procesora RYZEN
 v1.1.08
