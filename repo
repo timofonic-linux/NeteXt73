@@ -130,22 +130,22 @@ baza=(
 	"ppa:team-xbmc/xbmc-nightly"
 	"KODI wydanie codzienne"
 	"KODI Nightly Builds"
-	"kodi kodi-bin"
+	"kodi kodi-bin kodi-data"
 
 	"ppa:team-xbmc/unstable"
 	"KODI wydanie niestabilne"
 	"KODI Unstable Builds"
-	"kodi kodi-bin"
+	"kodi kodi-bin kodi-data"
 
 	"ppa:team-xbmc/ppa"
 	"KODI stabilne wydane"
 	"KODI Stable PPA"
-	"kodi kodi-bin"
+	"kodi kodi-bin kodi-data"
 	
 	"ppa:team-xbmc/kodi-old"
 	"KODI stabilne dla starszych maszyn"
 	"KODI Stable OLD"
-	"kodi kodi-bin"
+	"kodi kodi-bin kodi-data"
 
 	"ppa:mehanik/ksuperkey"
 	"Ksuperkey - uruchom program uruchamiający za pomocą klawisza SuperKey"
