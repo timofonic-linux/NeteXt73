@@ -423,67 +423,67 @@ else
 					elif [ "${r[$i]}" = "TRUE" ] && [ "${z[$i]}" = "FALSE" ]; then
 					# "kasujemy"
 						if [ "${repo[$i]}" = "ppa:i-nex-development-team/daily" ]; then
-						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
-						      echo "sudo ppa-purge -y ppa:nemh/gambas3" >> instaluj.sh
+						      echo "sudo ppa-purge -y ${repo[$i]}" >> usun.sh
+						      echo "sudo ppa-purge -y ppa:nemh/gambas3" >> usun.sh
 						elif [ "${repo[$i]}" = "deb http://repository.spotify.com stable non-free" ]; then
-						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list"  >> instaluj.sh
-						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list.d/*"  >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list"  >> usun.sh
+						      echo "sudo sed -i '/repository.spotify.com stable/ d' /etc/apt/sources.list.d/*"  >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free" ]; then
-						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list"  >> instaluj.sh
-						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list"  >> usun.sh
+						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list.d/*"  >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						      echo "sudo sed -i '/download.opensuse.org\/repositories\/isv:\/ownCloud/d' /etc/apt/sources.list.d/*"  >> instaluj.sh
-						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo sed -i '/download.opensuse.org\/repositories\/isv:\/ownCloud/d' /etc/apt/sources.list.d/*"  >> usun.sh
+						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud.list"  >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud.list"  >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "deb \[arch=amd64\] http://dl.google.com/linux/chrome/deb/ stable main" ]; then
-						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list"  >> instaluj.sh
-						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list.d/*"  >> instaluj.sh
-						      echo " sudo rm -f /etc/apt/sources.list.d/google-chrome.list*" >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list"  >> usun.sh
+						      echo "sudo sed -i '/deb.*dl.google.com\/linux\/chrome\/deb\/ stable main/ d' /etc/apt/sources.list.d/*"  >> usun.sh
+						      echo " sudo rm -f /etc/apt/sources.list.d/google-chrome.list*" >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "ppa:kubuntu-ppa/backports" ]; then
-						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
+						      echo "sudo ppa-purge -y ${repo[$i]}" >> usun.sh
 					#	elif [ "${repo[$i]}" = "deb http://repo.vivaldi.com/stable/deb/ stable main" ]; then
-					#	      echo "sudo rm /etc/apt/sources.list.d/vivaldi.*" >> instaluj.sh
-					#	      echo "sudo apt purge -f vivaldi-stable" >> instaluj.sh
+					#	      echo "sudo rm /etc/apt/sources.list.d/vivaldi.*" >> usun.sh
+					#	      echo "sudo apt purge -f vivaldi-stable" >> usun.sh
 						elif [ "${repo[$i]}" = "ppa:rebuntu16/avidemux+unofficial" ]; then
-						      echo "sudo rm /etc/apt/sources.list.d/rebuntu16-ubuntu-avidemux*" >> instaluj.sh
-						      echo "sudo apt purge -f avidemux" >> instaluj.txt
+						      echo "sudo rm /etc/apt/sources.list.d/rebuntu16-ubuntu-avidemux*" >> usun.sh
+						      echo "sudo apt purge -f avidemux" >> usun.txt
 						else
-						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
-						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
+						      echo "sudo ppa-purge -y ${repo[$i]}" >> usun.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						fi
 					elif [ "${r[$i]}" = "FALSE" ] && [ "${z[$i]}" = "TRUE" ]; then
 					# "instalujemy"
 						if [ "${repo[$i]}" = "ppa:i-nex-development-team/daily" ]; then
-						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-						    echo "sudo add-apt-repository -y ppa:nemh/gambas3" >> instaluj.sh
-						    echo "sudo apt install -y  ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj1.sh
+						    echo "sudo add-apt-repository -y ppa:nemh/gambas3" >> instaluj1.sh
+						    echo "sudo apt install -y  ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb http://repository.spotify.com stable non-free" ]; then
-						    echo "sudo add-apt-repository -y 'deb http://repository.spotify.com stable non-free'" >> instaluj.sh
-						    echo "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886"  >> instaluj.sh
-						    echo "wget https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
-						    echo "sudo dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj.txt
-						    echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo add-apt-repository -y 'deb http://repository.spotify.com stable non-free'" >> instaluj1.sh
+						    echo "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886"  >> instaluj1.sh
+						    echo "wget https://launchpad.net/ubuntu/+archive/primary/+files/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj1.txt
+						    echo "sudo dpkg -i libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" >> instaluj1.txt
+						    echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "ppa:pipelight/stable" ]; then
-						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-						    echo "sudo apt install --install-recommends pipelight-multi" >> instaluj.txt
-						    echo "sudo pipelight-plugin --update" >> instaluj.txt
-						    echo "sudo pipelight-plugin --enable silverlight" >> instaluj.txt
+						    echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj1.sh
+						    echo "sudo apt install --install-recommends pipelight-multi" >> instaluj1.txt
+						    echo "sudo pipelight-plugin --update" >> instaluj1.txt
+						    echo "sudo pipelight-plugin --enable silverlight" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						    echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj.sh
-						    echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
-						    echo "sudo apt-key add - < Release.key" >> instaluj.sh
-						    echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
+						    echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj1.sh
+						    echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj1.sh
+						    echo "sudo apt-key add - < Release.key" >> instaluj1.sh
+						    echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-							echo "wget -nv https://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj.sh
-							echo "sudo apt-key add - < Release.key" >> instaluj.sh
-							echo "sh -c \"echo 'deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /' > /etc/apt/sources.list.d/owncloud.list\"" >> instaluj.sh
-							echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
+							echo "wget -nv https://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj1.sh
+							echo "sudo apt-key add - < Release.key" >> instaluj1.sh
+							echo "sh -c \"echo 'deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /' > /etc/apt/sources.list.d/owncloud.list\"" >> instaluj1.sh
+							echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "ppa:leolik/leolik" ]; then
 							if [ ! -e ~/.notify-osd ]; then
 								echo "slot-allocation = dynamic" > ~/.notify-osd
@@ -510,39 +510,50 @@ else
 								echo "bubble-close-on-click = 1" >> ~/.notify-osd
 								echo "bubble-as-desktop-bg = 0" >> ~/.notify-osd
 							fi
-							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-							echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
+							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj1.sh
+							echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb \[arch=amd64\] http://dl.google.com/linux/chrome/deb/ stable main" ]; then
-							echo "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list" >> instaluj.sh
-							echo "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -" >> instaluj.sh
-							echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
-							echo "sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list.d/google-chrome.list" >> instaluj.txt
+							echo "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list" >> instaluj1.sh
+							echo "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -" >> instaluj1.sh
+							echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
+							echo "sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list.d/google-chrome.list" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free" ]; then
-							echo "sudo sh -c 'wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -' && sudo sh -c 'echo \"deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free\" >> /etc/apt/sources.list.d/virtualbox.list' " >> instaluj.sh
-							echo "sudo apt install -y ${paczka[$i]} && sudo usermod -aG vboxusers $(cat /tmp/netext73/userek)" >> instaluj.txt
+							echo "sudo sh -c 'wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -' && sudo sh -c 'echo \"deb http://download.virtualbox.org/virtualbox/debian $WERSJA_UBUNTU contrib non-free\" >> /etc/apt/sources.list.d/virtualbox.list' " >> instaluj1.sh
+							echo "sudo apt install -y ${paczka[$i]} && sudo usermod -aG vboxusers $(cat /tmp/netext73/userek)" >> instaluj1.txt
 							jezyczek;case $jezyk in pol*)
 							      #dodanie języka polskiego
-							      echo "wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/qt_pl.qm && wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/VirtualBox_pl.qm && sudo mv qt_pl.qm /usr/share/virtualbox/nls/ && sudo mv VirtualBox_pl.qm /usr/share/virtualbox/nls/" >> instaluj.txt
+							      echo "wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/qt_pl.qm && wget http://admc.ubuntu-pomoc.org/files/vbox-langpack-pl/VirtualBox_pl.qm && sudo mv qt_pl.qm /usr/share/virtualbox/nls/ && sudo mv VirtualBox_pl.qm /usr/share/virtualbox/nls/" >> instaluj1.txt
 							  ;;
 							  esac
 						elif [ "${repo[$i]}" = "ppa:kubuntu-ppa/backports" ]; then
-							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
+							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj1.sh
 						else
-							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj.sh
-							echo "sudo apt install -y ${paczka[$i]}" >> instaluj.txt
+							echo "sudo add-apt-repository -y ${repo[$i]}" >> instaluj1.sh
+							echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						fi
 					fi
 				done
 
-
-				if [ "$(grep 'sudo' instaluj.sh)" != "" ] || [ "$(cat instaluj.txt)" != "" ]; then
-					echo "sudo apt update" >> instaluj.sh
-					cat instaluj.txt >> instaluj.sh
-					echo "sudo apt install -f && sudo apt dist-upgrade -y" >> instaluj.sh
+				if [ -e usun.sh ]; then
+					cat usun.sh >> instaluj.sh
 				fi
+				if [ -e usun.txt ]; then
+					cat usun.txt >> instaluj.sh
+				fi
+				if [ -e usun.sh ] || [ -e usun.txt ]; then
+					echo "sudo apt update" >> instaluj.sh
+				fi
+				if [ -e instaluj1.sh ]; then
+					cat instaluj1.sh >> instaluj.sh
+				fi
+				if [ -e instaluj1.txt ]; then
+					echo "sudo apt update" >> instaluj.sh
+					cat instaluj1.txt >> instaluj.sh
+				fi
+				echo "sudo apt install -f && sudo apt dist-upgrade -y" >> instaluj.sh
 				instalacja
 			fi
-			rm *.txt instaluj.sh -f
+			rm *.txt *.sh -f
 	#########################################################################################################################################################################
 	#instalator pakietów
 		elif [ "$backup" = "$a7" ]; then
