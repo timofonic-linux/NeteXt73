@@ -130,22 +130,22 @@ baza=(
 	"ppa:team-xbmc/xbmc-nightly"
 	"KODI wydanie codzienne"
 	"KODI Nightly Builds"
-	"kodi"
+	"kodi kodi-bin"
 
 	"ppa:team-xbmc/unstable"
 	"KODI wydanie niestabilne"
 	"KODI Unstable Builds"
-	"kodi"
+	"kodi kodi-bin"
 
 	"ppa:team-xbmc/ppa"
 	"KODI stabilne wydane"
 	"KODI Stable PPA"
-	"kodi"
+	"kodi kodi-bin"
 	
 	"ppa:team-xbmc/kodi-old"
 	"KODI stabilne dla starszych maszyn"
 	"KODI Stable OLD"
-	"kodi"
+	"kodi kodi-bin"
 
 	"ppa:mehanik/ksuperkey"
 	"Ksuperkey - uruchom program uruchamiający za pomocą klawisza SuperKey"
@@ -452,9 +452,10 @@ else
 					#	      echo "sudo apt purge -f vivaldi-stable" >> instaluj.sh
 						elif [ "${repo[$i]}" = "ppa:rebuntu16/avidemux+unofficial" ]; then
 						      echo "sudo rm /etc/apt/sources.list.d/rebuntu16-ubuntu-avidemux*" >> instaluj.sh
-						      echo "sudo apt purge -f avidemux" >> instaluj.sh
+						      echo "sudo apt purge -f avidemux" >> instaluj.txt
 						else
 						      echo "sudo ppa-purge -y ${repo[$i]}" >> instaluj.sh
+						      echo "sudo apt purge -y ${paczka[$i]}" >> instaluj.txt
 						fi
 					elif [ "${r[$i]}" = "FALSE" ] && [ "${z[$i]}" = "TRUE" ]; then
 					# "instalujemy"
