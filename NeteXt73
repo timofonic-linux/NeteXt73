@@ -11,7 +11,7 @@ source /opt/NeteXt73/procedury
 #########################################################################################################################################################################
 
 #zapobieganie dwukrotnemu uruchomieniu
-if [ "$(ps -aux | grep yad | grep NeteXt73.png)" ] || [ "$(ps -aux | grep NeteXt73 | grep Root-mode)" != '' ]; then
+if [ "$(ps -aux | grep yad | grep NeteXt73.png | grep -v poczatek.html)" != '' ] || [ "$(ps -aux | grep NeteXt73 | grep Root-mode)" != '' ]; then
 	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
 	exit 1
 fi
