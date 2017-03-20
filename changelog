@@ -3,6 +3,7 @@
 v1.1.11
 -	zapobieganie podwójnemu uruchomieniu programu
 -	repo purge fix
+-	zmiana wielkości okna AMD
 v1.1.10
 -	usuwanie pustych enterów przy modyfikacji grub
 -	wsparcie dla quadro

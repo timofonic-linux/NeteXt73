@@ -48,11 +48,6 @@ else
 		pliki="/opt/NeteXt73/kernel-premium-amd"
 		ikona="linux-premium.png"
 		menu_dodatkowe=""
-		if [ "$skala" = "2" ];then
-			wysokosc="250"
-		else
-			wysokosc="170"
-		fi
 	fi
 	if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
 		menu_dodatkowe="--button="$TEXT_LOKALNE:3" --button="$TEXT_NAGLOWKI:2" --button="$TEXT_PPA:4""
