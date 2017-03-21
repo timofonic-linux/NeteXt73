@@ -1,3 +1,9 @@
+netext73 (1.1.12) xenial; urgency=medium
+
+  * poprawka dla instalatora nv quadro optimus
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 21 Mar 2017 15:33:54 +0100
+
 netext73 (1.1.11) xenial; urgency=medium
 
   * !2xNeteXt

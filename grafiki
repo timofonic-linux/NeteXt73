@@ -14,7 +14,7 @@ instaluj_NV(){
 	naglowek > instaluj.sh
 	nvidia_naglowek >> instaluj.sh
 	#sprawdzanie czy jest nvidia_optimus
-	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
+	if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && { [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ] || [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ]; };then
 		nvidia_optimus >> instaluj.sh
 	else
 		nvidia >> instaluj.sh
