@@ -2,6 +2,7 @@
 
 v1.1.12
 -	poprawka dla instalatora NV quadro optimus
+-	poprawka zależności dla sterowników NV
 v1.1.11
 -	zapobieganie podwójnemu uruchomieniu programu
 -	repo purge fix
