@@ -1,3 +1,9 @@
+netext73 (1.1.13) xenial; urgency=medium
+
+  * testowe wsparcie dla 17.04
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 22 Mar 2017 13:25:20 +0100
+
 netext73 (1.1.12) xenial; urgency=medium
 
   * poprawka dla instalatora nv quadro optimus
