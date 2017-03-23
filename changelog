@@ -2,6 +2,7 @@
 
 v1.1.13
 -	włączenie testowe wsparcia dla zesty 17.04
+-	poprawka dla podwójnego uruchamiania dla dymków yad
 v1.1.12
 -	poprawka dla instalatora NV quadro optimus
 -	poprawka zależności dla sterowników NV
