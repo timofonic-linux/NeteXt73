@@ -1,3 +1,9 @@
+netext73 (1.1.14) xenial; urgency=medium
+
+  * usunięcie wsparcia dla 14.04
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 02 Apr 2017 10:28:36 +0200
+
 netext73 (1.1.13) xenial; urgency=medium
 
   * testowe wsparcie dla 17.04

@@ -294,13 +294,11 @@ while [ $petla_duza = "tak" ]; do
 				ls /usr/lib/pm-utils/power.d/ -la | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
 				echo -e "\nls /etc/apm/event.d/ -la" >> apmsystem$losowa.log
 				ls -la /etc/apm/event.d/ | grep -v drwxr-xr-x | sed '1s/.*//' >> apmsystem$losowa.log
-				if [ "$apmik" = "nowy" ]; then
-					cat /etc/systemd/system/hibernate.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-					cat /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-					cat /etc/systemd/system/suspend.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
-					cat /etc/udev/rules.d/50-udev-apm.rules  >> apmsystem$losowa.log
-				fi
-
+				cat /etc/systemd/system/hibernate.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+				cat /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+				cat /etc/systemd/system/suspend.target.wants/apm_ext73-resume.service >> apmsystem$losowa.log
+				cat /etc/udev/rules.d/50-udev-apm.rules  >> apmsystem$losowa.log
+			
 
 				echo -e "##############################################################################################" >> apmsystem$losowa.log
 				cat ~/.netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log

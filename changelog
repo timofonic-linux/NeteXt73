@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.14
+-	usunięcie wsparcia dla 14.04
 v1.1.13
 -	włączenie testowe wsparcia dla zesty 17.04
 -	poprawka dla podwójnego uruchamiania dla dymków yad
@@ -19,7 +21,7 @@ v1.1.10
 v1.1.09
 -	przygotowanie programu pod obsługę procesora RYZEN
 v1.1.08
-- 	zapobieganie podwójnemu odaleniu programu
+- 	zapobieganie podwójnemu odpaleniu programu
 -	update-grub -> autoremove
 v1.1.07
 -	uproszczenie kodu zarządzania APM
