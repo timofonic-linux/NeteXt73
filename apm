@@ -28,7 +28,17 @@ cd /tmp/netext73
 rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
-
+#zapamiętanie configu jeżeli był niepełen config
+if [ -e  ~/.netext73/apm_status ] && [ "$(cat ~/.netext73/apm_status | wc -l)" != "14" ]; then
+	#sprawdzanie czy jest włączony jakiś APM
+	if [ "$apmik" = "stary" ]; then
+		if [ -e /etc/pm/power.d ] && [ "$(ls /etc/pm/power.d | grep advanced_power_management_by_ext73)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
+			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_conservative*
+		fi
+		#sprawdzenie stanu czeków
+		stan_apm_config
+	fi
+fi
 petla_duza="tak"
 while [ $petla_duza = "tak" ]; do
 	#stan apm config
