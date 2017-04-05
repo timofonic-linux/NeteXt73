@@ -177,7 +177,7 @@ else
 fi
 
 if [ ! -e $download ]; then
-      mkdir -p $download
+	download="/home/$userek/"
 fi
 
 #HiDPI

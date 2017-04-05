@@ -3,6 +3,7 @@
 v1.1.14
 -	usunięcie wsparcia dla 14.04
 -	przywrócenie wsparcia dla 14.04
+-	naprawa błędu tworzenia katadlogu download w home
 v1.1.13
 -	włączenie testowe wsparcia dla zesty 17.04
 -	poprawka dla podwójnego uruchamiania dla dymków yad
