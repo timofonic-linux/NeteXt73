@@ -107,9 +107,9 @@ while [ $petla_duza = "tak" ]; do
 		--field="$TEXT_PLANISTA:CB" "$hdd_scheduler_menu" \
 		--field="$(echo $TEXT_PLANISTA | sed 's/HDD/SSD\/FLASH/'):CB" "$ssd_scheduler_menu" \
 		--field='':LBL "" \
-                --field="$TEXT_STEROWANIE_JASNOSCIA:CHK" "$jasnosc_dziala" \
+        --field="$TEXT_STEROWANIE_JASNOSCIA:CHK" "$jasnosc_dziala" \
 		--field="$TEXT_JASNOSC_NA_BATT:SCL" "$wartosc_batt" \
-                --field="$TEXT_JASNOSC_NA_AC:SCL" "$wartosc_ac" \
+        --field="$TEXT_JASNOSC_NA_AC:SCL" "$wartosc_ac" \
         --field='':LBL "" \
 		--field="$TEXT_FIX1:CHK" "$wifi_batt_fix" \
 		--field="$TEXT_FIX2:CHK" "$wifi_batt_on" \
@@ -187,14 +187,14 @@ while [ $petla_duza = "tak" ]; do
 				--button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ $klawisz = 0 ]; then
-						wartosc=$(echo $aa | cut -d "|" -f 1)
-						if [ "$wartosc" = "$cpu_current" ]; then
-							opusc_petle
-						else
-							for i in $(ls /sys/devices/system/cpu/ | grep cpu[0-9]); do
-								echo $(( $wartosc * 1000 )) > /sys/devices/system/cpu/$i/cpufreq/scaling_max_freq
-							done
-						fi
+					wartosc=$(echo $aa | cut -d "|" -f 1)
+					if [ "$wartosc" = "$cpu_current" ]; then
+						opusc_petle
+					else
+						for i in $(ls /sys/devices/system/cpu/ | grep cpu[0-9]); do
+							echo $(( $wartosc * 1000 )) > /sys/devices/system/cpu/$i/cpufreq/scaling_max_freq
+						done
+					fi
 				else
 					opusc_petle
 				fi
