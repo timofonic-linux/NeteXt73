@@ -628,6 +628,29 @@ fi
 }
 
 stan_apm_config(){
+#wysłanie danych do configu
+if [ "$1" = "czeki" ]; then
+		if [ "$apmik" = "stary" ]; then
+			ls /etc/pm/power.d/ -Fl | grep '*' | awk '{print $9}' | sed -e 's/*//' -e 's/advanced_power_management_by_ext73_//' -e 's/_v.*//' > ~/.netext73/apm_status
+		elif [ "$apmik" = "nowy" ]; then
+			cat /etc/udev/rules.d/50-udev-apm-ext73.rules | grep advanced_power_management_by_ext73_ | head -n 1 | cut -d '_' -f 9 > ~/.netext73/apm_status
+		fi
+		echo "hdd_scheduler 	$hdd_scheduler" >> ~/.netext73/apm_status
+		echo "ssd_scheduler 	$ssd_scheduler" >> ~/.netext73/apm_status
+		echo "jasnosc 		$jasnosc_dziala" >> ~/.netext73/apm_status
+		echo "wifi_batt_fix 	$wifi_batt_fix" >> ~/.netext73/apm_status
+		echo "wifi_batt_on 	$wifi_batt_on" >> ~/.netext73/apm_status
+		echo "bt_batt_on 	$bt_batt_on">> ~/.netext73/apm_status
+		echo "rts5139_on 	$rts5139_on" >> ~/.netext73/apm_status
+		echo "wifi_n_on 	$wifi_n_on" >> ~/.netext73/apm_status
+
+		echo "turbo_batt_on 	$turbo_batt_on" >> ~/.netext73/apm_status
+		echo "turbo_ac_on 	$turbo_ac_on" >> ~/.netext73/apm_status
+		echo "vsync_on 		$vsync_on" >> ~/.netext73/apm_status
+		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
+		echo "stan_samsung 	$stan_samsung" >> ~/.netext73/apm_status
+		echo "stan_min_free_kbytes $stan_min_free_kbytes"  >> ~/.netext73/apm_status
+else
 	#sprawdzenie stanu APM wifi FIX
 	if [ "$(grep 'echo auto > $ii' $katalog_apm)" = "" ];then
 		export wifi_batt_fix="FALSE"
@@ -752,29 +775,7 @@ stan_apm_config(){
 	export stan_samsung_przed=$stan_samsung
 	export stan_min_free_kbytes_przed=$stan_min_free_kbytes
 
-	#wysłanie danych do configu
-	if [ "$1" = "czeki" ]; then
-		if [ "$apmik" = "stary" ]; then
-			ls /etc/pm/power.d/ -Fl | grep '*' | awk '{print $9}' | sed -e 's/*//' -e 's/advanced_power_management_by_ext73_//' -e 's/_v.*//' > ~/.netext73/apm_status
-		elif [ "$apmik" = "nowy" ]; then
-			cat /etc/udev/rules.d/50-udev-apm-ext73.rules | grep advanced_power_management_by_ext73_ | head -n 1 | cut -d '_' -f 9 > ~/.netext73/apm_status
-		fi
-		echo "hdd_scheduler 	$hdd_scheduler" >> ~/.netext73/apm_status
-		echo "ssd_scheduler 	$ssd_scheduler" >> ~/.netext73/apm_status
-		echo "jasnosc 		$jasnosc_dziala" >> ~/.netext73/apm_status
-		echo "wifi_batt_fix 	$wifi_batt_fix" >> ~/.netext73/apm_status
-		echo "wifi_batt_on 	$wifi_batt_on" >> ~/.netext73/apm_status
-		echo "bt_batt_on 	$bt_batt_on">> ~/.netext73/apm_status
-		echo "rts5139_on 	$rts5139_on" >> ~/.netext73/apm_status
-		echo "wifi_n_on 	$wifi_n_on" >> ~/.netext73/apm_status
-
-		echo "turbo_batt_on 	$turbo_batt_on" >> ~/.netext73/apm_status
-		echo "turbo_ac_on 	$turbo_ac_on" >> ~/.netext73/apm_status
-		echo "vsync_on 		$vsync_on" >> ~/.netext73/apm_status
-		echo "hibernacja 	$hibernacja_menu" >> ~/.netext73/apm_status
-		echo "stan_samsung 	$stan_samsung" >> ~/.netext73/apm_status
-		echo "stan_min_free_kbytes $stan_min_free_kbytes"  >> ~/.netext73/apm_status
-	fi
+fi
 }
 
 apm_usun(){

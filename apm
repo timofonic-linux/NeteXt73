@@ -146,7 +146,7 @@ while [ $petla_duza = "tak" ]; do
 			export hibernacja_menu=$(echo $aa | cut -d "|" -f 20)
 			export stan_samsung=$(echo $aa | cut -d "|" -f 21)
 			export stan_min_free_kbytes=$(echo $aa | cut -d "|" -f 22)
-	       if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
+			if [ "$jasnosc_dziala" = "TRUE" ] && [ "$katalog_jasnosc" != "" ]; then
 				wart_batt=$(awk "BEGIN{print int(($wart_batt1*$skala_jasnosci/$wartosc_max)+0.5)}")
 				wart_ac=$(awk "BEGIN{print int(($wart_ac1*$skala_jasnosci/$wartosc_max)+0.5)}")
 				sudo sed -i "/#ac/ s/echo.*>/echo $wart_ac >/" /etc/apm-ext73/brightness
