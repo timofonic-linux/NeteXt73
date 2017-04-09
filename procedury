@@ -1537,6 +1537,7 @@ kill_yad(){
 }
 
 instaluj_gcc(){
+export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //')
 if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/"
 	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep binutils) -C /opt/"
@@ -1550,7 +1551,7 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "if [ \"\$(lsb_release -cr | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo $WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
-	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0"
+	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libgsl /usr/lib/libgsl.so.0"
 	echo "fi"
 	echo "sudo ldconfig"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
@@ -1564,7 +1565,7 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/c++ /usr/bin/c++"
 	echo "if [ \"\$(lsb_release -cr | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo $WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
-	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libgsl.so.19.0.0 /usr/lib/libgsl.so.0"
+	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/wersja_libgsl /usr/lib/libgsl.so.0"
 	echo "fi"
 	echo "sudo ldconfig"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
