@@ -1537,7 +1537,7 @@ kill_yad(){
 }
 
 instaluj_gcc(){
-export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //')
+export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //' | head -n 1)
 if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/"
 	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep binutils) -C /opt/"
