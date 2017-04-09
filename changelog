@@ -1,5 +1,8 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.15
+-	usunięcie z zależności libisl13
+-	poprawki linkowania gcc
 v1.1.14
 -	usunięcie wsparcia dla 14.04
 -	przywrócenie wsparcia dla 14.04
