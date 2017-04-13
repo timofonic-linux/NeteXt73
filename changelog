@@ -3,6 +3,7 @@
 v1.1.15
 -	usunięcie z zależności libisl13
 -	poprawki linkowania gcc
+-	poprawka w sterowaniu jasnością APM
 v1.1.14
 -	usunięcie wsparcia dla 14.04
 -	przywrócenie wsparcia dla 14.04
