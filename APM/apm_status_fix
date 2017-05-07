@@ -100,3 +100,4 @@ if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i Ge
 	fi
 	rm -rf /tmp/netext73
 fi
+

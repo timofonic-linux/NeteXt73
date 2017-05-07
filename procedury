@@ -95,8 +95,8 @@ case `lsb_release -cs` in
 esac
 
 #adres serwera
-export adres_glowny="ftp://37.59.165.105"
-export adres_logi="http://37.59.165.105/htdocs/api/create?apikey=dodawanie_wpisow"
+export adres_glowny="ftp://212.59.240.218"
+export adres_logi="http://212.59.240.218/htdocs/api/create?apikey=dodawanie_wpisow"
 export adres_sterownikow="$adres_glowny/sterowniki/"
 
 #sumy sumy kontrolne
