@@ -2,6 +2,7 @@
 
 v1.1.16
 -	zmiana serwera
+-	poprawka netext73-paste
 v1.1.15
 -	usunięcie z zależności libisl13
 -	poprawki linkowania gcc
