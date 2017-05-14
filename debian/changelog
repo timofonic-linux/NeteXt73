@@ -1,3 +1,9 @@
+netext73 (1.1.17) xenial; urgency=medium
+
+  * ppa:paulo-miguel-dias/pkppa
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 14 May 2017 18:21:59 +0200
+
 netext73 (1.1.16) xenial; urgency=medium
 
   * zmiana serwera

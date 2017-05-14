@@ -128,9 +128,9 @@ elif [ "$1" = "mesa3d" ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
 		if [ "$(echo $WERSJA_UBUNTU | grep -i -x "xenial")" != "" ]; then
-			lista="mesa 17.0 stable!mesa 17.1 testing!remove"
+			lista="mesa 17.x stable!mesa 17.x testing!remove"
 		elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
-			lista="mesa 17.1 testing!remove"
+			lista="mesa 17.x testing!remove"
 		fi
 		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((310*$skala)) --window-icon="/opt/NeteXt73/ikony/mesa3d.png" --image="/opt/NeteXt73/ikony/mesa3d.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Mesa3D</b></span>\n\nInstalled: $(glxinfo | grep "OpenGL version" | grep "Mesa")" --form --field="$TEXT_STEROWNIK:CB" "$lista" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
@@ -138,7 +138,8 @@ elif [ "$1" = "mesa3d" ]; then
 			naglowek > instaluj.sh
 			if [ "$(echo $ster | grep stable)" != "" ]; then
 				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
-				echo "sudo add-apt-repository ppa:joe-yasi/xorg-xenial -y" >> instaluj.sh
+				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
+				echo "sudo add-apt-repository ppa:paulo-miguel-dias/pkppa -y" >> instaluj.sh
 				echo "sudo apt update" >> instaluj.sh
 				echo "sudo apt install vainfo -y" >> instaluj.sh
 				echo "sudo apt dist-upgrade -y" >> instaluj.sh
@@ -149,6 +150,7 @@ elif [ "$1" = "mesa3d" ]; then
 				echo "sudo apt dist-upgrade -y" >> instaluj.sh
 			elif [ "$(echo $ster | grep remove)" != "" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
+				echo "sudo ppa-purge ppa:paulo-miguel-dias/pkppa"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
 			fi
 			instalacja
