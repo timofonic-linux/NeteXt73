@@ -711,7 +711,7 @@ else
 		fi
 		if [ "$(grep 'none' $katalog_apm | grep '#HDD' )" != "" ] ;then
 			export hdd_scheduler="none"; export hdd_scheduler_menu="none!mq-deadline"
-		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
+		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#HDD')" != "" ]; then
 			export hdd_scheduler="mq-deadline"; export hdd_scheduler_menu="mq-deadline!none"
 		fi
 	elif [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
@@ -722,7 +722,7 @@ else
 		fi
 		if [ "$(grep 'none' $katalog_apm | grep '#HDD' )" != "" ] ;then
 			export hdd_scheduler="none"; export hdd_scheduler_menu="none!mq-deadlin"
-		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
+		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#HDD')" != "" ]; then
 			export hdd_scheduler="mq-deadline"; export hdd_scheduler_menu="mq-deadline!none"
 		fi
 	else
