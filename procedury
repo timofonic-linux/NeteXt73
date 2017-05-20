@@ -521,22 +521,40 @@ if [ "$turbo_ac_on" = "FALSE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/a
 elif [ "$turbo_ac_on" = "TRUE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep turbo_ac_on | grep TRUE)" != "" ]; };then
 	sudo sed -i 's/echo 1 > \$acintel/echo 0 > \$acintel/g' $katalog_apm
 fi
-#HDD
+#HDD			
 if [ "$hdd_scheduler" = "bfq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep bfq)" != "" ]; };then
 	sudo sed -i '/#HDD/ s/cfq/bfq/g' $katalog_apm
 	sudo sed -i '/#HDD/ s/deadline/bfq/g' $katalog_apm
+elif [ "$hdd_scheduler" = "blk-mq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep blk-mq)" != "" ]; };then
+	sudo sed -i '/#HDD/ s/cfq/mq-deadline/g' $katalog_apm
+	sudo sed -i '/#HDD/ s/deadline/mq-deadline/g' $katalog_apm
 elif [ "$hdd_scheduler" = "cfq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep cfq)" != "" ]; };then
 	sudo sed -i '/#HDD/ s/bfq/cfq/g' $katalog_apm
 	sudo sed -i '/#HDD/ s/deadline/cfq/g' $katalog_apm
+	sudo sed -i '/#HDD/ s/mq-deadline/cfq/g' $katalog_apm
+	
 elif [ "$hdd_scheduler" = "deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep deadline)" != "" ]; };then
 	sudo sed -i '/#HDD/ s/bfq/deadline/g' $katalog_apm
 	sudo sed -i '/#HDD/ s/cfq/deadline/g' $katalog_apm
+	sudo sed -i '/#HDD/ s/mq-deadline/dedline/g' $katalog_apm
 fi
 #SSD
 if [ "$ssd_scheduler" = "deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep deadline )" != "" ]; };then
 	sudo sed -i '/#SSD/ s/noop/deadline/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/none/deadline/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/mq-deadline/deadline/g' $katalog_apm
 elif [ "$ssd_scheduler" = "noop" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep noop)" != "" ]; };then
 	sudo sed -i '/#SSD/ s/deadline/noop/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/mq-deadline/noop/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/none/noop/g' $katalog_apm
+elif [ "$ssd_scheduler" = "mq-deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep mq-deadline )" != "" ]; };then
+	sudo sed -i '/#SSD/ s/deadline/mq-deadline/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/none/mq-deadline/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/noop/mq-deadlineg' $katalog_apm
+elif [ "$ssd_scheduler" = "none" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep none )" != "" ]; };then
+	sudo sed -i '/#SSD/ s/deadline/none/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/mq-deadline/none/g' $katalog_apm
+	sudo sed -i '/#SSD/ s/noop/none/g' $katalog_apm
 fi
 #hibernacja
 if [ "$hibernacja_menu" = "TRUE" ] || { [ "$3" = "nowy" ] &&  [ "$(cat ~/.netext73/apm_status | grep hibernacja | grep TRUE)" != "" ]; };then
@@ -700,8 +718,11 @@ else
 	#sprawdzenie BFQ/CFQ/deadline HDD
 
 	if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
-		hdd_scheduler_menu="blk-mq"
-		ssd_scheduler_menu="blk-mq"
+		export hdd_scheduler_menu="blk-mq"
+		export ssd_scheduler_menu="blk-mq"
+	elif [ "$(grep mq-deadline /sys/block/sd*/queue/scheduler)" != "" ]; then
+		export hdd_scheduler_menu="mq-deadline!none"
+		export ssd_scheduler_menu="mq-deadline!none"
 	else
 		if [ "$(grep bfq /sys/block/sda/queue/scheduler)" != "" ]; then
 			if [ "$(grep 'bfq' $katalog_apm)" != "" ] ;then
