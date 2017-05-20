@@ -712,7 +712,7 @@ else
 		if [ "$(grep 'none' $katalog_apm | grep '#SSD' )" != "" ] ;then
 			export ssd_scheduler="none"; export ssd_scheduler_menu="none!mq-deadline"
 		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
-			export ssd_scheduler="mq-deadline"; export sse_scheduler_menu="mq-deadline!none"
+			export ssd_scheduler="mq-deadline"; export ssd_scheduler_menu="mq-deadline!none"
 		fi
 		if [ "$(grep 'none' $katalog_apm | grep '#HDD' )" != "" ] ;then
 			export hdd_scheduler="none"; export hdd_scheduler_menu="none!mq-deadline"
