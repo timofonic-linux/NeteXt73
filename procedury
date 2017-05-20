@@ -705,11 +705,14 @@ else
 		export turbo_ac_on="TRUE"
 	fi
 	#sprawdzenie BFQ/CFQ/deadline HDD
-	if [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
+	if [ "$(cat /sys/block/sda/queue/scheduler)" = "none" ]; then
+		hdd_scheduler_menu="blk-mq"
+		ssd_scheduler_menu="blk-mq"
+	elif [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
 		if [ "$(grep 'none' $katalog_apm | grep '#SSD' )" != "" ] ;then
 			export ssd_scheduler="none"; export ssd_scheduler_menu="none!mq-deadline"
 		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
-			export ssd_scheduler="mq-deadline"; export ssd_scheduler_menu="mq-deadline!none"
+			export ssd_scheduler="mq-deadline"; export sse_scheduler_menu="mq-deadline!none"
 		fi
 		if [ "$(grep 'none' $katalog_apm | grep '#HDD' )" != "" ] ;then
 			export hdd_scheduler="none"; export hdd_scheduler_menu="none!mq-deadline"
