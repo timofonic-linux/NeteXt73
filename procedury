@@ -718,8 +718,8 @@ else
 	#sprawdzenie BFQ/CFQ/deadline HDD
 
 	if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
-		export hdd_scheduler_menu="blk-mq"
-		export ssd_scheduler_menu="blk-mq"
+		export hdd_scheduler_menu="mq-deadline!none"
+		export ssd_scheduler_menu="mq-deadline!none"
 	elif [ "$(grep mq-deadline /sys/block/sd*/queue/scheduler)" != "" ]; then
 		export hdd_scheduler_menu="mq-deadline!none"
 		export ssd_scheduler_menu="mq-deadline!none"
