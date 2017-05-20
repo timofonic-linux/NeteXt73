@@ -709,6 +709,8 @@ else
 		hdd_scheduler_menu="blk-mq"
 		ssd_scheduler_menu="blk-mq"
 	elif [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
+		#usunięcie # jak był
+		sed -i '/^[^#]/s:^:#:' /etc/udev/rules.d/60-ssd-scheduler.rules
 		if [ "$(grep 'none' $katalog_apm | grep '#SSD' )" != "" ] ;then
 			export ssd_scheduler="none"; export ssd_scheduler_menu="none!mq-deadline"
 		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
@@ -720,6 +722,7 @@ else
 			export hdd_scheduler="mq-deadline"; export hdd_scheduler_menu="mq-deadline!none"
 		fi
 	else
+		sed -i 's/#//g' /etc/udev/rules.d/60-ssd-scheduler.rules
 		if [ "$(grep bfq /sys/block/sda/queue/scheduler)" != "" ]; then
 			if [ "$(grep 'bfq' $katalog_apm)" != "" ] ;then
 				export hdd_scheduler="bfq"; export hdd_scheduler_menu="bfq!cfq!deadline"
