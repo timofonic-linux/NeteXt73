@@ -717,7 +717,6 @@ else
 		if [ "$(grep 'mq-deadline' $katalog_apm | grep '#HDD')" != "" ]; then
 			export hdd_scheduler="mq-deadline"; export hdd_scheduler_menu="mq-deadline!none"
 		fi
-	fi
 	else
 		if [ "$(grep bfq /sys/block/sda/queue/scheduler)" != "" ]; then
 			if [ "$(grep 'bfq' $katalog_apm)" != "" ] ;then
