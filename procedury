@@ -529,7 +529,10 @@ elif [ "$hdd_scheduler" = "mq-deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.
 
 elif [ "$hdd_scheduler" = "cfq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep cfq)" != "" ]; };then
 	sudo sed -i '/#HDD/ s/echo.*>/echo cfq >/g' $katalog_apm
-	
+elif [ "$hdd_scheduler" = "none" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep none)" != "" ]; };then
+	sudo sed -i '/#HDD/ s/echo.*>/echo none >/g' $katalog_apm
+elif [ "$hdd_scheduler" = "nope" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep nope)" != "" ]; };then
+	sudo sed -i '/#HDD/ s/echo.*>/echo nope >/g' $katalog_apm	
 elif [ "$hdd_scheduler" = "deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep deadline)" != "" ]; };then
 	sudo sed -i '/#HDD/ s/echo.*>/echo deadline >/g' $katalog_apm
 fi
