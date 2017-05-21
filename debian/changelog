@@ -1,3 +1,9 @@
+netext73 (1.1.19) xenial; urgency=medium
+
+  * APM 5.5
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 21 May 2017 21:12:11 +0200
+
 netext73 (1.1.18) xenial; urgency=medium
 
   * dynamiczny wybór planistów
