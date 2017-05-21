@@ -694,8 +694,8 @@ else
 		export turbo_ac_on="TRUE"
 	fi
 		
-	export ssd_scheduler=$(cat /etc/apm-ext73/advanced_power_management_by_ext73* | grep '#SSD' | head -n 1 | awk '{print $2}')
-	export hdd_scheduler=$(cat /etc/apm-ext73/advanced_power_management_by_ext73* | grep '#HDD' | head -n 1 | awk '{print $2}')
+	export ssd_scheduler=$(cat $katalog_apm | grep '#SSD' | head -n 1 | awk '{print $2}')
+	export hdd_scheduler=$(cat $katalog_apm | grep '#HDD' | head -n 1 | awk '{print $2}')
 	lista_planistow=$(cat /sys/block/sd*/queue/scheduler | head -n 1 | sed 's/\[//g' | sed 's/\]//g')
 
 	#sprawdzenie BFQ/CFQ/deadline HDD
