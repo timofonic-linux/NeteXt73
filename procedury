@@ -521,30 +521,19 @@ if [ "$turbo_ac_on" = "FALSE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/a
 elif [ "$turbo_ac_on" = "TRUE" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep turbo_ac_on | grep TRUE)" != "" ]; };then
 	sudo sed -i 's/echo 1 > \$acintel/echo 0 > \$acintel/g' $katalog_apm
 fi
-#HDD			
-if [ "$hdd_scheduler" = "bfq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep bfq)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo bfq >/g' $katalog_apm
-elif [ "$hdd_scheduler" = "mq-deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep mq-deadline)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo mq-deadline >/g' $katalog_apm
-elif [ "$hdd_scheduler" = "cfq" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep cfq)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo cfq >/g' $katalog_apm
-elif [ "$hdd_scheduler" = "none" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep none)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo none >/g' $katalog_apm
-elif [ "$hdd_scheduler" = "noop" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep noop)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo noop >/g' $katalog_apm	
-elif [ "$hdd_scheduler" = "deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep deadline)" != "" ]; };then
-	sudo sed -i '/#HDD/ s/echo.*>/echo deadline >/g' $katalog_apm
+
+#zmiana planisty
+for i in $(cat /sys/block/sd*/queue/scheduler | head -n 1 | sed 's/\[//g' | sed 's/\]//g'); do
+#HDD
+if [ "$hdd_scheduler" = "$i" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep hdd_scheduler | grep $i)" != "" ]; };then
+	sudo sed -i "/#HDD/ s/echo.*>/echo $i >/g" $katalog_apm
 fi
 #SSD
-if [ "$ssd_scheduler" = "deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep deadline )" != "" ]; };then
-	sudo sed -i '/#SSD/ s/echo.*>/echo deadline >/g' $katalog_apm
-elif [ "$ssd_scheduler" = "noop" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep noop)" != "" ]; };then
-	sudo sed -i '/#SSD/ s/echo.*>/echo noop >/g' $katalog_apm
-elif [ "$ssd_scheduler" = "mq-deadline" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep mq-deadline )" != "" ]; };then
-	sudo sed -i '/#SSD/ s/echo.*>/echo mq-deadline >/g' $katalog_apm
-elif [ "$ssd_scheduler" = "none" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep none )" != "" ]; };then
-	sudo sed -i '/#SSD/ s/echo.*>/echo none >/g' $katalog_apm
+if [ "$ssd_scheduler" = "$i" ] || { [ "$3" = "nowy" ] && [ "$(cat ~/.netext73/apm_status | grep ssd_scheduler | grep $i )" != "" ]; };then
+	sudo sed -i "/#SSD/ s/echo.*>/echo $i >/g" $katalog_apm
 fi
+done
+
 #hibernacja
 if [ "$hibernacja_menu" = "TRUE" ] || { [ "$3" = "nowy" ] &&  [ "$(cat ~/.netext73/apm_status | grep hibernacja | grep TRUE)" != "" ]; };then
 	sudo cp /opt/NeteXt73/APM/com.ubuntu.enable-hibernate.pkla /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla -f
@@ -704,41 +693,37 @@ else
 	else
 		export turbo_ac_on="TRUE"
 	fi
+		
+	export ssd_scheduler=$(cat /etc/apm-ext73/advanced_power_management_by_ext73* | grep '#SSD' | head -n 1 | awk '{print $2}')
+	export hdd_scheduler=$(cat /etc/apm-ext73/advanced_power_management_by_ext73* | grep '#HDD' | head -n 1 | awk '{print $2}')
+	lista_planistow=$(cat /sys/block/sd*/queue/scheduler | head -n 1 | sed 's/\[//g' | sed 's/\]//g')
+
 	#sprawdzenie BFQ/CFQ/deadline HDD
-	if [ "$(cat /sys/block/sda/queue/scheduler)" = "none" ]; then
+	if [ "$(cat /sys/block/sda/queue/scheduler)" = "none" ] || [ "$(cat /sys/block/sda/queue/scheduler)" = "[none]" ] ; then
 		hdd_scheduler_menu="blk-mq"
 		ssd_scheduler_menu="blk-mq"
 	elif [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
 		#dodanie # jak nie było
 		sed -i '/^[^#]/s:^:#:' /etc/udev/rules.d/60-ssd-scheduler.rules
-		if [ "$(grep 'none' $katalog_apm | grep '#SSD' )" != "" ] ;then
-			export ssd_scheduler="none"; export ssd_scheduler_menu="none!mq-deadline"
-		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#SSD')" != "" ]; then
-			export ssd_scheduler="mq-deadline"; export ssd_scheduler_menu="mq-deadline!none"
-		fi
-		if [ "$(grep 'none' $katalog_apm | grep '#HDD' )" != "" ] ;then
-			export hdd_scheduler="none"; export hdd_scheduler_menu="none!mq-deadline"
-		elif [ "$(grep 'mq-deadline' $katalog_apm | grep '#HDD')" != "" ]; then
-			export hdd_scheduler="mq-deadline"; export hdd_scheduler_menu="mq-deadline!none"
-		fi
+
+		lista_ssd=$(echo $lista_planistow | sed "s/$ssd_scheduler//" | sed 's/ /!/g' | sed 's/!!/!/g')
+		export ssd_scheduler_menu=$(echo $ssd_scheduler' '$lista_ssd | sed 's/ /!/g' | sed 's/!!/!/g'| sed '$s/!$//')
+		
+		lista_hdd=$(echo $lista_planistow | sed "s/$hdd_scheduler//" | sed 's/ /!/g' | sed 's/!!/!/g')
+		export hdd_scheduler_menu=$(echo $hdd_scheduler' '$lista_hdd | sed 's/ /!/g' | sed 's/!!/!/g'| sed '$s/!$//')
+		
 	else
 		#usunięcie # jak był
 		sed -i 's/#//g' /etc/udev/rules.d/60-ssd-scheduler.rules
-		if [ "$(grep 'noop' $katalog_apm | grep '#SSD' )" != "" ] ;then
-			export ssd_scheduler="noop"; export ssd_scheduler_menu="noop!deadline!cfq"
-		elif [ "$(grep 'cfq' $katalog_apm | grep '#SSD')" != "" ]; then
-			export ssd_scheduler="cfq"; export ssd_scheduler_menu="cfq!noop!deadline"
-		elif [ "$(grep 'deadline' $katalog_apm | grep '#SSD')" != "" ]; then
-			export ssd_scheduler="deadline"; export ssd_scheduler_menu="deadline!noop!cfq"
-		fi
-		if [ "$(grep 'noop' $katalog_apm | grep '#HDD' )" != "" ] ;then
-			export hdd_scheduler="noop"; export hdd_scheduler_menu="noop!deadline!cfq"
-		elif [ "$(grep 'cfq' $katalog_apm | grep '#HDD')" != "" ]; then
-			export hdd_scheduler="cfq"; export hdd_scheduler_menu="cfq!noop!deadline"
-		elif [ "$(grep 'deadline' $katalog_apm | grep '#HDD')" != "" ]; then
-			export hdd_scheduler="deadline"; export hdd_scheduler_menu="deadline!noop!cfq"
-		fi
+
+		lista_ssd=$(echo $lista_planistow | sed "s/$ssd_scheduler//" | sed 's/ /!/g' | sed 's/!!/!/g')
+		export ssd_scheduler_menu=$(echo $ssd_scheduler' '$lista_ssd | sed 's/ /!/g' | sed 's/!!/!/g' | sed '$s/!$//')
+		
+		lista_hdd=$(echo $lista_planistow | sed "s/$hdd_scheduler//" | sed 's/ /!/g' | sed 's/!!/!/g')
+		export hdd_scheduler_menu=$(echo $hdd_scheduler' '$lista_hdd | sed 's/ /!/g' | sed 's/!!/!/g'| sed '$s/!$//')
+
 	fi
+
 	#sprawdzanie hibernacji
 	if [ -e /var/lib/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then
 		hibernacja_menu="TRUE"

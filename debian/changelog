@@ -1,3 +1,9 @@
+netext73 (1.1.18) xenial; urgency=medium
+
+  * dynamiczny wybór planistów
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 21 May 2017 09:34:14 +0200
+
 netext73 (1.1.17) xenial; urgency=medium
 
   * ppa:paulo-miguel-dias/pkppa
