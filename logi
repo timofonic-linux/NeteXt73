@@ -39,11 +39,13 @@ while [ $petla_duza = "tak" ]; do
 					yad --notebook --key=$KEY2 --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 					klawisz=$?
 					if [ "$klawisz" = "0" ]; then
+						please_wait
 						export userek=$(cat /tmp/netext73/userek)
 						cat /var/log/netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
 						cat /var/log/netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
 						wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
 						dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
+						please_wait kill
 					fi
 					for i in $(seq 0 1); do
 						rm res[$i] -f
@@ -405,7 +407,7 @@ while [ $petla_duza = "tak" ]; do
 					done
 
 					export userek=$(cat /tmp/netext73/userek)
-
+					please_wait
 					if [ -e /etc/netext73/wysylkalogow ]; then
 						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
 							cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
@@ -442,6 +444,7 @@ while [ $petla_duza = "tak" ]; do
 					else
 						cat netext.log | pastebinit_netext73 netext.log && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI netext.log"
 					fi
+					please_wait kill
 				fi
 				rm /tmp/netext73/sumy/pakiety.txt -f
 				rm *.log losowa -f

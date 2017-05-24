@@ -51,8 +51,10 @@ elif [ "$1" = "kontakty" ]; then
 	if [ "$klawisz" = "0" ]; then
 		#wycinanie błędów
 		if [ "$(cat ${res[5]} | cut -d '|' -f 4 )" != "" ]; then
+			please_wait
 			export userek=$(cat /tmp/netext73/userek)
 			echo -e "$(cat ${res[5]} | cut -d '|' -f 3) \n $(cat ${res[5]} | cut -d '|' -f 5) \n $(cat ${res[5]} | cut -d '|' -f 4)"  | pastebinit_netext73 "$(cat ${res[5]} | cut -d "|" -f 2)" && dymek -i $ikona_info1 "$TEXT_INFORMACJA" "\n$TEXT_WYSLANO_ZGLOSZENIE"
+			please_wait kill
 		fi
 	fi
 	for i in $(seq 0 6); do
