@@ -18,11 +18,11 @@ if [ "$(cat /etc/modules | grep sensors-detect)" = "" ]; then
 fi
 
 cd /tmp/netext73
-if [ -e ~/.netext73/monitor ]; then
+if [ -e /etc/netext73/monitor ]; then
 	licznik="0"
 	for i in $(echo system powertop HTOP saidar CPU HDD battery); do
 		licznik=$((licznik + 1 ))
-		if [ "$(grep $i ~/.netext73/monitor)" != "" ]; then
+		if [ "$(grep $i /etc/netext73/monitor)" != "" ]; then
 			a[licznik]=TRUE
 		else
 			a[licznik]=FALSE
@@ -45,33 +45,33 @@ konfiguracja=$(yad --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/m
 klawisz=$?
 
 if [ "$klawisz" = "0" ]; then
-	rm ~/.netext73/monitor -f
+	rm /etc/netext73/monitor -f
 	if [ "$(echo $konfiguracja | cut -d '|' -f 1 )" = "TRUE" ]; then
-		echo "system" >> ~/.netext73/monitor
+		echo "system" >> /etc/netext73/monitor
 		xterm -T "System monitor" -e bash -c "watch -t 'uptime; echo  -n \"\nScaling governor : \"; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;echo -n \"CPU driver       : \";cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver | head -n 1; echo -n \"\nCpu Core Frequency\n\";cat /proc/cpuinfo | grep MHz;echo -n \"\nMemory :\n\";free -m;echo -n \"\nSensors:\n\";sensors'" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 2 )" = "TRUE" ]; then
-		echo "powertop" >> ~/.netext73/monitor
+		echo "powertop" >> /etc/netext73/monitor
 		xterm -T "PowerTop" -e bash -c "sudo powertop" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 3 )" = "TRUE" ]; then
-		echo "HTOP" >> ~/.netext73/monitor
+		echo "HTOP" >> /etc/netext73/monitor
 		xterm -T "HTop" -e bash -c "htop" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 4 )" = "TRUE" ]; then
-		echo "saidar" >> ~/.netext73/monitor
+		echo "saidar" >> /etc/netext73/monitor
 		xterm -T "Saidar" -e bash -c "saidar -c" &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 5 )" = "TRUE" ]; then
-		echo "CPU" >> ~/.netext73/monitor
+		echo "CPU" >> /etc/netext73/monitor
 		procesor_monitor &
 	fi
 	if [ "$(echo $konfiguracja | cut -d '|' -f 6 )" = "TRUE" ]; then
-		echo "HDD" >> ~/.netext73/monitor
+		echo "HDD" >> /etc/netext73/monitor
 		hdd_stan &
 	fi
 		if [ "$(echo $konfiguracja | cut -d '|' -f 7 )" = "TRUE" ] && [ -e /sys/class/power_supply/BAT*/uevent ]; then
-		echo "battery" >> ~/.netext73/monitor
+		echo "battery" >> /etc/netext73/monitor
 		stan_baterii &
 	fi
 fi

@@ -14,8 +14,8 @@ source /opt/NeteXt73/procedury
 
 cd /tmp/netext73
 
-if [ -e ~/.netext73/kernel_automat ] && [ -e ~/.netext73/instalator_kerneli ] && [ "$(cat ~/.netext73/kernel_automat)" = "TRUE" ]; then
-	kern="$(cat ~/.netext73/instalator_kerneli)"
+if [ -e /etc/netext73/kernel_automat ] && [ -e /etc/netext73/instalator_kerneli ] && [ "$(cat /etc/netext73/kernel_automat)" = "TRUE" ]; then
+	kern="$(cat /etc/netext73/instalator_kerneli)"
 	if [ "$(echo $kern | grep -E $lista_kerneli_premium)" != "" ]; then
 		export premium="tak"
 	else
@@ -49,9 +49,9 @@ else
 		ikona="linux-premium.png"
 		menu_dodatkowe=""
 	fi
-	if [ -e ~/.netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
+	if [ -e /etc/netext73/kernel_premium ] && [ -e /etc/netext73/vsftpd/vsftpd ] && [ -e /etc/netext73/has* ]; then
 		menu_dodatkowe="--button="$TEXT_LOKALNE:3" --button="$TEXT_NAGLOWKI:2" --button="$TEXT_PPA:4""
-	elif [ -e ~/.netext73/kernel_premium ];then
+	elif [ -e /etc/netext73/kernel_premium ];then
 		menu_dodatkowe="--button="$TEXT_LOKALNE:3" --button="$TEXT_NAGLOWKI:2""
 	fi
 	
@@ -171,10 +171,10 @@ elif [ "$kern" != "" ] && [ "$blad" != "1" ]; then
 					if [ "$klawisz" = "1" ] || [ "$(echo $strona | grep '@'  | grep '@')" = "" ]; then
 						exit 1
 					elif [ "$klawisz" = "0" ]; then
-						echo $strona > ~/.netext73/kernel_premium
+						echo $strona > /etc/netext73/kernel_premium
 						strona="$adres_glowny/kernele_premium$katalog2/"
-						export US1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 1) 
-						export PASS1=$(cat ~/.netext73/kernel_premium | cut -d '@' -f 3)
+						export US1=$(cat /etc/netext73/kernel_premium | cut -d '@' -f 1) 
+						export PASS1=$(cat /etc/netext73/kernel_premium | cut -d '@' -f 3)
 						export kernel_premium="tak"
 						pobieranie_kerneli
 					fi

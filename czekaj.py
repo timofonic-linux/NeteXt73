@@ -31,7 +31,6 @@ class ProgressBarWindow(Gtk.Window):
 	sefl.progressbar.set_show_text(text)
         sefl.progressbar.pulse()
 	return True
-	
 		
 win = ProgressBarWindow()
 win.connect("delete-event", Gtk.main_quit)

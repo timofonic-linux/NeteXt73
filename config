@@ -14,22 +14,22 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 
 #kasowanie starych configów
-rm ~/.netext73/https_link -f
-rm ~/.netext73/server_no -f
+rm /etc/netext73/https_link -f
+rm /etc/netext73/server_no -f
 
-if [ -e ~/.netext73/apm_status ]; then
-	apm_stat=$(cat ~/.netext73/apm_status | sed 's/.* //' | head -n 1)
+if [ -e /etc/netext73/apm_status ]; then
+	apm_stat=$(cat /etc/netext73/apm_status | sed 's/.* //' | head -n 1)
 else
 	apm_stat=""
 fi
-if [ -e ~/.netext73/instalator_kerneli ]; then
-	ik=$(cat ~/.netext73/instalator_kerneli)
+if [ -e /etc/netext73/instalator_kerneli ]; then
+	ik=$(cat /etc/netext73/instalator_kerneli)
 else
 	ik=""
 fi
 
-if [ -e ~/.netext73/kernel_automat ]; then
-	if [ "$(cat ~/.netext73/kernel_automat)" = "TRUE" ]; then
+if [ -e /etc/netext73/kernel_automat ]; then
+	if [ "$(cat /etc/netext73/kernel_automat)" = "TRUE" ]; then
 	      automatyczna_instalacja="TRUE"
 	else
 	      automatyczna_instalacja="FALSE"
@@ -39,8 +39,8 @@ else
 fi
 
 
-if [ -e ~/.netext73/archiwum_deb ]; then
-	if [ "$(cat ~/.netext73/archiwum_deb)" = "TRUE" ]; then
+if [ -e /etc/netext73/archiwum_deb ]; then
+	if [ "$(cat /etc/netext73/archiwum_deb)" = "TRUE" ]; then
 	      archiwum_deb="TRUE"
 	else
 	      archiwum_deb="FALSE"
@@ -49,7 +49,7 @@ else
 	archiwum_deb="FALSE"
 fi
 
-if [ -e ~/.netext73/HiDPI ] && [ "$(cat ~/.netext73/HiDPI)" = "TRUE" ]; then
+if [ -e /etc/netext73/HiDPI ] && [ "$(cat /etc/netext73/HiDPI)" = "TRUE" ]; then
 	HiDPI="TRUE"
 else
 	HiDPI="FALSE"
@@ -60,7 +60,7 @@ else
 	xterm_font="8"
 fi
 
-if [ -e ~/.netext73/notify_fix ] && [ "$(grep TRUE ~/.netext73/notify_fix)" != "" ];then
+if [ -e /etc/netext73/notify_fix ] && [ "$(grep TRUE /etc/netext73/notify_fix)" != "" ];then
 	notify_fix="TRUE"
 else
 	notify_fix="FALSE"
@@ -76,7 +76,7 @@ else
 fi
 
 #zgoda
-if [ -e ~/.netext73/zgoda ] && [ "$(grep TRUE ~/.netext73/zgoda)" != "" ];then
+if [ -e /etc/netext73/zgoda ] && [ "$(grep TRUE /etc/netext73/zgoda)" != "" ];then
 	zgoda="TRUE"
 else
 	zgoda="FALSE"
@@ -105,7 +105,7 @@ yad --notebook --key=$KEY --center --title="$nazwa_skryptu1 " --tab="$TEXT_CONFI
 klawisz=$?
 if [ "$klawisz" = "0" ]; then
 	if [ "$(grep "$TEXT_TAK" ${res[1]})" != "" ]; then
-		rm ~/.netext73/* -f
+		rm /etc/netext73/* -f
 		yad --center --info --title="$nazwa_skryptu"  --window-icon="/opt/NeteXt73/ikony/info.png" --image="/opt/NeteXt73/ikony/info.png" --button="gtk-ok:0" --text="$TEXT_CONFIG8" --button="$TEXT_POWROT:1" --timeout=5
 	else
 		#kasowanie śmieci
@@ -114,15 +114,15 @@ if [ "$klawisz" = "0" ]; then
 		sed -i '/.*yad.*/ d' ${res[2]}
 		sed -i '/^[ \t]*$/ d' ${res[2]}
 		if [ "$(cat ${res[1]} | grep '@' | cut -d "|" -f 2)" != "" ];then
-			cat ${res[1]} | grep '@' | cut -d "|" -f 2 > ~/.netext73/kernel_premium
+			cat ${res[1]} | grep '@' | cut -d "|" -f 2 > /etc/netext73/kernel_premium
 		fi
-		cat ${res[1]} | cut -d "|" -f 3 > ~/.netext73/jezyk
-		cat ${res[1]} | cut -d "|" -f 9 > ~/.netext73/kernel_automat
-		cat ${res[1]} | cut -d "|" -f 10 > ~/.netext73/archiwum_deb
-		cat ${res[1]} | cut -d "|" -f 11 > ~/.netext73/HiDPI
-		cat ${res[1]} | cut -d "|" -f 12 > ~/.netext73/notify_fix
-		cat ${res[1]} | cut -d "|" -f 13 > ~/.netext73/zgoda
-		cat ${res[2]} > ~/.netext73/kolor_textu
+		cat ${res[1]} | cut -d "|" -f 3 > /etc/netext73/jezyk
+		cat ${res[1]} | cut -d "|" -f 9 > /etc/netext73/kernel_automat
+		cat ${res[1]} | cut -d "|" -f 10 > /etc/netext73/archiwum_deb
+		cat ${res[1]} | cut -d "|" -f 11 > /etc/netext73/HiDPI
+		cat ${res[1]} | cut -d "|" -f 12 > /etc/netext73/notify_fix
+		cat ${res[1]} | cut -d "|" -f 13 > /etc/netext73/zgoda
+		cat ${res[2]} > /etc/netext73/kolor_textu
 		wersja=$(cat  ${res[1]} | cut -d "|" -f 7)
 		if [ "$aktualny_gcc" != "$wersja" ];then
 			naglowek > instaluj.sh
@@ -148,11 +148,11 @@ if [ "$klawisz" = "0" ]; then
 		fi
 
 		#kasowanie śmieci w configach
-		for i in $(ls -la ~/.netext73/ | grep -v drw | awk '{print $9}'); do
-			if [ -e ~/.netext73/$i ]; then
-				sed -i '/.*yad.*/ d' ~/.netext73/$i
-				sed -i '/Gtk-Message.*/ d' ~/.netext73/$i
-				sed -i '/^[ \t]*$/ d' ~/.netext73/$i
+		for i in $(ls -la /etc/netext73/ | grep -v drw | awk '{print $9}'); do
+			if [ -e /etc/netext73/$i ]; then
+				sed -i '/.*yad.*/ d' /etc/netext73/$i
+				sed -i '/Gtk-Message.*/ d' /etc/netext73/$i
+				sed -i '/^[ \t]*$/ d' /etc/netext73/$i
 			fi
 		done
 	fi

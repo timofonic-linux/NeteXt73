@@ -1,5 +1,8 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.20
+-	przeniesienie logów z katalogu domowego do /var/log/netext73
+-	przeniesienie configów z katalogu domowego do /etc/netext73
 v1.1.19
 -	APM 5.5
 v1.1.18

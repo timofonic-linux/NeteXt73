@@ -25,7 +25,7 @@ while [ $petla_duza = "tak" ]; do
 		if [ "$skrypt" = "$TEXT_LISTA_LOGOW" ];then
 			petla="tak"
 			while [ $petla = "tak" ]; do
-				a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls ~/.netext73/logi/*.log | sed 's/.*instal...._//g' | sort -r | uniq) --button="$TEXT_USUN_WYNIK:2" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
+				a=$(yad --center --height=$((540*$skala)) --width=$((440*$skala)) --window-icon="/opt/NeteXt73/ikony/logi.png" --title="$nazwa_skryptu" --text="$TEXT_LOGI10" --column="DATA" --list $(ls /var/log/netext73/logi/*.log | sed 's/.*instal...._//g' | sort -r | uniq) --button="$TEXT_USUN_WYNIK:2" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1")
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
 					wynik=$(echo $a | cut -d '|' -f 1)
@@ -34,14 +34,14 @@ while [ $petla_duza = "tak" ]; do
 					for i in $(seq 0 1); do
 						res[$i]=$(mktemp --tmpdir=/tmp/netext73 netext73_$i.XXXXXXXX)
 					done
-					yad --plug=$KEY2 --tabnum=1 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik" 1> ${res[0]} &
-					yad --plug=$KEY2 --tabnum=2 --text-info --filename="/home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik" 1> ${res[1]} &
+					yad --plug=$KEY2 --tabnum=1 --text-info --filename="/var/log/netext73/logi/instalujsh_$wynik" 1> ${res[0]} &
+					yad --plug=$KEY2 --tabnum=2 --text-info --filename="/var/log/netext73/logi/instalacja_$wynik" 1> ${res[1]} &
 					yad --notebook --key=$KEY2 --center --title="$nazwa_skryptu1 " --tab="instalujsh" --tab="instalacja" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 					klawisz=$?
 					if [ "$klawisz" = "0" ]; then
 						export userek=$(cat /tmp/netext73/userek)
-						cat /home/$userek/.netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
-						cat /home/$userek/.netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
+						cat /var/log/netext73/logi/instalujsh_$wynik | pastebinit_netext73 instalujsh_$wynik && log1="instalujsh.log"
+						cat /var/log/netext73/logi/instalacja_$wynik | pastebinit_netext73 instalacja_$wynik && log2="instalacja.log"
 						wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
 						dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
 					fi
@@ -50,7 +50,7 @@ while [ $petla_duza = "tak" ]; do
 					done
 				elif [ "$klawisz" = "2" ]; then
 					wynik=$(echo $a | cut -d '|' -f 1)
-					rm /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalujsh_$wynik /home/$(cat /tmp/netext73/userek)/.netext73/logi/instalacja_$wynik -f
+					rm /var/log/netext73/logi/instalujsh_$wynik /var/log/netext73/logi/instalacja_$wynik -f
 				else
 					opusc_mala_petle
 				fi
@@ -228,21 +228,21 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "\n\nKonfiguracja netext73" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				#katalogi
-				ls -la ~/.netext73 | grep drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
+				ls -la /etc/netext73 | grep drwxrwxr-x | sed '1s/.*//' >> system$losowa.log
 				#pliki
-				ls -la ~/.netext73 | grep rw-rw >> system$losowa.log
+				ls -la /etc/netext73 | grep rw-rw >> system$losowa.log
 				echo -e "\n\narchiwum_deb" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/archiwum_deb >> system$losowa.log
+				cat /etc/netext73/archiwum_deb >> system$losowa.log
 				echo -e "\n\ninstalator_kerneli" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/instalator_kerneli >> system$losowa.log
+				cat /etc/netext73/instalator_kerneli >> system$losowa.log
 				echo -e "\n\njezyk" >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/jezyk >> system$losowa.log
+				cat /etc/netext73/jezyk >> system$losowa.log
 				echo -e "\n\nkernel_automat " >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
-				cat ~/.netext73/kernel_automat >> system$losowa.log
+				cat /etc/netext73/kernel_automat >> system$losowa.log
 				echo -e "\n\nzswap " >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				dmesg | grep zswap: >> system$losowa.log
@@ -303,7 +303,7 @@ while [ $petla_duza = "tak" ]; do
 
 
 				echo -e "##############################################################################################" >> apmsystem$losowa.log
-				cat ~/.netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log
+				cat /etc/netext73/apm_status | tr ' ' '\t' >> apmsystem$losowa.log
 				echo -e "\n\nscheduler  " >> apmsystem$losowa.log
 				echo -e "##############################################################################################" >> apmsystem$losowa.log
 				if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
@@ -355,9 +355,9 @@ while [ $petla_duza = "tak" ]; do
 				#system logi
 				please_wait kill
 				#czeki wysyłek
-				if [ -e ~/.netext73/wysylkalogow ]; then
+				if [ -e /etc/netext73/wysylkalogow ]; then
 					i=0
-					for lista in $(cat ~/.netext73/wysylkalogow); do
+					for lista in $(cat /etc/netext73/wysylkalogow); do
 						i=$(($i + 1))
 						s[$i]=$lista
 					done
@@ -399,42 +399,42 @@ while [ $petla_duza = "tak" ]; do
 				--button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
 				klawisz=$?
 				if [ "$klawisz" = "0" ]; then
-					rm ~/.netext73/wysylkalogow -f
+					rm /etc/netext73/wysylkalogow -f
 					for i in $(seq 1 10); do
-						cat ${rs[12]} | cut -d "|" -f $i >> ~/.netext73/wysylkalogow
+						cat ${rs[12]} | cut -d "|" -f $i >> /etc/netext73/wysylkalogow
 					done
 
 					export userek=$(cat /tmp/netext73/userek)
 
-					if [ -e ~/.netext73/wysylkalogow ]; then
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
+					if [ -e /etc/netext73/wysylkalogow ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 1p)" != "FALSE" ]; then
 							cat netext.log | pastebinit_netext73 netext.log && log1="netext.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 2p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 2p)" != "FALSE" ]; then
 							cat opengl$losowa.log | pastebinit_netext73 opengl.log && log2="opengl.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 3p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 3p)" != "FALSE" ]; then
 							cat dmesg.log | pastebinit_netext73 dmesg.log && log3="dmesg.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 4p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 4p)" != "FALSE" ]; then
 							cat kern.log | pastebinit_netext73 kern.log && log4="kern.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 5p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 5p)" != "FALSE" ]; then
 							cat firewall.log | pastebinit_netext73 firewall.log && log5="firewall.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 6p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 6p)" != "FALSE" ]; then
 							cat glxinfo$losowa.log | pastebinit_netext73 glxinfo.log && log6="glxinfo.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 7p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 7p)" != "FALSE" ]; then
 							cat apmsystem$losowa.log | pastebinit_netext73 apmsystem.log && log7="apmsystem.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 8p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 8p)" != "FALSE" ]; then
 							cat lsmodsystem$losowa.log | pastebinit_netext73 lsmodsystem.log && log8="lsmodsystem.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 9p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 9p)" != "FALSE" ]; then
 							cat lspcisystem$losowa.log | pastebinit_netext73 lspcisystem.log && log9="lspcisystem.log"
 						fi
-						if [ "$(cat  ~/.netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
+						if [ "$(cat  /etc/netext73/wysylkalogow | sed -n 10p)" != "FALSE" ]; then
 							cat lsusbsystem$losowa.log | pastebinit_netext73 lsusbsystem.log && log10="lsusbsystem.log"
 						fi
 						wyslane_logi=$(echo $log1 $log2 $log3 $log4 $log5 $log6 $log7 $log8 $log9 $log10 | tr ' ' '\n')

@@ -111,7 +111,7 @@ if [ $klawisz = 0 ]; then
 		a10="execution time (avg/stddev):"
 
 		#katalog roboczy skryptu
-		cd ~/.netext73/sysbench
+		cd /var/log/netext73/sysbench
 		#procedury
 
 		info_test(){
@@ -214,7 +214,7 @@ if [ $klawisz = 0 ]; then
 	#glmark
 	elif [ "$(echo $skrypt | grep 'glmark')" != "" ]; then
 		#katalog roboczy skryptu
-		cd ~/.netext73/glmark2
+		cd /etc/netext73/glmark2
 
 		#procedury
 		zrob_test(){

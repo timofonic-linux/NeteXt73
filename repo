@@ -38,7 +38,7 @@ while read linia; do
 done < lista_ppa.txt
 }
 sofcik(){
-	echo "audacity avidemux clementine compizconfig-settings-manager digikam dropbox ffmulticonverter gimp google-chrome-stable grsync guake gufw homebank htop i-nex kadu kget kodi kubuntu-restricted-extras language-pack-gnome-pl libnss3-tools libreoffice-gtk libreoffice-kde libreoffice-style-sifr lubuntu-restricted-extras mc network-manager-openvpn openssh-client openssl oracle-java8-installer pidgin plasma plasma-scriptengines plasma-widget-homerun-kicker plasma-widget-yawp ppa-purge radiotray saidar showfoto shutter spotify-client synaptic tomahawk ubuntu-restricted-extras ufw-kde unetbootin unity-tweak-tool vlc wakeonlan widget-yawp wmctrl x2goclient x2goserver xubuntu-restricted-extras yakuake youtube-dl" > ~/.netext73/soft
+	echo "audacity avidemux clementine compizconfig-settings-manager digikam dropbox ffmulticonverter gimp google-chrome-stable grsync guake gufw homebank htop i-nex kadu kget kodi kubuntu-restricted-extras language-pack-gnome-pl libnss3-tools libreoffice-gtk libreoffice-kde libreoffice-style-sifr lubuntu-restricted-extras mc network-manager-openvpn openssh-client openssl oracle-java8-installer pidgin plasma plasma-scriptengines plasma-widget-homerun-kicker plasma-widget-yawp ppa-purge radiotray saidar showfoto shutter spotify-client synaptic tomahawk ubuntu-restricted-extras ufw-kde unetbootin unity-tweak-tool vlc wakeonlan widget-yawp wmctrl x2goclient x2goserver xubuntu-restricted-extras yakuake youtube-dl" > /etc/netext73/soft
 }
 
 baza=(
@@ -564,14 +564,14 @@ else
 				ilosc=0
 				#sortowanie tablicy programów
 				#ilosc=$(( ${#soft[*]} ))
-				if [ -e ~/.netext73/soft ]; then
-					for a in $(cat ~/.netext73/soft); do
+				if [ -e /etc/netext73/soft ]; then
+					for a in $(cat /etc/netext73/soft); do
 						((ilosc++))
 						soft1[$ilosc]=$a
 					done
 				else
 					sofcik
-					for a in $(cat ~/.netext73/soft); do
+					for a in $(cat /etc/netext73/soft); do
 						((ilosc++))
 						soft1[$ilosc]=$a
 					done
@@ -621,13 +621,13 @@ else
 					instalacja
 				elif [ "$klawisz" = "2" ]; then
 				#edytor instalatora pakietów
-					if [ ! -e ~/.netext73/soft ]; then
+					if [ ! -e /etc/netext73/soft ]; then
 						sofcik
 					fi
-					nowa_lista=$(yad --on-top --title="$nazwa_skryptu  " --center --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((400*$skala)) --height=$((600*$skala)) --form --field="<span color=\"$kolor_textu\"><b>$MENU_OPIS</b></span>:TXT" "$(cat -e ~/.netext73/soft | tr ' ' '\n' | sed 's/\$//g' | sort)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
+					nowa_lista=$(yad --on-top --title="$nazwa_skryptu  " --center --window-icon="/opt/NeteXt73/ikony/backuprepo.png" --width=$((400*$skala)) --height=$((600*$skala)) --form --field="<span color=\"$kolor_textu\"><b>$MENU_OPIS</b></span>:TXT" "$(cat -e /etc/netext73/soft | tr ' ' '\n' | sed 's/\$//g' | sort)" --button="gtk-ok:0" --button="$TEXT_POWROT:1")
 					if [ $? = "0" ]; then
-						echo -e $nowa_lista | sed 's/|//g'| tr ' ' '\n' | sed 's/\$//g' | sort | uniq > ~/.netext73/soft
-						sed -i '/^[ \t]*$/ d' ~/.netext73/soft
+						echo -e $nowa_lista | sed 's/|//g'| tr ' ' '\n' | sed 's/\$//g' | sort | uniq > /etc/netext73/soft
+						sed -i '/^[ \t]*$/ d' /etc/netext73/soft
 					fi
 				elif [ "$klawisz" = "1" ]; then
 					petla="nie"
