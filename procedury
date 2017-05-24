@@ -31,13 +31,13 @@ fi
 
 przepisanie_configow(){
 #katalog dla sysbench
-if [ ! -e /var/log/netext73 ]; then
-	mkdir /var/log/netext73 -p
+if [ ! -e /var/log/netext73/sysbench ]; then
+	mkdir /var/log/netext73/sysbench -p
 fi
 
 #katalog dla logów
-if [ ! -e /var/log/logi ]; then
-	mkdir /var/log/logi -p
+if [ ! -e /var/log/netext73/logi ]; then
+	mkdir /var/log/netext73/logi -p
 fi
 
 #katalog dla configów
@@ -47,16 +47,18 @@ fi
 
 #przepisanie logów
 if [ -e ~/.netext73/logi ] || [ -e ~/.netext73/sysbench ]; then
-	mv -f ~/.netext73/logi /var/log/netext73/
-	mv -f ~/.netext73/sysbench /var/log/netext73/
+	mv -f ~/.netext73/logi/* /var/log/netext73/logi/
+	mv -f ~/.netext73/sysbench/* /var/log/netext73/sysbench/*
+	rm -rf ~/.netext73/sysbench
+	rm -rf ~/.netext73/logi
 fi
+
 #przepisanie configów
 if [ -e ~/.netext73 ]; then
 	mv -f ~/.netext73/* /etc/netext73/
-	if [ ! -e ~/.netext73/vsftpd/vsftpd ];then
-		rm -rf ~/.netext73
-	fi
+	rm -rf ~/.netext73
 fi
+
 #odpalanie strony domowej 
 if [ ! -e /etc/netext73/strona_domowa ]; then
 	echo "TRUE" > /etc/netext73/strona_domowa
