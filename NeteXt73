@@ -45,7 +45,7 @@ fi
 
 przepisanie_configow
 
-if [ -e /etc/netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e ~/.netext73/has* ]; then
+if [ -e /etc/netext73/kernel_premium ] && [ -e ~/.netext73/vsftpd/vsftpd ] && [ -e /etc/netext73/has* ]; then
 	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
 else
 	klawisze_aktywne="--button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
