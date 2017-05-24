@@ -47,15 +47,15 @@ fi
 
 #przepisanie logów
 if [ -e ~/.netext73/logi ] || [ -e ~/.netext73/sysbench ]; then
-	mv -f ~/.netext73/logi/* /var/log/netext73/logi/
-	mv -f ~/.netext73/sysbench/* /var/log/netext73/sysbench/*
+	cp -f ~/.netext73/logi/* /var/log/netext73/logi/
+	cp -f ~/.netext73/sysbench/* /var/log/netext73/sysbench/
 	rm -rf ~/.netext73/sysbench
 	rm -rf ~/.netext73/logi
 fi
 
 #przepisanie configów
 if [ -e ~/.netext73 ]; then
-	mv -f ~/.netext73/* /etc/netext73/
+	cp -rf ~/.netext73/* /etc/netext73/
 	rm -rf ~/.netext73
 fi
 
