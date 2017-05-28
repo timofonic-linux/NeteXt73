@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.21
+-	apmfix zmiana dla NV
 v1.1.20
 -	przeniesienie logów z katalogu domowego do /var/log/netext73
 -	przeniesienie configów z katalogu domowego do /etc/netext73

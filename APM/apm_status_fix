@@ -82,12 +82,19 @@ if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i Ge
 	cd /tmp/netext73
 	source /opt/NeteXt73/procedury
 	if [ "$(lsb_release -a | grep -E "$wspierane_nr")" != "" ] || [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
+		rm -f /etc/alternatives/x86_64-linux-gnu_nvidia_modconf
+		rm -f /etc/modprobe.d/nvidia-graphics-drivers.conf
 		rm -f /etc/ld.so.conf.d/i386-linux-gnu_GL.conf
+		rm -f /etc/alternatives/i386-linux-gnu_xorg_extra_modules
+		rm -f /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules
 		rm -f /etc/ld.so.conf.d/x86_64-linux-gnu_GL.conf
 		ln -sf /usr/lib/i386-linux-gnu/mesa/ld.so.conf /etc/alternatives/i386-linux-gnu_gl_conf
 		ln -sf /usr/lib/i386-linux-gnu/mesa/ld.so.conf /etc/ld.so.conf.d/i386-linux-gnu_GL.conf
+		ln -sf /usr/lib/i386-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/i386-linux-gnu_xorg_extra_modules
+		ln -sf /usr/lib/x86_64-linux-gnu/mesa/ld.so.conf /etc/alternatives/x86_64-linux-gnu_gl_conf
 		ln -sf /usr/lib/x86_64-linux-gnu/mesa/ld.so.conf /etc/ld.so.conf.d/x86_64-linux-gnu_GL.conf
 		ln -sf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf /etc/ld.so.conf.d/x86_64-linux-gnu_EGL.conf
+		ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules
 		ldconfig
 	fi
 	rm -rf /tmp/netext73

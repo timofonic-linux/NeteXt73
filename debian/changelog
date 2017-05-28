@@ -1,3 +1,9 @@
+netext73 (1.1.21) xenial; urgency=medium
+
+  * apmfix
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 28 May 2017 21:36:24 +0200
+
 netext73 (1.1.20) xenial; urgency=medium
 
   * zmiana katalogu config i log
