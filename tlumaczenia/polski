@@ -6,8 +6,8 @@
 ## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
 #########################################################################################################################################################################
 #tłumaczenia
- 
- 
+
+
 #########################################################################################################################################################################
 #tlumaczenia_apm
 export TEXT_APM1="Masz zainstalowany skrypt APM w starszej wersji lub niepełnej, zainstaluj nowszą.\nZa chwilę nastąpi instalacja skryptu APM.\n\nInstalować?"
@@ -69,7 +69,7 @@ export TEXT_ZMIEN_NA="Zmień na:"
 
 #########################################################################################################################################################################
 #tlumaczenia_config
-export lang1="polski!english" 
+export lang1="polski!english"
 export TEXT_CONFIG1="Konfigurator NeteXt73"
 export TEXT_CONFIG2="Menu konfiguracyjne NeteXt73"
 export TEXT_CONFIG3="Kolor wyróżnionych napisów"
@@ -172,7 +172,7 @@ export TEXT_DEB1="Wskaż plik linux-headers lub linux-image, który chcesz zains
 export TEXT_NAGLOWKI="Nagłówki"
 export TEXT_LOKALNE="Lokalne"
 export TEXT_PPA="kernel-ppa"
-export TEXT_WYMAGANY_NV="Wymagane jest ponowne zainstalowanie sterowników Nvidia"
+export TEXT_WYMAGANY_NV="Wymagana jest instalacja najnowszego buildu sterowników Nvidia"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt
