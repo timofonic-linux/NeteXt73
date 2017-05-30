@@ -875,6 +875,7 @@ else
 		tekst_instalatora="$1"
 	fi
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /var/log/netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /var/log/netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+	blad_instalacji instalujsh_$godzina.log instalacja_$godzina.log
 fi
 }
 
@@ -890,6 +891,7 @@ else
 		tekst_instalatora="$1"
 	fi
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /var/log/netext73/logi/instalujsh_$godzina.log && bash instaluj.sh 2>&1 | tee -a /var/log/netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f"
+	blad_instalacji instalujsh_$godzina.log instalacja_$godzina.log
 fi
 }
 
@@ -905,6 +907,35 @@ else
 		tekst_instalatora="$1"
 	fi
 	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /var/log/netext73/logi/instalujsh_$godzina.log && sudo bash instaluj.sh 2>&1 | tee -a /var/log/netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; read ent; echo 'tak' > /tmp/netext73/ok.txt"
+	blad_instalacji instalujsh_$godzina.log instalacja_$godzina.log
+fi
+}
+
+blad_instalacji(){
+KEY3="$(echo $RANDOM)"
+#czyszczenie z "
+instalujsh=$(echo $1 | sed 's/"//g')
+instalacja=$(echo $2 | sed 's/"//g')
+if [ "$(cat /var/log/netext73/logi/instalacja | grep -i error)" != "" ]; then
+	#zmienne losowe
+	res[0]=$(mktemp --tmpdir=/tmp/netext73 netext73_0.XXXXXXXX)
+	res[1]=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
+	yad --plug=$KEY3 --tabnum=1 --text-info --filename="/var/log/netext73/logi/$instalacja" 1> ${res[0]} &
+	yad --plug=$KEY3 --tabnum=2 --text-info --filename="/var/log/netext73/logi/$instalujsh" 1> ${res[1]} &
+	yad --notebook --key=$KEY3 --center --title="$nazwa_skryptu1 - ERROR !" --tab="install ERROR !" --tab="instalujsh" --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --on-top --width=$((860*$skala)) --height=$((640*$skala)) --button="$TEXT_PASTEBIN:0" --button="$TEXT_ZAMKNIJ:1"
+	klawisz=$?
+	if [ "$klawisz" = "0" ]; then
+		please_wait
+		export userek=$(cat /tmp/netext73/userek)
+		cat /var/log/netext73/logi/$instalujsh | pastebinit_netext73 $instalujsh && log1="instalujsh.log"
+		cat /var/log/netext73/logi/$instalacja | pastebinit_netext73 $instalacja && log2="instalacja.log"
+		wyslane_logi=$(echo $log1 $log2 | tr ' ' '\n')
+		dymek -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_PRZESLIJ_LOGI :\n$wyslane_logi"
+		please_wait kill
+	fi
+	for i in $(seq 0 1); do
+		rm res[$i] -f
+	done
 fi
 }
 

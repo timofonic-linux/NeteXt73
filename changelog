@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.23
+-	wyświetlanie okna błędów po stwierdzeniu takowych w logu
 v1.1.22
 -	wymuszanie instalacji sterowników NV po instalacji kernela
 v1.1.21
