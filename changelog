@@ -2,6 +2,7 @@
 
 v1.1.23
 -	wyświetlanie okna błędów po stwierdzeniu takowych w logu
+-	rozbudowa warunku błędu dla instalacji
 v1.1.22
 -	wymuszanie instalacji sterowników NV po instalacji kernela
 v1.1.21

@@ -916,7 +916,7 @@ KEY3="$(echo $RANDOM)"
 #czyszczenie z "
 instalujsh=$(echo $1 | sed 's/"//g')
 instalacja=$(echo $2 | sed 's/"//g')
-if [ "$(cat /var/log/netext73/logi/instalacja | grep -i error)" != "" ]; then
+if [ "$(cat /var/log/netext73/logi/instalacja | grep -i -x -E "error|fail")" != "" ]; then
 	#zmienne losowe
 	res[0]=$(mktemp --tmpdir=/tmp/netext73 netext73_0.XXXXXXXX)
 	res[1]=$(mktemp --tmpdir=/tmp/netext73 netext73_1.XXXXXXXX)
