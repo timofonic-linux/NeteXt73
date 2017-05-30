@@ -172,6 +172,7 @@ export TEXT_DEB1="Wskaż plik linux-headers lub linux-image, który chcesz zains
 export TEXT_NAGLOWKI="Nagłówki"
 export TEXT_LOKALNE="Lokalne"
 export TEXT_PPA="kernel-ppa"
+export TEXT_WYMAGANY_NV="Wymagane jest ponowne zainstalowanie sterowników Nvidia"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt

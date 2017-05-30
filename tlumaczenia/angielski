@@ -176,6 +176,7 @@ export TEXT_DEB1="Select the file linux-headers or linux-image, which do you wan
 export TEXT_NAGLOWKI="Headers"
 export TEXT_LOKALNE="Local"
 export TEXT_PPA="kernel-ppa"
+export TEXT_WYMAGANY_NV="Reinstalling Nvidia drivers is required"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt

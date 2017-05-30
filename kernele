@@ -13,7 +13,13 @@ source /opt/NeteXt73/procedury
 #instalator płatnych wersji
 
 cd /tmp/netext73
-
+wymagana_instalacja_nv(){
+#wymagana reinstalacja sterowników NV
+if [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ] && [ "$a5" != "TRUE" ]; then
+	dymek  -i $warning1 "$TEXT_UWAGA" "$TEXT_WYMAGANY_NV"
+	/opt/NeteXt73/./grafiki nvidia
+fi
+}
 if [ -e /etc/netext73/kernel_automat ] && [ -e /etc/netext73/instalator_kerneli ] && [ "$(cat /etc/netext73/kernel_automat)" = "TRUE" ]; then
 	kern="$(cat /etc/netext73/instalator_kerneli)"
 	if [ "$(echo $kern | grep -E $lista_kerneli_premium)" != "" ]; then
@@ -115,7 +121,7 @@ elif [ "$kern" = "$TEXT_NAGLOWKI" ]; then
 		rm /tmp/netext73/kernel -fr; 	mkdir /tmp/netext73/kernel
 		cd /tmp/netext73/kernel;    	cp $b /tmp/netext73/kernel/
 		xterm -T instalator -e bash -c "/usr/bin/yes | sudo dpkg -i linux-headers*"
-			restart
+		restart
 	elif [ "$(echo $a | grep 'linux-headers' | grep 'ext' | grep '.deb')" != "" ]; then
 		cd $(echo $a | sed -e 's/linux.*//g')
 		rm /tmp/netext73/kernel -fr; 	mkdir /tmp/netext73/kernel
@@ -191,6 +197,7 @@ elif [ "$kern" != "" ] && [ "$blad" != "1" ]; then
 						zgoda_na_raport
 						#wywalenie plików po instalacji
 						wywal_pobrane_pliki_kernela
+						wymagana_instalacja_nv
 						restart kernel
 					else
 						dymek  -i $warning1 "$TEXT_UWAGA" "$TEXT_INSTALOWAC_KERNEL6"

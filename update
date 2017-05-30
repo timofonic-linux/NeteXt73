@@ -34,9 +34,9 @@ instalacja gcc
 
 nv_radeon(){
 if lspci | grep -i GeForce | grep -i NVIDIA;then
-	a5="TRUE"
+	export a5="TRUE"
 else
-	a5="FALSE"
+	export a5="FALSE"
 fi
 if ! lspci | grep VGA | awk '{print tolower($0)}' | grep radeon || [ "$(glxinfo | grep 'AMD Radeon HD' | sed -e 's/.*HD //g' -e 's/ .*//g')" -le 5000 ];then
 	a6="FALSE"
