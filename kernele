@@ -15,7 +15,7 @@ source /opt/NeteXt73/procedury
 cd /tmp/netext73
 wymagana_instalacja_nv(){
 #wymagana reinstalacja sterowników NV
-if [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ] && [ "$a5" != "TRUE" ]; then
+if  [ "$a5" != "TRUE" ] && { [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ] || [ "$(lspci | grep -i NVIDIA | grep -i Quadro)" != "" ]; }; then
 	dymek  -i $warning1 "$TEXT_UWAGA" "$TEXT_WYMAGANY_NV"
 	/opt/NeteXt73/./grafiki nvidia
 fi
