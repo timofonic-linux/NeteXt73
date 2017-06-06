@@ -10,61 +10,40 @@ source /opt/NeteXt73/procedury
 
 #########################################################################################################################################################################
 
-#zapobieganie dwukrotnemu uruchomieniu
-if [ "$(ps -aux | grep yad | grep NeteXt73.png | grep -v poczatek.html | grep -v info)" != '' ] || [ "$(ps -aux | grep NeteXt73 | grep Root-mode)" != '' ]; then
-	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
+#uruchamianie bez sudo
+if [ $USER = "root" ] ;then
+	rm -rf /tmp/netext73
+    echo -e "Please run program without sudo.\nUruchom program bez sudo."
+    sudo -K
 	exit 1
 fi
 
-#pobieranie sum kontrolnych i informacji o aktualizacjach
-if [ "$USER" != "root" ];then
+#sprawdzanie czy już jest uruchomiony
+if [ "$(ps -aux | grep 'class=NeteXt' | grep yad | wc -l)" != "1" ]; then
+	#pobieranie sum kontrolnych i informacji o aktualizacjach
 	rm -rf /tmp/netext73/sumy/*
 	mkdir -p /tmp/netext73/sumy
 	wersja &
 	zaleznosci &
 	/opt/NeteXt73/./update start &
-fi
-
-#zapobieganie uruchomieniu programu z poziomu roota
-if [ ! -e /tmp/netext73/userek ]; then
-	if [ ! -e /tmp/netext73 ]; then
-		mkdir -p /tmp/netext73
+	if [ ! -e /tmp/netext73/userek ]; then
+		if [ ! -e /tmp/netext73 ]; then
+			mkdir -p /tmp/netext73
+		fi
+		echo $USER > /tmp/netext73/userek
+		export userek=$(cat /tmp/netext73/userek)
 	fi
-	echo $USER > /tmp/netext73/userek
-	export userek=$(cat /tmp/netext73/userek)
-	if [ "$userek" = "root" ]; then
-		rm -rf /tmp/netext73
-		echo -e "Please run program without sudo.\nUruchom program bez sudo."
-		sudo -K
-		exit 1
-	else
-		cd /opt/NeteXt73 && NeteXt73_root ./NeteXt73
-		exit 0
-	fi
-fi
-
-przepisanie_configow
-
-if [ -e /etc/netext73/kernel_premium ] && [ -e /etc/netext73/vsftpd/vsftpd ] && [ -e /etc/netext73/has* ]; then
-	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
-else
-	klawisze_aktywne="--button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
-fi
-if [ "$skala" = "2" ];then
-	wysokosc="720"
-else
-	wysokosc="680"
-fi
-yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image-on-top --item-width="$((200*$skala))" --read-dir="/opt/NeteXt73/desktopfiles" --width="$((870*$skala))" --height="$wysokosc" --title="- $nazwa_skryptu -" $klawisze_aktywne
-klawisz=$?
-if [ "$klawisz" = "2" ]; then
-	restart
-elif  [ "$klawisz" = "3" ] ; then
-	chmod a+x /etc/netext73/vsftpd/vsftpd
-	/etc/netext73/vsftpd/./vsftpd
-else
-	sudo -K
+	cd /opt/NeteXt73
+	while ! yad --center --on-top --title="NeteXt'73 - Root-mode" --width=$((360*$skala)) --entry --hide-text --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image="/opt/NeteXt73/ikony/key.png" --text="$TEXT_PASSWD1\n" --button="gtk-ok:0" | sudo -S ./menu; do
+		if $(yad --center --question --title="$nazwa_skryptu1" --width=$((460*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_NIE:1" --text="$TEXT_PASSWD"); then
+			rm -rf /tmp/netext73
+			sudo -K
+			exit 0
+		fi
+	done
 	rm -rf /tmp/netext73
-	exit 0
+	sudo -K
+else
+	dymek  -i $ikona_info1 "$TEXT_INFORMACJA" "$TEXT_NETEXT_JUZ_DZIALA"
+	exit 1
 fi
-

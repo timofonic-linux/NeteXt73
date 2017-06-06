@@ -1,0 +1,37 @@
+#!/bin/bash
+## Graficzny instalator kerneli e X t 7 3  - NeteXt'73
+## przygotowanie kerneli e X t 7 3 - ext73@wp.pl
+## przygotowanie skryptów optymalizacyjnych e X t 7 3
+## autor skryptu NeteXt'73 - NetBit73 - netbit73@gmail.com
+## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
+#########################################################################################################################################################################
+#procedury
+source /opt/NeteXt73/procedury
+
+#########################################################################################################################################################################
+
+przepisanie_configow
+
+if [ -e /etc/netext73/kernel_premium ] && [ -e /etc/netext73/vsftpd/vsftpd ] && [ -e /etc/netext73/has* ]; then
+	klawisze_aktywne="--button="vsFTPd:3" --button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
+else
+	klawisze_aktywne="--button="$TEXT_REBOOT:2" --button="$TEXT_ZAMKNIJ:1" --single-click"
+fi
+if [ "$skala" = "2" ];then
+	wysokosc="720"
+else
+	wysokosc="680"
+fi
+yad --center --icons --class="NeteXt'73" --name="NeteXt'73" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --image-on-top --item-width="$((200*$skala))" --read-dir="/opt/NeteXt73/desktopfiles" --width="$((870*$skala))" --height="$wysokosc" --title="- $nazwa_skryptu -" $klawisze_aktywne
+klawisz=$?
+if [ "$klawisz" = "2" ]; then
+	restart
+elif  [ "$klawisz" = "3" ] ; then
+	chmod a+x /etc/netext73/vsftpd/vsftpd
+	/etc/netext73/vsftpd/./vsftpd
+else
+	sudo -K
+	rm -rf /tmp/netext73
+	exit 0
+fi
+

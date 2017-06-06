@@ -33,6 +33,7 @@ install: install_desktopfiles \
 	 install_APM \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
+	 install_file_menu \
 	 install_file_NeteXt73.desktop \
 	 install_file_rkhunter.tar.gz \
 	 install_file_apm \
@@ -88,6 +89,8 @@ install_file_LICENSE:
 	$(INSTALL) 0755 LICENSE $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73:	
 	$(INSTALL) 0755 NeteXt73 $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
+install_file_menu:	
+	$(INSTALL) 0755 menu $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73.desktop:	
 	$(INSTALL) 0755 NeteXt73.desktop $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_rkhunter.tar.gz:
