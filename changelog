@@ -3,6 +3,7 @@
 v1.1.24
 -	zmiana trybu root
 -	poprawki Makefile
+-	poprawka Netext73.desktop 
 v1.1.23
 -	wyświetlanie okna błędów po stwierdzeniu takowych w logu
 -	rozbudowa warunku błędu dla instalacji
