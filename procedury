@@ -267,7 +267,7 @@ echo "fi"
 #broadcom dla kerneli 5x
 echo "if [ \"\$(lspci | grep -i bcm | grep -i wireless)\" != \"\" ]; then"
 echo "sudo apt purge broadcom-sta* bcmwl-kernel-source* -y"
-echo "if [ \"\$(ls *.deb | | grep -i 'ext73-5')\" != \"\" ];then"
+echo "if [ \"\$(ls *.deb | grep -i 'ext73-5')\" != \"\" ];then"
 echo "sudo dpkg -i /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep broadcom-sta-dkms)"
 echo "fi"
 echo "fi"
