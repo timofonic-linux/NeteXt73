@@ -28,6 +28,23 @@ cd /tmp/netext73
 rm *.html -f
 rm /tmp/netext73/*.txt -f; rm /tmp/netext73/*.sh -f
 stan_apm=""
+
+
+#sprawdzanie czy była zmiana blk-mq
+if [ "$(cat /sys/block/sda/queue/scheduler | grep -E "none|mq-deadline")" != "" ];then
+	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline")" = "" ];then
+		sed -i 's/hdd_scheduler.*/hdd_scheduler		none/g' /etc/netext73/apm_status
+		sed -i 's/ssd_scheduler.*/ssd_scheduler		none/g' /etc/netext73/apm_status
+	fi
+elif [ "$(cat /sys/block/sda/queue/scheduler | grep -E "noop|cfq|bfq")" = "" ];then
+	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline")" = "" ];then
+		sed -i 's/hdd_scheduler.*/hdd_scheduler		noop/g' /etc/netext73/apm_status
+		sed -i 's/ssd_scheduler.*/ssd_scheduler		noop/g' /etc/netext73/apm_status
+	
+	fi
+fi
+
+
 #zapamiętanie configu jeżeli był niepełen config
 if [ -e  /etc/netext73/apm_status ] && [ "$(cat /etc/netext73/apm_status | wc -l)" != "14" ]; then
 	#sprawdzanie czy jest włączony jakiś APM

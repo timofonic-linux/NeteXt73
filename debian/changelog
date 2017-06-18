@@ -1,3 +1,9 @@
+netext73 (1.1.26) xenial; urgency=medium
+
+  * poprawka APM dla planistów
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 18 Jun 2017 20:06:36 +0200
+
 netext73 (1.1.25) xenial; urgency=medium
 
   * przywrócenie instalatora broadcoma
