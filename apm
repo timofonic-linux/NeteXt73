@@ -36,8 +36,8 @@ if [ "$(cat /sys/block/sda/queue/scheduler | grep -E "none|mq-deadline")" != "" 
 		sed -i 's/hdd_scheduler.*/hdd_scheduler		none/g' /etc/netext73/apm_status
 		sed -i 's/ssd_scheduler.*/ssd_scheduler		none/g' /etc/netext73/apm_status
 	fi
-elif [ "$(cat /sys/block/sda/queue/scheduler | grep -E "noop|cfq|bfq")" = "" ];then
-	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline")" = "" ];then
+else
+	if [ "$(cat /etc/netext73/apm_status | grep -E "noop|cfq|bfq|deadline")" = "" ];then
 		sed -i 's/hdd_scheduler.*/hdd_scheduler		noop/g' /etc/netext73/apm_status
 		sed -i 's/ssd_scheduler.*/ssd_scheduler		noop/g' /etc/netext73/apm_status
 	
