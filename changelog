@@ -2,6 +2,7 @@
 
 v1.1.26
 -	poprawka APM dla planistów
+-	wymuszenie noop dla zwykłego i none dla blq
 v1.1.25
 -	przywrócenie instalatora broadcoma
 v1.1.24
