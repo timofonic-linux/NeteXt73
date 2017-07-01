@@ -44,7 +44,7 @@ if [ -e /etc/sysctl.conf ]; then
 fi
 #linkowanie
 wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
-plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py)
+plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)
 suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
 if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
 	if [ ! -e /usr/lib/x86_64-linux-gnu/$plik ] || [ "$(md5sum /usr/lib/x86_64-linux-gnu/$plik | awk '{print $1}')" != "$suma" ] || [ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ]; then
