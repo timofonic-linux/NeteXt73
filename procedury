@@ -727,7 +727,8 @@ else
 	if [ "$(cat /sys/block/sda/queue/scheduler)" = "none" ] || [ "$(cat /sys/block/sda/queue/scheduler)" = "[none]" ] ; then
 		hdd_scheduler_menu="blk-mq"
 		ssd_scheduler_menu="blk-mq"
-	elif [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
+		
+	elif [ "$(grep '\[none\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[mq-deadline\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[kyber\]' /sys/block/sd*/queue/scheduler)" != "" ] || [ "$(grep '\[bfq\]' /sys/block/sd*/queue/scheduler)" != "" ]; then
 		#dodanie # jak nie było
 		sed -i '/^[^#]/s:^:#:' /etc/udev/rules.d/60-ssd-scheduler.rules
 
