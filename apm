@@ -31,8 +31,8 @@ stan_apm=""
 
 
 #sprawdzanie czy była zmiana blk-mq
-if [ "$(cat /sys/block/sda/queue/scheduler | grep -E "none|mq-deadline")" != "" ];then
-	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline")" = "" ] || [ "$(cat $katalog_apm | grep hdd_scheduler | grep -E "none|mq-deadline")" = "" ]  || [ "$(cat $katalog_apm | grep ssd_scheduler | grep -E "none|mq-deadline")" = "" ] ;then
+if [ "$(cat /sys/block/sda/queue/scheduler | grep -E "none|mq-deadline|kyber|bfq")" != "" ];then
+	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline|kyber|bfq")" = "" ] || [ "$(cat $katalog_apm | grep hdd_scheduler | grep -E "none|mq-deadline|kyber|bfq")" = "" ]  || [ "$(cat $katalog_apm | grep ssd_scheduler | grep -E "none|mq-deadline|kyber|bfq")" = "" ] ;then
 		sed -i 's/hdd_scheduler.*/hdd_scheduler		none/g' /etc/netext73/apm_status
 		sed -i 's/ssd_scheduler.*/ssd_scheduler		none/g' /etc/netext73/apm_status
 		sudo sed -i "/#HDD/ s/echo.*>/echo none >/g" $katalog_apm
