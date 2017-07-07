@@ -2,6 +2,9 @@
 
 v1.1.29
 -	nowe schedulery: kyber i bfq
+-	dynamiczne listy w APM
+-	dynamiczny system sprawdzający czy nastawy są poprawne w schedulerach
+-	uzależnienie wpisów schedulerów od wpisu w grubie
 v1.1.28
 -	wsparcie dla Linux Mint 18.2 Sonya
 v1.1.27

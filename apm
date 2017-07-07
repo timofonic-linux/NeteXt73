@@ -31,8 +31,9 @@ stan_apm=""
 
 
 #sprawdzanie czy była zmiana blk-mq
+dynamiczna_lista_planistow=$(cat /sys/block/sd*/queue/scheduler | head -n 1 | sed 's/\[//g' | sed 's/\]//g' | tr ' ' '|' | sed '$s/|$//g')
 if [ "$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub | grep 'scsi_mod.use_blk_mq=1')" != "" ]; then
-	if [ "$(cat /etc/netext73/apm_status | grep -E "none|mq-deadline|kyber|bfq")" = "" ] || [ "$(cat $katalog_apm | grep '#HDD' | grep -E "none|mq-deadline|kyber|bfq")" = "" ] || [ "$(cat $katalog_apm | grep '#SSD' | grep -E "none|mq-deadline|kyber|bfq")" = "" ] ;then
+	if [ "$(cat /etc/netext73/apm_status | grep -E "$dynamiczna_lista_planistow")" = "" ] || [ "$(cat $katalog_apm | grep '#HDD' | grep -E "$dynamiczna_lista_planistow")" = "" ] || [ "$(cat $katalog_apm | grep '#SSD' | grep -E "$dynamiczna_lista_planistow")" = "" ] ;then
 		sed -i 's/hdd_scheduler.*/hdd_scheduler		none/g' /etc/netext73/apm_status
 		sed -i 's/ssd_scheduler.*/ssd_scheduler		none/g' /etc/netext73/apm_status
 		sudo sed -i "/#HDD/ s/echo.*>/echo none >/g" $katalog_apm
@@ -42,7 +43,7 @@ if [ "$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub | grep 'scsi_mod.use_blk_mq=
 		done
 	fi
 else
-	if [ "$(cat /etc/netext73/apm_status | grep -E "noop|cfq|bfq|deadline")" = "" ] || [ "$(cat $katalog_apm | grep '#HDD' | grep -E  "noop|cfq|bfq|deadline")" = "" ]  || [ "$(cat $katalog_apm | grep '#SSD' | grep -E  "noop|cfq|bfq|deadline")" = "" ];then
+	if [ "$(cat /etc/netext73/apm_status | grep -E "$dynamiczna_lista_planistow")" = "" ] || [ "$(cat $katalog_apm | grep '#HDD' | grep -E  "$dynamiczna_lista_planistow")" = "" ] || [ "$(cat $katalog_apm | grep '#SSD' | grep -E  "$dynamiczna_lista_planistow")" = "" ];then
 		sed -i 's/hdd_scheduler.*/hdd_scheduler		noop/g' /etc/netext73/apm_status
 		sed -i 's/ssd_scheduler.*/ssd_scheduler		noop/g' /etc/netext73/apm_status
 		sudo sed -i "/#HDD/ s/echo.*>/echo noop >/g" $katalog_apm
