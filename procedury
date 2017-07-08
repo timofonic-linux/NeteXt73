@@ -552,12 +552,26 @@ for i in $(cat /sys/block/sd*/queue/scheduler | head -n 1 | sed 's/\[//g' | sed 
 #HDD
 if [ "$hdd_scheduler" = "$i" ] || { [ "$3" = "nowy" ] && [ "$(cat /etc/netext73/apm_status | grep hdd_scheduler | grep $i)" != "" ]; };then
 	sudo sed -i "/#HDD/ s/echo.*>/echo $i >/g" $katalog_apm
+	
 fi
 #SSD
 if [ "$ssd_scheduler" = "$i" ] || { [ "$3" = "nowy" ] && [ "$(cat /etc/netext73/apm_status | grep ssd_scheduler | grep $i )" != "" ]; };then
 	sudo sed -i "/#SSD/ s/echo.*>/echo $i >/g" $katalog_apm
+	
 fi
 done
+#ustawienie planistów live
+export ssd_scheduler=$(cat $katalog_apm | grep '#SSD' | head -n 1 | awk '{print $2}')
+export hdd_scheduler=$(cat $katalog_apm | grep '#HDD' | head -n 1 | awk '{print $2}')
+for i in /sys/block/sd*/queue
+do
+		if [ "$(cat $i/rotational)" = "0" ]; then
+			echo $ssd_scheduler > $i/scheduler #SSD
+		else
+			echo $hdd_scheduler > $i/scheduler #HDD
+		fi
+done
+
 
 #hibernacja
 if [ "$hibernacja_menu" = "TRUE" ] || { [ "$3" = "nowy" ] &&  [ "$(cat /etc/netext73/apm_status | grep hibernacja | grep TRUE)" != "" ]; };then
