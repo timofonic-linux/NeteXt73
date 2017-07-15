@@ -94,8 +94,8 @@ export warning1="dialog-warning"
 export adres_opisu="http://www.netext73.pl/search/label/opis_netext73"
 
 export wersje_ubu="yakkety!xenial!trusty!unstable"
-export wspierane_wersje="xenial|yakkety|zesty"
-export wspierane_nr="16.04|16.10|17.04"
+export wspierane_wersje="xenial|yakkety|zesty|artful"
+export wspierane_nr="16.04|16.10|17.04|17.10"
 
 export lista_dyskow=$(lsblk | grep disk | awk '{print $1}' | sort | uniq)
 

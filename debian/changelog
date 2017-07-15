@@ -1,3 +1,9 @@
+netext73 (1.1.31) xenial; urgency=medium
+
+  * testowe wsparcie dla 17.10 artful
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 15 Jul 2017 20:43:04 +0200
+
 netext73 (1.1.30) xenial; urgency=medium
 
   * nastawy schedulerów live
