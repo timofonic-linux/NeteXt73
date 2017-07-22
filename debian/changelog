@@ -1,3 +1,9 @@
+netext73 (1.1.32) xenial; urgency=medium
+
+  * poprawka będu cannot open display
+
+ -- NetBit73 <netbit73@gmail.com>  Sat, 22 Jul 2017 19:37:06 +0200
+
 netext73 (1.1.31) xenial; urgency=medium
 
   * testowe wsparcie dla 17.10 artful
