@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.33
+-	wyłączenie wsparcia dla 16.10 - EOL
 v1.1.32
 -	poprawka błędu Gtk-WARNING **: cannot open display: :0
 v1.1.31

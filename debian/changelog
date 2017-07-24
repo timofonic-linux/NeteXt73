@@ -1,3 +1,9 @@
+netext73 (1.1.33) xenial; urgency=medium
+
+  * 16.10 EOL
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 24 Jul 2017 09:27:12 +0200
+
 netext73 (1.1.32) xenial; urgency=medium
 
   * poprawka będu cannot open display
