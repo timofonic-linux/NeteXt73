@@ -16,8 +16,6 @@ petla_duza="tak"
 while [ $petla_duza = "tak" ]; do
 	cd /tmp/netext73
 	rm netext73_* -f
-	#yad --center --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --on-top \
-	--button="$TEXT_WYGENERUJ:2" --button="$TEXT_LISTA_LOGOW:3" --button="$TEXT_LISTAPAKIETOW:4" --button="$TEXT_ZAMKNIJ:1"
 	skrypt=$(yad --center --on-top --title="$nazwa_skryptu1 - logs generator " --window-icon="/opt/NeteXt73/ikony/logi.png" --image="/opt/NeteXt73/ikony/logi.png" --form --field="$TEXT_DEINSTALATOR1:CB" \
 	"$TEXT_WYGENERUJ!$TEXT_LISTA_LOGOW!$TEXT_LISTAPAKIETOW" --button="gtk-ok:0" --button="$TEXT_ZAMKNIJ:1"  )
 	klawisz=$?; skrypt=$(echo $skrypt | cut -d "|" -f 1)
@@ -335,8 +333,17 @@ while [ $petla_duza = "tak" ]; do
 				sed -i 's/<span.*">//g' system$losowa.log
 				sed -i 's/<\/b>//g' system$losowa.log
 				sed -i 's/<b>//g' system$losowa.log
+				#####
+				echo -e "\npodsumowanie" >> system$losowa.log
+				echo -e "##############################################################################################" >> system$losowa.log
 				mv system$losowa.log netext.log
-
+				cp zakladka1.log netext2.log
+				sed -i 's/<\/span>//g' netext2.log
+				sed -i 's/<span.*">//g' netext2.log
+				sed -i 's/<\/b>//g' netext2.log
+				sed -i 's/<b>//g' netext2.log
+				cat netext2.log >> netext.log
+				
 				echo -e "dmesg".log > dmesg.log
 				echo -e "##############################################################################################" >> dmesg.log
 				dmesg >> dmesg.log

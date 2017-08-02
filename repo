@@ -182,6 +182,11 @@ baza=(
 	"LinSSID - Graphical Wireless Scanner"
 	"linssid"
 
+	"ppa:webupd8team/mtpaint"
+	"mtPaint - A Lightweight Paint Software for Digital Photos"
+	"mtPaint - lekki program graficzny"
+	"mtpaint"
+	
 	"ppa:oibaf/graphics-drivers"
 	"Najnowsze (testowe) otwarte sterowniki graficzne (Mesa)"
 	"The latest (testing) open graphics drivers (Mesa)"
