@@ -192,7 +192,7 @@ baza=(
 	"The latest (testing) open graphics drivers (Mesa)"
 	"vainfo"
 
-	"ppa:joe-yasi/xorg-xenial"
+	"ppa:paulo-miguel-dias/pkppa"
 	"Najnowsze (stabilne) otwarte sterowniki graficzne (Mesa)"
 	"The latest (stable) open graphics drivers (Mesa)"
 	"vainfo"
