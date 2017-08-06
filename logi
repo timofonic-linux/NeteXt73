@@ -138,12 +138,16 @@ while [ $petla_duza = "tak" ]; do
 					wifi="$(lspci | grep "Network controller:" |sed -e 's/'.*:'//g' -e 's/Network Connection//g' | head -n1 | sed -e 's/ //')"
 				fi
 				echo -e "$wifi" >> system$losowa.log
-				#scheduler
-				if [ "$(grep none /sys/block/sd*/queue/scheduler)" != "" ]; then
-					echo -e "scheduler I/O :\nblk-mq" >> system$losowa.log
-				else
-					echo -e "scheduler I/O :\n$(cat /sys/block/sd*/queue/scheduler)"  >> system$losowa.log
-				fi
+				#scheduler SSD/HDD
+				for i in /sys/block/sd*/queue
+				do
+                    if [ "$(cat $i/rotational)" = "0" ]; then
+                        echo -e "SSD - $(echo $i | cut -d '/' -f 4) - scheduler I/O : $(cat $i/scheduler)"  >> system$losowa.log
+                    else
+                        echo -e "HDD - $(echo $i | cut -d '/' -f 4) - scheduler I/O : $(cat $i/scheduler)"  >> system$losowa.log
+                    fi
+				done
+
 				#system
 				echo -e "<span color=\"$kolor_textu\"><b>SYSTEM:</b></span> $(lsb_release -i | awk '{print $3}') $NR_WERSJA_UBUNTU $WERSJA_UBUNTU $bit" >> system$losowa.log
 				echo -e "<span color=\"$kolor_textu\"><b>$TEXT_LOGI6</b></span>" >> system$losowa.log
