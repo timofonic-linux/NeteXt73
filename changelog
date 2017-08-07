@@ -5,6 +5,7 @@ v1.1.34
 -	drobne poprawki
 -	poprawki w module logów
 -	poprawka schedulerów w module logów
+-	zmiana warunków dla pstate w apm
 v1.1.33
 -	wyłączenie wsparcia dla 16.10 - EOL
 v1.1.32
