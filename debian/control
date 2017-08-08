@@ -36,6 +36,8 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   curl,   
   libisl15, 
   libatlas3-base, 
+  libatlas-base-dev, 
+  libgsl-dev, 
   libgsl0ldbl | libgsl2, 
   desktop-file-utils, 
   software-properties-common 
