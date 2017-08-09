@@ -1199,7 +1199,6 @@ echo "else"
 echo "if grep 'pcie_port_pm=off' /etc/default/grub; then"
 echo "sudo sed -i 's/ pcie_port_pm=off//g' /etc/default/grub"
 echo "fi"
-echo "sudo service bumblebeed restart"
 echo "fi"
 }
 
