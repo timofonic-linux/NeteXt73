@@ -56,11 +56,12 @@ if [ "$1" = "nvidia" ]; then
 		ster=$(yad --center --on-top --title="$nazwa_skryptu" --width=$((410*$skala)) --window-icon="/opt/NeteXt73/ikony/nvidia.png" --image="/opt/NeteXt73/ikony/nvidia.png" --text="$TEXT_STEROWNIKI2 <span color=\"$kolor_textu\"><b>Nvidia</b></span>" --form --field="$TEXT_STEROWNIK:CB" "$lista" $menu)
 		klawisz=$?; ster=$(echo $ster | cut -d "|" -f 1)
 		if [ "$ster" != "" ] && [ "$klawisz" = "0" ]; then
-			yad_wget $adres_sterownikow/$ster.tar.xz $adres_sterownikow/nvidia-optimus.tar.xz
-			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ] && [ -e nvidia-optimus.tar.xz ] && [ "$(grep $(md5sum nvidia-optimus.tar.xz) $sumy_kontrolne)" != "" ]; then
+			nvidiaoptimus=$(grep nvidia-optimus-ext /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}' | sed 's/.tar.xz//g')
+			yad_wget $adres_sterownikow/$ster.tar.xz $adres_sterownikow/$nvidiaoptimus.tar.xz
+			if [ -e $ster.tar.xz ] && [ "$(grep $(md5sum $ster.tar.xz) $sumy_kontrolne)" != "" ] && [ -e $nvidiaoptimus.tar.xz ] && [ "$(grep $(md5sum $nvidiaoptimus.tar.xz) $sumy_kontrolne)" != "" ]; then
 				rm -f index.html 2a.txt
 				tar -Jxf $ster.tar.xz
-				tar -Jxf nvidia-optimus.tar.xz -C /tmp/
+				tar -Jxf $nvidiaoptimus.tar.xz -C /tmp/
 				if [ -e $ster ]; then
 					cd $ster
 					export wersja_nvidia=$(echo $ster"_amd64" | sed 's/nvidia-//')

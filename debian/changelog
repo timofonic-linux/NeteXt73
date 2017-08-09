@@ -1,3 +1,9 @@
+netext73 (1.1.36) xenial; urgency=medium
+
+  * przebudowa modułu instalacji optimusa
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 09 Aug 2017 13:09:21 +0200
+
 netext73 (1.1.35) xenial; urgency=medium
 
   * uzupełnienie zależności
