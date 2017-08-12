@@ -38,7 +38,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   libatlas3-base, 
   libatlas-base-dev, 
   libgsl-dev, 
-  libgsl0ldbl | libgsl2, 
+  libgsl0ldbl | libgsl2 | libgsl23, 
   desktop-file-utils, 
   software-properties-common 
 Replaces: netext73 
