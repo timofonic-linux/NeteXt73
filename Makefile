@@ -18,6 +18,8 @@ GRAPHIC_BASE_DIR = ikony
 GRAPHIC_BASE_FILES = $(wildcard $(GRAPHIC_BASE_DIR)/*.png)
 CONTACTS_DIR = kontakty
 CONTACTS_FILES = $(wildcard $(CONTACTS_DIR)/*.desktop)
+DEB_DIR_FIRMWARE = iwlwifi
+DEB_FILES_FIRMWARE = $(wildcard $(DEB_DIR_FIRMWARE)/*)
 TRANSLATIONS_DIR = tlumaczenia
 make: nothing_to_make
 nothing_to_make:
@@ -53,6 +55,7 @@ install: install_desktopfiles \
 	 install_file_skrypty \
 	 install_file_update \
 	 install_file_uslugi \
+	 install_file_iwlwifi \
 	 install_file_czekaj
 	 
 	 $(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
@@ -127,8 +130,11 @@ install_file_skrypty:
 	$(INSTALL) 0755 skrypty $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_update:
 	$(INSTALL) 0755 update $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
-install_file_uslugi:	
+install_file_uslugi:
 	$(INSTALL) 0755 uslugi $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
+install_file_iwlwifi:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR_FIRMWARE)/
+	$(INSTALL) 0755 $(DEB_FILES_FIRMWARE) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(DEB_DIR_FIRMWARE)
 install_file_czekaj:	
 	$(INSTALL) 0755 czekaj.py $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 
