@@ -284,6 +284,8 @@ echo "fi"
 echo "echo 'tak' > /tmp/netext73/ok.txt"
 #wyłączenie LPT
 echo "sudo sed -i '/^[^#]/s:^:#:' /etc/modules-load.d/cups-filters.conf"
+#ldconfig
+echo "sudo ldconfig"
 }
 
 #zgoda na wysyłanie raportów

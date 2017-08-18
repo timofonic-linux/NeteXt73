@@ -3,6 +3,7 @@
 v1.1.37
 -	pobieranie broadcoma z serwera zamiast z paczki NeteXt73-pakiety
 -	udowstępnianie iwlwifi z NeteXt73 zamiast z paczki NeteXt73-pakiety
+-	ldconfig po instalacji kernela
 v1.1.36
 -	przebudowa modułu instalacji optimusa
 -	poprawa zależności dla 17.10
