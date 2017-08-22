@@ -1,3 +1,9 @@
+netext73 (1.1.38) xenial; urgency=medium
+
+  * libgsl-dev
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 22 Aug 2017 10:48:56 +0200
+
 netext73 (1.1.37) xenial; urgency=medium
 
   * iwlwifi+broadcom

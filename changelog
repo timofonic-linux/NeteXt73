@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.38
+-	usunięcie z zależności libgsl-dev
 v1.1.37
 -	pobieranie broadcoma z serwera zamiast z paczki NeteXt73-pakiety
 -	udowstępnianie iwlwifi z NeteXt73 zamiast z paczki NeteXt73-pakiety
