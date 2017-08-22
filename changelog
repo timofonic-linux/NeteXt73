@@ -2,6 +2,7 @@
 
 v1.1.38
 -	usunięcie z zależności libgsl-dev
+-	poprawka linkowania libstdc++.so.6.0.xx
 v1.1.37
 -	pobieranie broadcoma z serwera zamiast z paczki NeteXt73-pakiety
 -	udowstępnianie iwlwifi z NeteXt73 zamiast z paczki NeteXt73-pakiety
