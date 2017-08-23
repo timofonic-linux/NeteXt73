@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.39
+-	dodanie TimeShift do repo
 v1.1.38
 -	usunięcie z zależności libgsl-dev
 -	poprawka linkowania libstdc++.so.6.0.xx

@@ -86,7 +86,7 @@ baza=(
 	"f.lux"
 	"f.lux"
 	"fluxgui"
-	
+
 	"ppa:otto-kesselgulasch/gimp"
 	"GIMP - pakiet graficzny"
 	"GIMP - graphics package"
@@ -141,7 +141,7 @@ baza=(
 	"KODI stabilne wydane"
 	"KODI Stable PPA"
 	"kodi kodi-bin kodi-data"
-	
+
 	"ppa:team-xbmc/kodi-old"
 	"KODI stabilne dla starszych maszyn"
 	"KODI Stable OLD"
@@ -186,7 +186,7 @@ baza=(
 	"mtPaint - A Lightweight Paint Software for Digital Photos"
 	"mtPaint - lekki program graficzny"
 	"mtpaint"
-	
+
 	"ppa:oibaf/graphics-drivers"
 	"Najnowsze (testowe) otwarte sterowniki graficzne (Mesa)"
 	"The latest (testing) open graphics drivers (Mesa)"
@@ -203,7 +203,7 @@ baza=(
 	"notify-osd"
 
 	"ppa:sandromani/gimagereader"
-    "OCR gimagereader"
+	"OCR gimagereader"
 	"OCR gimagereader"
 	"gimagereader tesseract-ocr tesseract-ocr-pol"
 
@@ -216,7 +216,7 @@ baza=(
 	"owncloud-server"
 	"owncloud-server"
 	"owncloud"
-	
+
 	"ppa:pinta-maintainers/pinta-stable"
 	"Pinta program graficzny wzorowany na Paint.NET."
 	"Pinta is a free, open source drawing/editing program modeled after Paint.NET."
@@ -231,7 +231,12 @@ baza=(
 	"gradio"
 	"gradio browser"
 	"gradio"
-	
+
+	"ppa:teejee2008/ppa"
+	"TimeShift"
+	"TimeShift"
+	"timeshift"
+
 	"ppa:hydr0g3n/qbittorrent-stable"
 	"qBittorrent - Codziennie wersje stabilnej gałęzi klienta BitTorrent - qBittorrent"
 	"qBittorrent - daily builds for the stable branch of qBittorrent BitTorrent client"
