@@ -1,3 +1,9 @@
+netext73 (1.1.40) xenial; urgency=medium
+
+  * przywrócenie                       libgsl-dev
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 24 Aug 2017 12:14:41 +0200
+
 netext73 (1.1.39) xenial; urgency=medium
 
   * repo TimeShift

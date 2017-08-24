@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.40
+-	przywrócenie libgsl-dev
 v1.1.39
 -	dodanie TimeShift do repo
 -	poprawka dla broadcoma
