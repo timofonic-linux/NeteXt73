@@ -1678,7 +1678,8 @@ stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '
 wget https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable  -O /tmp/netext73/sumy/ChangeLog-$stable  2> /dev/null
 #Sumy kontrolne
 wget $adres_sum_kontrolnych --no-check-certificate 2> /dev/null
-openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
+openssl aes-256-cbc -d -md MD5 -salt -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
+#openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 rm sumy_kontrolne.txt -f
 if [ "$(cat $sumy_kontrolne)" = "" ]; then
 	yad --center --info --title="$nazwa_skryptu  " --text="<span color=\"$kolor_textu\"><b>$BRAKNETA</b></span>" --window-icon="/opt/NeteXt73/ikony/error.png" --image="/opt/NeteXt73/ikony/error.png" --button="gtk-ok:0" --on-top
