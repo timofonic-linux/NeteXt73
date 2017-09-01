@@ -1,3 +1,9 @@
+netext73 (1.1.42) xenial; urgency=medium
+
+  * drobne poprawki
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 01 Sep 2017 13:51:42 +0200
+
 netext73 (1.1.41) xenial; urgency=medium
 
   * openssl

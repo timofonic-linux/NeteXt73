@@ -60,10 +60,10 @@ if [ -e ~/.netext73 ]; then
 fi
 
 #odpalanie strony domowej 
-if [ ! -e /etc/netext73/strona_domowa ]; then
-	echo "TRUE" > /etc/netext73/strona_domowa
-	yad --center --title="http://www.netext73.pl/p/netext73-poczatek.html" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --html --uri="http://www.netext73.pl/p/netext73-poczatek.html" --width=$((950*$skala))  --height=$((600*$skala)) --browser
-fi
+#if [ ! -e /etc/netext73/strona_domowa ]; then
+#	echo "TRUE" > /etc/netext73/strona_domowa
+#	yad --center --title="http://www.netext73.pl/p/netext73-poczatek.html" --window-icon="/opt/NeteXt73/ikony/NeteXt73.png" --html --uri="http://www.netext73.pl/p/netext73-poczatek.html" --width=$((950*$skala))  --height=$((600*$skala)) --browser
+#fi
 
 }
 
