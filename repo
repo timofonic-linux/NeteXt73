@@ -207,10 +207,10 @@ baza=(
 	"OCR gimagereader"
 	"gimagereader tesseract-ocr tesseract-ocr-pol"
 
-	"deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /"
+	"deb http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_$NR_WERSJA_UBUNTU/ /"
 	"owncloud-client"
 	"owncloud-client"
-	"owncloud-client"
+	"osc"
 
 	"deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /"
 	"owncloud-server"
@@ -443,8 +443,7 @@ else
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list"  >> usun.sh
 						      echo "sudo sed -i '/virtualbox/d' /etc/apt/sources.list.d/*"  >> usun.sh
 						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
-						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						      echo "sudo sed -i '/download.opensuse.org\/repositories\/isv:\/ownCloud/d' /etc/apt/sources.list.d/*"  >> usun.sh
+						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_$NR_WERSJA_UBUNTU/ /" ]; then
 						      echo "sudo rm -f /etc/apt/sources.list.d/owncloud-client.list"  >> usun.sh
 						      echo "sudo apt purge -y ${paczka[$i]}" >> usun.txt
 						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
@@ -484,9 +483,9 @@ else
 						    echo "sudo apt install --install-recommends pipelight-multi" >> instaluj1.txt
 						    echo "sudo pipelight-plugin --update" >> instaluj1.txt
 						    echo "sudo pipelight-plugin --enable silverlight" >> instaluj1.txt
-						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then
-						    echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj1.sh
-						    echo "wget -nv http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj1.sh
+						elif [ "${repo[$i]}" = "deb http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_$NR_WERSJA_UBUNTU/ /" ]; then
+						    echo "sudo sh -c \"echo 'deb http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_$NR_WERSJA_UBUNTU/ /' >> /etc/apt/sources.list.d/owncloud-client.list\"" >> instaluj1.sh
+						    echo "wget -nv http://download.opensuse.org/repositories/openSUSE:Tools/xUbuntu_$NR_WERSJA_UBUNTU/Release.key -O Release.key" >> instaluj1.sh
 						    echo "sudo apt-key add - < Release.key" >> instaluj1.sh
 						    echo "sudo apt install -y ${paczka[$i]}" >> instaluj1.txt
 						elif [ "${repo[$i]}" = "deb http://download.owncloud.org/download/repositories/stable/Ubuntu_$NR_WERSJA_UBUNTU/ /" ]; then

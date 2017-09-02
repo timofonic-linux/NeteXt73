@@ -2,6 +2,7 @@
 
 v1.1.42
 -	drobna poprawka
+-	owncloud-client zmiana repo
 v1.1.41
 -	dostosowanie sum kontrolnych do nowszej wersji openssl
 v1.1.40
@@ -14,7 +15,7 @@ v1.1.38
 -	poprawka linkowania libstdc++.so.6.0.xx
 v1.1.37
 -	pobieranie broadcoma z serwera zamiast z paczki NeteXt73-pakiety
--	udowstępnianie iwlwifi z NeteXt73 zamiast z paczki NeteXt73-pakiety
+-	udostępnianie iwlwifi z NeteXt73 zamiast z paczki NeteXt73-pakiety
 -	ldconfig po instalacji kernela
 v1.1.36
 -	przebudowa modułu instalacji optimusa
@@ -75,7 +76,7 @@ v1.1.17
 -	nowe repozytorium mesa stable ppa:paulo-miguel-dias/pkppa
 -	nowe nastawy dla APM
 -	60-ssd-scheduler.rules on/off
--   schedulery deadline, noop, cfq
+-     schedulery deadline, noop, cfq
 v1.1.16
 -	zmiana serwera
 -	poprawka netext73-paste
