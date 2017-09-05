@@ -1620,20 +1620,33 @@ kill_yad(){
 	kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
 }
 
+pobierz_gcc(){
+	rm -f /opt/NeteXt73/pakiety/gcc*
+	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
+	yad_wget $adres_sterownikow/$gcc_link
+	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
+		cp $gcc_link /opt/NeteXt73/pakiety/ -f
+		rm -f $gcc_link
+		instaluj_gcc instaluj_nowy
+	else
+		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
+	fi
+}
+
 instaluj_gcc(){
 export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //' | head -n 1)
 export wersja_libisl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)
 if [ "$1" = "instaluj_nowy" ];then
-	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep gcc) -C /opt/"
-	echo "sudo tar -Jxf /opt/NeteXt73-pakiety/pakiety/\$(ls /opt/NeteXt73-pakiety/pakiety | grep binutils) -C /opt/"
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin"
-	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
-	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
+	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
+	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld-plugin"
+	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld.bfd /usr/bin/ld.bfd"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc /usr/bin/gcc"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/gcc-ar /usr/bin/gcc-ar"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/cpp /usr/bin/cpp"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/g++ /usr/bin/g++"
+	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "if [ \"\$(lsb_release -cr | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo $WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libgsl /usr/lib/libgsl.so.0"

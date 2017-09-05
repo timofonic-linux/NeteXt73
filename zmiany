@@ -6,6 +6,7 @@
 ## Licencja: GPL v3: https://www.gnu.org/licenses/gpl.txt
 ########################################################################################################################
 if [ "$1" = "2" ]; then
+	rm -f /opt/NeteXt73/pakiety/gcc*
 	git add -A
 	IFS=$'\n'
 	echo 'podaj komentarz:'

@@ -286,7 +286,7 @@ if [ $klawisz = 0 ]; then
 	elif [ "$skrypt" = "$MENU_RKHUNTER" ]; then
 		naglowek 																> instaluj.sh
 		if [ ! -e /usr/local/bin/rkhunter ]; then
-			echo "tar -xvf /opt/NeteXt73/rkhunter.tar.gz -C /tmp/" 	>> instaluj.sh
+			echo "tar -xvf /opt/NeteXt73/pakiety/rkhunter.tar.gz -C /tmp/" 	>> instaluj.sh
 			echo "cd /tmp/rkhunter-1.4.2/"  									>> instaluj.sh
 			echo "sudo ./installer.sh --layout default --install" 				>> instaluj.sh
 			echo "cd /tmp/netext73" 											>> instaluj.sh

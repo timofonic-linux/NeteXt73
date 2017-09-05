@@ -47,6 +47,9 @@ if [ "$(glxinfo | grep OpenGL | grep AMD)" != "" ]; then
 		update-grub
 	fi
 fi
-
-
+#przywracanie gcc
+if [ -e /tmp/gcc/gcc* ]; then 
+	cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety/ -f
+	rm -rf /tmp/gcc
+fi
 exit 0

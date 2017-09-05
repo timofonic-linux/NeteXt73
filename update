@@ -28,7 +28,8 @@ rm -f /tmp/netext73/*.txt
 
 instalacja_gcc(){
 naglowek > instaluj.sh
-instaluj_gcc instaluj_nowy >> instaluj.sh
+pobierz_gcc  >> instaluj.sh
+#instaluj_gcc instaluj_nowy >> instaluj.sh
 instalacja gcc
 }
 
@@ -138,8 +139,14 @@ else
 fi
 
 #gcc
-twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
-dostepny_gcc=$(ls /opt/NeteXt73-pakiety/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')
+
+if [ -e /opt/NeteXt73/pakiety/gcc* ]; then 
+	twoj_gcc=$(md5sum /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) | awk '{print $1}')
+	dostepny_gcc=$(cat /tmp/netext73/sumy/sumy_kontrolne.txt | grep gcc | awk '{print$1}')
+else
+	twoj_gcc=$(gcc --version | head -n 1 | awk '{print $3}')
+	dostepny_gcc="brak"
+fi
 if [ "$twoj_gcc" = "$dostepny_gcc" ];then
 	gcc_text="$twoj_gcc"
 	a7="FALSE"

@@ -8,6 +8,8 @@ MKDIR = mkdir
 INSTALL = install -m
 APM_DIR = APM
 APM_FILES = $(wildcard $(APM_DIR)/*)
+PAKIETY_DIR = pakiety
+PAKIETY_FILES = $(wildcard $(PAKIETY_DIR)/*)
 DESKTOPFILES_DIR = desktopfiles
 DESKTOPFILES_FILES=$(wildcard $(DESKTOPFILES_DIR)/*.desktop)
 GRAPHIC_KERNEL_PREMIUM_DIR = kernel-premium
@@ -33,11 +35,11 @@ install: install_desktopfiles \
 	 install_contacts \
 	 install_translations_files \
 	 install_APM \
+	 install_pakiety \
 	 install_file_LICENSE \
 	 install_file_NeteXt73 \
 	 install_file_menu \
 	 install_file_NeteXt73.desktop \
-	 install_file_rkhunter.tar.gz \
 	 install_file_apm \
 	 install_file_changelog \
 	 install_file_config \
@@ -72,6 +74,10 @@ install_APM:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)/
 	$(INSTALL) 0755 $(APM_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(APM_DIR)
 
+install_pakiety:
+	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(PAKIETY_DIR)/
+	$(INSTALL) 0755 $(PAKIETY_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(PAKIETY_DIR)
+
 install_desktopfiles_kernel_premium:
 	$(MKDIR) -p $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_PREMIUM_DIR)/
 	$(INSTALL) 0755 $(GRAPHIC_KERNEL_PREMIUM_FILES) $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/$(GRAPHIC_KERNEL_PREMIUM_DIR)
@@ -96,8 +102,6 @@ install_file_menu:
 	$(INSTALL) 0755 menu $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_NeteXt73.desktop:	
 	$(INSTALL) 0755 NeteXt73.desktop $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
-install_file_rkhunter.tar.gz:
-	$(INSTALL) 0755 rkhunter.tar.gz $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)
 install_file_apm:	
 	$(INSTALL) 0755 apm $(DESTDIR)$(OPT_DIR)/$(PROG_NAME)/
 install_file_changelog:	
