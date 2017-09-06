@@ -1667,11 +1667,11 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libgsl /usr/lib/libgsl.so.0"
 	echo "fi"
-	echo "sudo ldconfig"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
+	echo "sudo ldconfig"
 elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc"
 	echo "sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar"
