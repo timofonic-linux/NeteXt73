@@ -1,3 +1,9 @@
+netext73 (1.1.44) xenial; urgency=medium
+
+  * zatwierdzenie zmian gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 06 Sep 2017 10:08:19 +0200
+
 netext73 (1.1.43) xenial; urgency=medium
 
   * usunięcie NeteXt73-pakiety z zależności

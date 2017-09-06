@@ -1626,6 +1626,7 @@ pobierz_gcc(){
 	yad_wget $adres_sterownikow/$gcc_link
 	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
 		cp $gcc_link /opt/NeteXt73/pakiety/ -f
+		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
 		rm -f $gcc_link
 		instaluj_gcc instaluj_nowy
 	else
