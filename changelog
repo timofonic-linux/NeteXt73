@@ -4,6 +4,7 @@ v1.1.43
 -	binutils wydawany razem z NeteXt73
 -	pozbycie się NeteXt73-pakiety z zależności
 -	gcc dostarczane dynamicznie z serwera
+-	usuwanie gcc przy deinstalacji NeteXta
 v1.1.42
 -	drobna poprawka
 v1.1.41
