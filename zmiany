@@ -19,6 +19,10 @@ if [ "$1" = "2" ]; then
 	read a
 	git commit -m $a
 	git push origin master
+	if [ -e  /tmp/gcc/gcc* ]; then
+		cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety  -f
+		rm -rf /tmp/gcc
+	fi	
 else
 	LATEST_VERSION=$(grep 'v[0-9]' changelog | head -n 1 | cut -d 'v' -f 2)
 	PKG_NAME="netext73"
