@@ -1,3 +1,9 @@
+netext73 (1.1.45) xenial; urgency=medium
+
+  * padoka dl 17.04
+
+ -- NetBit73 <netbit73@gmail.com>  Sun, 10 Sep 2017 19:50:23 +0200
+
 netext73 (1.1.44) xenial; urgency=medium
 
   * zatwierdzenie zmian gcc
