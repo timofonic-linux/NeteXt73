@@ -111,3 +111,12 @@ if [ -e /lib/firmware ]; then
 		cp -f /opt/NeteXt73/iwlwifi/*.ucode /lib/firmware/
 	fi
 fi
+#ureadahead
+if [ "$(systemctl --failed | grep ureadahead)" != "" ]; then
+	if [ -e /etc/init/ureadahead.conf ]; then
+		mv /etc/init/ureadahead.conf /etc/init/ureadahead.conf.disable
+	fi
+	if [ -e /etc/init/ureadahead-other.conf ]; then
+		mv /etc/init/ureadahead-other.conf /etc/init/ureadahead-other.conf.disable
+	fi
+fi

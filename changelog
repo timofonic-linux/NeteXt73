@@ -2,6 +2,7 @@
 
 v1.1.45
 -	mesa stable dla 17.04 padoka
+-	apm_fix - wyłączenie ureadhead gdy startuje z błędem
 v1.1.44
 -	zatwierdzenie zmian gcc
 -	poprawka warunków sprawdzających wersję gcc
