@@ -1705,10 +1705,12 @@ fi
 zaleznosci(){
 cd /tmp/netext73
 plik=""
-for i in $(echo tlp acpi-call laptop-mode-tools ulatelcy ulatencyd cpufrequtils);do
-if [ "$(dpkg -l | awk '{print $2}' | grep $i -x)" != "" ];then
-	export plik="$plik $i"
-fi
+for i in $(echo tlp acpi-call laptop-mode-tools ulatelcy ulatencyd cpufrequtils ureadahead);do
+	if [ "$i" = "ureadahead" ] && [ "$(systemctl --failed | grep ureadahead)" != "" ] && [ "$(dpkg -l | awk '{print $2}' | grep $i -x)" != "" ]; then
+		export plik="$plik $i"
+	elif  [ "$i" != "ureadahead" ] &&  [ "$(dpkg -l | awk '{print $2}' | grep $i -x)" != "" ];then
+		export plik="$plik $i"
+	fi
 done
 if [ "$plik" != "" ]; then
 	if yad --center --question --on-top --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_WARRING_DEP1\n$plik"; then
