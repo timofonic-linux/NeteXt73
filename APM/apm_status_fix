@@ -105,9 +105,3 @@ if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i Ge
 	fi
 	rm -rf /tmp/netext73
 fi
-#nadpisywanie iwlwifi
-if [ -e /lib/firmware ]; then
-	if [ "$(ls /lib/firmware | grep $(ls /opt/NeteXt73/iwlwifi/ | tail -n 1))" = "" ]; then
-		cp -f /opt/NeteXt73/iwlwifi/*.ucode /lib/firmware/
-	fi
-fi
