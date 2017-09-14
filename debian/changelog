@@ -1,3 +1,9 @@
+netext73 (1.1.46) xenial; urgency=medium
+
+  * gcc - usuwanie częściowo pobranego pliku
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 14 Sep 2017 18:12:13 +0200
+
 netext73 (1.1.45) xenial; urgency=medium
 
   * padoka dl 17.04
