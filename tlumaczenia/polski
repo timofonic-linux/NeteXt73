@@ -324,7 +324,7 @@ export TEXT_INFO2="Anulowałeś instalację. Pliki instalacyjne zostały w katal
 export TEXT_RESTART="Czy na pewno zrestartować komputer?"
 #często powtarzane
 export TEXT_INSTALACJA1="Za chwilę nastąpi wprowadzenie wybranych zmian. Zamknięcie tego okna anuluje operację."
-##export TEXT_INST1="Instalacja zależności niezbędnych do prawidłowego działania programu."
+export TEXT_INST1="Instalacja zależności niezbędnych do prawidłowego działania programu."
 export TEXT_INFORMACJA="INFORMACJA"
 export TEXT_INSTALACJA2="\n\nGOTOWE !!!"
 export TEXT_MENU="menu"

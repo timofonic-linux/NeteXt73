@@ -332,7 +332,7 @@ export TEXT_INFO2="Installation was canceled. Downloaded files are in:"
 export TEXT_RESTART="Reboot?"
 #często powtarzane
 export TEXT_INSTALACJA1="Enter root password or close this window."
-##export TEXT_INST1="Installing dependencies."
+export TEXT_INST1="Installing dependencies."
 export TEXT_INFORMACJA="INFORMATION"
 export TEXT_MENU="menu"
 export TEXT_NIE="No"

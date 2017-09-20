@@ -1,3 +1,9 @@
+netext73 (1.1.47) xenial; urgency=medium
+
+  * wymuszanie gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 20 Sep 2017 12:18:30 +0200
+
 netext73 (1.1.46) xenial; urgency=medium
 
   * gcc - usuwanie częściowo pobranego pliku

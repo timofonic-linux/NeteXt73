@@ -163,6 +163,9 @@ else
 	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
 	a7="TRUE"
 	TEXT_DYMKA="$TEXT_DYMKA\nGCC - $TEXT_UPDATE5a"
+	if yad --center --question --on-top --title="$nazwa_skryptu" --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_INST1 :\ngcc"; then
+		instalacja_gcc
+	fi
 fi
 
 #dymek możliwych aktualizacji

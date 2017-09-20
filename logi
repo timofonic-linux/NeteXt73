@@ -265,14 +265,6 @@ while [ $petla_duza = "tak" ]; do
 				echo -e "\n\nmounted-proc.conf " >> system$losowa.log
 				echo -e "##############################################################################################" >> system$losowa.log
 				cat /etc/init/mounted-proc.conf >> system$losowa.log
-				echo -e "\n\nureadahead.conf  " >> system$losowa.log
-				echo -e "##############################################################################################" >> system$losowa.log
-				cat /etc/init/ureadahead.conf >> system$losowa.log
-				echo -e "\n\nreadahead  " >> system$losowa.log
-				echo -e "##############################################################################################" >> system$losowa.log
-				if [ -e /usr/lib/pm-utils/power.d/readahead ]; then
-					cat /usr/lib/pm-utils/power.d/readahead >> system$losowa.log
-				fi
 				echo -e "microcode  " >> apmsystem$losowa.log
 				echo -e "##############################################################################################" >> apmsystem$losowa.log
 				if [ "$(dpkg -l intel-microcode | grep "ii" | awk '{print $1}'| head -n1)" = "ii" ];  then

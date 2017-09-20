@@ -902,7 +902,7 @@ else
 	else
 		tekst_instalatora="$1"
 	fi
-	xterm -T "$tekst_instalatora" -e bash -c "cp -f instaluj.sh /var/log/netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | tee -a /var/log/netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
+	xterm -T "$tekst_instalatora" -e bash -c "sudo cp -f instaluj.sh /var/log/netext73/logi/instalujsh_$godzina.log && tput setaf 1;echo \"$TEXT_INSTALACJA1\";tput sgr0; bash instaluj.sh 2>&1 | sudo tee -a /var/log/netext73/logi/instalacja_$godzina.log && rm instaluj.sh -f ;tput setaf 2; echo -e \"$TEXT_INSTALACJA2\"; sleep 5; echo 'tak' > /tmp/netext73/ok.txt" 
 	blad_instalacji instalujsh_$godzina.log instalacja_$godzina.log
 fi
 }
@@ -1628,7 +1628,6 @@ pobierz_gcc(){
 		cp $gcc_link /opt/NeteXt73/pakiety/ -f
 		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
 		rm -f $gcc_link
-		instaluj_gcc instaluj_nowy
 	else
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
 	fi

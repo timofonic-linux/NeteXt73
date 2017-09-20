@@ -1,7 +1,10 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.47
+-	wymuszanie gcc
 v1.1.46
 -	usuwanie częściowo pobranego pliku gcc
+-	poprawka logów
 v1.1.45
 -	mesa stable dla 17.04 padoka
 -	apm_fix - wyłączenie ureadhead gdy startuje z błędem
@@ -9,7 +12,7 @@ v1.1.45
 v1.1.44
 -	zatwierdzenie zmian gcc
 -	poprawka warunków sprawdzających wersję gcc
--	sprawdzanie aktualizacji po ściągnieciu sum - dotyczy błednego pokazywania dostępnej aktualizacji dla gcc
+-	sprawdzanie aktualizacji po ściągnięciu sum - dotyczy błędnego pokazywania dostępnej aktualizacji dla gcc
 v1.1.43
 -	binutils wydawany razem z NeteXt73
 -	pozbycie się NeteXt73-pakiety z zależności
