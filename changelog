@@ -1,5 +1,8 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.48
+-	pobieranie gcc podczas instalacji NeteXt73
+-	automatyczna instalacja gcc przy inastalacji NeteXt73
 v1.1.47
 -	wymuszanie gcc
 v1.1.46

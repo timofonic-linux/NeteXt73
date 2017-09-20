@@ -1621,6 +1621,7 @@ kill_yad(){
 }
 
 pobierz_gcc(){
+	cd /tmp/netext73
 	rm -f /opt/NeteXt73/pakiety/gcc* /tmp/netext73/gcc*
 	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
 	yad_wget $adres_sterownikow/$gcc_link

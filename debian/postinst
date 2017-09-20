@@ -52,4 +52,21 @@ if [ -e /tmp/gcc/gcc* ]; then
 	cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety/ -f
 	rm -rf /tmp/gcc
 fi
+
+if [ ! -e /opt/NeteXt73/pakiety/gcc* ]; then
+	cd /tmp	
+	rm gcc* -f
+	dostepna_wersja=$(curl ftp://212.59.240.218/sterowniki/ | grep gcc | awk '{print $9}')
+	wget ftp://212.59.240.218/sterowniki/$dostepna_wersja
+	cp $dostepna_wersja /opt/NeteXt73/pakiety/
+fi
+if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
+	mkdir -p /tmp/netext73
+	cd /tmp/netext73
+	source /opt/NeteXt73/procedury
+	naglowek > instaluj.sh
+	instaluj_gcc instaluj_nowy >> instaluj.sh
+	bash instaluj.sh
+	rm -rf /tmp/netext73
+fi
 exit 0

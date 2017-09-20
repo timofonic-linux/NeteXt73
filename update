@@ -38,6 +38,7 @@ if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 	fi
 else
 	pobierz_gcc  >> instaluj.sh
+	instaluj_gcc instaluj_nowy >> instaluj.sh
 fi
 instalacja gcc
 }
@@ -163,9 +164,6 @@ else
 	gcc_text="$TEXT_UPDATE5a V$dostepny_gcc"
 	a7="TRUE"
 	TEXT_DYMKA="$TEXT_DYMKA\nGCC - $TEXT_UPDATE5a"
-	if yad --center --question --on-top --title="$nazwa_skryptu" --width=$((660*$skala)) --window-icon="/opt/NeteXt73/ikony/pytanie.png" --image="/opt/NeteXt73/ikony/pytanie.png" --button="$TEXT_TAK:0" --button="$TEXT_POWROT:1" --text="$TEXT_INST1 :\ngcc"; then
-		instalacja_gcc
-	fi
 fi
 
 #dymek możliwych aktualizacji
