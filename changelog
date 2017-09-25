@@ -2,6 +2,7 @@
 
 v1.1.49
 -	wymuszenie instalacji gcc przy instalacji kernela
+-	sprawdzanie czy jest ureadahead przy instalacji kernela
 v1.1.48
 -	pobieranie gcc podczas instalacji NeteXt73
 -	automatyczna instalacja gcc przy inastalacji NeteXt73

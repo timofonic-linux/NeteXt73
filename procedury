@@ -229,23 +229,41 @@ if [ "$kern" = "$TEXT_MENU_INSTALATOR5" ];then
 		yad_wget $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep "all" | grep "linux-headers" | grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-headers"| grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image"| grep -v -E "latency")
 	fi
 else
-	rm -f /opt/NeteXt73/pakiety/gcc* gcc*
-	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}') 
+	rm -f gcc*
+	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
+	if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
+		twoj_gcc=$(md5sum /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) | awk '{print $1}')
+	else
+		twoj_gcc="brak_twoj"
+	fi
+	if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+		dostepny_gcc=$(cat /tmp/netext73/sumy/sumy_kontrolne.txt | grep gcc | awk '{print$1}')
+	else
+		dostepny_gcc="brak_sum"
+	fi
+	if [ "$twoj_gcc" != "$dostepny_gcc" ]; then
+		download_gcc=$adres_sterownikow/$gcc_link
+	else
+		download_gcc=""
+	fi
 	#pobieranie kerneli e X t 7 3
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
 	#pobieranie broadcoma jak jest
 	if [ "$(lspci | grep -i bcm | grep -i wireless)" != "" ]; then
 		broadcom=$(grep broadcom-sta-dkms /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom $adres_sterownikow/$gcc_link
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom $download_gcc
 	else
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$gcc_link
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $download_gcc
 	fi
-	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
-		cp $gcc_link /opt/NeteXt73/pakiety/ -f
-		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
-		rm -f $gcc_link
-	else
-		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
+	if [ "$download_gcc" != "" ]; then
+		if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
+			rm -f /opt/NeteXt73/pakiety/gcc*
+			cp $gcc_link /opt/NeteXt73/pakiety/ -f
+			chmod 775 /opt/NeteXt73/pakiety/$gcc_link
+			rm -f $gcc_link
+		else
+			dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
+		fi
 	fi
 fi
 rm ./index.html -f
@@ -274,7 +292,9 @@ echo "echo -e \"\$TEST_INSTALOWAC_KERNEL3 \$rodzaj \$TEST_INSTALOWAC_KERNEL4\n\n
 echo "if [ -e /etc/init/mounted-proc.conf ]; then"
 echo "sudo sed -i 's+^start on mounted MOUNTPOINT=/proc TYPE=proc+start on mounted MOUNTPOINT=/var+' /etc/init/mounted-proc.conf"
 echo "fi"
+echo "if [ -e /etc/init/ureadahead.conf ]; then"
 echo "sudo sed -i 's+^start on starting mountall+start on mounted MOUNTPOINT=/var+' /etc/init/ureadahead.conf"
+echo "fi"
 echo "/usr/bin/yes | sudo dpkg -i linux-headers* linux-image*"
 echo "if [ -e /etc/netext73/archiwum_deb ] && [ \"\$(cat /etc/netext73/archiwum_deb)\" = \"TRUE\" ]; then"
 echo "sudo cp *.deb /var/cache/apt/archives/ -f"
@@ -1632,10 +1652,11 @@ kill_yad(){
 
 pobierz_gcc(){
 	cd /tmp/netext73
-	rm -f /opt/NeteXt73/pakiety/gcc* /tmp/netext73/gcc*
+	rm -f /tmp/netext73/gcc*
 	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
 	yad_wget $adres_sterownikow/$gcc_link
 	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
+		rm -f /opt/NeteXt73/pakiety/gcc* 
 		cp $gcc_link /opt/NeteXt73/pakiety/ -f
 		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
 		rm -f $gcc_link
