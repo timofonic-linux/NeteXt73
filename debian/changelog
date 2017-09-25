@@ -1,3 +1,9 @@
+netext73 (1.1.50) xenial; urgency=medium
+
+  * pobieranie kluczy gpg fix
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 25 Sep 2017 22:32:05 +0200
+
 netext73 (1.1.49) xenial; urgency=medium
 
   * gcc instalacja i pobieranie przy instalacji kernela
