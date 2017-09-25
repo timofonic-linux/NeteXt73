@@ -191,7 +191,9 @@ elif [ "$kern" != "" ] && [ "$blad" != "1" ]; then
 					echo "nie" > /tmp/netext73/ok.txt
 					if [ -e linux-headers* ] && [ -e linux-image* ]; then
 						naglowek > instaluj.sh
+						#kernel
 						instaluj_kernel >> instaluj.sh
+						instaluj_gcc instaluj_nowy >> instaluj.sh
 						instalacja2
 						#zgoda na wysyłanie raportów
 						zgoda_na_raport

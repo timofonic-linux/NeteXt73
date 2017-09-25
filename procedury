@@ -229,14 +229,23 @@ if [ "$kern" = "$TEXT_MENU_INSTALATOR5" ];then
 		yad_wget $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep "all" | grep "linux-headers" | grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-headers"| grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image"| grep -v -E "latency")
 	fi
 else
+	rm -f /opt/NeteXt73/pakiety/gcc* gcc*
+	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}') 
 	#pobieranie kerneli e X t 7 3
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
 	#pobieranie broadcoma jak jest
 	if [ "$(lspci | grep -i bcm | grep -i wireless)" != "" ]; then
 		broadcom=$(grep broadcom-sta-dkms /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom $adres_sterownikow/$gcc_link
 	else
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$gcc_link
+	fi
+	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
+		cp $gcc_link /opt/NeteXt73/pakiety/ -f
+		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
+		rm -f $gcc_link
+	else
+		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
 	fi
 fi
 rm ./index.html -f
@@ -1119,6 +1128,7 @@ if [ "$(cat /tmp/netext73/ok.txt)" = "tak" ]; then
 elif  [ "$(cat /tmp/netext73/ok.txt)" = "nie" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_INFO2<br>/tmp/netext73/$a"
 fi
+rm -f /tmp/netext73/ok.txt
 }
 
 nvidia_naglowek(){

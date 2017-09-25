@@ -29,7 +29,7 @@ echo "cd /opt/NeteXt73 " >> /usr/bin/netext73
 echo "./NeteXt73 2> /dev/null" >> /usr/bin/netext73
 #netext73-paste
 echo "#/bin/bash" > /usr/bin/netext73-paste
-echo "if [  -e /tmp/netext73/userek ]; then" >> /usr/bin/netext73-paste
+echo "if [ -e /tmp/netext73/userek ]; then" >> /usr/bin/netext73-paste
 echo "export userek=\$(cat /tmp/netext73/userek)" >> /usr/bin/netext73-paste
 echo "else" >> /usr/bin/netext73-paste
 echo "export userek=\$USER" >> /usr/bin/netext73-paste
