@@ -39,13 +39,13 @@ while [ "$petla_duza" = "tak" ]; do
 			while [ $petla = "tak" ]; do
 				IFS=$' \t\n'
 				if [ "$(cat klucze1.txt)" != "" ]; then
-					grep 'pub' klucze1.txt | cut -d '/' -f 2 | cut -d ' ' -f 1 > klucz.txt
+					apt-key adv --list-public-keys --with-colons | grep '^pub' | cut -d':' -f 5 | egrep -o '.{8}$' > klucz.txt
 					for i in $(cat klucz.txt); do
-						cat klucze1.txt | grep $i -n | cut -d ':' -f 1 | head -n 1 >> linie.txt
+						cat klucze1.txt | sed 's/ //g' | grep $i -n | cut -d ':' -f 1 | head -n 1 >> linie.txt
 					done
 					for i in $(cat linie.txt); do
 						a=$(($i + 1))
-						head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
+						head -n $a klucze1.txt | tail -n 1 | sed 's/uid//' | sed 's/.*\] //g' | sed 's/^[[:space:]]*//' | tr ' ' '_'  | sed 's/<.*>//g' >> nazwa.txt
 					done
 					paste -d "]" klucz.txt nazwa.txt  > lista.txt
 					sed -i 's/_/ /g' lista.txt
@@ -75,5 +75,6 @@ while [ "$petla_duza" = "tak" ]; do
 		fi
 	else
 		petla_duza="nie"
+		rm *.txt -f
 	fi
 done

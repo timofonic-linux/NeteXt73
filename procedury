@@ -1298,7 +1298,7 @@ sprawdz_klucze(){
 sudo apt-key list > klucze1.txt
 }
 usun_klucze(){
-xterm -T GPG-KEY -e bash -c "echo 'Podaj hasło aby usunąć zaznaczone klucze'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
+xterm -T GPG-KEY -e bash -c "echo 'Usuwanie zaznaczonych kluczy'; for i in \$(cat usun.txt); do sudo apt-key del \$i; done ; echo 'sudo apt-key list' ; sudo apt-key list > klucze1.txt"
 }
 
 klucze(){
