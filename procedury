@@ -12,9 +12,11 @@ LATEST_VERSION=$(grep 'v[0-9]' /opt/NeteXt73/changelog | head -n 1 | cut -d 'v' 
 jezyczek(){
 
 #teksty w języku polskim
-if [ -e /etc/netext73/jezyk ] && [ "$(cat /etc/netext73/jezyk | grep -e "niemiecki" -e "francuski")" != "" ]; then
-	export jezyk="angielski"
-	echo 'angielski' >  /etc/netext73/jezyk
+if [ -e /etc/netext73/jezyk ]; then 
+	if [ "$(cat /etc/netext73/jezyk | grep -e "niemiecki" -e "francuski")" != "" ]; then
+		export jezyk="angielski"
+		echo 'angielski' >  /etc/netext73/jezyk
+	fi
 fi
 if [ -e /etc/netext73/jezyk ]; then
 	export jezyk=$(cat /etc/netext73/jezyk)
