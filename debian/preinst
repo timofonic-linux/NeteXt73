@@ -1,3 +1,12 @@
 #!/bin/bash
+if [ -e /opt/NeteXt73-PAKIETY/pakiety/gcc* ]; then
+  	mkdir -p /tmp/gcc
+ 	rm -f /tmp/gcc/gcc*
+ 	cp /opt/NeteXt73-pakiety/pakiety/gcc* /tmp/gcc/ -f
+elif [ -e /opt/NeteXt73/pakiety/gcc* ]; then
+ 	mkdir -p /tmp/gcc
+ 	rm -f /tmp/gcc/gcc*
+  	cp /opt/NeteXt73/pakiety/gcc* /tmp/gcc/ -f
+fi
 rm -rf /opt/NeteXt73/*
 exit 0

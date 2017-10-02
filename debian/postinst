@@ -54,6 +54,14 @@ rm gcc* -f
 dostepna_wersja=$(curl ftp://212.59.240.218/sterowniki/ | grep gcc | awk '{print $9}')
 wget ftp://212.59.240.218/sterowniki/$dostepna_wersja
 cp $dostepna_wersja /opt/NeteXt73/pakiety/
+#przywracanie gcc przy reinstalacji jak jest problem z pobraniem
+if [ -e /tmp/gcc/gcc* ] && [ ! -e /opt/NeteXt73/pakiety/gcc* ]; then 
+	cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety/ -f
+	rm -rf /tmp/gcc
+else
+	rm -rf /tmp/gcc
+fi
+#nadpisywanie gcc i binutils
 if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 	mkdir -p /tmp/netext73
 	cd /tmp/netext73
