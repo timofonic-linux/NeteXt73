@@ -43,6 +43,7 @@ if [ "$(ps -aux | grep 'class=NeteXt' | grep yad | wc -l)" != "1" ]; then
 			exit 0
 		fi
 	done
+
 	rm -rf /tmp/netext73
 	sudo -K
 else

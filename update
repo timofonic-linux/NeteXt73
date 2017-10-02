@@ -202,7 +202,7 @@ if [ "$1" != "start" ]; then
 	--field="gcc -version:RO" "$(gcc --version | head -n 1)" \
 	--field="$TEXT_UPDATE1:CB" "$menu" \
 	--button="gtk-ok:0" \
-	--button="$(echo $TEXT_SUMY_KONTROLNE | tr '_' ' '):3" --button="$TEXT_ZAMKNIJ:1")
+	--button="$TEXT_ZAMKNIJ:1")
 	klawisz=$?; a=$(echo $a | cut -d "|" -f 5)
 
 	if [ $klawisz = "0" ]; then
@@ -222,9 +222,6 @@ if [ "$1" != "start" ]; then
 			a7="TRUE"
 			aktualizuj_calosc
 		fi
-	elif [ "$klawisz" = "3" ]; then
-		rm -f /tmp/netext73/sumy/*
-		/opt/NeteXt73/./update start &
 	fi
 fi
 usun

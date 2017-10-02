@@ -1,10 +1,12 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.52
+-	wymuszanie instalowania gcc i binutils przy instalacji NeteXt73
 v1.1.51
 -	naprawa usuwania kluczy gpg
 -	drobne poprawki
 v1.1.50
--	naprawa pobierania brakujacych kluczy gpg
+-	naprawa pobierania brakujących kluczy gpg
 v1.1.49
 -	wymuszenie instalacji gcc przy instalacji kernela
 -	sprawdzanie czy jest ureadahead przy instalacji kernela
