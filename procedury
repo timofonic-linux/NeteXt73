@@ -1605,8 +1605,11 @@ while [ "$petla_duza" = "tak" ]; do
 	echo "9:#C P U      C O R E     F R E Q U E N C Y"
 	sleep 1
 	for i in $(seq 10 $(($(grep 'model name' /proc/cpuinfo | wc -l )+9))); do
-		echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/$cpu_max))" # * 6000MHZ/100
-		echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' ) MHz"
+		czestotliwosc=$(($(cat /sys/devices/system/cpu/cpu$(($i-10))/cpufreq/scaling_cur_freq)/1000))
+		echo "$i:$(($czestotliwosc/$cpu_max))" # * 6000MHZ/100
+		echo "$i:#$czestotliwosc MHz"
+		#echo "$i:$(($(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' )/$cpu_max))" # * 6000MHZ/100
+		#echo "$i:#$(cat /proc/cpuinfo | grep MHz | cut -d ' ' -f 3 | sed -n $(($i-9))'p' | sed 's/\..*//' ) MHz"
 	done
 done | yad --title "$nazwa_skryptu" --center --multi-progress $barek --text="$(cat /proc/cpuinfo | grep 'model name' | head -n 1 | sed 's/.*: //')\n\n" --auto-kill --on-top --window-icon="/opt/NeteXt73/ikony/monitor.png" --image="/opt/NeteXt73/ikony/monitor.png" --width=$((460*$skala)) --button="$TEXT_ZAMKNIJ:1"
 if [ "$?" != "" ]; then

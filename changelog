@@ -1,6 +1,8 @@
 ﻿NeteXt'73 Changelog
 
 v1.1.53
+-	zmiana badania częstotliwości procesora w monitorach
+v1.1.53
 -	usunięcie instalatora kerneli ppa
 -	zamiana miejscami powrót-ok w oknie pobierania kerneli
 -	poprawka postinst błąd: "rm: cannot remove 'gcc': Is a directory"

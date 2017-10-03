@@ -1,5 +1,11 @@
 netext73 (1.1.53) xenial; urgency=medium
 
+  * monitor cpu
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 03 Oct 2017 23:05:29 +0200
+
+netext73 (1.1.53) xenial; urgency=medium
+
   * usunięcie instalatora kerneli ppa
 
  -- NetBit73 <netbit73@gmail.com>  Tue, 03 Oct 2017 08:33:55 +0200
