@@ -1,3 +1,9 @@
+netext73 (1.1.53) xenial; urgency=medium
+
+  * usunięcie instalatora kerneli ppa
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 03 Oct 2017 08:33:55 +0200
+
 netext73 (1.1.52) xenial; urgency=medium
 
   * wymuszenie instalacji gcc i binutils przy instalacji NeteXt73

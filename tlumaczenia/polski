@@ -171,7 +171,6 @@ export TEXT_STRONA1="Podaj kod dostępu do kerneli Premium.\nJeżeli jeszcze nie
 export TEXT_DEB1="Wskaż plik linux-headers lub linux-image, który chcesz zainstalować:"
 export TEXT_NAGLOWKI="Nagłówki"
 export TEXT_LOKALNE="Lokalne"
-export TEXT_PPA="kernel-ppa"
 export TEXT_WYMAGANY_NV="Wymagana jest instalacja najnowszego buildu sterowników Nvidia"
 
 #########################################################################################################################################################################

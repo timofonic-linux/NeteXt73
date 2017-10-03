@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.53
+-	usunięcie instalatora kerneli ppa
 v1.1.52
 -	wymuszanie instalowania gcc i binutils przy instalacji NeteXt73
 v1.1.51

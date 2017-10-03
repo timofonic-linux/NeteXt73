@@ -175,7 +175,6 @@ export TEXT_SUMA_KONTROLNA="Incorrect checksums. Download file again."
 export TEXT_DEB1="Select the file linux-headers or linux-image, which do you want to install:"
 export TEXT_NAGLOWKI="Headers"
 export TEXT_LOKALNE="Local"
-export TEXT_PPA="kernel-ppa"
 export TEXT_WYMAGANY_NV="It is required to install the latest Nvidia driver build"
 
 #########################################################################################################################################################################
