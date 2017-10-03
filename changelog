@@ -3,6 +3,7 @@
 v1.1.53
 -	usunięcie instalatora kerneli ppa
 -	zamiana miejscami powrót-ok w oknie pobierania kerneli
+-	poprawka postinst błąd: "rm: cannot remove 'gcc': Is a directory"
 v1.1.52
 -	wymuszanie instalowania gcc i binutils przy instalacji NeteXt73
 v1.1.51
