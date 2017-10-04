@@ -139,7 +139,8 @@ export TEXT_GRUB17="Ustawienia podświetlenia matrycy"
 ##export TEXT_GRUB18="ustawienia używane w przypadku kłopotów z ustawieniami standardowymi"
 export TEXT_GRUB19="Poprawione"
 export TEXT_GRUB_STD="optymalizacja zyżycia energii"
-export TEXT_GRUB_INTEL="Intel i3-i5-i7 - Sandy/Ivy Bridge, Haswell, Broadwell, Skylake ze zintegrowaną grafiką Intel - powersave"
+export TEXT_GRUB_INTEL_ACTIVE="Intel i3-i5-i7 - Sandy/Ivy Bridge, Haswell, Broadwell, Skylake ze zintegrowaną grafiką Intel - active"
+export TEXT_GRUB_INTEL_PASSIVE="Intel i3-i5-i7 - Sandy/Ivy Bridge, Haswell, Broadwell, Skylake ze zintegrowaną grafiką Intel - passive"
 export TEXT_GRUB_RADEON="Radeon DPM - otwarte sterowniki grafiki. Tylko dla kernela od wersji v26.xx wzwyż"
 ##export TEXT_GRUB21="Końcowa akceptacja zmian."
 ####export TEXT_GRUB21A="Wprowadza zmiany wg wcześniejszych wytycznych"
@@ -171,7 +172,7 @@ export TEXT_STRONA1="Podaj kod dostępu do kerneli Premium.\nJeżeli jeszcze nie
 export TEXT_DEB1="Wskaż plik linux-headers lub linux-image, który chcesz zainstalować:"
 export TEXT_NAGLOWKI="Nagłówki"
 export TEXT_LOKALNE="Lokalne"
-export TEXT_WYMAGANY_NV="Wymagana jest instalacja najnowszego buildu sterowników Nvidia"
+TEXT_GRUB_INTELexport TEXT_WYMAGANY_NV="Wymagana jest instalacja najnowszego buildu sterowników Nvidia"
 
 #########################################################################################################################################################################
 #tlumaczenia_kontakt
