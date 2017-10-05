@@ -3,6 +3,7 @@
 v1.1.53
 -	zmiana badania częstotliwości procesora w monitorach
 -	intel_pstate=passive
+-	zmiana widoku monitora systemu
 v1.1.53
 -	usunięcie instalatora kerneli ppa
 -	zamiana miejscami powrót-ok w oknie pobierania kerneli
