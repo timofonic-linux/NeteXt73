@@ -1,3 +1,9 @@
+netext73 (1.1.54) xenial; urgency=medium
+
+  * APM 5.6
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 06 Oct 2017 22:25:12 +0200
+
 netext73 (1.1.53) xenial; urgency=medium
 
   * monitor cpu

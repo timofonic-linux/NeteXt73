@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.54
+-	APM 5.6
 v1.1.53
 -	zmiana badania częstotliwości procesora w monitorach
 -	intel_pstate=passive

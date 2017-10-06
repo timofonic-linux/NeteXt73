@@ -79,11 +79,11 @@ esac
 export nazwa_skryptu="NeteXt'73 v$LATEST_VERSION - $TEXT_NETEXT2"
 export nazwa_skryptu1="NeteXt'73 v$LATEST_VERSION"
 #wersje APM
-export wersja_apm1="advanced_power_management_by_ext73_conservative-conservative"
+export wersja_apm1="advanced_power_management_by_ext73_schedutil-schedutil"
 export wersja_apm2="advanced_power_management_by_ext73_ondemand-ondemand"
 export wersja_apm3="advanced_power_management_by_ext73_intel-performance"
 export wersja_apm4="advanced_power_management_by_ext73_intel-powersave"
-export wersja_apm5="advanced_power_management_by_ext73_performance-conservative"
+export wersja_apm5="advanced_power_management_by_ext73_performance-schedutil"
 export wersja_apm6="advanced_power_management_by_ext73_performance-ondemand"
 #lista kerneli premium i standard
 export lista_kerneli_premium="silvermont|sandybridge|ivybridge|haswell|broadwell|skylake|brazos|bulldozer|piledriver|ryzen"
@@ -424,7 +424,7 @@ if [ "$apmik" = "stary" ]; then
 	sudo chmod a+x /usr/lib/pm-utils/power.d/xfs_buffer /usr/lib/pm-utils/power.d/disable_wol /etc/pm/sleep.d/99fancontrol
 	sudo chmod a-x /etc/pm/power.d/*
 	sudo chmod a+x /etc/apm-ext73/*
-	sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_conservative*
+	sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_performance-ondemand*
 	sudo chown root:root /etc/pm/power.d/*
 	sudo chown root:root /etc/apm-ext73/*
 	sudo chown root:root /etc/pm/sleep.d/99fancontrol
@@ -542,6 +542,8 @@ elif [ "$apmik" = "nowy" ]; then
 	sudo sed -i "s/intel-powersave_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
 	sudo sed -i "s/performance-conservative_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
 	sudo sed -i "s/performance-ondemand_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+	sudo sed -i "s/performance-schedutil_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
+	sudo sed -i "s/schedutil-schedutil_v.* /$1_$wersja_apm /g" $katalog1 $katalog2
 fi
 #wifi_batt_fix
 

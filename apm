@@ -59,7 +59,7 @@ if [ -e  /etc/netext73/apm_status ] && [ "$(cat /etc/netext73/apm_status | wc -l
 	#sprawdzanie czy jest włączony jakiś APM
 	if [ "$apmik" = "stary" ]; then
 		if [ -e /etc/pm/power.d ] && [ "$(ls /etc/pm/power.d | grep advanced_power_management_by_ext73)" != "" ] && [ "$(ls /etc/pm/power.d/advanced_power_management_by_ext73* -Fl | grep '*' | cut -d '_' -f 7)" = "" ];then
-			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_conservative*
+			sudo chmod a+x /etc/pm/power.d/advanced_power_management_by_ext73_performance-ondemand*
 		fi
 		#sprawdzenie stanu czeków
 		stan_apm_config
@@ -88,7 +88,7 @@ while [ $petla_duza = "tak" ]; do
 		menu_apm=$(echo "intel-performance!intel-powersave" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	else
 		#wybór APM dla pozostałych
-		menu_apm=$(echo "conservative-conservative!ondemand-ondemand!performance-conservative!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
+		menu_apm=$(echo "schedutil-schedutil!ondemand-ondemand!performance-schedutil!performance-ondemand" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	fi
 	menu=$(echo "$aktualny_apm!$menu_apm" | sed -e 's/!!/!/' -e 's/!$//')
 
