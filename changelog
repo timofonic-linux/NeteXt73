@@ -2,6 +2,10 @@
 
 v1.1.54
 -	APM 5.6
+-	wyłączenie wsprcia dla conservative-conservative
+-	wyłączenie wsprcia dla performance-conservative
+-	wsparcie dla performance-schedutil
+-	wsparcie dla schedutil-schedutil
 v1.1.53
 -	zmiana badania częstotliwości procesora w monitorach
 -	intel_pstate=passive

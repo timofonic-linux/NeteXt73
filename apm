@@ -83,7 +83,8 @@ while [ $petla_duza = "tak" ]; do
 	stan_apm_config
 
 	aktualny_apm=$(echo $stan_apm | awk '{print $1}')
-	if [ "$(grep -i pstate /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver)" != "" ] ; then
+	cat /sys/devices/system/cpu/intel_pstate/status
+	if [ "$(grep -i active cat /sys/devices/system/cpu/intel_pstate/status)" != "" ] ; then
 		#wybór APM dla pstate
 		menu_apm=$(echo "intel-performance!intel-powersave" | sed -e "s/$aktualny_apm//" -e 's/!!/!/')
 	else
