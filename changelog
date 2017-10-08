@@ -6,6 +6,7 @@ v1.1.54
 -	wyłączenie wsprcia dla performance-conservative
 -	wsparcie dla performance-schedutil
 -	wsparcie dla schedutil-schedutil
+-	dymek active-passive
 v1.1.53
 -	zmiana badania częstotliwości procesora w monitorach
 -	intel_pstate=passive

@@ -168,6 +168,10 @@ else
 	TEXT_DYMKA="$TEXT_DYMKA\nGCC - $TEXT_UPDATE5a"
 fi
 
+#intel passive active
+if [ "$(grep -i active cat /sys/devices/system/cpu/intel_pstate/status)" != "" ] ; then
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_ACTIVE_PASSIVE"
+fi
 #dymek możliwych aktualizacji
 if [ "$TEXT_DYMKA" != "" ]; then
 	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_DYMKA"
