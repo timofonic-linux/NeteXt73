@@ -1,3 +1,9 @@
+netext73 (1.1.56) xenial; urgency=medium
+
+  * netext73-monitor
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 09 Oct 2017 19:36:33 +0200
+
 netext73 (1.1.55) xenial; urgency=medium
 
   * wymuszanie APM przy passive/active
