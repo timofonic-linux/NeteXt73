@@ -311,8 +311,10 @@ klawisz=$?; grub=$(echo $grub | cut -d "|" -f 2)
 	if [ "$stan_apm" != "-" ]; then
 		if [ "$(echo $wpis_grub | grep -e 'intel_pstate=passive')" != "" ];then
 			apm_zmiana performance-ondemand "advanced_power_management_by_ext73_performance-ondemand*"
+			dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_APM_DEFAULT"
 		elif [ "$(echo $wpis_grub | grep -e '915.enable' -e 'vblankoffdelay')" != "" ] ; then
 			apm_zmiana intel-performance "advanced_power_management_by_ext73_intel-performance*"
+			dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_APM_DEFAULT"
 		fi
 	fi
 if [ -z "$a" ]; then

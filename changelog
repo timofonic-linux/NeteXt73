@@ -2,6 +2,9 @@
 
 v1.1.55
 -	wymuszanie nadpisywania APM przy zmianach passive/active w grubie
+-	poprawki tłumaczeń
+-	dymki informujące o konieczności zmiany passive/active
+-	dymki informujące o wymuszeniu ustawień APM związanych ze zmianą passive/active
 v1.1.54
 -	APM 5.6
 -	wyłączenie wsprcia dla conservative-conservative
