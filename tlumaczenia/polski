@@ -402,7 +402,7 @@ export TEXT_OCZEKUJE_ODPOWIEDZI="Oczekuję odpowiedzi"
 export TEXT_NETEXT_JUZ_DZIALA="Masz już uruchomiony program NeteXt'73\nJeżeli program nie odpowiada wykonaj:sudo killall yad"
 ##export TEXT_DONATE="Wspomóż projekt"
 export TEXT_UPDATE_ZAJETY="Podczas próby instalacji trwał inny proces aktualizacyjny. Zakończ go i spróbuj ponownie."
-export TEXT_ACTIVE_PASSIVE="Pracujesz w trybie intel pstate active. Wprowadziliśmy też tryb passive - jeśli procesor utrzymuje wysoką temperaturę proponujemy przetestować przełączenie za pomocą naszego Generatora Grub w tryb passive, a po restarcie wybór odpowiedniego [jednego z nowych] trybu pracy w APM."
+export TEXT_ACTIVE_PASSIVE="Pracujesz w trybie intel pstate active. Obecnie sterownik pstate działając w trybie activ. Wprowadziliśmy też tryb passive - jeśli procesor utrzymuje wysoką temperaturę proponujemy przetestować przełączenie za pomocą naszego Generatora Grub w tryb passive, a po restarcie wybór odpowiedniego [jednego z nowych] trybu pracy w APM."
 export TEXT_APM_DEFAULT="Nastąpiła zmiana ustawień grub, co skutkuje przywróceniem profilu APM do ustawień defaultowych."
 
 
