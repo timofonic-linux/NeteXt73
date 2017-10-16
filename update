@@ -170,11 +170,11 @@ fi
 
 #intel passive active
 if [ "$(grep -i active cat /sys/devices/system/cpu/intel_pstate/status)" != "" ] ; then
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_ACTIVE_PASSIVE"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_ACTIVE_PASSIVE" &
 fi
 #dymek możliwych aktualizacji
 if [ "$TEXT_DYMKA" != "" ]; then
-	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_DYMKA"
+	dymek -i $ikona_info1 "$TEXT_UWAGA" "$TEXT_DYMKA" &
 fi
 if [ "$1" = "first" ]; then
 	if [ ! -e /etc/netext73/opis_programu ]; then
