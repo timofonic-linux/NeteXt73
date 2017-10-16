@@ -1435,9 +1435,9 @@ echo "sudo sysctl -p"
 dymek(){
 if [ "$USER" != "root" ];then
 	if [ "$(which notify-send)" != "" ];then
-		notify-send "$1" "$2" "$3" "$4"
+		notify-send "$1" "$2" "$3" "$4" &
 	elif [ "$(which kdialog)" != "" ];then
-		kdialog --title "$3" -passivepopup "$4"
+		kdialog --title "$3" -passivepopup "$4" &
 	else
 		yad --center --on-top --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 	fi
@@ -1447,9 +1447,9 @@ elif [ "$USER" = "root" ];then
 	else
 		sudo -u $userek bash << EOF
 		if [ "$(which notify-send)" != "" ];then
-			notify-send "$1" "$2" "$3" "$4"
-		elif [ "$(which kdialog)" != "" ];then
-			kdialog --title "$3" -passivepopup "$4"
+			notify-send "$1" "$2" "$3" "$4" &
+#		elif [ "$(which kdialog)" != "" ];then
+#			kdialog --title "$3" -passivepopup "$4" &
 		else
 			yad --center --on-top --info --title="$3"  --window-icon="$2" --image="$2" --text="$4" --timeout=5 --geometry="$((300*$skala))x$((100*$skala))+15+30" --no-buttons --undecorated &
 		fi
@@ -1778,7 +1778,7 @@ fi
 
 #sprawdzanie wersji systemu
 if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "trusty|$wspierane_wersje")" = "" ] ; then
-      dymek  -i $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
+      dymek -i $warning1 "$TEXT_INFORMACJA" "<b>NeteXt'73 - $TEXT_BRAK_KERNELA</b>"
 fi
 }
 
