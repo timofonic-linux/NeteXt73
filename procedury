@@ -493,10 +493,14 @@ sudo chown root:root /usr/lib/pm-utils/power.d/*
 if [ "$(which journalctl)" != "" ] && [ "$(journalctl -u cron | grep systemd)" != "" ];then
 	sudo systemctl disable ondemand 2> /dev/null
 	sudo systemctl stop ondemand 2> /dev/null
-	sudo chmod a-x /etc/init.d/ondemand
+	if [ -e /etc/init.d/ondemand ]; then
+		sudo chmod a-x /etc/init.d/ondemand
+	fi
 else
 	sudo service ondemand stop
-	sudo chmod a-x /etc/init.d/ondemand
+	if [ -e /etc/init.d/ondemand ]; then
+		sudo chmod a-x /etc/init.d/ondemand
+	fi
 fi
 
 #ustawienie jasności wg aktualnej
