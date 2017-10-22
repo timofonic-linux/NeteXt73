@@ -101,20 +101,16 @@ export wspierane_nr="16.04|17.04|17.10"
 
 export lista_dyskow=$(lsblk | grep disk | awk '{print $1}' | sort | uniq)
 
-if lsb_release -d | grep 'Linux Lite 3.2'; then
-	#wsparcie dla Lite Linux
-	export WERSJA_UBUNTU="yakkety"
-	export NR_WERSJA_UBUNTU="16.10"
-else
-	export WERSJA_UBUNTU="$(lsb_release -cs)"
-	export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
-fi
-#wsparcie mint
+#wersja
+export WERSJA_UBUNTU="$(lsb_release -cs)"
+export NR_WERSJA_UBUNTU="$(lsb_release -rs)"
+
+#wsparcie mint/elementary os
 case `lsb_release -cs` in
 	qiana|rebecca|rafaela|freya|rosa)
 		export WERSJA_UBUNTU="trusty"
 		export NR_WERSJA_UBUNTU="14.04" ;;
-	sarah|serena|sonya)
+	sarah|serena|sonya|loki)
 		export WERSJA_UBUNTU="xenial"
 		export NR_WERSJA_UBUNTU="16.04" ;;
 esac
