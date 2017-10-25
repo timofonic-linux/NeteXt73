@@ -128,7 +128,7 @@ elif [ "$1" = "mesa3d" ]; then
 	if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" = "" ]; then
 		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_STEROWNIKI3"
 	else
-		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "xenial|trusty")" != "" ]; then
+		if [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
 			lista="mesa 17.x stable!mesa 17.x testing!remove"
 		elif [ "$(echo $WERSJA_UBUNTU | grep -i -x -E "$wspierane_wersje")" != "" ]; then
 			lista="mesa 17.x testing!remove"
