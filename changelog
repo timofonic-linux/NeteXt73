@@ -1,9 +1,12 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.60
+-	przepiecie serwera z ip na adres netext73.com
+-	szyfrowanie wysyłki logów
 v1.1.59
 -	mesa stable dla 17.10
 -	testowe wsparcie dla 18.04
--	przepiecie serwera z ip na adres netext73.com
+
 v1.1.58
 -	wsparcie dla elementary os loki
 v1.1.57

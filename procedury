@@ -117,7 +117,7 @@ esac
 
 #adres serwera
 export adres_glowny="ftp://netext73.com"
-export adres_logi="http://netext73.com/htdocs/api/create?apikey=dodawanie_wpisow"
+export adres_logi="https://netext73.com/htdocs/api/create?apikey=dodawanie_wpisow"
 export adres_sterownikow="$adres_glowny/sterowniki/"
 
 #sumy sumy kontrolne
