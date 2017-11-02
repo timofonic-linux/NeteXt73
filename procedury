@@ -1173,7 +1173,7 @@ echo "sudo apt install ocl-icd-libopencl1 ocl-icd-libopencl1:i386 lib32gcc1 libv
 echo "if [ \"\$(dpkg -l | grep bumblebee)\" = \"\" ];then"
 echo "sudo apt install nvidia-prime"
 echo "fi"
-echo "sudo apt -f install pkg-config screen-resolution-extra -y"
+echo "sudo apt -f install libdrm-common pkg-config screen-resolution-extra -y"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i libcuda1-$wersja_nvidia.deb"
 echo "/usr/bin/yes | sudo dpkg -i nvidia-opencl-icd-$wersja_nvidia.deb"
