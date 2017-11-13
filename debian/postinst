@@ -76,8 +76,13 @@ if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 fi
 
 #apparmor_linux-4.14-ext73.patch
-cp /opt/NeteXt73/APM/apparmor_linux-4.14-ext73.patch /apparmor_linux-4.14-ext73.patch
-cd /
-patch -p1 < apparmor_linux-4.14-ext73.patch
-rm -f apparmor_linux-4.14-ext73.patch
+echo "apparmor_linux-4.14-ext73.patch"
+if [ "grep 'network unix stream' /etc/apparmor.d/abstractions/nameservice" != "" ] || [ "grep 'network unix stream' /etc/apparmor.d/sbin.dhclient" != "" ] || [ "grep 'network unix stream' /etc/apparmor.d/usr.sbin.cupsd" != "" ]; then
+	echo "Nothing to do!"	
+else
+	cp /opt/NeteXt73/APM/apparmor_linux-4.14-ext73.patch /apparmor_linux-4.14-ext73.patch
+	cd /
+	patch -p1 < apparmor_linux-4.14-ext73.patch
+	rm -f apparmor_linux-4.14-ext73.patch
+fi
 exit 0
