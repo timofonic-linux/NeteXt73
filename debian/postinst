@@ -74,4 +74,10 @@ if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 	bash instaluj.sh
 	rm -rf /tmp/netext73
 fi
+
+#apparmor_linux-4.14-ext73.patch
+cp /opt/NeteXt73/APM/apparmor_linux-4.14-ext73.patch /apparmor_linux-4.14-ext73.patch
+cd /
+patch -p1 < apparmor_linux-4.14-ext73.patch
+rm -f apparmor_linux-4.14-ext73.patch
 exit 0

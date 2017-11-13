@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.61
+-	apparmor_linux-4.14-ext73.patch
 v1.1.60
 -	przepiecie serwera z ip na adres netext73.com
 -	szyfrowanie wysyłki logów

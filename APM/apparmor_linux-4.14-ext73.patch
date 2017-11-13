@@ -1,0 +1,54 @@
+#patch by e X t 7 3
+diff --git a/etc/apparmor.d/abstractions/nameservice b/etc/apparmor.d/abstractions/nameservice
+index 6c9bde39..4322cf17 100644
+--- a/etc/apparmor.d/abstractions/nameservice
++++ b/etc/apparmor.d/abstractions/nameservice
+@@ -89,6 +89,12 @@
+   network inet  dgram,
+   network inet6 dgram,
+ 
++  # TODO: replace with more specific "unix" rules once support for them
++  # arrives in the Linux kernel (probably in 4.15) and gives us detailed
++  # log messages
++  network unix dgram,
++  network unix stream,
++
+   # TODO: adjust when support finer-grained netlink rules
+   # Netlink raw needed for nscd
+   network netlink raw,
+diff --git a/etc/apparmor.d/sbin.dhclient b/etc/apparmor.d/sbin.dhclient
+index 7b6a06d8..17723dab 100644
+--- a/etc/apparmor.d/sbin.dhclient
++++ b/etc/apparmor.d/sbin.dhclient
+@@ -16,6 +16,9 @@
+ 
+   network packet,
+   network raw,
++  
++  network unix dgram,
++  network unix stream,
+ 
+   @{PROC}/[0-9]*/net/ r,
+   @{PROC}/[0-9]*/net/** r,
+@@ -81,6 +84,8 @@
+   ptrace (readby) peer=/usr/sbin/NetworkManager,
+   network inet dgram,
+   network inet6 dgram,
++
++  network unix stream,
+ }
+ 
+ /usr/lib/NetworkManager/nm-dhcp-helper {
+diff --git a/etc/apparmor.d/usr.sbin.cupsd b/etc/apparmor.d/usr.sbin.cupsd
+index 053d1c1f..ca884e2d 100644
+--- a/etc/apparmor.d/usr.sbin.cupsd
++++ b/etc/apparmor.d/usr.sbin.cupsd
+@@ -41,6 +41,8 @@
+   network appletalk dgram,
+   network econet dgram,
+   network ash dgram,
++  
++  network unix stream,
+ 
+   /bin/bash ixr,
+   /bin/dash ixr,
