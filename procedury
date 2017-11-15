@@ -864,9 +864,9 @@ fi
 apm_usun(){
 echo "echo \"$TEXT_PROCEDURA_9\""
 echo "sudo rm -f /lib/systemd/system/apm_ext73-resume.service"
-echo "sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73-*"
-echo "sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-*"
-echo "sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-*"
+echo "sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73*"
+echo "sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73*"
+echo "sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73*"
 echo "sudo rm -f /etc/udev/rules.d/40-wol-udev-apm-ext73.rules"
 echo "sudo rm -f /etc/udev/rules.d/50-udev-apm-ext73.rules"
 echo "sudo rm -f /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules"
