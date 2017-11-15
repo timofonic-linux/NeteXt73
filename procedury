@@ -1678,9 +1678,8 @@ pobierz_gcc(){
 
 instaluj_gcc(){
 export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //' | head -n 1)
-export wersja_libisl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)if [ "$1" = "instaluj_nowy" ];then
-export wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
-export plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)
+export wersja_libisl=$(ls -la  /usr/lib/x8664-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)
+if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
 	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep binutils) -C /opt/"
 	echo "sudo ln -sf /opt/binutils-\$(ls /opt/NeteXt73/pakiety/ | grep binutils | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/ld /usr/bin/ld "
@@ -1693,14 +1692,16 @@ export plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py 
 	echo "sudo ln -sf /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/bin/c++ /usr/bin/c++"
 	echo "if [ \"\$(lsb_release -cr | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo $WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
-	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libgsl /usr/lib/libgsl.so.0"
 	echo "fi"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.13"
+	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo cp -f /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
+	echo "export wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')"
+	echo "export plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)"
 	echo "sudo cp -f /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/"
 	echo "sudo ldconfig"
 
@@ -1712,14 +1713,16 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/c++ /usr/bin/c++"
 	echo "if [ \"\$(lsb_release -cr | grep -E \"$wspierane_nr\")\" != \"\" ] || [ \"\$(echo $WERSJA_UBUNTU | grep -i -x -E \"\$wspierane_wersje\")\" != \"\" ]; then"
 	echo "sudo rm -rf /usr/lib/libgsl.so.0"
-	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libgsl /usr/lib/libgsl.so.0"
 	echo "fi"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.13"
+	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo cp -f /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
+	echo "export wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')"
+	echo "export plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)"
 	echo "sudo cp -f /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/"
 	echo "sudo ldconfig"
 elif [ "$1" = "zmien_stary" ];then
@@ -1740,7 +1743,8 @@ wget https://www.kernel.org/ -O /tmp/netext73/sumy/stable.txt 2> /dev/null
 stable="$(cat /tmp/netext73/sumy/stable.txt | grep tar.xz | head -n 1 | cut -d '-' -f 2 | sed 's/.tar.*//')"
 wget https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-$stable  -O /tmp/netext73/sumy/ChangeLog-$stable  2> /dev/null
 #Sumy kontrolne
-wget $adres_sum_kontrolnych --no-check-certificate 2> /dev/null
+wget https://raw.githubusercontent.com/NetBit73/sumy/master/sumy_kontrolne.txt --no-check-certificate #2> /dev/null
+#$adres_sum_kontrolnych --no-check-certificate #2> /dev/null
 openssl aes-256-cbc -d -md MD5 -salt -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 #openssl enc -d -aes-256-cbc -in sumy_kontrolne.txt -pass pass:sumykontrolne -out $sumy_kontrolne
 rm sumy_kontrolne.txt -f
