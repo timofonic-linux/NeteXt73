@@ -1678,8 +1678,7 @@ pobierz_gcc(){
 
 instaluj_gcc(){
 export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //' | head -n 1)
-export wersja_libisl=$(ls -la  /usr/lib/x8664-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)
-#export plik=$(ls /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)
+export wersja_libisl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)
 
 if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo tar -Jxf /opt/NeteXt73/pakiety/\$(ls /opt/NeteXt73/pakiety | grep gcc) -C /opt/"
@@ -1720,7 +1719,7 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
-	echo "sudo cp -f /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
+	echo "sudo cp -f /opt/gcc-\$wersja/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
 	echo "sudo cp -f /opt/gcc-\$wersja/lib64/\$(ls /opt/gcc-\$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1) /usr/lib/x86_64-linux-gnu/"
 	echo "sudo ldconfig"
 elif [ "$1" = "zmien_stary" ];then
