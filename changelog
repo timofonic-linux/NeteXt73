@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.62
+-	zatwierdzenie zmian dla gcc
 v1.1.61
 -	apparmor_linux-4.14-ext73.patch
 -	dodatkowe linkowanie gcc
