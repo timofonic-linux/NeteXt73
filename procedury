@@ -445,9 +445,10 @@ elif [ "$apmik" = "nowy" ]; then
 	sudo cp /tmp/apm-ext73/*.rules /etc/udev/rules.d/
 	sudo chown root:root /etc/udev/rules.d/*
 	#APM systemd
-	sudo cp /tmp/apm-ext73/apm_ext73-resume.service /etc/systemd/system/hibernate.target.wants/
-	sudo cp /tmp/apm-ext73/apm_ext73-resume.service /etc/systemd/system/hybrid-sleep.target.wants/
-	sudo cp /tmp/apm-ext73/apm_ext73-resume.service /etc/systemd/system/suspend.target.wants/
+	sudo cp /tmp/apm-ext73/apm_ext73-resume.service /lib/systemd/system/
+	sudo ln -sf /lib/systemd/system/apm_ext73-resume.service /etc/systemd/system/hibernate.target.wants/apm_ext73_resume.service
+	sudo ln -sf /lib/systemd/system/apm_ext73-resume.service /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73_resume.service
+	sudo ln -sf /lib/systemd/system/apm_ext73-resume.service /etc/systemd/system/suspend.target.wants/apm_ext73_resume.service
 	sudo chown root:root /etc/systemd/system/hibernate.target.wants/*
 	sudo chown root:root /etc/systemd/system/hybrid-sleep.target.wants/*
 	sudo chown root:root /etc/systemd/system/suspend.target.wants/*
@@ -481,7 +482,7 @@ elif [ "$apmik" = "nowy" ]; then
 			rm -f /etc/udev/rules.d/80-xfs-udev-apm-ext73.rules
 		fi
 		echo 'exit 0' | sudo tee -a /etc/rc.local
-		#usunięcie dla desktop zbędnych regół udev
+		#usunięcie dla desktop zbędnych reguł udev
 		rm -f /etc/udev/rules.d/60-brightness-udev-apm-ext73.rules
 	fi
 fi

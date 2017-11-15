@@ -1,3 +1,9 @@
+netext73 (1.1.63) xenial; urgency=medium
+
+  * apm-resume
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 15 Nov 2017 21:49:11 +0100
+
 netext73 (1.1.62) xenial; urgency=medium
 
   * zatwierdzenie zmian dla gcc
