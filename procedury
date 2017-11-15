@@ -863,7 +863,7 @@ fi
 
 apm_usun(){
 echo "echo \"$TEXT_PROCEDURA_9\""
-echo "sudo rm -f /etc/systemd/system/apm_ext73_resume.service"
+echo "sudo rm -f /lib/systemd/system/apm_ext73_resume.service"
 echo "sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-*"
