@@ -397,9 +397,9 @@ apm_inst(){
 sudo rm -fr /etc/pm/power.d/* /usr/lib/pm-utils/power.d/readahead
 sudo chmod a-x /usr/lib/pm-utils/power.d/*
 sudo chmod a-x /etc/apm/event.d/20hdparm
-sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73-resume.service
-sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-resume.service
-sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-resume.service
+sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73.resume.service
+sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73.resume.service
+sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73.resume.service
 sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73-before.service
 sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-before.service
 sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-before.service
@@ -863,7 +863,7 @@ fi
 
 apm_usun(){
 echo "echo \"$TEXT_PROCEDURA_9\""
-echo "sudo rm -f /lib/systemd/system/apm_ext73_resume.service"
+echo "sudo rm -f /lib/systemd/system/apm_ext73-resume.service"
 echo "sudo rm -f /etc/systemd/system/hibernate.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/systemd/system/hybrid-sleep.target.wants/apm_ext73-*"
 echo "sudo rm -f /etc/systemd/system/suspend.target.wants/apm_ext73-*"
