@@ -50,13 +50,11 @@ suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
 if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
 #linkowanie steam
 	if [ "$(ls /home/*/.local/share/Steam/)" != "" ]; then
-		rm -f /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
-		cp -f /opt/gcc-$wersja/lib64/$plik /usr/lib/x86_64-linux-gnu/
 		cp -f /opt/gcc-$wersja/lib64/libgcc_s.so.1 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
 		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
