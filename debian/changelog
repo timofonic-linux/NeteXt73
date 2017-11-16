@@ -1,3 +1,9 @@
+netext73 (1.1.64) xenial; urgency=medium
+
+  * apm_fix po instalacji lub zmianie gcc
+
+ -- NetBit73 <netbit73@gmail.com>  Thu, 16 Nov 2017 08:07:46 +0100
+
 netext73 (1.1.63) xenial; urgency=medium
 
   * apm-resume
