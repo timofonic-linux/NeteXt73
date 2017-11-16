@@ -2,6 +2,8 @@
 
 v1.1.64
 -	uruchomienie apm_fix po instalacji lub zmianie gcc
+-	lsb-core
+-	drobne poprawki
 v1.1.63
 -	zmiana linkowania apm-resume
 -	apm_fix 

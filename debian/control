@@ -38,6 +38,7 @@ Depends: python (>= 2.5), ${python:Depends}, ${misc:Depends},
   libatlas-base-dev, 
   libgsl-dev, 
   desktop-file-utils, 
+  lsb-core, 
   software-properties-common 
 Replaces: netext73 
 Description: NeteXt'73 - optymalizator systemu
