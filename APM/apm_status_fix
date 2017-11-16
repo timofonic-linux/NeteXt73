@@ -49,7 +49,7 @@ plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort 
 suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
 if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
 #linkowanie steam
-	if [ "$(ls /home/*/.local/share/Steam/)" != "" ]; then
+	if [ "$(which steam)" != "" ]; then
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
@@ -68,7 +68,7 @@ else
 	ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 	ldconfig
 	#linkowanie steam
-	if [ "$(ls /home/*/.local/share/Steam/)" != "" ]; then
+	if [ "$(which steam)" != "" ]; then
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
 		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
 	fi
