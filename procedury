@@ -1707,9 +1707,9 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo cp -f /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
 	echo "sudo cp -f /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64/\$(ls /opt/gcc-\$(ls /opt/NeteXt73/pakiety/ | grep gcc | cut -d "-" -f 2 | sed 's/.tar.xz//g')/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1) /usr/lib/x86_64-linux-gnu/"
 	echo "sudo ln -sf \$(ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6.*) /usr/lib/x86_64-linux-gnu/libstdc++.so"
-	echo "sudo ldconfig"
 	#uruchomienie APM_FIX
-	echo "bash /opt/NeteXt73/APM/apm_status_fix"
+	echo "bash /opt/NeteXt73/APM/apm_status_fix nie"
+	echo "sudo ldconfig"
 
 elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc"
@@ -1730,9 +1730,11 @@ elif [ "$1" = "zmien" ];then
 	echo "sudo cp -f /opt/gcc-\$wersja/lib64/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/"
 	echo "sudo cp -f /opt/gcc-\$wersja/lib64/\$(ls /opt/gcc-\$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1) /usr/lib/x86_64-linux-gnu/"
 	echo "sudo ln -sf \$(ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6.*) /usr/lib/x86_64-linux-gnu/libstdc++.so"
-	echo "sudo ldconfig"
 	#uruchomienie APM_FIX
-	echo "bash /opt/NeteXt73/APM/apm_status_fix"
+	echo "bash /opt/NeteXt73/APM/apm_status_fix nie"
+	echo "sudo ldconfig"
+	
+
 elif [ "$1" = "zmien_stary" ];then
 	echo "sudo ln -sf /usr/bin/gcc-\$wersja /usr/bin/gcc"
 	echo "sudo ln -sf /usr/bin/gcc-ar-\$wersja /usr/bin/gcc-ar"
