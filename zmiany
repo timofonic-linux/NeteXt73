@@ -7,22 +7,12 @@
 ########################################################################################################################
 if [ "$1" = "2" ]; then
 	#!/bin/bash
-	if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
-		mkdir -p /tmp/gcc
-		rm -f /tmp/gcc/gcc*
-		cp /opt/NeteXt73/pakiety/gcc* /tmp/gcc/ -f
-		rm -f /opt/NeteXt73/pakiety/gcc*
-	fi	
 	git add -A
 	IFS=$'\n'
 	echo 'podaj komentarz:'
 	read a
 	git commit -m $a
-	git push origin master
-	if [ -e  /tmp/gcc/gcc* ]; then
-		cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety  -f
-		rm -rf /tmp/gcc
-	fi	
+	git push origin master	
 else
 	LATEST_VERSION=$(grep 'v[0-9]' changelog | head -n 1 | cut -d 'v' -f 2)
 	PKG_NAME="netext73"

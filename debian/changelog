@@ -1,3 +1,9 @@
+netext73 (1.1.66) xenial; urgency=medium
+
+  * gcc razem z NeteXt
+
+ -- NetBit73 <netbit73@gmail.com>  Mon, 20 Nov 2017 19:50:52 +0100
+
 netext73 (1.1.65) xenial; urgency=medium
 
   * rc.local

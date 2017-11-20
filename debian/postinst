@@ -51,19 +51,6 @@ if [ "$(glxinfo | grep OpenGL | grep AMD)" != "" ]; then
 	fi
 fi
 
-#pobieranie gcc
-cd /tmp	
-rm gcc-* -f
-dostepna_wersja=$(curl ftp://netext73.com/sterowniki/ | grep gcc | awk '{print $9}')
-wget ftp://netext73.com/sterowniki/$dostepna_wersja
-cp $dostepna_wersja /opt/NeteXt73/pakiety/
-#przywracanie gcc przy reinstalacji jak jest problem z pobraniem
-if [ -e /tmp/gcc/gcc* ] && [ ! -e /opt/NeteXt73/pakiety/gcc* ]; then 
-	cp /tmp/gcc/gcc* /opt/NeteXt73/pakiety/ -f
-	rm -rf /tmp/gcc
-else
-	rm -rf /tmp/gcc
-fi
 #nadpisywanie gcc i binutils
 if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 	mkdir -p /tmp/netext73
