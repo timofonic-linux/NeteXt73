@@ -78,10 +78,6 @@ instalacja_gcc(){
 cd /tmp/netext73
 naglowek > instaluj.sh
 if [ -e /opt/NeteXt73/pakiety/gcc* ]; then 
-	if [ "$twoj_gcc" != "$dostepny_gcc" ]; then
-		instaluj_gcc instaluj_nowy >> instaluj.sh
-	fi
-else
 	instaluj_gcc instaluj_nowy >> instaluj.sh
 fi
 instalacja gcc

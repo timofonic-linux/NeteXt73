@@ -1714,6 +1714,7 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "sudo ln -sf \$(ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6.*) /usr/lib/x86_64-linux-gnu/libstdc++.so"
 	#uruchomienie APM_FIX
 	echo "sudo ldconfig"
+	echo "\$(gcc -v)"
 	echo "bash /opt/NeteXt73/APM/apm_status_fix nie"
 elif [ "$1" = "zmien" ];then
 	echo "sudo ln -sf /opt/gcc-\$wersja/bin/gcc /usr/bin/gcc"
