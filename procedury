@@ -413,7 +413,7 @@ sudo rm -f /etc/apm-ext73/*
 mkdir /tmp/apm-ext73 -p
 rm /tmp/apm-ext73/* -f
 tar -Jxf /opt/NeteXt73/APM/advanced_power_management_by_ext73_$wersja_apm.tar.xz -C /tmp/apm-ext73/
-if [ !-e /etc/rc.local ] || [ "$(cat /etc/rc.local | grep '#!/bin/sh -e')" = "" ]; then
+if [ ! -e /etc/rc.local ] || [ "$(cat /etc/rc.local | grep '#!/bin/sh -e')" = "" ]; then
 	echo '#!/bin/sh -e' > /etc/rc.local
 	chmod a+x /etc/rc.local
 	chown root:root /etc/rc.local

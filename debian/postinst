@@ -85,4 +85,20 @@ else
 	patch -p1 < apparmor_linux-4.14-ext73.patch
 	rm -f apparmor_linux-4.14-ext73.patch
 fi
+
+#naprawa rc.local
+
+if [ ! -e /etc/rc.local ]; then
+	echo '#!/bin/sh -e' > /etc/rc.local
+	chmod a+x /etc/rc.local
+	chown root:root /etc/rc.local
+fi
+if [ "$(cat /etc/rc.local | grep '#!/bin/sh -e')" = "" ]; then
+	cat /etc/rc.local > /tmp/rc.local
+	echo '#!/bin/sh -e' > /etc/rc.local
+	cat /tmp/rc.local >> /etc/rc.local
+	rm /tmp/rc.local -f
+	chmod a+x /etc/rc.local
+	chown root:root /etc/rc.local
+fi
 exit 0
