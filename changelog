@@ -1,5 +1,7 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.65
+-	naprawa rc.local
 v1.1.64
 -	uruchomienie apm_fix po instalacji lub zmianie gcc
 -	lsb-core
