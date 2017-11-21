@@ -33,7 +33,7 @@ if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
 	[ "$(ls -la /usr/bin/g++ | grep '/opt/gcc-')" = "" ] || \
 	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so ] || \
 	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ] || \
-	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.[1-9][1-9] ] || \
+	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-9] ] || \
 	[ ! -e /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ]; then
 		mkdir -p /tmp/netext73
 		cd /tmp/netext73
