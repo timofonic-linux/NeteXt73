@@ -25,13 +25,14 @@
 
 
 #binutils i gcc
-mkdir -p /tmp/netext73
-cd /tmp/netext73
-source /opt/NeteXt73/procedury
-naglowek > instaluj.sh
-instaluj_gcc instaluj_nowy >> instaluj.sh
-bash instaluj.sh
-if [ $1 != "nie" ]; then
+if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
+	mkdir -p /tmp/netext73
+	cd /tmp/netext73
+	source /opt/NeteXt73/procedury
+	naglowek > instaluj.sh
+	instaluj_gcc instaluj_nowy >> instaluj.sh
+	bash instaluj.sh
+	cd /tmp
 	rm -rf /tmp/netext73
 fi
 #TPC
@@ -95,7 +96,6 @@ if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i Ge
 		ln -sf /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules/ /etc/alternatives/x86_64-linux-gnu_xorg_extra_modules
 		ldconfig
 	fi
-	if [ $1 != "nie" ]; then
-		rm -rf /tmp/netext73
-	fi
+	cd /tmp
+	rm -rf /tmp/netext73
 fi
