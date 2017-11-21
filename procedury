@@ -1669,21 +1669,6 @@ kill_yad(){
 	kill -9 $(ps -aux | grep yad | grep $1 | awk '{print $2}' | head -n 1)
 }
 
-pobierz_gcc(){
-	cd /tmp/netext73
-	rm -f /tmp/netext73/gcc*
-	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
-	yad_wget $adres_sterownikow/$gcc_link
-	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
-		rm -f /opt/NeteXt73/pakiety/gcc* 
-		cp $gcc_link /opt/NeteXt73/pakiety/ -f
-		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
-		rm -f $gcc_link
-	else
-		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
-	fi
-}
-
 instaluj_gcc(){
 export wersja_libgsl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libgsl.so | grep -e '-rw' | sed 's/.* //' | head -n 1)
 export wersja_libisl=$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libisl.so.15 | grep -e '-rw' | sed 's/.* //' | head -n 1)
@@ -1705,7 +1690,7 @@ if [ "$1" = "instaluj_nowy" ];then
 	echo "fi"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.13"
-	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
+	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-9]"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"
@@ -1727,7 +1712,7 @@ elif [ "$1" = "zmien" ];then
 	echo "fi"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.10"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libisl.so.13"
-	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]"
+	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-9]"
 	echo "sudo rm -rf /usr/lib/x86_64-linux-gnu/libstdc++.so"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/$wersja_libisl /usr/lib/x86_64-linux-gnu/libisl.so.13"
 	echo "sudo ln -sf /usr/lib/x86_64-linux-gnu/libisl.so.13 /usr/lib/x86_64-linux-gnu/libisl.so.10"

@@ -1,3 +1,9 @@
+netext73 (1.1.67) xenial; urgency=medium
+
+  * apm_fix naprawa gcc przy starcie
+
+ -- NetBit73 <netbit73@gmail.com>  Tue, 21 Nov 2017 19:43:00 +0100
+
 netext73 (1.1.66) xenial; urgency=medium
 
   * gcc razem z NeteXt

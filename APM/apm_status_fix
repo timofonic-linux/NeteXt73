@@ -26,15 +26,27 @@
 
 #binutils i gcc
 if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
-	mkdir -p /tmp/netext73
-	cd /tmp/netext73
-	source /opt/NeteXt73/procedury
-	naglowek > instaluj.sh
-	instaluj_gcc instaluj_nowy >> instaluj.sh
-	bash instaluj.sh
-	cd /tmp
-	rm -rf /tmp/netext73
+
+	if [ "$(ls -la /usr/bin/gcc | grep '/opt/gcc-')" = "" ] || \
+	[ "$(ls -la /usr/bin/gcc-ar | grep '/opt/gcc-')" = "" ] || \
+	[ "$(ls -la /usr/bin/cpp | grep '/opt/gcc-')" = "" ] || \
+	[ "$(ls -la /usr/bin/g++ | grep '/opt/gcc-')" = "" ] || \
+	[ "$(ls -la  /usr/lib/x86_64-linux-gnu/ | grep libstdc++ | wc -l)" != "3" ] || \
+	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so ] || \
+	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ] || \
+	[ ! -e /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ] || \
+	[ ! -e /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ]; then
+		mkdir -p /tmp/netext73
+		cd /tmp/netext73
+		source /opt/NeteXt73/procedury
+		naglowek > instaluj.sh
+		instaluj_gcc instaluj_nowy >> instaluj.sh
+		bash instaluj.sh
+		cd /tmp
+		rm -rf /tmp/netext73
+	fi
 fi
+
 #TPC
 if [ -e /etc/sysctl.conf ]; then
 	if [ "$(grep 'net.ipv4.tcp_challenge_ack_limit = 999999999' /etc/sysctl.conf)" = "" ]; then
@@ -42,41 +54,27 @@ if [ -e /etc/sysctl.conf ]; then
 		sysctl -p
 	fi
 fi
-#linkowanie
 
+#linkowanie
 wersja=$(gcc --version | grep -i ext73 | awk '{print $3}')
 plik=$(ls /opt/gcc-$wersja/lib64 | grep libstdc++.so.6. | grep -v gdb.py | sort -r | head -n 1)
-suma=$(md5sum /opt/gcc-$wersja/lib64/$plik | awk '{print $1}')
-if [ "$(uname -a | grep -i ext73)" != "" ] && [ "$(gcc --version | grep -i ext73)" != "" ]; then
 #linkowanie steam
-	if [ "$(which steam)" != "" ]; then
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
-		cp -f /opt/gcc-$wersja/lib64/libgcc_s.so.1 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/libgcc_s.so.1 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
-		cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
-	fi
-else
-	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5] -f
-	rm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 -f
-	ln -sf /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
-	ldconfig
-	#linkowanie steam
-	if [ "$(which steam)" != "" ]; then
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
-		rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-5]
-	fi
+if [ "$(which steam)" != "" ]; then
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-9]
+	rm -f /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.2[1-9]
+	cp -f /opt/gcc-$wersja/lib64/libgcc_s.so.1 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-$wersja/lib64/libgcc_s.so.1 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-$wersja/lib64/$plik /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
+	cp -f /opt/gcc-$wersja/lib64/libstdc++.so.6 /home/*/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/
 fi
 
 #nvidia fix
 if [ "$(lspci | grep -i VGA | grep -i Intel)" != "" ] && [ "$(lspci | grep -i GeForce | grep -i NVIDIA)" != "" ];then
-	#procedury
 	mkdir -p /tmp/netext73
 	cd /tmp/netext73
 	source /opt/NeteXt73/procedury
