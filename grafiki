@@ -86,7 +86,7 @@ if [ "$1" = "nvidia" ]; then
 					nazwa=$(echo "$i" | sed 's/.desktop//')
 					#taskset 0xFFFFFFFF primusrun
 					#taskset 0xFFFFFFFF optirun -b primus
-					if [ "$(grep 'taskset 0xFFFFFFFF primus' $katalog/$i)" = "" ]; then
+					if [ "$(grep 'taskset 0xFFFFFFFF primusrun' $katalog/$i)" = "" ]; then
 						echo "FALSE@"$nazwa"@-@off" >> primusrun1.txt 
 					else
 						echo "FALSE@"$nazwa"@on@-" >> primusrun1.txt 
@@ -103,10 +103,10 @@ if [ "$1" = "nvidia" ]; then
 							IFS=$'\n'
 							for i in $(cat zaznaczone.txt); do
 							echo $i
-								if [ "$(grep 'taskset 0xFFFFFFFF primus' "$katalog/$i.desktop")" = "" ]; then
+								if [ "$(grep 'taskset 0xFFFFFFFF primusrun' "$katalog/$i.desktop")" = "" ]; then
 									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF primusrun /Exec=/g\" \"$katalog/$i.desktop\"" >> instaluj.sh
-									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF optirun -b primusrun /Exec=/g\" \"$katalog/$i.desktop\"" >> instaluj.sh
-									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primus /g\" \"$katalog/$i.desktop\"" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=taskset 0xFFFFFFFF optirun -b primus /Exec=/g\" \"$katalog/$i.desktop\"" >> instaluj.sh
+									echo "sudo sed -i \"s/Exec=/Exec=taskset 0xFFFFFFFF primusrun /g\" \"$katalog/$i.desktop\"" >> instaluj.sh
 									if [ "$klawisz" = "3" ] && [ $USER = "root" ]; then
 										echo "sudo chown $userek:$userek  \"$katalog/$i.desktop\"" >> instaluj.sh
 									fi
