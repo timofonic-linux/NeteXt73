@@ -1,5 +1,8 @@
 ﻿NeteXt'73 Changelog
 
+v1.1.68
+-	apparmor patch
+-	drobne poprawki
 v1.1.67
 -	modyfikacja apm_fix - naprawa gcc przy starcie
 -	optirun -b primusrun

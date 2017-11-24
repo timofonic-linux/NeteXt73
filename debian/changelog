@@ -1,3 +1,9 @@
+netext73 (1.1.68) xenial; urgency=medium
+
+  * apparmor revert
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 24 Nov 2017 19:19:53 +0100
+
 netext73 (1.1.67) xenial; urgency=medium
 
   * apm_fix naprawa gcc przy starcie
