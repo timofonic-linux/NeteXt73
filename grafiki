@@ -147,19 +147,21 @@ elif [ "$1" = "mesa3d" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
 				echo "sudo add-apt-repository ppa:paulo-miguel-dias/pkppa -y" >> instaluj.sh
 				echo "sudo apt update" >> instaluj.sh
-				echo "sudo apt install vainfo -y" >> instaluj.sh
+				echo "sudo apt install vainfo libvulkan1 libvulkan1:i386 vulkan-utils mesa-vulkan-drivers -y" >> instaluj.sh
 				echo "sudo apt dist-upgrade -y" >> instaluj.sh
 			elif [ "$(echo $ster | grep testing)" != "" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:paulo-miguel-dias/pkppa"  >> instaluj.sh
-				echo "sudo add-apt-repository ppa:oibaf/graphics-drivers -y" >> instaluj.sh
+				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
+				echo "sudo add-apt-repository ppa:paulo-miguel-dias/mesa -y" >> instaluj.sh
 				echo "sudo apt update" >> instaluj.sh
-				echo "sudo apt install vainfo -y" >> instaluj.sh
+				echo "sudo apt install vainfo libvulkan1 libvulkan1:i386 vulkan-utils mesa-vulkan-drivers -y" >> instaluj.sh
 				echo "sudo apt dist-upgrade -y" >> instaluj.sh
 			elif [ "$(echo $ster | grep remove)" != "" ]; then
 				echo "sudo ppa-purge ppa:joe-yasi/xorg-xenial"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:paulo-miguel-dias/pkppa"  >> instaluj.sh
 				echo "sudo ppa-purge ppa:oibaf/graphics-drivers"  >> instaluj.sh
+				echo "sudo ppa-purge ppa:paulo-miguel-dias/mesa"  >> instaluj.sh
 			fi
 			instalacja
 		fi
