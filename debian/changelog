@@ -1,3 +1,9 @@
+netext73 (1.1.69) xenial; urgency=medium
+
+  * zależnosci Vulkan
+
+ -- NetBit73 <netbit73@gmail.com>  Wed, 29 Nov 2017 09:43:20 +0100
+
 netext73 (1.1.68) xenial; urgency=medium
 
   * apparmor revert
