@@ -227,42 +227,42 @@ if [ "$kern" = "$TEXT_MENU_INSTALATOR5" ];then
 		yad_wget $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep "all" | grep "linux-headers" | grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-headers"| grep -v -E "latency") $strona/$a/$(grep "href=" ./$a | cut -d '"' -f 8 | grep $bit2 | grep "linux-image"| grep -v -E "latency")
 	fi
 else
-	rm -f gcc*
-	gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
-	if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
-		twoj_gcc=$(md5sum /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) | awk '{print $1}')
-	else
-		twoj_gcc="brak_twoj"
-	fi
-	if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
-		dostepny_gcc=$(cat /tmp/netext73/sumy/sumy_kontrolne.txt | grep gcc | awk '{print$1}')
-	else
-		dostepny_gcc="brak_sum"
-	fi
-	if [ "$twoj_gcc" != "$dostepny_gcc" ]; then
-		download_gcc=$adres_sterownikow/$gcc_link
-	else
-		download_gcc=""
-	fi
+	#rm -f gcc*
+	#gcc_link=$(grep gcc /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
+	#if [ -e /opt/NeteXt73/pakiety/gcc* ]; then
+	#	twoj_gcc=$(md5sum /opt/NeteXt73/pakiety/$(ls /opt/NeteXt73/pakiety | grep gcc) | awk '{print $1}')
+	#else
+	#	twoj_gcc="brak_twoj"
+	#fi
+	#if [ -e /tmp/netext73/sumy/sumy_kontrolne.txt ]; then
+	#	dostepny_gcc=$(cat /tmp/netext73/sumy/sumy_kontrolne.txt | grep gcc | awk '{print$1}')
+	#else
+	#	dostepny_gcc="brak_sum"
+	#fi
+	#if [ "$twoj_gcc" != "$dostepny_gcc" ]; then
+	#	download_gcc=$adres_sterownikow/$gcc_link
+	#else
+	#	download_gcc=""
+	#fi
 	#pobieranie kerneli e X t 7 3
 	nazwa_paczki="$(echo $a | cut -d "_" -f 2)$(echo -$rodzaj'_'$bit2.deb)"
 	#pobieranie broadcoma jak jest
 	if [ "$(lspci | grep -i bcm | grep -i wireless)" != "" ]; then
 		broadcom=$(grep broadcom-sta-dkms /tmp/netext73/sumy/sumy_kontrolne.txt | awk '{print $2}')
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom $download_gcc
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $adres_sterownikow/$broadcom
 	else
-		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki $download_gcc
+		yad_wget $strona/$a/linux-headers-$nazwa_paczki $strona/$a/linux-image-$nazwa_paczki
 	fi
-	if [ "$download_gcc" != "" ]; then
-		if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
-			rm -f /opt/NeteXt73/pakiety/gcc*
-			cp $gcc_link /opt/NeteXt73/pakiety/ -f
-			chmod 775 /opt/NeteXt73/pakiety/$gcc_link
-			rm -f $gcc_link
-		else
-			dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
-		fi
-	fi
+	#if [ "$download_gcc" != "" ]; then
+	#	if [ -e $gcc_link ] && [ "$(grep $(md5sum $gcc_link) $sumy_kontrolne)" != "" ]; then
+	#		rm -f /opt/NeteXt73/pakiety/gcc*
+	#		cp $gcc_link /opt/NeteXt73/pakiety/ -f
+	#		chmod 775 /opt/NeteXt73/pakiety/$gcc_link
+	#		rm -f $gcc_link
+	#	else
+	#		dymek -i $warning1 "$TEXT_UWAGA" "$TEXT_SUMA_KONTROLNA"
+	#	fi
+	#fi
 fi
 rm ./index.html -f
 }

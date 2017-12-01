@@ -1,3 +1,9 @@
+netext73 (1.1.70) xenial; urgency=medium
+
+  * naprawa błędu - przy instalacji kerneli
+
+ -- NetBit73 <netbit73@gmail.com>  Fri, 01 Dec 2017 23:57:36 +0100
+
 netext73 (1.1.69) xenial; urgency=medium
 
   * zależnosci Vulkan
