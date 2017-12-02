@@ -3,6 +3,7 @@
 v1.1.70
 -	naprawa bug - złe sumy przy instalacji kernela
 -	gcc 7.2.1 - aktualizacja
+-	libvulkan1:i386  - usuięcie zależności
 v1.1.69
 -	zależności vulkan
 -	mesa testing zmiana repo
